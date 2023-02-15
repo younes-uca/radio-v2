@@ -64,8 +64,10 @@ public class PrescriptionRadiotherapieCriteria extends BaseCriteria {
 
     private DecisionTraitementCriteria decisionTraitement;
     private List<DecisionTraitementCriteria> decisionTraitements;
-    private StatutRadiotherapieCriteria statutRadiotherapieCriteria;
-    private List<StatutRadiotherapieCriteria> statutRadiotherapieCriterias;
+    private StatutRadiotherapieCriteria statutRadiotherapie;
+    private List<StatutRadiotherapieCriteria> statutRadiotherapies;
+    private PatientCriteria patient;
+    private List<PatientCriteria> patients;
 
 
     public PrescriptionRadiotherapieCriteria() {
@@ -496,19 +498,35 @@ public class PrescriptionRadiotherapieCriteria extends BaseCriteria {
         this.decisionTraitements = decisionTraitements;
     }
 
-    public StatutRadiotherapieCriteria getStatutRadiotherapieCriteria() {
-        return statutRadiotherapieCriteria;
+    public StatutRadiotherapieCriteria getStatutRadiotherapie() {
+        return statutRadiotherapie;
     }
 
-    public void setStatutRadiotherapieCriteria(StatutRadiotherapieCriteria statutRadiotherapieCriteria) {
-        this.statutRadiotherapieCriteria = statutRadiotherapieCriteria;
+    public void setStatutRadiotherapie(StatutRadiotherapieCriteria statutRadiotherapie) {
+        this.statutRadiotherapie = statutRadiotherapie;
     }
 
-    public List<StatutRadiotherapieCriteria> getStatutRadiotherapieCriterias() {
-        return statutRadiotherapieCriterias;
+    public List<StatutRadiotherapieCriteria> getStatutRadiotherapies() {
+        return statutRadiotherapies;
     }
 
-    public void setStatutRadiotherapieCriterias(List<StatutRadiotherapieCriteria> statutRadiotherapieCriterias) {
-        this.statutRadiotherapieCriterias = statutRadiotherapieCriterias;
+    public void setStatutRadiotherapies(List<StatutRadiotherapieCriteria> statutRadiotherapies) {
+        this.statutRadiotherapies = statutRadiotherapies;
+    }
+
+    public PatientCriteria getPatient() {
+        return patient;
+    }
+
+    public void setPatient(PatientCriteria patient) {
+        this.patient = patient;
+    }
+
+    public List<PatientCriteria> getPatients() {
+        return patients;
+    }
+
+    public void setPatients(List<PatientCriteria> patients) {
+        this.patients = patients;
     }
 }

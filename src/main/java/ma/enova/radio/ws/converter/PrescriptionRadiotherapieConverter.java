@@ -263,6 +263,19 @@ public class PrescriptionRadiotherapieConverter extends AbstractConverter<Prescr
         this.histortiquePrescriptionRadiotherapies = value;
     }
 
+    public void initObject(boolean value) {
+        medecinPrescripteur = value;
+        site = value;
+        modaliteRadiotherapie = value;
+        visee = value;
+        protocoleInclusion = value;
+        statutRadiotherapie = value;
+        decisionTraitement = value;
+        validateurSimulation = value;
+        patient = value;
+        typeTraitement = value;
+    }
+
 
     public ModaliteRadiotherapieConverter getModaliteRadiotherapieConverter() {
         return this.modaliteRadiotherapieConverter;

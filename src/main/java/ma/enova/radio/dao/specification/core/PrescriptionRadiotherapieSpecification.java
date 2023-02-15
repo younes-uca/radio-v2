@@ -45,8 +45,10 @@ public class PrescriptionRadiotherapieSpecification extends AbstractSpecificatio
             addPredicateInt("nombreSeanceRealise", criteria.getNombreSeanceRealiseMin(), criteria.getNombreSeanceRealiseMax());
             addPredicateInt("nombreTotalSeance", criteria.getNombreTotalSeance());
             addPredicateInt("nombreTotalSeance", criteria.getNombreTotalSeanceMin(), criteria.getNombreTotalSeanceMax());
-            addPredicate("decisionTraitement.id", criteria.getDecisionTraitement());
-            addPredicate("decisionTraitement.id", criteria.getDecisionTraitements());
+            addPredicateFk("decisionTraitement", "id", criteria.getDecisionTraitement() == null ? null : criteria.getDecisionTraitement().getId());
+            addPredicateFk("decisionTraitement", "code", criteria.getDecisionTraitement() == null ? null : criteria.getDecisionTraitement().getCode());
+            addPredicateFk("patient", "ipp", criteria.getPatient() == null ? null : criteria.getPatient().getIpp());
+            addPredicateFk("statutRadiotherapie", "code", criteria.getStatutRadiotherapie() == null ? null : criteria.getStatutRadiotherapie().getCode());
             addOrderAndFilter();
         }
         return getResult();

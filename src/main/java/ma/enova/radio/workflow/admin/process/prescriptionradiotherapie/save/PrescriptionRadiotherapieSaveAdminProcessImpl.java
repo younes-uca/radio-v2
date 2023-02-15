@@ -68,6 +68,7 @@ public class PrescriptionRadiotherapieSaveAdminProcessImpl extends AbstractProce
             seanceRadiotherapie.setNumero(i + 1);
             t.getSeanceRadiotherapies().add(seanceRadiotherapie);
         }
+        t.setNombreTotalSeance(t.getFractionnement());
     }
 
     private PrescriptionRadiotherapieAdminService service;

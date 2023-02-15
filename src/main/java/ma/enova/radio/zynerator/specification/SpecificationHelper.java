@@ -42,8 +42,8 @@ public abstract class SpecificationHelper<Criteria extends BaseCriteria, H exten
 
     public void addPredicate(String name, List<? extends BaseCriteria> baseCriterias) {
         if (baseCriterias != null) {
-            List<Long> ids = baseCriterias.stream().map(e->e.getId()).collect(Collectors.toList());
-            addPredicateIn(name,ids);
+            List<Long> ids = baseCriterias.stream().map(e -> e.getId()).collect(Collectors.toList());
+            addPredicateIn(name, ids);
         }
     }
 
@@ -71,11 +71,13 @@ public abstract class SpecificationHelper<Criteria extends BaseCriteria, H exten
             predicates.add(builder.equal(root.<Double>get(name), Double.parseDouble(value)));
         }
     }
+
     public void addPredicateBigDecimal(String name, String value) {
         if (StringUtil.isNotEmpty(value)) {
             predicates.add(builder.equal(root.<BigDecimal>get(name), new BigDecimal(value)));
         }
     }
+
     public void addPredicateId(String name, BaseCriteria baseCriteria) {
         if (baseCriteria != null) {
             addPredicateLong(name, baseCriteria.getId());
@@ -119,6 +121,18 @@ public abstract class SpecificationHelper<Criteria extends BaseCriteria, H exten
         }
     }
 
+    public void addPredicateFk(String nameObject, String nameAttribute, String value) {
+        if (StringUtil.isNotEmpty(value)) {
+            predicates.add(builder.equal(root.get(nameObject).get(nameAttribute), value));
+        }
+    }
+
+    public void addPredicateFk(String nameObject, String nameAttribute, Long value) {
+        if (StringUtil.isNotEmpty(value)) {
+            predicates.add(builder.equal(root.get(nameObject).get(nameAttribute), value));
+        }
+    }
+
     public void addPredicate(String name, LocalDateTime value) {
         if (value != null) {
             predicates.add(builder.equal(root.<LocalDateTime>get(name), value));
@@ -138,7 +152,7 @@ public abstract class SpecificationHelper<Criteria extends BaseCriteria, H exten
     }
 
     public void addPredicateBool(String name, Boolean value) {
-        if (value!=null) {
+        if (value != null) {
             predicates.add(builder.equal(root.<Boolean>get(name), value));
         }
     }
@@ -165,31 +179,38 @@ public abstract class SpecificationHelper<Criteria extends BaseCriteria, H exten
         }
     }
 
-    public void addPredicateBigDecimal(String name, String valueMin,String valueMax) {
+    public void addPredicateBigDecimal(String name, String valueMin, String valueMax) {
         if (StringUtil.isNotEmpty(valueMin)) {
             predicates.add(builder.greaterThanOrEqualTo(root.<BigDecimal>get(name), new BigDecimal(valueMin)));
-        } if (StringUtil.isNotEmpty(valueMax)) {
+        }
+        if (StringUtil.isNotEmpty(valueMax)) {
             predicates.add(builder.lessThanOrEqualTo(root.<BigDecimal>get(name), new BigDecimal(valueMax)));
         }
     }
-    public void addPredicateDouble(String name, String valueMin,String valueMax) {
+
+    public void addPredicateDouble(String name, String valueMin, String valueMax) {
         if (StringUtil.isNotEmpty(valueMin)) {
             predicates.add(builder.greaterThanOrEqualTo(root.<Double>get(name), Double.valueOf(valueMin)));
-        } if (StringUtil.isNotEmpty(valueMax)) {
-            predicates.add(builder.lessThanOrEqualTo(root.<Double>get(name),  Double.valueOf(valueMax)));
+        }
+        if (StringUtil.isNotEmpty(valueMax)) {
+            predicates.add(builder.lessThanOrEqualTo(root.<Double>get(name), Double.valueOf(valueMax)));
         }
     }
-    public void addPredicateLong(String name, String valueMin,String valueMax) {
+
+    public void addPredicateLong(String name, String valueMin, String valueMax) {
         if (StringUtil.isNotEmpty(valueMin)) {
             predicates.add(builder.greaterThanOrEqualTo(root.<Long>get(name), Long.valueOf(valueMin)));
-        } if (StringUtil.isNotEmpty(valueMax)) {
+        }
+        if (StringUtil.isNotEmpty(valueMax)) {
             predicates.add(builder.lessThanOrEqualTo(root.<Long>get(name), Long.valueOf(valueMax)));
         }
     }
-    public void addPredicateInt(String name, String valueMin,String valueMax) {
+
+    public void addPredicateInt(String name, String valueMin, String valueMax) {
         if (StringUtil.isNotEmpty(valueMin)) {
             predicates.add(builder.greaterThanOrEqualTo(root.<Integer>get(name), Integer.valueOf(valueMin)));
-        } if (StringUtil.isNotEmpty(valueMax)) {
+        }
+        if (StringUtil.isNotEmpty(valueMax)) {
             predicates.add(builder.lessThanOrEqualTo(root.<Integer>get(name), Integer.valueOf(valueMax)));
         }
     }

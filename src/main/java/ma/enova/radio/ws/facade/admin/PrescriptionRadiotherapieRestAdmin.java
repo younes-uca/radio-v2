@@ -42,42 +42,6 @@ import java.util.List;
 @RequestMapping("/api/prescriptionRadiotherapie")
 public class PrescriptionRadiotherapieRestAdmin extends AbstractController<PrescriptionRadiotherapie, PrescriptionRadiotherapieDto, PrescriptionRadiotherapieHistory, PrescriptionRadiotherapieCriteria, PrescriptionRadiotherapieHistoryCriteria, PrescriptionRadiotherapieAdminService, PrescriptionRadiotherapieConverter> {
 
-    @ApiOperation("findByDecisionTraitementCode")
-    @GetMapping("/decision-traitement/code/{code}")
-    public ResponseEntity<List<PrescriptionRadiotherapieDto>> findByDecisionTraitementCode(@PathVariable String code) {
-        return getResponseEntity(service.findByDecisionTraitementCode(code));
-    }
-
-    @ApiOperation("findByPatientIpp")
-    @GetMapping("/patient/ipp/{ipp}")
-    public ResponseEntity<List<PrescriptionRadiotherapieDto>> findByPatientIpp(@PathVariable String ipp) {
-        return getResponseEntity(service.findByPatientIpp(ipp));
-    }
-
-    @ApiOperation("find by statutRadiotherapie ENATTENTEPRESCRIPTION")
-    @GetMapping("statutRadiotherapie/code/en-attente-prescritpion")
-    public ResponseEntity<List<PrescriptionRadiotherapieDto>> findByStatutRadiotherapieEnAttentePrescription() {
-        return getResponseEntity(service.findByStatutRadiotherapieCode(StatutRadioTherapieConstant.EN_ATTENTE_PRESCRIPTION));
-    }
-
-    @ApiOperation("find by statutRadiotherapie ENATTENTESIMULATION")
-    @GetMapping("statutRadiotherapie/code/en-attente-simulation")
-    public ResponseEntity<List<PrescriptionRadiotherapieDto>> findByStatutRadiotherapieEnAttenteSimulation() {
-        return getResponseEntity(service.findByStatutRadiotherapieCode(StatutRadioTherapieConstant.EN_ATTENTE_SIMULATION));
-    }
-
-    @ApiOperation("find by statutRadiotherapie ENCOURSTRAITEMENT")
-    @GetMapping("statutRadiotherapie/code/en-cours-traitement")
-    public ResponseEntity<List<PrescriptionRadiotherapieDto>> findByStatutRadiotherapieEnCoursTraitement() {
-        return getResponseEntity(service.findByStatutRadiotherapieCode(StatutRadioTherapieConstant.EN_COURS_TRAITEMENT));
-    }
-
-    @ApiOperation("find by statutRadiotherapie FINTRAITEMENT")
-    @GetMapping("statutRadiotherapie/code/fin-traitement")
-    public ResponseEntity<List<PrescriptionRadiotherapieDto>> findByStatutRadiotherapieFinTraitement() {
-        return getResponseEntity(service.findByStatutRadiotherapieCode(StatutRadioTherapieConstant.FIN_TRAITEMENT));
-    }
-
     @ApiOperation("save a prescriptionRadiotherapie")
     @PostMapping("process/save")
     public ResponseEntity<Result<PrescriptionRadiotherapieSaveAdminInput, PrescriptionRadiotherapieSaveAdminOutput, PrescriptionRadiotherapie>> saveProcess(@RequestBody PrescriptionRadiotherapieSaveAdminInput input) throws Exception {

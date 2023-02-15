@@ -158,9 +158,8 @@ public class AbstractController<T extends AuditBusinessObject, DTO extends BaseD
         List<T> list = service.findByCriteria(criteria);
         List<DTO> dtos = null;
         HttpStatus status = HttpStatus.NO_CONTENT;
-        if (criteria != null) {
-            list = converter.copyIncludeExcludeItems(list, criteria.getIncludes(), criteria.getExcludes());
-        }
+        converter.initObject(true);
+        converter.initList(false);
         dtos = converter.toDto(list);
 
         if (dtos != null && !dtos.isEmpty())
