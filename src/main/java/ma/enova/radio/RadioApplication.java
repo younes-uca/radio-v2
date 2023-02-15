@@ -1,27 +1,25 @@
-package  ma.enova.radio;
+package ma.enova.radio;
 
+import ma.enova.radio.bean.core.*;
+import ma.enova.radio.service.facade.admin.*;
+import ma.enova.radio.zynerator.security.bean.Permission;
+import ma.enova.radio.zynerator.security.bean.Role;
+import ma.enova.radio.zynerator.security.bean.User;
+import ma.enova.radio.zynerator.security.common.AuthoritiesConstants;
+import ma.enova.radio.zynerator.security.service.facade.RoleService;
+import ma.enova.radio.zynerator.security.service.facade.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
-import java.util.*;
-import java.util.stream.Stream;
-
-
-import ma.enova.radio.zynerator.security.common.AuthoritiesConstants;
-import ma.enova.radio.zynerator.security.bean.User;
-import ma.enova.radio.zynerator.security.bean.Permission;
-import ma.enova.radio.zynerator.security.bean.Role;
-import ma.enova.radio.zynerator.security.service.facade.UserService;
-import ma.enova.radio.zynerator.security.service.facade.RoleService;
-/*
-import ma.enova.radio.service.admin.facade.TypeTraitementAdminService;
-import ma.enova.radio.bean.TypeTraitement;
-import ma.enova.radio.service.admin.facade.StatutRadiotherapieAdminService;
-import ma.enova.radio.bean.StatutRadiotherapie;*/
-
 import org.springframework.web.client.RestTemplate;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @SpringBootApplication
 //@EnableFeignClients("ma.enova.radio.required.facade")
@@ -29,12 +27,12 @@ public class RadioApplication {
     public static ConfigurableApplicationContext ctx;
 
     public static void main(String[] args) {
-        ctx=SpringApplication.run(RadioApplication.class, args);
+        ctx = SpringApplication.run(RadioApplication.class, args);
     }
 
 
     @Bean
-    RestTemplate restTemplate(){
+    RestTemplate restTemplate() {
         return new RestTemplate();
     }
 
@@ -44,151 +42,207 @@ public class RadioApplication {
 
     @Bean
     public CommandLineRunner demo(UserService userService, RoleService roleService
-    //, TypeTraitementAdminService typeTraitementAdminService, StatutRadiotherapieAdminService statutRadiotherapieAdminService
+                                  //, TypeTraitementAdminService typeTraitementAdminService, StatutRadiotherapieAdminService statutRadiotherapieAdminService
     ) {
-    return (args) -> {
-        if(true){
-            Map<String,String> etats=new HashMap<>();
-            etats.put("en-attente-prescription","EN_ATTENTE_PRESCRIPTION");
-            etats.put("en-attente-simulation","EN_ATTENTE_SIMULATION");
-            etats.put("en-attente-validation","EN_ATTENTE_VALIDATION");
-            etats.put("en-cours-traitement","EN_COURS_TRAITEMENT");
-            etats.put("fin-traitement","FIN_TRAITEMENT");
+        return (args) -> {
+            if (true) {
+                Map<String, String> etats = new HashMap<>();
+                etats.put("en-attente-prescription", "EN_ATTENTE_PRESCRIPTION");
+                etats.put("en-attente-simulation", "EN_ATTENTE_SIMULATION");
+                etats.put("en-attente-validation", "EN_ATTENTE_VALIDATION");
+                etats.put("en-cours-traitement", "EN_COURS_TRAITEMENT");
+                etats.put("fin-traitement", "FIN_TRAITEMENT");
+
+                createModalite();
+                createVisee();
+                createPatient();
+                createSite();
+                createPersonnel();
+                createProtocoleInclusion();
+                createTypeTraitement();
+
+                createGradeToxiciteRth();
+                createImmobilistion();
+                createPositionnement();
+                createTypeToxiciteRth();
 
           /*  etats.entrySet().stream().forEach(e->typeTraitementAdminService.save(new TypeTraitement(e.getKey(),e.getValue())));
             etats.entrySet().stream().forEach(e->statutRadiotherapieAdminService.save(new StatutRadiotherapie(e.getKey(),e.getValue())));
 */
 
-    // Role admin
+                // Role admin
 
-        User userForAdmin = new User("admin");
+                User userForAdmin = new User("admin");
 
-        Role roleForAdmin = new Role();
-        roleForAdmin.setAuthority(AuthoritiesConstants.ADMIN);
-        List<Permission> permissionsForAdmin = new ArrayList<>();
-        addPermissionForAdmin(permissionsForAdmin);
-        roleForAdmin.setPermissions(permissionsForAdmin);
-        if(userForAdmin.getRoles()==null)
-            userForAdmin.setRoles(new ArrayList<>());
+                Role roleForAdmin = new Role();
+                roleForAdmin.setAuthority(AuthoritiesConstants.ADMIN);
+                List<Permission> permissionsForAdmin = new ArrayList<>();
+                roleForAdmin.setPermissions(permissionsForAdmin);
+                if (userForAdmin.getRoles() == null)
+                    userForAdmin.setRoles(new ArrayList<>());
 
-        userForAdmin.getRoles().add(roleForAdmin);
-        userService.save(userForAdmin);
+                userForAdmin.getRoles().add(roleForAdmin);
+                userService.save(userForAdmin);
             }
         };
     }
 
-    private static void addPermissionForAdmin(List<Permission> permissions){
-        permissions.add(new Permission("GradeToxiciteRth.edit"));
-        permissions.add(new Permission("GradeToxiciteRth.list"));
-        permissions.add(new Permission("GradeToxiciteRth.view"));
-        permissions.add(new Permission("GradeToxiciteRth.add"));
-        permissions.add(new Permission("GradeToxiciteRth.delete"));
-        permissions.add(new Permission("Specialite.edit"));
-        permissions.add(new Permission("Specialite.list"));
-        permissions.add(new Permission("Specialite.view"));
-        permissions.add(new Permission("Specialite.add"));
-        permissions.add(new Permission("Specialite.delete"));
-        permissions.add(new Permission("DecisionTraitement.edit"));
-        permissions.add(new Permission("DecisionTraitement.list"));
-        permissions.add(new Permission("DecisionTraitement.view"));
-        permissions.add(new Permission("DecisionTraitement.add"));
-        permissions.add(new Permission("DecisionTraitement.delete"));
-        permissions.add(new Permission("ProtocoleInclusion.edit"));
-        permissions.add(new Permission("ProtocoleInclusion.list"));
-        permissions.add(new Permission("ProtocoleInclusion.view"));
-        permissions.add(new Permission("ProtocoleInclusion.add"));
-        permissions.add(new Permission("ProtocoleInclusion.delete"));
-        permissions.add(new Permission("CategoriePersonnel.edit"));
-        permissions.add(new Permission("CategoriePersonnel.list"));
-        permissions.add(new Permission("CategoriePersonnel.view"));
-        permissions.add(new Permission("CategoriePersonnel.add"));
-        permissions.add(new Permission("CategoriePersonnel.delete"));
-        permissions.add(new Permission("HistortiquePrescriptionRadiotherapie.edit"));
-        permissions.add(new Permission("HistortiquePrescriptionRadiotherapie.list"));
-        permissions.add(new Permission("HistortiquePrescriptionRadiotherapie.view"));
-        permissions.add(new Permission("HistortiquePrescriptionRadiotherapie.add"));
-        permissions.add(new Permission("HistortiquePrescriptionRadiotherapie.delete"));
-        permissions.add(new Permission("SeanceRadiotherapie.edit"));
-        permissions.add(new Permission("SeanceRadiotherapie.list"));
-        permissions.add(new Permission("SeanceRadiotherapie.view"));
-        permissions.add(new Permission("SeanceRadiotherapie.add"));
-        permissions.add(new Permission("SeanceRadiotherapie.delete"));
-        permissions.add(new Permission("Positionnement.edit"));
-        permissions.add(new Permission("Positionnement.list"));
-        permissions.add(new Permission("Positionnement.view"));
-        permissions.add(new Permission("Positionnement.add"));
-        permissions.add(new Permission("Positionnement.delete"));
-        permissions.add(new Permission("PrescriptionRadiotherapie.edit"));
-        permissions.add(new Permission("PrescriptionRadiotherapie.list"));
-        permissions.add(new Permission("PrescriptionRadiotherapie.view"));
-        permissions.add(new Permission("PrescriptionRadiotherapie.add"));
-        permissions.add(new Permission("PrescriptionRadiotherapie.delete"));
-        permissions.add(new Permission("ConsultationRadiotherapie.edit"));
-        permissions.add(new Permission("ConsultationRadiotherapie.list"));
-        permissions.add(new Permission("ConsultationRadiotherapie.view"));
-        permissions.add(new Permission("ConsultationRadiotherapie.add"));
-        permissions.add(new Permission("ConsultationRadiotherapie.delete"));
-        permissions.add(new Permission("TypeTraitement.edit"));
-        permissions.add(new Permission("TypeTraitement.list"));
-        permissions.add(new Permission("TypeTraitement.view"));
-        permissions.add(new Permission("TypeTraitement.add"));
-        permissions.add(new Permission("TypeTraitement.delete"));
-        permissions.add(new Permission("StatutRadiotherapie.edit"));
-        permissions.add(new Permission("StatutRadiotherapie.list"));
-        permissions.add(new Permission("StatutRadiotherapie.view"));
-        permissions.add(new Permission("StatutRadiotherapie.add"));
-        permissions.add(new Permission("StatutRadiotherapie.delete"));
-        permissions.add(new Permission("Site.edit"));
-        permissions.add(new Permission("Site.list"));
-        permissions.add(new Permission("Site.view"));
-        permissions.add(new Permission("Site.add"));
-        permissions.add(new Permission("Site.delete"));
-        permissions.add(new Permission("ModaliteRadiotherapie.edit"));
-        permissions.add(new Permission("ModaliteRadiotherapie.list"));
-        permissions.add(new Permission("ModaliteRadiotherapie.view"));
-        permissions.add(new Permission("ModaliteRadiotherapie.add"));
-        permissions.add(new Permission("ModaliteRadiotherapie.delete"));
-        permissions.add(new Permission("Services.edit"));
-        permissions.add(new Permission("Services.list"));
-        permissions.add(new Permission("Services.view"));
-        permissions.add(new Permission("Services.add"));
-        permissions.add(new Permission("Services.delete"));
-        permissions.add(new Permission("FrequenceRadiotherapie.edit"));
-        permissions.add(new Permission("FrequenceRadiotherapie.list"));
-        permissions.add(new Permission("FrequenceRadiotherapie.view"));
-        permissions.add(new Permission("FrequenceRadiotherapie.add"));
-        permissions.add(new Permission("FrequenceRadiotherapie.delete"));
-        permissions.add(new Permission("Visee.edit"));
-        permissions.add(new Permission("Visee.list"));
-        permissions.add(new Permission("Visee.view"));
-        permissions.add(new Permission("Visee.add"));
-        permissions.add(new Permission("Visee.delete"));
-        permissions.add(new Permission("Patient.edit"));
-        permissions.add(new Permission("Patient.list"));
-        permissions.add(new Permission("Patient.view"));
-        permissions.add(new Permission("Patient.add"));
-        permissions.add(new Permission("Patient.delete"));
-        permissions.add(new Permission("Personnel.edit"));
-        permissions.add(new Permission("Personnel.list"));
-        permissions.add(new Permission("Personnel.view"));
-        permissions.add(new Permission("Personnel.add"));
-        permissions.add(new Permission("Personnel.delete"));
-        permissions.add(new Permission("TypeConsultationRadiotherapie.edit"));
-        permissions.add(new Permission("TypeConsultationRadiotherapie.list"));
-        permissions.add(new Permission("TypeConsultationRadiotherapie.view"));
-        permissions.add(new Permission("TypeConsultationRadiotherapie.add"));
-        permissions.add(new Permission("TypeConsultationRadiotherapie.delete"));
-        permissions.add(new Permission("Immobilistion.edit"));
-        permissions.add(new Permission("Immobilistion.list"));
-        permissions.add(new Permission("Immobilistion.view"));
-        permissions.add(new Permission("Immobilistion.add"));
-        permissions.add(new Permission("Immobilistion.delete"));
-        permissions.add(new Permission("TypeToxiciteRth.edit"));
-        permissions.add(new Permission("TypeToxiciteRth.list"));
-        permissions.add(new Permission("TypeToxiciteRth.view"));
-        permissions.add(new Permission("TypeToxiciteRth.add"));
-        permissions.add(new Permission("TypeToxiciteRth.delete"));
+    private void createModalite() {
+        String prefix = "modalite ";
+        for (int i = 1; i < 100; i++) {
+            ModaliteRadiotherapie item = new ModaliteRadiotherapie();
+            item.setOrdre(1L * i);
+            item.setLibelle(prefix + i);
+            item.setCode(prefix + i);
+            modaliteRadiotherapieService.create(item);
+        }
     }
+
+    private void createPatient() {
+        String prefix = "patient ";
+        for (int i = 1; i < 100; i++) {
+            Patient item = new Patient();
+            item.setOrdre(1L * i);
+            item.setIpp(prefix + i);
+            item.setNom(prefix + i);
+            item.setPrenom(prefix + i);
+            item.setAge(i * 10);
+            item.setSexe(i % 2 == 0 ? "Male" : "Female");
+            patientService.create(item);
+
+        }
+    }
+
+    private void createSite() {
+        String prefix = "site ";
+        for (int i = 1; i < 100; i++) {
+            Site item = new Site();
+            item.setOrdre(1L * i);
+            item.setLibelle(prefix + i);
+            item.setCode(prefix + i);
+            siteService.create(item);
+
+        }
+    }
+
+    private void createTypeTraitement() {
+        String prefix = "typeTraitement ";
+        for (int i = 1; i < 100; i++) {
+            TypeTraitement item = new TypeTraitement();
+            item.setLibelle(prefix + i);
+            item.setCode(prefix + i);
+            typeTraitementService.create(item);
+
+        }
+    }
+
+    private void createPersonnel() {
+        String prefix = "personnel ";
+        for (int i = 1; i < 100; i++) {
+            Personnel item = new Personnel();
+            item.setIpp(prefix + i);
+            item.setNom(prefix + i);
+            item.setPrenom(prefix + i);
+            personnelService.create(item);
+
+        }
+    }
+
+    private void createVisee() {
+        String prefix = "visee ";
+        for (int i = 1; i < 100; i++) {
+            Visee item = new Visee();
+            item.setOrdre(1L * i);
+            item.setLibelle(prefix + i);
+            item.setCode(prefix + i);
+            viseeService.create(item);
+
+        }
+    }
+
+    private void createProtocoleInclusion() {
+        String prefix = "protocoleInclusion ";
+        for (int i = 1; i < 100; i++) {
+            ProtocoleInclusion item = new ProtocoleInclusion();
+            item.setOrdre(1L * i);
+            item.setLibelle(prefix + i);
+            item.setCode(prefix + i);
+            protocoleInclusionService.create(item);
+
+        }
+    }
+
+    private void createGradeToxiciteRth() {
+        String prefix = "gradeToxiciteRth ";
+        for (int i = 1; i < 100; i++) {
+            GradeToxiciteRth item = new GradeToxiciteRth();
+            item.setOrdre(1L * i);
+            item.setLibelle(prefix + i);
+            item.setCode(prefix + i);
+            gradeToxiciteRthService.create(item);
+
+        }
+    }
+
+    private void createTypeToxiciteRth() {
+        String prefix = "typeToxiciteRth ";
+        for (int i = 1; i < 100; i++) {
+            TypeToxiciteRth item = new TypeToxiciteRth();
+            item.setOrdre(1L * i);
+            item.setLibelle(prefix + i);
+            item.setCode(prefix + i);
+            typeToxiciteRthService.create(item);
+
+        }
+    }
+
+    private void createImmobilistion() {
+        String prefix = "immobilistion ";
+        for (int i = 1; i < 100; i++) {
+            Immobilistion item = new Immobilistion();
+            item.setOrdre(1L * i);
+            item.setLibelle(prefix + i);
+            item.setCode(prefix + i);
+            immobilistionService.create(item);
+
+        }
+    }
+
+    private void createPositionnement() {
+        String prefix = "positionnement ";
+        for (int i = 1; i < 100; i++) {
+            Positionnement item = new Positionnement();
+            item.setOrdre(1L * i);
+            item.setLibelle(prefix + i);
+            item.setCode(prefix + i);
+            positionnementService.create(item);
+
+        }
+    }
+
+    @Autowired
+    private GradeToxiciteRthAdminService gradeToxiciteRthService;
+    @Autowired
+    private TypeToxiciteRthAdminService typeToxiciteRthService;
+    @Autowired
+    private ImmobilistionAdminService immobilistionService;
+    @Autowired
+    private PositionnementAdminService positionnementService;
+    @Autowired
+    private ModaliteRadiotherapieAdminService modaliteRadiotherapieService;
+    @Autowired
+    private PatientAdminService patientService;
+    @Autowired
+    private SiteAdminService siteService;
+    @Autowired
+    private TypeTraitementAdminService typeTraitementService;
+    @Autowired
+    private PersonnelAdminService personnelService;
+    @Autowired
+    private ViseeAdminService viseeService;
+    @Autowired
+    private ProtocoleInclusionAdminService protocoleInclusionService;
+
 }
 
 
