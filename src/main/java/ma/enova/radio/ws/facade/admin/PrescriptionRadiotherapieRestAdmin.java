@@ -44,25 +44,25 @@ public class PrescriptionRadiotherapieRestAdmin extends AbstractController<Presc
 
     @ApiOperation("find by statutRadiotherapie ENATTENTEPRESCRIPTION")
     @GetMapping("statutRadiotherapie/code/en-attente-prescritpion")
-    public List<PrescriptionRadiotherapie> findByStatutRadiotherapieEnAttentePrescription(@PathVariable String code) {
+    public List<PrescriptionRadiotherapie> findByStatutRadiotherapieEnAttentePrescription() {
         return service.findByStatutRadiotherapieCode(StatutRadioTherapieConstant.EN_ATTENTE_PRESCRIPTION);
     }
 
     @ApiOperation("find by statutRadiotherapie ENATTENTESIMULATION")
     @GetMapping("statutRadiotherapie/code/en-attente-simulation")
-    public List<PrescriptionRadiotherapie> findByStatutRadiotherapieEnAttenteSimulation(@PathVariable String code) {
+    public List<PrescriptionRadiotherapie> findByStatutRadiotherapieEnAttenteSimulation() {
         return service.findByStatutRadiotherapieCode(StatutRadioTherapieConstant.EN_ATTENTE_SIMULATION);
     }
 
     @ApiOperation("find by statutRadiotherapie ENCOURSTRAITEMENT")
     @GetMapping("statutRadiotherapie/code/en-cours-traitement")
-    public List<PrescriptionRadiotherapie> findByStatutRadiotherapieEnCoursTraitement(@PathVariable String code) {
+    public List<PrescriptionRadiotherapie> findByStatutRadiotherapieEnCoursTraitement() {
         return service.findByStatutRadiotherapieCode(StatutRadioTherapieConstant.EN_COURS_TRAITEMENT);
     }
 
     @ApiOperation("find by statutRadiotherapie FINTRAITEMENT")
     @GetMapping("statutRadiotherapie/code/fin-traitement")
-    public List<PrescriptionRadiotherapie> findByStatutRadiotherapieFinTraitement(@PathVariable String code) {
+    public List<PrescriptionRadiotherapie> findByStatutRadiotherapieFinTraitement() {
         return service.findByStatutRadiotherapieCode(StatutRadioTherapieConstant.FIN_TRAITEMENT);
     }
 
