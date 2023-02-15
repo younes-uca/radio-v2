@@ -35,16 +35,19 @@ public class PrescriptionRadiotherapieAdminServiceImpl extends AbstractServiceIm
     }
 
     @Override
+    @Transactional
     public void updateAsSimuler(Long id, Long statutRadiotherapieId, LocalDateTime dateSimulation, String immobilistion, String positionnement, String fichierTraitement, LocalDateTime validateurSimulationDate, Long validateurId) {
         dao.updateAsSimuler(id, statutRadiotherapieId, dateSimulation, immobilistion, positionnement, fichierTraitement, validateurSimulationDate, validateurId);
     }
 
     @Override
+    @Transactional
     public void updateAsValiderSimulation(Long id, Long statutRadiotherapieId, LocalDateTime validateurSimulationDate, Long validateurId) {
         dao.updateAsValiderSimulation(id, statutRadiotherapieId, validateurSimulationDate, validateurId);
     }
 
     @Override
+    @Transactional
     public void updateAsCloturerTraitement(Long id, Long statutRadiotherapieId, LocalDateTime dateFinTraitement, String compteRendu) {
         dao.updateAsCloturerTraitement(id, statutRadiotherapieId, dateFinTraitement, compteRendu);
     }

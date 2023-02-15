@@ -1,5 +1,6 @@
 package ma.enova.radio.workflow.admin.process.prescriptionradiotherapie.simuler;
 
+import ma.enova.radio.bean.core.Personnel;
 import ma.enova.radio.bean.core.PrescriptionRadiotherapie;
 import ma.enova.radio.bean.core.StatutRadiotherapie;
 import ma.enova.radio.constant.StatutRadioTherapieConstant;
@@ -8,7 +9,8 @@ import ma.enova.radio.service.facade.admin.PrescriptionRadiotherapieAdminService
 import ma.enova.radio.service.facade.admin.StatutRadiotherapieAdminService;
 import ma.enova.radio.zynerator.process.AbstractProcessImpl;
 import ma.enova.radio.zynerator.process.Result;
-import ma.enova.radio.zynerator.util.DateUtil;
+
+import java.time.LocalDateTime;
 
 public class PrescriptionRadiotherapieSimulerAdminProcessImpl extends AbstractProcessImpl<PrescriptionRadiotherapieSimulerAdminInput, PrescriptionRadiotherapieSimulerAdminOutput, PrescriptionRadiotherapie, PrescriptionRadiotherapieSimulerAdminConverter> implements PrescriptionRadiotherapieSimulerAdminProcess {
 
@@ -16,24 +18,29 @@ public class PrescriptionRadiotherapieSimulerAdminProcessImpl extends AbstractPr
     public void init(PrescriptionRadiotherapieSimulerAdminInput input, PrescriptionRadiotherapie item) {
         StatutRadiotherapie statutRadiotherapie = statutRadiotherapieService.findByCode(StatutRadioTherapieConstant.EN_COURS_TRAITEMENT);
         item.setStatutRadiotherapie(statutRadiotherapie);
+        Personnel personnel = new Personnel(1L);
+        item.setValidateurSimulation(personnel);//TODO get current user :: Personnel must extends User
+        item.setValidateurSimulationDate(LocalDateTime.now());
     }
 
     @Override
     public void validate(PrescriptionRadiotherapieSimulerAdminInput input, PrescriptionRadiotherapie item, Result<PrescriptionRadiotherapieSimulerAdminInput, PrescriptionRadiotherapieSimulerAdminOutput, PrescriptionRadiotherapie> result) {
-        if (input.getStatutRadiotherapie() == null)
-            result.addErrorMessage("");
-        else if (input.getId() == null)
-            result.addErrorMessage("");
-        else if (input.getValidateurSimulation() == null || input.getValidateurSimulation().getId() == null) {
-            result.addErrorMessage("");
+        if (item.getStatutRadiotherapie() == null)
+            result.addErrorMessage("radiotherapie.simuler.status.obligatoire");
+        else if (item.getId() == null)
+            result.addErrorMessage("radiotherapie.simuler.prescription.obligatoire");
+        else if (item.getValidateurSimulation() == null || item.getValidateurSimulation().getId() == null) {
+            result.addErrorMessage("radiotherapie.simuler.validateur.obligatoire");
         }
     }
 
     @Override
     public void run(PrescriptionRadiotherapieSimulerAdminInput input, PrescriptionRadiotherapie t, Result<PrescriptionRadiotherapieSimulerAdminInput, PrescriptionRadiotherapieSimulerAdminOutput, PrescriptionRadiotherapie> result) {
-        Long validateurSimulationId = input.getValidateurSimulation().getId();
-        service.updateAsValiderSimulation(input.getId(), input.getStatutRadiotherapie().getId(), DateUtil.stringToDateTime(input.getValidateurSimulationDate()), validateurSimulationId);
+        Long validateurSimulationId = t.getValidateurSimulation().getId();
+        service.updateAsValiderSimulation(t.getId(), t.getStatutRadiotherapie().getId(), t.getValidateurSimulationDate(), validateurSimulationId);
         histortiquePrescriptionRadiotherapieService.createFromPrescription(t.getId(), t.getStatutRadiotherapie());
+        // TODO : send new state to RabbitMq
+        result.addInfoMessage("radiotherapie.simuler.ok");
     }
 
 

@@ -16,9 +16,9 @@ public class PrescriptionRadiotherapieSimulerAdminInput extends AbstractProcessI
     private String immobilistion;
     private String positionnement;
     private String fichierTraitements;
-    private PersonnelDto validateurSimulation;
-    private String validateurSimulationDate;
-    private StatutRadiotherapieDto statutRadiotherapie;
+    private PersonnelDto validateurSimulation; // to del just put it in output
+    private String validateurSimulationDate;// to del just put it in output (now)
+    private StatutRadiotherapieDto statutRadiotherapie;// to del just put it in output
 
     @Log
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm")

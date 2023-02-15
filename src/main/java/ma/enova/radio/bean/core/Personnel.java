@@ -1,33 +1,24 @@
 package ma.enova.radio.bean.core;
 
-import java.util.Objects;
-
-
-
-
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import ma.enova.radio.zynerator.audit.AuditBusinessObjectEnhanced;
+
 import javax.persistence.*;
 import java.util.Objects;
-
-
-
-
 
 
 @Entity
 @Table(name = "personnel")
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@SequenceGenerator(name="personnel_seq",sequenceName="personnel_seq",allocationSize=1, initialValue = 1)
-public class Personnel   extends AuditBusinessObjectEnhanced  {
+@SequenceGenerator(name = "personnel_seq", sequenceName = "personnel_seq", allocationSize = 1, initialValue = 1)
+public class Personnel extends AuditBusinessObjectEnhanced {
 
     private Long id;
 
     @Column(length = 500)
     private String ipp;
     @Lob
-    @Column(columnDefinition="TEXT")
+    @Column(columnDefinition = "TEXT")
     private String adresse;
     @Column(length = 500)
     private String nom;
@@ -44,94 +35,117 @@ public class Personnel   extends AuditBusinessObjectEnhanced  {
     @Column(columnDefinition = "boolean default false")
     private Boolean expertise = false;
 
-    private CategoriePersonnel categoriePersonnel ;
-    
-    private Specialite specialite ;
-    
+    private CategoriePersonnel categoriePersonnel;
+
+    private Specialite specialite;
 
 
-    public Personnel(){
+    public Personnel() {
         super();
     }
 
-
-
+    public Personnel(Long id) {
+        this.id = id;
+    }
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator="personnel_seq")
-    public Long getId(){
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "personnel_seq")
+    public Long getId() {
         return this.id;
     }
-    public void setId(Long id){
+
+    public void setId(Long id) {
         this.id = id;
     }
-    public String getIpp(){
+
+    public String getIpp() {
         return this.ipp;
     }
-    public void setIpp(String ipp){
+
+    public void setIpp(String ipp) {
         this.ipp = ipp;
     }
-    public String getAdresse(){
+
+    public String getAdresse() {
         return this.adresse;
     }
-    public void setAdresse(String adresse){
+
+    public void setAdresse(String adresse) {
         this.adresse = adresse;
     }
-    public String getNom(){
+
+    public String getNom() {
         return this.nom;
     }
-    public void setNom(String nom){
+
+    public void setNom(String nom) {
         this.nom = nom;
     }
-    public String getPrenom(){
+
+    public String getPrenom() {
         return this.prenom;
     }
-    public void setPrenom(String prenom){
+
+    public void setPrenom(String prenom) {
         this.prenom = prenom;
     }
-    public String getCin(){
+
+    public String getCin() {
         return this.cin;
     }
-    public void setCin(String cin){
+
+    public void setCin(String cin) {
         this.cin = cin;
     }
-    public String getTelephone(){
+
+    public String getTelephone() {
         return this.telephone;
     }
-    public void setTelephone(String telephone){
+
+    public void setTelephone(String telephone) {
         this.telephone = telephone;
     }
-    public String getEmail(){
+
+    public String getEmail() {
         return this.email;
     }
-    public void setEmail(String email){
+
+    public void setEmail(String email) {
         this.email = email;
     }
-    public String getMobile(){
+
+    public String getMobile() {
         return this.mobile;
     }
-    public void setMobile(String mobile){
+
+    public void setMobile(String mobile) {
         this.mobile = mobile;
     }
-    public Boolean  getExpertise(){
+
+    public Boolean getExpertise() {
         return this.expertise;
     }
-    public void setExpertise(Boolean expertise){
+
+    public void setExpertise(Boolean expertise) {
         this.expertise = expertise;
     }
+
     @ManyToOne(fetch = FetchType.LAZY)
-    public CategoriePersonnel getCategoriePersonnel(){
+    public CategoriePersonnel getCategoriePersonnel() {
         return this.categoriePersonnel;
     }
-    public void setCategoriePersonnel(CategoriePersonnel categoriePersonnel){
+
+    public void setCategoriePersonnel(CategoriePersonnel categoriePersonnel) {
         this.categoriePersonnel = categoriePersonnel;
     }
+
     @ManyToOne(fetch = FetchType.LAZY)
-    public Specialite getSpecialite(){
+    public Specialite getSpecialite() {
         return this.specialite;
     }
-    public void setSpecialite(Specialite specialite){
+
+    public void setSpecialite(Specialite specialite) {
         this.specialite = specialite;
     }
 

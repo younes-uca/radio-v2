@@ -66,15 +66,11 @@ public class PrescriptionRadiotherapieSimulerAdminOutput extends AbstractProcess
         this.validateurSimulationDate = validateurSimulationDate;
     }
 
-    public void setStatutRadiotherapieDto(StatutRadiotherapieDto statutRadiotherapie) {
-        this.statutRadiotherapie = statutRadiotherapie;
-    }
-
     public PersonnelDto getValidateurSimulation() {
         return this.validateurSimulation;
     }
 
-    public void setValidateurSimulationDto(PersonnelDto validateurSimulation) {
+    public void setValidateurSimulation(PersonnelDto validateurSimulation) {
         this.validateurSimulation = validateurSimulation;
     }
 

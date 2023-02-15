@@ -32,7 +32,6 @@ import ma.enova.radio.zynerator.process.Result;
 import ma.enova.radio.zynerator.util.PaginatedList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -43,6 +42,18 @@ import java.util.List;
 @RequestMapping("/api/prescriptionRadiotherapie")
 public class PrescriptionRadiotherapieRestAdmin extends AbstractController<PrescriptionRadiotherapie, PrescriptionRadiotherapieDto, PrescriptionRadiotherapieHistory, PrescriptionRadiotherapieCriteria, PrescriptionRadiotherapieHistoryCriteria, PrescriptionRadiotherapieAdminService, PrescriptionRadiotherapieConverter> {
 
+    @ApiOperation("findByDecisionTraitementCode")
+    @GetMapping("/decision-traitement/code/{code}")
+    public ResponseEntity<List<PrescriptionRadiotherapieDto>> findByDecisionTraitementCode(@PathVariable String code) {
+        return getResponseEntity(service.findByDecisionTraitementCode(code));
+    }
+
+    @ApiOperation("findByPatientIpp")
+    @GetMapping("/patient/ipp/{ipp}")
+    public ResponseEntity<List<PrescriptionRadiotherapieDto>> findByPatientIpp(@PathVariable String ipp) {
+        return getResponseEntity(service.findByPatientIpp(ipp));
+    }
+
     @ApiOperation("find by statutRadiotherapie ENATTENTEPRESCRIPTION")
     @GetMapping("statutRadiotherapie/code/en-attente-prescritpion")
     public ResponseEntity<List<PrescriptionRadiotherapieDto>> findByStatutRadiotherapieEnAttentePrescription() {
@@ -51,20 +62,20 @@ public class PrescriptionRadiotherapieRestAdmin extends AbstractController<Presc
 
     @ApiOperation("find by statutRadiotherapie ENATTENTESIMULATION")
     @GetMapping("statutRadiotherapie/code/en-attente-simulation")
-    public List<PrescriptionRadiotherapie> findByStatutRadiotherapieEnAttenteSimulation() {
-        return service.findByStatutRadiotherapieCode(StatutRadioTherapieConstant.EN_ATTENTE_SIMULATION);
+    public ResponseEntity<List<PrescriptionRadiotherapieDto>> findByStatutRadiotherapieEnAttenteSimulation() {
+        return getResponseEntity(service.findByStatutRadiotherapieCode(StatutRadioTherapieConstant.EN_ATTENTE_SIMULATION));
     }
 
     @ApiOperation("find by statutRadiotherapie ENCOURSTRAITEMENT")
     @GetMapping("statutRadiotherapie/code/en-cours-traitement")
-    public List<PrescriptionRadiotherapie> findByStatutRadiotherapieEnCoursTraitement() {
-        return service.findByStatutRadiotherapieCode(StatutRadioTherapieConstant.EN_COURS_TRAITEMENT);
+    public ResponseEntity<List<PrescriptionRadiotherapieDto>> findByStatutRadiotherapieEnCoursTraitement() {
+        return getResponseEntity(service.findByStatutRadiotherapieCode(StatutRadioTherapieConstant.EN_COURS_TRAITEMENT));
     }
 
     @ApiOperation("find by statutRadiotherapie FINTRAITEMENT")
     @GetMapping("statutRadiotherapie/code/fin-traitement")
-    public List<PrescriptionRadiotherapie> findByStatutRadiotherapieFinTraitement() {
-        return service.findByStatutRadiotherapieCode(StatutRadioTherapieConstant.FIN_TRAITEMENT);
+    public ResponseEntity<List<PrescriptionRadiotherapieDto>> findByStatutRadiotherapieFinTraitement() {
+        return getResponseEntity(service.findByStatutRadiotherapieCode(StatutRadioTherapieConstant.FIN_TRAITEMENT));
     }
 
     @ApiOperation("save a prescriptionRadiotherapie")
@@ -102,17 +113,6 @@ public class PrescriptionRadiotherapieRestAdmin extends AbstractController<Presc
         return new ResponseEntity<>(result, result.getStatus());
     }
 
-    @ApiOperation("findByDecisionTraitementCode")
-    @GetMapping("/decision-traitement/code/{code}")
-    public List<PrescriptionRadiotherapie> findByDecisionTraitementCode(@PathVariable String code) {
-        return service.findByDecisionTraitementCode(code);
-    }
-
-    @ApiOperation("findByPatientIpp")
-    @GetMapping("/patient/ipp/{ipp}")
-    public List<PrescriptionRadiotherapie> findByPatientIpp(@PathVariable String ipp) {
-        return service.findByPatientIpp(ipp);
-    }
 
     @ApiOperation("Finds a list of all prescriptionRadiotherapies")
     @GetMapping("")
