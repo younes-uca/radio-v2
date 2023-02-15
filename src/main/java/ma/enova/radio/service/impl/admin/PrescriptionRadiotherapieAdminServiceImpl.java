@@ -7,63 +7,75 @@ import ma.enova.radio.dao.criteria.history.PrescriptionRadiotherapieHistoryCrite
 import ma.enova.radio.dao.facade.core.PrescriptionRadiotherapieDao;
 import ma.enova.radio.dao.facade.history.PrescriptionRadiotherapieHistoryDao;
 import ma.enova.radio.dao.specification.core.PrescriptionRadiotherapieSpecification;
-import ma.enova.radio.service.facade.admin.PrescriptionRadiotherapieAdminService;
+import ma.enova.radio.service.facade.admin.*;
 import ma.enova.radio.ws.converter.PrescriptionRadiotherapieConverter;
 import ma.enova.radio.ws.dto.PrescriptionRadiotherapieDto;
 import ma.enova.radio.zynerator.service.AbstractServiceImpl;
-import org.springframework.stereotype.Service;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import ma.enova.radio.service.facade.admin.ModaliteRadiotherapieAdminService ;
-import ma.enova.radio.service.facade.admin.SeanceRadiotherapieAdminService ;
-import ma.enova.radio.service.facade.admin.PatientAdminService ;
-import ma.enova.radio.service.facade.admin.HistortiquePrescriptionRadiotherapieAdminService ;
-import ma.enova.radio.service.facade.admin.StatutRadiotherapieAdminService ;
-import ma.enova.radio.service.facade.admin.SiteAdminService ;
-import ma.enova.radio.service.facade.admin.TypeTraitementAdminService ;
-import ma.enova.radio.service.facade.admin.PersonnelAdminService ;
-import ma.enova.radio.service.facade.admin.ConsultationRadiotherapieAdminService ;
-import ma.enova.radio.service.facade.admin.ViseeAdminService ;
-import ma.enova.radio.service.facade.admin.ProtocoleInclusionAdminService ;
-
-
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
-public class PrescriptionRadiotherapieAdminServiceImpl extends AbstractServiceImpl<PrescriptionRadiotherapie, PrescriptionRadiotherapieDto,PrescriptionRadiotherapieHistory, PrescriptionRadiotherapieCriteria, PrescriptionRadiotherapieHistoryCriteria, PrescriptionRadiotherapieDao,
-PrescriptionRadiotherapieHistoryDao, PrescriptionRadiotherapieConverter> implements PrescriptionRadiotherapieAdminService {
+public class PrescriptionRadiotherapieAdminServiceImpl extends AbstractServiceImpl<PrescriptionRadiotherapie, PrescriptionRadiotherapieDto, PrescriptionRadiotherapieHistory, PrescriptionRadiotherapieCriteria, PrescriptionRadiotherapieHistoryCriteria, PrescriptionRadiotherapieDao,
+        PrescriptionRadiotherapieHistoryDao, PrescriptionRadiotherapieConverter> implements PrescriptionRadiotherapieAdminService {
+
+
+    @Override
+    public List<PrescriptionRadiotherapie> findByDecisionTraitementCode(String code) {
+        return dao.findByDecisionTraitementCode(code);
+    }
+
+    @Override
+    public List<PrescriptionRadiotherapie> findByPatientIpp(String ipp) {
+        return dao.findByPatientIpp(ipp);
+    }
+
+    @Override
+    public void updateAsSimuler(Long id, Long statutRadiotherapieId, LocalDateTime dateSimulation, String immobilistion, String positionnement, String fichierTraitement, LocalDateTime validateurSimulationDate, Long validateurId) {
+        dao.updateAsSimuler(id, statutRadiotherapieId, dateSimulation, immobilistion, positionnement, fichierTraitement, validateurSimulationDate, validateurId);
+    }
+
+    @Override
+    public void updateAsValiderSimulation(Long id, Long statutRadiotherapieId, LocalDateTime validateurSimulationDate, Long validateurId) {
+        dao.updateAsValiderSimulation(id, statutRadiotherapieId, validateurSimulationDate, validateurId);
+    }
+
+    @Override
+    public void updateAsCloturerTraitement(Long id, Long statutRadiotherapieId, LocalDateTime dateFinTraitement, String compteRendu) {
+        dao.updateAsCloturerTraitement(id, statutRadiotherapieId, dateFinTraitement, compteRendu);
+    }
 
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
     public PrescriptionRadiotherapie create(PrescriptionRadiotherapie t) {
         super.create(t);
         if (t.getConsultationRadiotherapies() != null) {
-                t.getConsultationRadiotherapies().forEach(element-> {
-                    element.setPrescriptionRadiotherapie(t);
-                    consultationRadiotherapieService.create(element);
+            t.getConsultationRadiotherapies().forEach(element -> {
+                element.setPrescriptionRadiotherapie(t);
+                consultationRadiotherapieService.create(element);
             });
         }
         if (t.getSeanceRadiotherapies() != null) {
-                t.getSeanceRadiotherapies().forEach(element-> {
-                    element.setPrescriptionRadiotherapie(t);
-                    seanceRadiotherapieService.create(element);
+            t.getSeanceRadiotherapies().forEach(element -> {
+                element.setPrescriptionRadiotherapie(t);
+                seanceRadiotherapieService.create(element);
             });
         }
         if (t.getHistortiquePrescriptionRadiotherapies() != null) {
-                t.getHistortiquePrescriptionRadiotherapies().forEach(element-> {
-                    element.setPrescriptionRadiotherapie(t);
-                    histortiquePrescriptionRadiotherapieService.create(element);
+            t.getHistortiquePrescriptionRadiotherapies().forEach(element -> {
+                element.setPrescriptionRadiotherapie(t);
+                histortiquePrescriptionRadiotherapieService.create(element);
             });
         }
         return t;
     }
 
-    public PrescriptionRadiotherapie findWithAssociatedLists(Long id){
+    public PrescriptionRadiotherapie findWithAssociatedLists(Long id) {
         PrescriptionRadiotherapie result = dao.findById(id).orElse(null);
-        if(result!=null && result.getId() != null) {
+        if (result != null && result.getId() != null) {
             result.setConsultationRadiotherapies(consultationRadiotherapieService.findByPrescriptionRadiotherapieId(id));
             result.setSeanceRadiotherapies(seanceRadiotherapieService.findByPrescriptionRadiotherapieId(id));
             result.setHistortiquePrescriptionRadiotherapies(histortiquePrescriptionRadiotherapieService.findByPrescriptionRadiotherapieId(id));
@@ -72,8 +84,8 @@ PrescriptionRadiotherapieHistoryDao, PrescriptionRadiotherapieConverter> impleme
     }
 
     @Transactional
-    public void delete(List<PrescriptionRadiotherapie> list){
-        if(list != null ) {
+    public void delete(List<PrescriptionRadiotherapie> list) {
+        if (list != null) {
             for (PrescriptionRadiotherapie element : list) {
                 //constructAndSaveHistory(dto, ACTION_TYPE.DELETE); TODO
                 consultationRadiotherapieService.deleteByPrescriptionRadiotherapieId(element.getId());
@@ -84,8 +96,8 @@ PrescriptionRadiotherapieHistoryDao, PrescriptionRadiotherapieConverter> impleme
         }
     }
 
-    public void updateWithAssociatedLists(PrescriptionRadiotherapie prescriptionRadiotherapie){
-    if(prescriptionRadiotherapie !=null && prescriptionRadiotherapie.getId() != null){
+    public void updateWithAssociatedLists(PrescriptionRadiotherapie prescriptionRadiotherapie) {
+        if (prescriptionRadiotherapie != null && prescriptionRadiotherapie.getId() != null) {
             //List<List<ConsultationRadiotherapie>> resultConsultationRadiotherapies= consultationRadiotherapieService.getToBeSavedAndToBeDeleted(consultationRadiotherapieService.findByPrescriptionRadiotherapieId(prescriptionRadiotherapie.getId()),prescriptionRadiotherapie.getConsultationRadiotherapies());
             //consultationRadiotherapieService.delete(resultConsultationRadiotherapies.get(1));
             //associateConsultationRadiotherapie(prescriptionRadiotherapie,resultConsultationRadiotherapies.get(0));
@@ -98,11 +110,11 @@ PrescriptionRadiotherapieHistoryDao, PrescriptionRadiotherapieConverter> impleme
             //histortiquePrescriptionRadiotherapieService.delete(resultHistortiquePrescriptionRadiotherapies.get(1));
             //associateHistortiquePrescriptionRadiotherapie(prescriptionRadiotherapie,resultHistortiquePrescriptionRadiotherapies.get(0));
             //histortiquePrescriptionRadiotherapieService.update(resultHistortiquePrescriptionRadiotherapies.get(0));
-    }
+        }
     }
 
-    public void findOrSaveAssociatedObject(PrescriptionRadiotherapie t){
-        if( t != null) {
+    public void findOrSaveAssociatedObject(PrescriptionRadiotherapie t) {
+        if (t != null) {
             t.setMedecinPrescripteur(personnelService.findOrSave(t.getMedecinPrescripteur()));
             t.setSite(siteService.findOrSave(t.getSite()));
             t.setModaliteRadiotherapie(modaliteRadiotherapieService.findOrSave(t.getModaliteRadiotherapie()));
@@ -115,58 +127,114 @@ PrescriptionRadiotherapieHistoryDao, PrescriptionRadiotherapieConverter> impleme
         }
     }
 
-    public List<PrescriptionRadiotherapie> findByMedecinPrescripteurId(Long id){
+
+/*
+
+    public int validerSimulation(PrescriptionRadioTherapieSimulerInput prescriptionRadioTherapieSimulerInput) {
+        if (prescriptionRadioTherapieSimulerInput == null)
+            return -1;
+        StatutRadiotherapie statutRadiotherapie = statutRadiotherapieService.findByCode(StatutRadioTherapieConstant.EN_COURS_TRAITEMENT);
+        if (statutRadiotherapie == null)
+            return -2;
+        else if (prescriptionRadioTherapieSimulerInput.getPrescriptionRadiotherapie() == null || prescriptionRadioTherapieSimulerInput.getPrescriptionRadiotherapie().getId() == null)
+            return -3;
+        else {
+            dao.updateAsValiderSimulation(prescriptionRadioTherapieSimulerInput.getPrescriptionRadiotherapie().getId(), statutRadiotherapie.getId(), DateUtil.stringToDateTime(prescriptionRadioTherapieSimulerInput.getValidateurSimulationDate()),
+                    prescriptionRadioTherapieSimulerInput.getValidateurSimulation() != null ? prescriptionRadioTherapieSimulerInput.getValidateurSimulation().getId() : null);
+            histortiquePrescriptionRadiotherapieService.createFromPrescription(prescriptionRadioTherapieSimulerInput.getPrescriptionRadiotherapie(), statutRadiotherapie);
+            return 1;
+        }
+    }
+
+    public int cloturerTraitement(PrescriptionRadioTherapieCloturerTraitementInput prescriptionRadioTherapieCloturerTraitementInput) {
+
+        if (prescriptionRadioTherapieCloturerTraitementInput == null)
+            return -1;
+        StatutRadiotherapie statutRadiotherapie = statutRadiotherapieService.findByCode(StatutRadioTherapieConstant.FIN_TRAITEMENT);
+        if (statutRadiotherapie == null)
+            return -2;
+        else if (prescriptionRadioTherapieCloturerTraitementInput.getPrescriptionRadiotherapie() == null || prescriptionRadioTherapieCloturerTraitementInput.getPrescriptionRadiotherapie().getId() == null)
+            return -3;
+        else {
+            dao.updateAsCloturerTraitement(prescriptionRadioTherapieCloturerTraitementInput.getPrescriptionRadiotherapie().getId(), statutRadiotherapie.getId(),
+                    DateUtil.stringToDateTime(prescriptionRadioTherapieCloturerTraitementInput.getDateFinTraitement()), prescriptionRadioTherapieCloturerTraitementInput.getCompteRendu());
+            histortiquePrescriptionRadiotherapieService.createFromPrescription(prescriptionRadioTherapieCloturerTraitementInput.getPrescriptionRadiotherapie(), statutRadiotherapie);
+            return 1;
+        }
+    }é
+
+*/
+
+
+    public List<PrescriptionRadiotherapie> findByMedecinPrescripteurId(Long id) {
         return dao.findByMedecinPrescripteurId(id);
     }
-    public int deleteByMedecinPrescripteurId(Long id){
+
+    public int deleteByMedecinPrescripteurId(Long id) {
         return dao.deleteByMedecinPrescripteurId(id);
     }
-    public List<PrescriptionRadiotherapie> findBySiteId(Long id){
+
+    public List<PrescriptionRadiotherapie> findBySiteId(Long id) {
         return dao.findBySiteId(id);
     }
-    public int deleteBySiteId(Long id){
+
+    public int deleteBySiteId(Long id) {
         return dao.deleteBySiteId(id);
     }
-    public List<PrescriptionRadiotherapie> findByModaliteRadiotherapieId(Long id){
+
+    public List<PrescriptionRadiotherapie> findByModaliteRadiotherapieId(Long id) {
         return dao.findByModaliteRadiotherapieId(id);
     }
-    public int deleteByModaliteRadiotherapieId(Long id){
+
+    public int deleteByModaliteRadiotherapieId(Long id) {
         return dao.deleteByModaliteRadiotherapieId(id);
     }
-    public List<PrescriptionRadiotherapie> findByViseeId(Long id){
+
+    public List<PrescriptionRadiotherapie> findByViseeId(Long id) {
         return dao.findByViseeId(id);
     }
-    public int deleteByViseeId(Long id){
+
+    public int deleteByViseeId(Long id) {
         return dao.deleteByViseeId(id);
     }
-    public List<PrescriptionRadiotherapie> findByProtocoleInclusionId(Long id){
+
+    public List<PrescriptionRadiotherapie> findByProtocoleInclusionId(Long id) {
         return dao.findByProtocoleInclusionId(id);
     }
-    public int deleteByProtocoleInclusionId(Long id){
+
+    public int deleteByProtocoleInclusionId(Long id) {
         return dao.deleteByProtocoleInclusionId(id);
     }
-    public List<PrescriptionRadiotherapie> findByStatutRadiotherapieCode(String code){
+
+    public List<PrescriptionRadiotherapie> findByStatutRadiotherapieCode(String code) {
         return dao.findByStatutRadiotherapieCode(code);
     }
-     public int deleteByStatutRadiotherapieCode(String code){
+
+    public int deleteByStatutRadiotherapieCode(String code) {
         return dao.deleteByStatutRadiotherapieCode(code);
     }
-    public List<PrescriptionRadiotherapie> findByValidateurSimulationId(Long id){
+
+    public List<PrescriptionRadiotherapie> findByValidateurSimulationId(Long id) {
         return dao.findByValidateurSimulationId(id);
     }
-    public int deleteByValidateurSimulationId(Long id){
+
+    public int deleteByValidateurSimulationId(Long id) {
         return dao.deleteByValidateurSimulationId(id);
     }
-    public List<PrescriptionRadiotherapie> findByPatientId(Long id){
+
+    public List<PrescriptionRadiotherapie> findByPatientId(Long id) {
         return dao.findByPatientId(id);
     }
-    public int deleteByPatientId(Long id){
+
+    public int deleteByPatientId(Long id) {
         return dao.deleteByPatientId(id);
     }
-    public List<PrescriptionRadiotherapie> findByTypeTraitementCode(String code){
+
+    public List<PrescriptionRadiotherapie> findByTypeTraitementCode(String code) {
         return dao.findByTypeTraitementCode(code);
     }
-     public int deleteByTypeTraitementCode(String code){
+
+    public int deleteByTypeTraitementCode(String code) {
         return dao.deleteByTypeTraitementCode(code);
     }
 
@@ -175,27 +243,28 @@ PrescriptionRadiotherapieHistoryDao, PrescriptionRadiotherapieConverter> impleme
     }
 
     @Autowired
-    private ModaliteRadiotherapieAdminService modaliteRadiotherapieService ;
+    private ModaliteRadiotherapieAdminService modaliteRadiotherapieService;
     @Autowired
-    private SeanceRadiotherapieAdminService seanceRadiotherapieService ;
+    private SeanceRadiotherapieAdminService seanceRadiotherapieService;
     @Autowired
-    private PatientAdminService patientService ;
+    private PatientAdminService patientService;
     @Autowired
-    private HistortiquePrescriptionRadiotherapieAdminService histortiquePrescriptionRadiotherapieService ;
+    private HistortiquePrescriptionRadiotherapieAdminService histortiquePrescriptionRadiotherapieService;
     @Autowired
-    private StatutRadiotherapieAdminService statutRadiotherapieService ;
+    private StatutRadiotherapieAdminService statutRadiotherapieService;
     @Autowired
-    private SiteAdminService siteService ;
+    private SiteAdminService siteService;
     @Autowired
-    private TypeTraitementAdminService typeTraitementService ;
+    private TypeTraitementAdminService typeTraitementService;
     @Autowired
-    private PersonnelAdminService personnelService ;
+    private PersonnelAdminService personnelService;
     @Autowired
-    private ConsultationRadiotherapieAdminService consultationRadiotherapieService ;
+    private ConsultationRadiotherapieAdminService consultationRadiotherapieService;
     @Autowired
-    private ViseeAdminService viseeService ;
+    private ViseeAdminService viseeService;
     @Autowired
-    private ProtocoleInclusionAdminService protocoleInclusionService ;
+    private ProtocoleInclusionAdminService protocoleInclusionService;
+
     public PrescriptionRadiotherapieAdminServiceImpl(PrescriptionRadiotherapieDao dao, PrescriptionRadiotherapieHistoryDao historyDao, PrescriptionRadiotherapieConverter converter) {
         super(dao, historyDao, converter);
     }

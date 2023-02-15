@@ -14,7 +14,7 @@ import java.util.Locale;
 public class DateUtil {
 
     public static final String DEFAULT_DATE_FORMAT = "dd/MM/yyyy";
-    public static final String DATE_TIME_FORMAT = "dd/MM/yyyy HH:mm:ss";
+    public static final String DATE_TIME_FORMAT = "dd/MM/yyyy HH:mm";
     // public static final String DATE_FORMAT_WITH_HOUR = "dd/MM/yyyy HH:mm";
     public static final String DATE_FORMAT_WITH_HOUR = "MM/dd/yyyy HH:mm";
     public static final String DATE_FORMAT_NAME = "ddMMyyyyHHmmss";
@@ -45,7 +45,7 @@ public class DateUtil {
     }
 
     public static LocalDateTime stringEnToDate(final String strDate) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_FORMAT_ENG, Locale.ENGLISH);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_TIME_FORMAT);
         return LocalDateTime.parse(strDate, formatter);
 
     }
@@ -132,32 +132,33 @@ public class DateUtil {
         return "";
     }
 
-/*
+    /*
+        public static String dateTimeToString(final LocalDateTime date) {
+            try {
+                if (date != null) {
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_FORMAT_WITH_HOUR);
+                    return date.format(formatter);
+                }
+            } catch (Exception e) {
+                return null;
+            }
+            return null;
+        }
+    */
     public static String dateTimeToString(final LocalDateTime date) {
         try {
             if (date != null) {
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_FORMAT_WITH_HOUR);
-                return date.format(formatter);
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_FORMAT_WITH_HOUR, Locale.ENGLISH);
+                OffsetDateTime off = OffsetDateTime.of(date, ZoneOffset.UTC);
+                ZonedDateTime zoned = off.atZoneSameInstant(ZoneId.of("UTC+1"));
+                return zoned.toLocalDateTime().format(formatter);
             }
         } catch (Exception e) {
             return null;
         }
         return null;
     }
-*/
-    public static String dateTimeToString(final LocalDateTime date) {
-        try {
-            if (date != null) {
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_FORMAT_WITH_HOUR,Locale.ENGLISH);
-                OffsetDateTime off = OffsetDateTime.of(date, ZoneOffset.UTC);
-                ZonedDateTime zoned = off.atZoneSameInstant(ZoneId.of("UTC+1"));
-                return zoned.toLocalDateTime().format(formatter);
-            }
-        } catch (Exception e) {
-        return null;
-        }
-    return null;
-    }
+
     public static String dateTimeToString(final LocalDate date) {
         try {
             if (date != null) {
@@ -239,27 +240,21 @@ public class DateUtil {
         return cal;
     }
 
-    public static String addFrequence(String dateSouhaiteDebutTraitement, int i, String code) {
-        LocalDateTime dateSouhaiteDebutTraitementDateTime = stringToDateTime(dateSouhaiteDebutTraitement);
+    public static LocalDateTime addFrequence(LocalDateTime dateSouhaiteDebutTraitement, int i, String code) {
         LocalDateTime myLocalDateTime = null;
-        String result = null;
         if ("heure".equals(code)) {
-            myLocalDateTime = dateSouhaiteDebutTraitementDateTime.plusHours(i);
+            myLocalDateTime = dateSouhaiteDebutTraitement.plusHours(i);
         } else if ("jour".equals(code)) {
-            myLocalDateTime = dateSouhaiteDebutTraitementDateTime.plusDays(i);
+            myLocalDateTime = dateSouhaiteDebutTraitement.plusDays(i);
         } else if ("semaine".equals(code)) {
-            myLocalDateTime = dateSouhaiteDebutTraitementDateTime.plusWeeks(i);
+            myLocalDateTime = dateSouhaiteDebutTraitement.plusWeeks(i);
         } else if ("mois".equals(code)) {
-            myLocalDateTime = dateSouhaiteDebutTraitementDateTime.plusMonths(i);
+            myLocalDateTime = dateSouhaiteDebutTraitement.plusMonths(i);
         }
-        if (myLocalDateTime != null) {
-            result = dateToStringWithHour(myLocalDateTime);
-        }
-        return result;
+        return myLocalDateTime;
     }
 
-    public static boolean isBeforeNow(String dateSouhaiteDebutTraitement) {
-        LocalDateTime dateSouhaiteDebutTraitementDateTime = stringToDateTime(dateSouhaiteDebutTraitement);
-        return dateSouhaiteDebutTraitementDateTime.isBefore(LocalDateTime.now());
+    public static boolean isBeforeNow(LocalDateTime dateSouhaiteDebutTraitement) {
+        return dateSouhaiteDebutTraitement.isBefore(LocalDateTime.now());
     }
 }

@@ -1,5 +1,6 @@
 package ma.enova.radio.zynerator.process;
 
+import ma.enova.radio.bean.core.StatutRadiotherapie;
 import ma.enova.radio.zynerator.audit.AuditBusinessObject;
 
 public abstract class AbstractProcessImpl<I extends AbstractProcessInput, K extends AbstractProcessOutput, T extends AuditBusinessObject,CONV extends AbstractProcessConverter<I, K, T>> {

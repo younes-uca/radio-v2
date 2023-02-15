@@ -49,9 +49,12 @@ public class RadioApplication {
     return (args) -> {
         if(true){
             Map<String,String> etats=new HashMap<>();
-            etats.put("Initialisé","initialise");
-            etats.put("En cours","encours");
-            etats.put("Terminé","termine");
+            etats.put("en-attente-prescription","EN_ATTENTE_PRESCRIPTION");
+            etats.put("en-attente-simulation","EN_ATTENTE_SIMULATION");
+            etats.put("en-attente-validation","EN_ATTENTE_VALIDATION");
+            etats.put("en-cours-traitement","EN_COURS_TRAITEMENT");
+            etats.put("fin-traitement","FIN_TRAITEMENT");
+
           /*  etats.entrySet().stream().forEach(e->typeTraitementAdminService.save(new TypeTraitement(e.getKey(),e.getValue())));
             etats.entrySet().stream().forEach(e->statutRadiotherapieAdminService.save(new StatutRadiotherapie(e.getKey(),e.getValue())));
 */

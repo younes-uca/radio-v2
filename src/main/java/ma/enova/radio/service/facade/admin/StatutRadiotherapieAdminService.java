@@ -11,6 +11,5 @@ import ma.enova.radio.dao.criteria.history.StatutRadiotherapieHistoryCriteria;
 public interface StatutRadiotherapieAdminService extends IService<StatutRadiotherapie, StatutRadiotherapieDto,StatutRadiotherapieCriteria, StatutRadiotherapieHistoryCriteria> {
 
 
-
-
+    StatutRadiotherapie findByCode(String code);
 }

@@ -12,23 +12,18 @@ import ma.enova.radio.ws.converter.StatutRadiotherapieConverter;
 import ma.enova.radio.ws.dto.StatutRadiotherapieDto;
 import ma.enova.radio.zynerator.service.AbstractServiceImpl;
 import org.springframework.stereotype.Service;
-import java.util.List;
-
-
-
-
-import java.util.List;
 
 @Service
-public class StatutRadiotherapieAdminServiceImpl extends AbstractServiceImpl<StatutRadiotherapie, StatutRadiotherapieDto,StatutRadiotherapieHistory, StatutRadiotherapieCriteria, StatutRadiotherapieHistoryCriteria, StatutRadiotherapieDao,
-StatutRadiotherapieHistoryDao, StatutRadiotherapieConverter> implements StatutRadiotherapieAdminService {
+public class StatutRadiotherapieAdminServiceImpl extends AbstractServiceImpl<StatutRadiotherapie, StatutRadiotherapieDto, StatutRadiotherapieHistory, StatutRadiotherapieCriteria, StatutRadiotherapieHistoryCriteria, StatutRadiotherapieDao,
+        StatutRadiotherapieHistoryDao, StatutRadiotherapieConverter> implements StatutRadiotherapieAdminService {
 
 
-    public StatutRadiotherapie findByReferenceEntity(StatutRadiotherapie t){
-        return  dao.findByCode(t.getCode());
+    public StatutRadiotherapie findByReferenceEntity(StatutRadiotherapie t) {
+        return dao.findByCode(t.getCode());
     }
-    public void findOrSaveAssociatedObject(StatutRadiotherapie t){
-        if( t != null) {
+
+    public void findOrSaveAssociatedObject(StatutRadiotherapie t) {
+        if (t != null) {
         }
     }
 
@@ -41,4 +36,8 @@ StatutRadiotherapieHistoryDao, StatutRadiotherapieConverter> implements StatutRa
         super(dao, historyDao, converter);
     }
 
+    @Override
+    public StatutRadiotherapie findByCode(String code) {
+        return dao.findByCode(code);
+    }
 }
