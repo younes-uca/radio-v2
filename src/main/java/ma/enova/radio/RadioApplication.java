@@ -46,13 +46,9 @@ public class RadioApplication {
     ) {
         return (args) -> {
             if (false) {
-                Map<String, String> etats = new HashMap<>();
-                etats.put("en-attente-prescription", "EN_ATTENTE_PRESCRIPTION");
-                etats.put("en-attente-simulation", "EN_ATTENTE_SIMULATION");
-                etats.put("en-attente-validation", "EN_ATTENTE_VALIDATION");
-                etats.put("en-cours-traitement", "EN_COURS_TRAITEMENT");
-                etats.put("fin-traitement", "FIN_TRAITEMENT");
 
+
+                createStatutRadio();
                 createModalite();
                 createVisee();
                 createPatient();
@@ -85,6 +81,22 @@ public class RadioApplication {
                 userService.save(userForAdmin);
             }
         };
+    }
+
+    private void createStatutRadio() {
+        Map<String, String> etats = new HashMap<>();
+        etats.put("en-attente-prescription", "EN_ATTENTE_PRESCRIPTION");
+        etats.put("en-attente-simulation", "EN_ATTENTE_SIMULATION");
+        etats.put("en-attente-validation", "EN_ATTENTE_VALIDATION");
+        etats.put("en-cours-traitement", "EN_COURS_TRAITEMENT");
+        etats.put("fin-traitement", "FIN_TRAITEMENT");
+        etats.forEach((k, v) -> {
+            StatutRadiotherapie statutRadiotherapie = new StatutRadiotherapie();
+            statutRadiotherapie.setCode(k);
+            statutRadiotherapie.setLibelle(v);
+            statutRadiotherapieService.create(statutRadiotherapie);
+
+        });
     }
 
     private void createModalite() {
@@ -220,6 +232,8 @@ public class RadioApplication {
         }
     }
 
+    @Autowired
+    private StatutRadiotherapieAdminService statutRadiotherapieService;
     @Autowired
     private GradeToxiciteRthAdminService gradeToxiciteRthService;
     @Autowired
