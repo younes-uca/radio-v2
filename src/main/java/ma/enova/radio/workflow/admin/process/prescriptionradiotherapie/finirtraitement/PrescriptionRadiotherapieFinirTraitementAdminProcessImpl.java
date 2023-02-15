@@ -20,20 +20,17 @@ public class PrescriptionRadiotherapieFinirTraitementAdminProcessImpl extends Ab
     @Override
     public void validate(PrescriptionRadiotherapieFinirTraitementAdminInput input, PrescriptionRadiotherapie item, Result<PrescriptionRadiotherapieFinirTraitementAdminInput, PrescriptionRadiotherapieFinirTraitementAdminOutput, PrescriptionRadiotherapie> result) {
         if (item.getStatutRadiotherapie() == null)
-            result.addErrorMessage("");
+        	 result.addErrorMessage("radiotherapie.finirtraitement.status.obligatoire");
         else if (item.getId() == null)
-            result.addErrorMessage("");
-        else if (item.getValidateurSimulation() == null || item.getValidateurSimulation().getId() == null) {
-            result.addErrorMessage("");
-        }
+        	result.addErrorMessage("radiotherapie.finirtraitement.prescription.obligatoire");
     }
 
     @Override
-    public void run(PrescriptionRadiotherapieFinirTraitementAdminInput input, PrescriptionRadiotherapie t, Result<PrescriptionRadiotherapieFinirTraitementAdminInput, PrescriptionRadiotherapieFinirTraitementAdminOutput, PrescriptionRadiotherapie> result) {
-        Long validateurSimulationId = t.getValidateurSimulation() != null ? t.getValidateurSimulation().getId() : null;
-        service.updateAsCloturerTraitement(t.getId(), t.getStatutRadiotherapie().getId(), t.getValidateurSimulationDate(), t.getCompteRendu());
+    public void run(PrescriptionRadiotherapieFinirTraitementAdminInput input, PrescriptionRadiotherapie t, Result<PrescriptionRadiotherapieFinirTraitementAdminInput, PrescriptionRadiotherapieFinirTraitementAdminOutput, PrescriptionRadiotherapie> result) {        Long validateurSimulationId = t.getValidateurSimulation() != null ? t.getValidateurSimulation().getId() : null;
+        service.updateAsCloturerTraitement(t.getId(), t.getStatutRadiotherapie().getId(), t.getDateFinTraitement(), t.getCompteRendu());
         histortiquePrescriptionRadiotherapieService.createFromPrescription(t.getId(), t.getStatutRadiotherapie());
-
+        // TODO : send new state to RabbitMq
+        result.addInfoMessage("radiotherapie.finirtraitement.ok");
     }
 
 
