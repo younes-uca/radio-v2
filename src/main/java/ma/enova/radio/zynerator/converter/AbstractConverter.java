@@ -87,6 +87,8 @@ public abstract class AbstractConverter<T extends BusinessObject, DTO extends Ba
 
 
     public List<DTO> toDto(List<T> items) {
+        initList(false);
+        initObject(true);
         List<DTO> dtos = new ArrayList();
         if (items != null && !items.isEmpty()) {
             for (T item : items) {

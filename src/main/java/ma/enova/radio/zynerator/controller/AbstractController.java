@@ -9,9 +9,11 @@ import ma.enova.radio.zynerator.exception.GlobalException;
 import ma.enova.radio.zynerator.export.ExportModel;
 import ma.enova.radio.zynerator.history.HistBusinessObject;
 import ma.enova.radio.zynerator.service.IService;
-import ma.enova.radio.zynerator.util.*;
+import ma.enova.radio.zynerator.util.ExportUtil;
+import ma.enova.radio.zynerator.util.FileUtils;
+import ma.enova.radio.zynerator.util.PaginatedList;
+import ma.enova.radio.zynerator.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpStatus;
@@ -27,8 +29,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.util.List;
 import java.util.Arrays;
+import java.util.List;
 
 public class AbstractController<T extends AuditBusinessObject, DTO extends BaseDto, H extends HistBusinessObject, Criteria extends BaseCriteria, HistoryCriteria extends BaseCriteria, SERV extends IService<T, DTO, Criteria, HistoryCriteria>, CONV extends AbstractConverter<T, DTO, H>> {
 
@@ -37,7 +39,7 @@ public class AbstractController<T extends AuditBusinessObject, DTO extends BaseD
     @Autowired
     private MessageSource messageSource;
 
-//@Value("${uploads.location.directory}")
+    //@Value("${uploads.location.directory}")
     private String UPLOADED_FOLDER;
 
     public AbstractController(SERV service, CONV converter) {
@@ -78,34 +80,40 @@ public class AbstractController<T extends AuditBusinessObject, DTO extends BaseD
     }
 
     public ResponseEntity<DTO> findWithAssociatedLists(Long id) {
-        T loaded =  service.findWithAssociatedLists(id);
+        T loaded = service.findWithAssociatedLists(id);
         converter.init(true);
         DTO dto = converter.toDto(loaded);
         return new ResponseEntity<>(dto, HttpStatus.OK);
-     }
+    }
 
-    private  ResponseEntity<DTO> getDtoResponseEntity(DTO dto, String[] includes, String[] excludes) throws Exception {
+    private ResponseEntity<DTO> getDtoResponseEntity(DTO dto, String[] includes, String[] excludes) throws Exception {
         if (StringUtil.isNoEmpty(includes) || StringUtil.isNoEmpty(excludes))
             dto = converter.copyIncludeExclude(dto, includes, excludes);
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 
+    public ResponseEntity<List<DTO>> getResponseEntity(List<T> items) {
+        converter.initList(false);
+        converter.initObject(true);
+        return new ResponseEntity<>(converter.toDto(items), HttpStatus.OK);
+    }
+
 
     public ResponseEntity<DTO> save(DTO dto) throws Exception {
-        if(dto!=null){
+        if (dto != null) {
             converter.init(true);
             T myT = converter.toItem(dto);
             T t = service.create(myT);
             DTO myDto = converter.toDto(t);
             return new ResponseEntity<>(myDto, HttpStatus.CREATED);
-        }else {
+        } else {
             return new ResponseEntity<>(dto, HttpStatus.NO_CONTENT);
         }
     }
 
 
     public ResponseEntity<DTO> update(DTO dto) throws Exception {
-        ResponseEntity<DTO> res ;
+        ResponseEntity<DTO> res;
         if (dto.getId() == null || findById(dto.getId(), null, null) == null)
             res = new ResponseEntity<>(HttpStatus.CONFLICT);
         else {
@@ -119,7 +127,7 @@ public class AbstractController<T extends AuditBusinessObject, DTO extends BaseD
 
 
     public ResponseEntity<List<DTO>> delete(List<DTO> dtos) throws Exception {
-        ResponseEntity<List<DTO>> res ;
+        ResponseEntity<List<DTO>> res;
         HttpStatus status = HttpStatus.CONFLICT;
         if (dtos != null && !dtos.isEmpty()) {
             converter.init(false);
@@ -266,8 +274,8 @@ public class AbstractController<T extends AuditBusinessObject, DTO extends BaseD
     protected ResponseEntity<List<DTO>> importData(List<DTO> dtos) {
         List<T> items = converter.toItem(dtos);
         items = service.importerData(items);
-        List<DTO> result= converter.toDto(items);
-        return new ResponseEntity<>(result,HttpStatus.OK);
+        List<DTO> result = converter.toDto(items);
+        return new ResponseEntity<>(result, HttpStatus.OK);
 
     }
 }

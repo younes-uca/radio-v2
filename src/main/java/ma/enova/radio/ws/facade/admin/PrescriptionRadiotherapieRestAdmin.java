@@ -32,6 +32,7 @@ import ma.enova.radio.zynerator.process.Result;
 import ma.enova.radio.zynerator.util.PaginatedList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -44,8 +45,8 @@ public class PrescriptionRadiotherapieRestAdmin extends AbstractController<Presc
 
     @ApiOperation("find by statutRadiotherapie ENATTENTEPRESCRIPTION")
     @GetMapping("statutRadiotherapie/code/en-attente-prescritpion")
-    public List<PrescriptionRadiotherapie> findByStatutRadiotherapieEnAttentePrescription() {
-        return service.findByStatutRadiotherapieCode(StatutRadioTherapieConstant.EN_ATTENTE_PRESCRIPTION);
+    public ResponseEntity<List<PrescriptionRadiotherapieDto>> findByStatutRadiotherapieEnAttentePrescription() {
+        return getResponseEntity(service.findByStatutRadiotherapieCode(StatutRadioTherapieConstant.EN_ATTENTE_PRESCRIPTION));
     }
 
     @ApiOperation("find by statutRadiotherapie ENATTENTESIMULATION")
@@ -106,6 +107,7 @@ public class PrescriptionRadiotherapieRestAdmin extends AbstractController<Presc
     public List<PrescriptionRadiotherapie> findByDecisionTraitementCode(@PathVariable String code) {
         return service.findByDecisionTraitementCode(code);
     }
+
     @ApiOperation("findByPatientIpp")
     @GetMapping("/patient/ipp/{ipp}")
     public List<PrescriptionRadiotherapie> findByPatientIpp(@PathVariable String ipp) {
