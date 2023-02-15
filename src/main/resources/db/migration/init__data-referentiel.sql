@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mer. 15 fév. 2023 à 11:54
+-- Généré le : mer. 15 fév. 2023 à 12:00
 -- Version du serveur : 10.4.27-MariaDB
 -- Version de PHP : 7.4.33
 
@@ -43,15 +43,18 @@ INSERT INTO `consultation_radiotherapie_seq` (`next_val`) VALUES
 --
 
 INSERT INTO `decision_traitement` (`id`, `createdby`, `createdon`, `updatedby`, `updatedon`, `code`, `date_decision_traitement`, `decision_therapeutique`, `urgence`, `statut_radiotherapie`) VALUES
-    (1, 'anonymousUser', '2023-02-15 10:47:49', '', NULL, 'decisionTraitement1', NULL, NULL, NULL, NULL);
+                                                                                                                                                                                                  (1, 'anonymousUser', '2023-02-15 10:47:49', '', NULL, 'decisionTraitement1', NULL, NULL, NULL, NULL),
+                                                                                                                                                                                                  (2, 'anonymousUser', '2023-02-15 10:58:07', '', NULL, 'decisionTraitement 2', NULL, NULL, NULL, NULL),
+                                                                                                                                                                                                  (3, 'anonymousUser', '2023-02-15 10:59:27', '', NULL, 'decisionTraitement 3', NULL, NULL, NULL, NULL),
+                                                                                                                                                                                                  (4, 'anonymousUser', '2023-02-15 11:00:18', '', NULL, 'decisionTraitement 4', NULL, NULL, NULL, NULL);
 
 --
 -- Déchargement des données de la table `decision_traitement_seq`
 --
 
 INSERT INTO `decision_traitement_seq` (`next_val`) VALUES
-                                                       (2),
-                                                       (2);
+                                                       (5),
+                                                       (5);
 
 --
 -- Déchargement des données de la table `etablissement_seq`
@@ -191,12 +194,23 @@ INSERT INTO `hibernate_sequence` (`next_val`) VALUES
                                                   (3);
 
 --
+-- Déchargement des données de la table `histortique_prescription_radiotherapie`
+--
+
+INSERT INTO `histortique_prescription_radiotherapie` (`id`, `createdby`, `createdon`, `updatedby`, `updatedon`, `date_histortique_prescription_radiotherapie`, `description`, `action_type`, `data`, `date`, `object_id`, `object_name`, `user_id`, `username`, `prescription_radiotherapie`, `statut_radiotherapie`) VALUES
+                                                                                                                                                                                                                                                                                                                          (1, 'anonymousUser', '2023-02-15 10:55:40', '', NULL, '2023-02-15 10:55:40', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1),
+                                                                                                                                                                                                                                                                                                                          (2, 'anonymousUser', '2023-02-15 10:56:46', '', NULL, '2023-02-15 10:56:46', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, 1),
+                                                                                                                                                                                                                                                                                                                          (3, 'anonymousUser', '2023-02-15 10:58:07', '', NULL, '2023-02-15 10:58:07', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, 1),
+                                                                                                                                                                                                                                                                                                                          (4, 'anonymousUser', '2023-02-15 10:59:27', '', NULL, '2023-02-15 10:59:27', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 4, 1),
+                                                                                                                                                                                                                                                                                                                          (5, 'anonymousUser', '2023-02-15 11:00:18', '', NULL, '2023-02-15 11:00:18', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 5, 1);
+
+--
 -- Déchargement des données de la table `histortique_prescription_radiotherapie_seq`
 --
 
 INSERT INTO `histortique_prescription_radiotherapie_seq` (`next_val`) VALUES
-                                                                          (1),
-                                                                          (1);
+                                                                          (6),
+                                                                          (6);
 
 --
 -- Déchargement des données de la table `immobilistion`
@@ -415,15 +429,18 @@ INSERT INTO `modalite_radiotherapie` (`id`, `createdby`, `createdon`, `updatedby
                                                                                                                                                                                                                                                                                  (97, '', '2023-02-15 10:42:56', '', NULL, b'0', NULL, NULL, 97, 'modalite 97', NULL, 'modalite 97', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
                                                                                                                                                                                                                                                                                  (98, '', '2023-02-15 10:42:56', '', NULL, b'0', NULL, NULL, 98, 'modalite 98', NULL, 'modalite 98', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
                                                                                                                                                                                                                                                                                  (99, '', '2023-02-15 10:42:56', '', NULL, b'0', NULL, NULL, 99, 'modalite 99', NULL, 'modalite 99', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-                                                                                                                                                                                                                                                                                 (100, 'anonymousUser', '2023-02-15 10:47:49', '', NULL, b'0', NULL, NULL, NULL, 'modalite-radiotherapie1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+                                                                                                                                                                                                                                                                                 (100, 'anonymousUser', '2023-02-15 10:47:49', '', NULL, b'0', NULL, NULL, NULL, 'modalite-radiotherapie1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+                                                                                                                                                                                                                                                                                 (101, 'anonymousUser', '2023-02-15 10:58:07', '', NULL, b'0', NULL, NULL, NULL, 'modalite-radiotherapie 2', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+                                                                                                                                                                                                                                                                                 (102, 'anonymousUser', '2023-02-15 10:59:27', '', NULL, b'0', NULL, NULL, NULL, 'modalite-radiotherapie 3', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+                                                                                                                                                                                                                                                                                 (103, 'anonymousUser', '2023-02-15 11:00:18', '', NULL, b'0', NULL, NULL, NULL, 'modalite-radiotherapie 4', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 --
 -- Déchargement des données de la table `modalite_radiotherapie_seq`
 --
 
 INSERT INTO `modalite_radiotherapie_seq` (`next_val`) VALUES
-                                                          (101),
-                                                          (101);
+                                                          (104),
+                                                          (104);
 
 --
 -- Déchargement des données de la table `patient`
@@ -643,15 +660,18 @@ INSERT INTO `personnel` (`id`, `createdby`, `createdon`, `updatedby`, `updatedon
                                                                                                                                                                                                                                                                                                                                                   (97, '', '2023-02-15 10:42:57', '', NULL, b'0', NULL, NULL, NULL, NULL, NULL, NULL, b'0', 'personnel 97', NULL, 'personnel 97', 'personnel 97', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
                                                                                                                                                                                                                                                                                                                                                   (98, '', '2023-02-15 10:42:57', '', NULL, b'0', NULL, NULL, NULL, NULL, NULL, NULL, b'0', 'personnel 98', NULL, 'personnel 98', 'personnel 98', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
                                                                                                                                                                                                                                                                                                                                                   (99, '', '2023-02-15 10:42:57', '', NULL, b'0', NULL, NULL, NULL, NULL, NULL, NULL, b'0', 'personnel 99', NULL, 'personnel 99', 'personnel 99', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-                                                                                                                                                                                                                                                                                                                                                  (100, 'anonymousUser', '2023-02-15 10:47:49', '', NULL, b'0', NULL, NULL, NULL, NULL, NULL, NULL, b'0', 'medecin-prescripteur1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+                                                                                                                                                                                                                                                                                                                                                  (100, 'anonymousUser', '2023-02-15 10:47:49', '', NULL, b'0', NULL, NULL, NULL, NULL, NULL, NULL, b'0', 'medecin-prescripteur1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+                                                                                                                                                                                                                                                                                                                                                  (101, 'anonymousUser', '2023-02-15 10:58:07', '', NULL, b'0', NULL, NULL, NULL, NULL, NULL, NULL, b'0', 'medecin-prescripteur 2', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+                                                                                                                                                                                                                                                                                                                                                  (102, 'anonymousUser', '2023-02-15 10:59:27', '', NULL, b'0', NULL, NULL, NULL, NULL, NULL, NULL, b'0', 'medecin-prescripteur 3', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+                                                                                                                                                                                                                                                                                                                                                  (103, 'anonymousUser', '2023-02-15 11:00:18', '', NULL, b'0', NULL, NULL, NULL, NULL, NULL, NULL, b'0', 'medecin-prescripteur 4', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 --
 -- Déchargement des données de la table `personnel_seq`
 --
 
 INSERT INTO `personnel_seq` (`next_val`) VALUES
-                                             (101),
-                                             (101);
+                                             (104),
+                                             (104);
 
 --
 -- Déchargement des données de la table `positionnement`
@@ -767,12 +787,23 @@ INSERT INTO `positionnement_seq` (`next_val`) VALUES
                                                   (100);
 
 --
+-- Déchargement des données de la table `prescription_radiotherapie`
+--
+
+INSERT INTO `prescription_radiotherapie` (`id`, `createdby`, `createdon`, `updatedby`, `updatedon`, `actif`, `compte_rendu`, `date_debut_traitement`, `date_decision_traitement`, `date_fin_traitement`, `date_prescription`, `date_prevu`, `date_simulation`, `date_souhaite_debut_traitement`, `dose`, `etalement`, `fichier_traitements`, `fractionnement`, `frequence_radiotherapie`, `immobilistion`, `nombre_seance_realise`, `nombre_total_seance`, `observation`, `positionnement`, `rcc`, `validateur_simulation_date`, `action_type`, `data`, `date`, `object_id`, `object_name`, `user_id`, `username`, `decision_traitement`, `medecin_prescripteur`, `modalite_radiotherapie`, `patient`, `protocole_inclusion`, `site`, `statut_radiotherapie`, `type_traitement`, `validateur_simulation`, `visee`) VALUES
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       (1, 'anonymousUser', '2023-02-15 10:55:40', '', NULL, b'0', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2023-12-23 07:20:00', '0.00', 0, NULL, 4, 'semaine', NULL, 0, 0, NULL, NULL, b'0', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 100, 100, 100, 100, 100, 1, NULL, NULL, 100),
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       (2, 'anonymousUser', '2023-02-15 10:56:46', '', NULL, b'0', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2023-12-23 07:20:00', '0.00', 0, NULL, 4, 'semaine', NULL, 0, 0, NULL, NULL, b'0', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 100, 100, 100, 100, 100, 1, NULL, NULL, 100),
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       (3, 'anonymousUser', '2023-02-15 10:58:07', '', NULL, b'0', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2023-12-23 07:20:00', '0.00', 0, NULL, 4, 'semaine', NULL, 0, 0, NULL, NULL, b'0', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, 101, 101, 2, 2, 2, 1, NULL, NULL, 2),
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       (4, 'anonymousUser', '2023-02-15 10:59:27', '', NULL, b'0', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2023-11-03 09:30:00', '0.00', 0, NULL, 5, 'semaine', NULL, 0, 0, NULL, NULL, b'0', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, 102, 102, 3, 3, 3, 1, NULL, NULL, 3),
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       (5, 'anonymousUser', '2023-02-15 11:00:18', '', NULL, b'0', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-11-04 09:40:00', '0.00', 0, NULL, 6, 'semaine', NULL, 0, 0, NULL, NULL, b'0', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 4, 103, 103, 4, 4, 4, 1, NULL, NULL, 4);
+
+--
 -- Déchargement des données de la table `prescription_radiotherapie_seq`
 --
 
 INSERT INTO `prescription_radiotherapie_seq` (`next_val`) VALUES
-                                                              (1),
-                                                              (1);
+                                                              (6),
+                                                              (6);
 
 --
 -- Déchargement des données de la table `protocole_inclusion`
@@ -896,12 +927,41 @@ INSERT INTO `role_app` (`id`, `authority`, `created_at`, `updated_at`) VALUES
     (1, 'ROLE_ADMIN', NULL, NULL);
 
 --
+-- Déchargement des données de la table `seance_radiotherapie`
+--
+
+INSERT INTO `seance_radiotherapie` (`id`, `createdby`, `createdon`, `updatedby`, `updatedon`, `code_rdv`, `cr`, `date_prevu`, `date_realisation`, `effectue`, `fichiers`, `numero`, `action_type`, `data`, `date`, `object_id`, `object_name`, `user_id`, `username`, `prescription_radiotherapie`) VALUES
+                                                                                                                                                                                                                                                                                                        (1, 'anonymousUser', '2023-02-15 10:55:40', '', NULL, NULL, NULL, '2023-12-23 07:20:00', NULL, b'0', NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1),
+                                                                                                                                                                                                                                                                                                        (2, 'anonymousUser', '2023-02-15 10:55:40', '', NULL, NULL, NULL, '2023-12-30 07:20:00', NULL, b'0', NULL, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1),
+                                                                                                                                                                                                                                                                                                        (3, 'anonymousUser', '2023-02-15 10:55:40', '', NULL, NULL, NULL, '2024-01-06 07:20:00', NULL, b'0', NULL, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1),
+                                                                                                                                                                                                                                                                                                        (4, 'anonymousUser', '2023-02-15 10:55:40', '', NULL, NULL, NULL, '2024-01-13 07:20:00', NULL, b'0', NULL, 4, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1),
+                                                                                                                                                                                                                                                                                                        (5, 'anonymousUser', '2023-02-15 10:56:46', '', NULL, NULL, NULL, '2023-12-23 07:20:00', NULL, b'0', NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2),
+                                                                                                                                                                                                                                                                                                        (6, 'anonymousUser', '2023-02-15 10:56:46', '', NULL, NULL, NULL, '2023-12-30 07:20:00', NULL, b'0', NULL, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2),
+                                                                                                                                                                                                                                                                                                        (7, 'anonymousUser', '2023-02-15 10:56:46', '', NULL, NULL, NULL, '2024-01-06 07:20:00', NULL, b'0', NULL, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2),
+                                                                                                                                                                                                                                                                                                        (8, 'anonymousUser', '2023-02-15 10:56:46', '', NULL, NULL, NULL, '2024-01-13 07:20:00', NULL, b'0', NULL, 4, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2),
+                                                                                                                                                                                                                                                                                                        (9, 'anonymousUser', '2023-02-15 10:58:07', '', NULL, NULL, NULL, '2023-12-23 07:20:00', NULL, b'0', NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3),
+                                                                                                                                                                                                                                                                                                        (10, 'anonymousUser', '2023-02-15 10:58:07', '', NULL, NULL, NULL, '2023-12-30 07:20:00', NULL, b'0', NULL, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3),
+                                                                                                                                                                                                                                                                                                        (11, 'anonymousUser', '2023-02-15 10:58:07', '', NULL, NULL, NULL, '2024-01-06 07:20:00', NULL, b'0', NULL, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3),
+                                                                                                                                                                                                                                                                                                        (12, 'anonymousUser', '2023-02-15 10:58:07', '', NULL, NULL, NULL, '2024-01-13 07:20:00', NULL, b'0', NULL, 4, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3),
+                                                                                                                                                                                                                                                                                                        (13, 'anonymousUser', '2023-02-15 10:59:27', '', NULL, NULL, NULL, '2023-11-03 09:30:00', NULL, b'0', NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 4),
+                                                                                                                                                                                                                                                                                                        (14, 'anonymousUser', '2023-02-15 10:59:27', '', NULL, NULL, NULL, '2023-11-10 09:30:00', NULL, b'0', NULL, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 4),
+                                                                                                                                                                                                                                                                                                        (15, 'anonymousUser', '2023-02-15 10:59:27', '', NULL, NULL, NULL, '2023-11-17 09:30:00', NULL, b'0', NULL, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 4),
+                                                                                                                                                                                                                                                                                                        (16, 'anonymousUser', '2023-02-15 10:59:27', '', NULL, NULL, NULL, '2023-11-24 09:30:00', NULL, b'0', NULL, 4, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 4),
+                                                                                                                                                                                                                                                                                                        (17, 'anonymousUser', '2023-02-15 10:59:27', '', NULL, NULL, NULL, '2023-12-01 09:30:00', NULL, b'0', NULL, 5, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 4),
+                                                                                                                                                                                                                                                                                                        (18, 'anonymousUser', '2023-02-15 11:00:18', '', NULL, NULL, NULL, '2024-11-04 09:40:00', NULL, b'0', NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 5),
+                                                                                                                                                                                                                                                                                                        (19, 'anonymousUser', '2023-02-15 11:00:18', '', NULL, NULL, NULL, '2024-11-11 09:40:00', NULL, b'0', NULL, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 5),
+                                                                                                                                                                                                                                                                                                        (20, 'anonymousUser', '2023-02-15 11:00:18', '', NULL, NULL, NULL, '2024-11-18 09:40:00', NULL, b'0', NULL, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 5),
+                                                                                                                                                                                                                                                                                                        (21, 'anonymousUser', '2023-02-15 11:00:18', '', NULL, NULL, NULL, '2024-11-25 09:40:00', NULL, b'0', NULL, 4, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 5),
+                                                                                                                                                                                                                                                                                                        (22, 'anonymousUser', '2023-02-15 11:00:18', '', NULL, NULL, NULL, '2024-12-02 09:40:00', NULL, b'0', NULL, 5, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 5),
+                                                                                                                                                                                                                                                                                                        (23, 'anonymousUser', '2023-02-15 11:00:18', '', NULL, NULL, NULL, '2024-12-09 09:40:00', NULL, b'0', NULL, 6, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 5);
+
+--
 -- Déchargement des données de la table `seance_radiotherapie_seq`
 --
 
 INSERT INTO `seance_radiotherapie_seq` (`next_val`) VALUES
-                                                        (1),
-                                                        (1);
+                                                        (24),
+                                                        (24);
 
 --
 -- Déchargement des données de la table `services_seq`
