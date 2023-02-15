@@ -37,7 +37,7 @@ public class PrescriptionRadiotherapieSimulerAdminProcessImpl extends AbstractPr
     @Override
     public void run(PrescriptionRadiotherapieSimulerAdminInput input, PrescriptionRadiotherapie t, Result<PrescriptionRadiotherapieSimulerAdminInput, PrescriptionRadiotherapieSimulerAdminOutput, PrescriptionRadiotherapie> result) {
         Long validateurSimulationId = t.getValidateurSimulation().getId();
-        service.updateAsValiderSimulation(t.getId(), t.getStatutRadiotherapie().getId(), t.getValidateurSimulationDate(), validateurSimulationId);
+        service.updateAsSimuler(t.getId(), t.getStatutRadiotherapie().getId(),t.getDateSimulation() , t.getImmobilistion(), t.getPositionnement() , t.getFichierTraitements() , t.getValidateurSimulationDate(), validateurSimulationId);
         histortiquePrescriptionRadiotherapieService.createFromPrescription(t.getId(), t.getStatutRadiotherapie());
         // TODO : send new state to RabbitMq
         result.addInfoMessage("radiotherapie.simuler.ok");
