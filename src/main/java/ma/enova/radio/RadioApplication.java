@@ -45,7 +45,7 @@ public class RadioApplication {
                                   //, TypeTraitementAdminService typeTraitementAdminService, StatutRadiotherapieAdminService statutRadiotherapieAdminService
     ) {
         return (args) -> {
-            if (true) {
+            if (false) {
                 Map<String, String> etats = new HashMap<>();
                 etats.put("en-attente-prescription", "EN_ATTENTE_PRESCRIPTION");
                 etats.put("en-attente-simulation", "EN_ATTENTE_SIMULATION");
