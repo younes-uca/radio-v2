@@ -1,5 +1,6 @@
 package ma.enova.radio.zynerator.security.bean;
 
+import ma.enova.radio.zynerator.audit.AuditBusinessObjectEnhanced;
 import ma.enova.radio.zynerator.bean.Etablissement;
 
 import java.util.ArrayList;
@@ -29,7 +30,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "user_app")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public class User  implements UserDetails {
+public class User  extends AuditBusinessObjectEnhanced implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     protected Long id;

@@ -1,6 +1,5 @@
 package ma.enova.radio.workflow.admin.process.prescriptionradiotherapie.simuler;
 
-import ma.enova.radio.bean.core.Personnel;
 import ma.enova.radio.bean.core.PrescriptionRadiotherapie;
 import ma.enova.radio.bean.core.StatutRadiotherapie;
 import ma.enova.radio.constant.StatutRadioTherapieConstant;
@@ -18,8 +17,6 @@ public class PrescriptionRadiotherapieSimulerAdminProcessImpl extends AbstractPr
     public void init(PrescriptionRadiotherapieSimulerAdminInput input, PrescriptionRadiotherapie item) {
         StatutRadiotherapie statutRadiotherapie = statutRadiotherapieService.findByCode(StatutRadioTherapieConstant.EN_COURS_TRAITEMENT);
         item.setStatutRadiotherapie(statutRadiotherapie);
-        Personnel personnel = new Personnel(1L);
-        item.setValidateurSimulation(personnel);//TODO get current user :: Personnel must extends User
         item.setValidateurSimulationDate(LocalDateTime.now());
     }
 

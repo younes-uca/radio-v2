@@ -1,11 +1,9 @@
-package  ma.enova.radio.dao.specification.core;
+package ma.enova.radio.dao.specification.core;
 
 
-
-
-import ma.enova.radio.zynerator.specification.AbstractSpecification;
-import ma.enova.radio.dao.criteria.core.HistortiquePrescriptionRadiotherapieCriteria;
 import ma.enova.radio.bean.core.HistortiquePrescriptionRadiotherapie;
+import ma.enova.radio.dao.criteria.core.HistortiquePrescriptionRadiotherapieCriteria;
+import ma.enova.radio.zynerator.specification.AbstractSpecification;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -19,12 +17,15 @@ public class HistortiquePrescriptionRadiotherapieSpecification extends AbstractS
     @Override
     public Predicate toPredicate(Root<HistortiquePrescriptionRadiotherapie> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
         List<Predicate> predicates = new ArrayList<>();
-            attachSearchElement(root, query, builder, predicates);
-            if (criteria != null) {
-                addPredicateId("id", criteria);
-                addPredicate("dateHistortiquePrescriptionRadiotherapie", criteria.getDateHistortiquePrescriptionRadiotherapie(), criteria.getDateHistortiquePrescriptionRadiotherapieFrom(), criteria.getDateHistortiquePrescriptionRadiotherapieTo());
-                addOrderAndFilter();
-          }
+        attachSearchElement(root, query, builder, predicates);
+        if (criteria != null) {
+            addPredicateId("id", criteria);
+            addPredicate("dateHistortiquePrescriptionRadiotherapie", criteria.getDateHistortiquePrescriptionRadiotherapie(), criteria.getDateHistortiquePrescriptionRadiotherapieFrom(), criteria.getDateHistortiquePrescriptionRadiotherapieTo());
+            addPredicateFk("prescriptionRadiotherapie", "id", criteria.getPrescriptionRadiotherapie() == null ? null : criteria.getPrescriptionRadiotherapie().getId());
+            addPredicateFk("statutRadiotherapie", "id", criteria.getStatutRadiotherapie() == null ? null : criteria.getStatutRadiotherapie().getId());
+            addPredicateFk("statutRadiotherapie", "code", criteria.getStatutRadiotherapie() == null ? null : criteria.getStatutRadiotherapie().getCode());
+            addOrderAndFilter();
+        }
         return getResult();
     }
 
@@ -38,5 +39,4 @@ public class HistortiquePrescriptionRadiotherapieSpecification extends AbstractS
     }
 
 
-
-    }
+}

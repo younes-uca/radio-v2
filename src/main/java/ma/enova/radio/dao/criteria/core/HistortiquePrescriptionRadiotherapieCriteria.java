@@ -15,10 +15,27 @@ public class HistortiquePrescriptionRadiotherapieCriteria extends BaseCriteria {
     private LocalDateTime dateHistortiquePrescriptionRadiotherapie;
     private LocalDateTime dateHistortiquePrescriptionRadiotherapieFrom;
     private LocalDateTime dateHistortiquePrescriptionRadiotherapieTo;
-
+    private PrescriptionRadiotherapieCriteria prescriptionRadiotherapie;
+    private StatutRadiotherapieCriteria statutRadiotherapie;
 
 
     public HistortiquePrescriptionRadiotherapieCriteria(){}
+
+    public PrescriptionRadiotherapieCriteria getPrescriptionRadiotherapie() {
+        return prescriptionRadiotherapie;
+    }
+
+    public void setPrescriptionRadiotherapie(PrescriptionRadiotherapieCriteria prescriptionRadiotherapie) {
+        this.prescriptionRadiotherapie = prescriptionRadiotherapie;
+    }
+
+    public StatutRadiotherapieCriteria getStatutRadiotherapie() {
+        return statutRadiotherapie;
+    }
+
+    public void setStatutRadiotherapie(StatutRadiotherapieCriteria statutRadiotherapie) {
+        this.statutRadiotherapie = statutRadiotherapie;
+    }
 
     public LocalDateTime getDateHistortiquePrescriptionRadiotherapie(){
         return this.dateHistortiquePrescriptionRadiotherapie;

@@ -2,6 +2,7 @@ package ma.enova.radio.bean.core;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import ma.enova.radio.zynerator.audit.AuditBusinessObjectEnhanced;
+import ma.enova.radio.zynerator.security.bean.User;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -11,7 +12,7 @@ import java.util.Objects;
 @Table(name = "personnel")
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @SequenceGenerator(name = "personnel_seq", sequenceName = "personnel_seq", allocationSize = 1, initialValue = 1)
-public class Personnel extends AuditBusinessObjectEnhanced {
+public class Personnel extends User {
 
     private Long id;
 
@@ -20,10 +21,6 @@ public class Personnel extends AuditBusinessObjectEnhanced {
     @Lob
     @Column(columnDefinition = "TEXT")
     private String adresse;
-    @Column(length = 500)
-    private String nom;
-    @Column(length = 500)
-    private String prenom;
     @Column(length = 500)
     private String cin;
     @Column(length = 500)
@@ -73,22 +70,6 @@ public class Personnel extends AuditBusinessObjectEnhanced {
 
     public void setAdresse(String adresse) {
         this.adresse = adresse;
-    }
-
-    public String getNom() {
-        return this.nom;
-    }
-
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
-    public String getPrenom() {
-        return this.prenom;
-    }
-
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
     }
 
     public String getCin() {

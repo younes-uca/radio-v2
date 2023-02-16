@@ -4,6 +4,7 @@ import ma.enova.radio.zynerator.bean.BusinessObject;
 import ma.enova.radio.zynerator.criteria.BaseCriteria;
 import ma.enova.radio.zynerator.dto.AuditEntityDto;
 import ma.enova.radio.zynerator.dto.BaseDto;
+import ma.enova.radio.zynerator.security.bean.User;
 
 import java.util.List;
 
@@ -14,7 +15,7 @@ public interface IService<T extends BusinessObject, DTO extends BaseDto, Criteri
 
     T update(T t);
 
-    List<T> update(List<T> ts,boolean createIfNotExist);
+    List<T> update(List<T> ts, boolean createIfNotExist);
 
     T findById(Long id);
 
@@ -51,5 +52,5 @@ public interface IService<T extends BusinessObject, DTO extends BaseDto, Criteri
     List<T> importerData(List<T> items);
 
 
-
+    User getCurrentUser();
 }
