@@ -33,7 +33,9 @@ public class PersonnelConverter extends AbstractConverter<Personnel, PersonnelDt
         Personnel item = new Personnel();
             if(StringUtil.isNotEmpty(dto.getId()))
                 item.setId(dto.getId());
-            if(StringUtil.isNotEmpty(dto.getIpp()))
+            if(StringUtil.isNotEmpty(dto.getLabel()))
+                item.setLabel(dto.getLabel());
+           /* if(StringUtil.isNotEmpty(dto.getIpp()))
                 item.setIpp(dto.getIpp());
             if(StringUtil.isNotEmpty(dto.getAdresse()))
                 item.setAdresse(dto.getAdresse());
@@ -56,7 +58,7 @@ public class PersonnelConverter extends AbstractConverter<Personnel, PersonnelDt
 
             if(this.specialite && dto.getSpecialite()!=null)
                 item.setSpecialite(specialiteConverter.toItem(dto.getSpecialite())) ;
-
+*/
 
 
         return item;
@@ -71,7 +73,9 @@ public class PersonnelConverter extends AbstractConverter<Personnel, PersonnelDt
             PersonnelDto dto = new PersonnelDto();
             if(StringUtil.isNotEmpty(item.getId()))
                 dto.setId(item.getId());
-            if(StringUtil.isNotEmpty(item.getIpp()))
+            if(StringUtil.isNotEmpty(item.getLabel()))
+                dto.setLabel(item.getLabel());
+           /* if(StringUtil.isNotEmpty(item.getIpp()))
                 dto.setIpp(item.getIpp());
             if(StringUtil.isNotEmpty(item.getAdresse()))
                 dto.setAdresse(item.getAdresse());
@@ -93,7 +97,7 @@ public class PersonnelConverter extends AbstractConverter<Personnel, PersonnelDt
         }
         if(this.specialite && item.getSpecialite()!=null) {
             dto.setSpecialite(specialiteConverter.toDto(item.getSpecialite())) ;
-        }
+        }*/
         return dto;
         }
     }

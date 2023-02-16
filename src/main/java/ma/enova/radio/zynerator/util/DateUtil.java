@@ -80,6 +80,14 @@ public class DateUtil {
 
         return null;
     }
+    public static LocalDateTime stringTextToSimpleDate(final String strDate) {
+        if (StringUtils.hasLength(strDate)) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DEFAULT_DATE_FORMAT);
+            return LocalDateTime.parse(strDate, formatter);
+        }
+
+        return null;
+    }
 
     public static LocalDateTime stringToDateTime(final String strDate) {
         try {
@@ -240,10 +248,10 @@ public class DateUtil {
         return cal;
     }
 
-    public static LocalDateTime addFrequence(LocalDateTime dateSouhaiteDebutTraitement, int i, String code) {
-        LocalDateTime myLocalDateTime = null;
+    public static LocalDate addFrequence(LocalDate dateSouhaiteDebutTraitement, int i, String code) {
+        LocalDate myLocalDateTime = null;
         if ("heure".equals(code)) {
-            myLocalDateTime = dateSouhaiteDebutTraitement.plusHours(i);
+            //myLocalDateTime = dateSouhaiteDebutTraitement.pl(i);
         } else if ("jour".equals(code)) {
             myLocalDateTime = dateSouhaiteDebutTraitement.plusDays(i);
         } else if ("semaine".equals(code)) {
@@ -254,7 +262,7 @@ public class DateUtil {
         return myLocalDateTime;
     }
 
-    public static boolean isBeforeNow(LocalDateTime dateSouhaiteDebutTraitement) {
-        return dateSouhaiteDebutTraitement.isBefore(LocalDateTime.now());
+    public static boolean isBeforeNow(LocalDate dateSouhaiteDebutTraitement) {
+        return dateSouhaiteDebutTraitement.isBefore(LocalDate.now());
     }
 }

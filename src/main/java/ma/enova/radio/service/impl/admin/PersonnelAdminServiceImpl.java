@@ -7,20 +7,14 @@ import ma.enova.radio.dao.criteria.history.PersonnelHistoryCriteria;
 import ma.enova.radio.dao.facade.core.PersonnelDao;
 import ma.enova.radio.dao.facade.history.PersonnelHistoryDao;
 import ma.enova.radio.dao.specification.core.PersonnelSpecification;
+import ma.enova.radio.service.facade.admin.CategoriePersonnelAdminService;
 import ma.enova.radio.service.facade.admin.PersonnelAdminService;
+import ma.enova.radio.service.facade.admin.SpecialiteAdminService;
 import ma.enova.radio.ws.converter.PersonnelConverter;
 import ma.enova.radio.ws.dto.PersonnelDto;
 import ma.enova.radio.zynerator.service.AbstractServiceImpl;
-import org.springframework.stereotype.Service;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-
-import ma.enova.radio.service.facade.admin.CategoriePersonnelAdminService ;
-import ma.enova.radio.service.facade.admin.SpecialiteAdminService ;
-
-
-import java.util.List;
+import org.springframework.stereotype.Service;
 
 @Service
 public class PersonnelAdminServiceImpl extends AbstractServiceImpl<Personnel, PersonnelDto,PersonnelHistory, PersonnelCriteria, PersonnelHistoryCriteria, PersonnelDao,
@@ -31,15 +25,18 @@ PersonnelHistoryDao, PersonnelConverter> implements PersonnelAdminService {
         return max != null ? max + 1 : 1;
     }
 
+/*
     public Personnel findByReferenceEntity(Personnel t){
         return  dao.findByIpp(t.getIpp());
     }
+*/
     public void findOrSaveAssociatedObject(Personnel t){
         if( t != null) {
-            t.setCategoriePersonnel(categoriePersonnelService.findOrSave(t.getCategoriePersonnel()));
-            t.setSpecialite(specialiteService.findOrSave(t.getSpecialite()));
+           /* t.setCategoriePersonnel(categoriePersonnelService.findOrSave(t.getCategoriePersonnel()));
+            t.setSpecialite(specialiteService.findOrSave(t.getSpecialite()));*/
         }
     }
+/*
 
     public List<Personnel> findByCategoriePersonnelId(Long id){
         return dao.findByCategoriePersonnelId(id);
@@ -53,6 +50,7 @@ PersonnelHistoryDao, PersonnelConverter> implements PersonnelAdminService {
     public int deleteBySpecialiteId(Long id){
         return dao.deleteBySpecialiteId(id);
     }
+*/
 
     public void configure() {
         super.configure(Personnel.class, PersonnelDto.class, PersonnelHistory.class, PersonnelHistoryCriteria.class, PersonnelSpecification.class);

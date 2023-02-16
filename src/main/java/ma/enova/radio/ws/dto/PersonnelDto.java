@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 public class PersonnelDto  extends AuditBaseDto {
 
     private String ipp  ;
+    private String label  ;
     private String adresse  ;
     private String nom  ;
     private String prenom  ;
@@ -26,8 +27,6 @@ public class PersonnelDto  extends AuditBaseDto {
     public PersonnelDto(){
         super();
     }
-
-
 
     @Log
     public String getIpp(){

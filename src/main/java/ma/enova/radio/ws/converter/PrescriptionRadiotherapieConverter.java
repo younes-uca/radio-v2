@@ -2,6 +2,7 @@ package ma.enova.radio.ws.converter;
 
 import ma.enova.radio.bean.core.PrescriptionRadiotherapie;
 import ma.enova.radio.bean.history.PrescriptionRadiotherapieHistory;
+import ma.enova.radio.ws.dto.FrequenceRadiotherapieDto;
 import ma.enova.radio.ws.dto.PrescriptionRadiotherapieDto;
 import ma.enova.radio.zynerator.converter.AbstractConverter;
 import ma.enova.radio.zynerator.util.DateUtil;
@@ -71,7 +72,7 @@ public class PrescriptionRadiotherapieConverter extends AbstractConverter<Prescr
             if (StringUtil.isNotEmpty(dto.getId()))
                 item.setId(dto.getId());
             if (StringUtil.isNotEmpty(dto.getDatePrescription()))
-                item.setDatePrescription(DateUtil.stringEnToDate(dto.getDatePrescription()));
+                item.setDatePrescription(DateUtil.stringToDate(dto.getDatePrescription()));
             if (dto.getRcc() != null)
                 item.setRcc(dto.getRcc());
             if (StringUtil.isNotEmpty(dto.getDose()))
@@ -80,10 +81,10 @@ public class PrescriptionRadiotherapieConverter extends AbstractConverter<Prescr
                 item.setFractionnement(dto.getFractionnement());
             if (StringUtil.isNotEmpty(dto.getEtalement()))
                 item.setEtalement(dto.getEtalement());
-            if (StringUtil.isNotEmpty(dto.getFrequenceRadiotherapie()))
-                item.setFrequenceRadiotherapie(dto.getFrequenceRadiotherapie());
+            if (dto.getFrequenceRadiotherapie() != null && StringUtil.isNotEmpty(dto.getFrequenceRadiotherapie().getCode()))
+                item.setFrequenceRadiotherapie(dto.getFrequenceRadiotherapie().getCode());
             if (StringUtil.isNotEmpty(dto.getDateSouhaiteDebutTraitement()))
-                item.setDateSouhaiteDebutTraitement(DateUtil.stringEnToDate(dto.getDateSouhaiteDebutTraitement()));
+                item.setDateSouhaiteDebutTraitement(DateUtil.stringToDate(dto.getDateSouhaiteDebutTraitement()));
             if (StringUtil.isNotEmpty(dto.getObservation()))
                 item.setObservation(dto.getObservation());
             if (StringUtil.isNotEmpty(dto.getDateSimulation()))
@@ -171,8 +172,13 @@ public class PrescriptionRadiotherapieConverter extends AbstractConverter<Prescr
                 dto.setFractionnement(item.getFractionnement());
             if (StringUtil.isNotEmpty(item.getEtalement()))
                 dto.setEtalement(item.getEtalement());
-            if (StringUtil.isNotEmpty(item.getFrequenceRadiotherapie()))
-                dto.setFrequenceRadiotherapie(item.getFrequenceRadiotherapie());
+            if (StringUtil.isNotEmpty(item.getFrequenceRadiotherapie())){
+                if(dto.getFrequenceRadiotherapie()==null){
+                    dto.setFrequenceRadiotherapie(new FrequenceRadiotherapieDto());
+                }
+                dto.getFrequenceRadiotherapie().setCode(item.getFrequenceRadiotherapie());
+                dto.getFrequenceRadiotherapie().setLibelle(item.getFrequenceRadiotherapie());
+            }
             if (item.getDateSouhaiteDebutTraitement() != null)
                 dto.setDateSouhaiteDebutTraitement(DateUtil.dateTimeToString(item.getDateSouhaiteDebutTraitement()));
             if (StringUtil.isNotEmpty(item.getObservation()))

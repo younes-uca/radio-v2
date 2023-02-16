@@ -18,7 +18,6 @@ public class PrescriptionRadiotherapieSaveAdminInput extends AbstractProcessInpu
     private BigDecimal dose;
     private Integer fractionnement = 0;
     private Integer etalement = 0;
-    private String frequenceRadiotherapie;
     private String dateSouhaiteDebutTraitement;
     private String observation;
     private String immobilistion;
@@ -38,6 +37,7 @@ public class PrescriptionRadiotherapieSaveAdminInput extends AbstractProcessInpu
     private PatientDto patient;
     private TypeTraitementDto typeTraitement;
     private DecisionTraitementDto decisionTraitement;
+    private FrequenceRadiotherapieDto frequenceRadiotherapie;
 
 
     @Log
@@ -86,14 +86,6 @@ public class PrescriptionRadiotherapieSaveAdminInput extends AbstractProcessInpu
         this.etalement = etalement;
     }
 
-    @Log
-    public String getFrequenceRadiotherapie() {
-        return this.frequenceRadiotherapie;
-    }
-
-    public void setFrequenceRadiotherapie(String frequenceRadiotherapie) {
-        this.frequenceRadiotherapie = frequenceRadiotherapie;
-    }
 
     public StatutRadiotherapieDto getStatutRadiotherapie() {
         return statutRadiotherapie;
@@ -276,6 +268,14 @@ public class PrescriptionRadiotherapieSaveAdminInput extends AbstractProcessInpu
 
     public void setDecisionTraitement(DecisionTraitementDto decisionTraitement) {
         this.decisionTraitement = decisionTraitement;
+    }
+
+    public FrequenceRadiotherapieDto getFrequenceRadiotherapie() {
+        return frequenceRadiotherapie;
+    }
+
+    public void setFrequenceRadiotherapie(FrequenceRadiotherapieDto frequenceRadiotherapie) {
+        this.frequenceRadiotherapie = frequenceRadiotherapie;
     }
 
     public void setPatient(PatientDto patient) {

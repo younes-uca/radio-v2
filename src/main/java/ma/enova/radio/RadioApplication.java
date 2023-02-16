@@ -152,9 +152,11 @@ public class RadioApplication {
         String prefix = "personnel ";
         for (int i = 1; i < 100; i++) {
             Personnel item = new Personnel();
-            item.setIpp(prefix + i);
+            /*item.setIpp(prefix + i);
             item.setNom(prefix + i);
-            item.setPrenom(prefix + i);
+            item.setPrenom(prefix + i);*/
+            item.setId(1L*i);
+            item.setLabel(prefix+i);
             personnelService.create(item);
 
         }

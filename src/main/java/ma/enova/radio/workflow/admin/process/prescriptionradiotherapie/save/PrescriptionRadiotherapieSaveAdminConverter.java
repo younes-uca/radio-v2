@@ -68,7 +68,7 @@ public class PrescriptionRadiotherapieSaveAdminConverter extends AbstractProcess
             if (StringUtil.isNotEmpty(input.getId()))
                 item.setId(input.getId());
             if (StringUtil.isNotEmpty(input.getDatePrescription()))
-                item.setDatePrescription(DateUtil.stringEnToDate(input.getDatePrescription()));
+                item.setDatePrescription(DateUtil.stringToDate(input.getDatePrescription()));
             if (input.getRcc() != null)
                 item.setRcc(input.getRcc());
             if (StringUtil.isNotEmpty(input.getDose()))
@@ -77,10 +77,10 @@ public class PrescriptionRadiotherapieSaveAdminConverter extends AbstractProcess
                 item.setFractionnement(input.getFractionnement());
             if (StringUtil.isNotEmpty(input.getEtalement()))
                 item.setEtalement(input.getEtalement());
-            if (StringUtil.isNotEmpty(input.getFrequenceRadiotherapie()))
-                item.setFrequenceRadiotherapie(input.getFrequenceRadiotherapie());
+            if (input.getFrequenceRadiotherapie()!=null && StringUtil.isNotEmpty(input.getFrequenceRadiotherapie().getCode()))
+                item.setFrequenceRadiotherapie(input.getFrequenceRadiotherapie().getCode());
             if (StringUtil.isNotEmpty(input.getDateSouhaiteDebutTraitement()))
-                item.setDateSouhaiteDebutTraitement(DateUtil.stringEnToDate(input.getDateSouhaiteDebutTraitement()));
+                item.setDateSouhaiteDebutTraitement(DateUtil.stringToDate(input.getDateSouhaiteDebutTraitement()));
             if (StringUtil.isNotEmpty(input.getObservation()))
                 item.setObservation(input.getObservation());
             if (StringUtil.isNotEmpty(input.getImmobilistion()))
@@ -174,6 +174,8 @@ public class PrescriptionRadiotherapieSaveAdminConverter extends AbstractProcess
             output.setActif(item.getActif());
             if (StringUtil.isNotEmpty(item.getNombreSeanceRealise()))
                 output.setNombreSeanceRealise(item.getNombreSeanceRealise());
+            if (StringUtil.isNotEmpty(item.getFrequenceRadiotherapie()))
+                output.setFrequenceRadiotherapie(item.getFrequenceRadiotherapie());
 
             if (StringUtil.isNotEmpty(item.getNombreTotalSeance()))
                 output.setNombreTotalSeance(item.getNombreTotalSeance());

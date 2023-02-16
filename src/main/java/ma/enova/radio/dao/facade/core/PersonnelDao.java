@@ -13,14 +13,14 @@ import java.util.List;
 
 @Repository
 public interface PersonnelDao extends AbstractRepository<Personnel,Long> {
-    Personnel findByIpp(String ipp);
+   /* Personnel findByIpp(String ipp);
     int deleteByIpp(String ipp);
 
     List<Personnel> findByCategoriePersonnelId(Long id);
     int deleteByCategoriePersonnelId(Long id);
     List<Personnel> findBySpecialiteId(Long id);
     int deleteBySpecialiteId(Long id);
-
+*/
     @Query(value = "SELECT MAX(item.ordre) FROM Personnel item where item.etablissementId = :etablissementId")
     Long findMaxOrdreByEtablissementIdOrder(@Param("etablissementId") Long etablissementId);
 }

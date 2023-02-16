@@ -1,5 +1,6 @@
 package ma.enova.radio.bean.core;
 
+import java.time.LocalDate;
 import java.util.Objects;
 
 import java.time.LocalDateTime;
@@ -29,7 +30,7 @@ public class SeanceRadiotherapie   extends AuditBusinessObject  {
 
     @Column(length = 500)
     private String codeRdv;
-    private LocalDateTime datePrevu ;
+    private LocalDate datePrevu ;
     private LocalDateTime dateRealisation ;
     private Integer numero = 0;
     @Column(columnDefinition = "boolean default false")
@@ -65,10 +66,10 @@ public class SeanceRadiotherapie   extends AuditBusinessObject  {
     public void setCodeRdv(String codeRdv){
         this.codeRdv = codeRdv;
     }
-    public LocalDateTime getDatePrevu(){
+    public LocalDate getDatePrevu(){
         return this.datePrevu;
     }
-    public void setDatePrevu(LocalDateTime datePrevu){
+    public void setDatePrevu(LocalDate datePrevu){
         this.datePrevu = datePrevu;
     }
     public LocalDateTime getDateRealisation(){

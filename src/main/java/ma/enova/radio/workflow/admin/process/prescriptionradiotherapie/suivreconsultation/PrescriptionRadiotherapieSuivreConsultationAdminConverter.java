@@ -69,7 +69,7 @@ public class PrescriptionRadiotherapieSuivreConsultationAdminConverter extends A
             if (StringUtil.isNotEmpty(input.getId()))
                 item.setId(input.getId());
             if (StringUtil.isNotEmpty(input.getDatePrescription()))
-                item.setDatePrescription(DateUtil.stringEnToDate(input.getDatePrescription()));
+                item.setDatePrescription(DateUtil.stringToDate(input.getDatePrescription()));
             if (input.getRcc() != null)
                 item.setRcc(input.getRcc());
             if (StringUtil.isNotEmpty(input.getDose()))
@@ -81,7 +81,7 @@ public class PrescriptionRadiotherapieSuivreConsultationAdminConverter extends A
             if (StringUtil.isNotEmpty(input.getFrequenceRadiotherapie()))
                 item.setFrequenceRadiotherapie(input.getFrequenceRadiotherapie());
             if (StringUtil.isNotEmpty(input.getDateSouhaiteDebutTraitement()))
-                item.setDateSouhaiteDebutTraitement(DateUtil.stringEnToDate(input.getDateSouhaiteDebutTraitement()));
+                item.setDateSouhaiteDebutTraitement(DateUtil.stringToDate(input.getDateSouhaiteDebutTraitement()));
             if (StringUtil.isNotEmpty(input.getObservation()))
                 item.setObservation(input.getObservation());
             if (StringUtil.isNotEmpty(input.getDateSimulation()))

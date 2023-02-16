@@ -5,6 +5,7 @@ import ma.enova.radio.zynerator.audit.AuditBusinessObject;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
@@ -18,7 +19,8 @@ public class PrescriptionRadiotherapie extends AuditBusinessObject {
 
     private Long id;
 
-    private LocalDateTime datePrescription;
+    @Temporal(TemporalType.DATE)
+    private LocalDate datePrescription;
     @Column(columnDefinition = "boolean default false")
     private Boolean rcc = false;
     private BigDecimal dose = BigDecimal.ZERO;
@@ -26,7 +28,7 @@ public class PrescriptionRadiotherapie extends AuditBusinessObject {
     private Integer etalement = 0;
     @Column(length = 500)
     private String frequenceRadiotherapie;
-    private LocalDateTime dateSouhaiteDebutTraitement;
+    private LocalDate dateSouhaiteDebutTraitement;
     @Lob
     @Column(columnDefinition = "TEXT")
     private String observation;
@@ -99,11 +101,11 @@ public class PrescriptionRadiotherapie extends AuditBusinessObject {
         this.decisionTraitement = decisionTraitement;
     }
 
-    public LocalDateTime getDatePrescription() {
+    public LocalDate getDatePrescription() {
         return this.datePrescription;
     }
 
-    public void setDatePrescription(LocalDateTime datePrescription) {
+    public void setDatePrescription(LocalDate datePrescription) {
         this.datePrescription = datePrescription;
     }
 
@@ -192,11 +194,11 @@ public class PrescriptionRadiotherapie extends AuditBusinessObject {
         this.frequenceRadiotherapie = frequenceRadiotherapie;
     }
 
-    public LocalDateTime getDateSouhaiteDebutTraitement() {
+    public LocalDate getDateSouhaiteDebutTraitement() {
         return this.dateSouhaiteDebutTraitement;
     }
 
-    public void setDateSouhaiteDebutTraitement(LocalDateTime dateSouhaiteDebutTraitement) {
+    public void setDateSouhaiteDebutTraitement(LocalDate dateSouhaiteDebutTraitement) {
         this.dateSouhaiteDebutTraitement = dateSouhaiteDebutTraitement;
     }
 

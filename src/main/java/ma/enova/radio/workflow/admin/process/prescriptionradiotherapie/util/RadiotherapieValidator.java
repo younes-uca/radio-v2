@@ -8,6 +8,7 @@ import ma.enova.radio.zynerator.process.Result;
 import ma.enova.radio.zynerator.util.DateUtil;
 import ma.enova.radio.zynerator.util.StringUtil;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
@@ -31,7 +32,7 @@ public class RadiotherapieValidator {
             result.addErrorMessage("radiotherapie.commun.patient.ipp-obligatoire");
         }
     }
-    public static void validateDateTraitement(LocalDateTime dateSouhaiteDebutTraitement, Result result) {
+    public static void validateDateTraitement(LocalDate dateSouhaiteDebutTraitement, Result result) {
         if (dateSouhaiteDebutTraitement == null) {
             result.addErrorMessage("radiotherapie.commun.dateDebutTraitement-obligatoire");
         } else if (DateUtil.isBeforeNow(dateSouhaiteDebutTraitement)) {
@@ -57,7 +58,7 @@ public class RadiotherapieValidator {
     }
 
     public static void validatePersonnel(Personnel medecinPrescripteur, Result<PrescriptionRadiotherapieSaveAdminInput, PrescriptionRadiotherapieSaveAdminOutput, PrescriptionRadiotherapie> result) {
-        if (medecinPrescripteur == null || StringUtil.isEmpty(medecinPrescripteur.getIpp())) {
+        if (medecinPrescripteur == null || StringUtil.isEmpty(medecinPrescripteur.getLabel())) {
             result.addErrorMessage("radiotherapie.commun.medecin-prescripteur.obligatoire");
         }
     }

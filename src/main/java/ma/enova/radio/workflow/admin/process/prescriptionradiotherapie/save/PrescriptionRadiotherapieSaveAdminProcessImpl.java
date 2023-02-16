@@ -12,19 +12,20 @@ import ma.enova.radio.zynerator.util.DateUtil;
 import ma.enova.radio.zynerator.util.StringUtil;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class PrescriptionRadiotherapieSaveAdminProcessImpl extends AbstractProcessImpl<PrescriptionRadiotherapieSaveAdminInput, PrescriptionRadiotherapieSaveAdminOutput, PrescriptionRadiotherapie, PrescriptionRadiotherapieSaveAdminConverter> implements PrescriptionRadiotherapieSaveAdminProcess {
 
     public void init(PrescriptionRadiotherapieSaveAdminInput input, PrescriptionRadiotherapie item) {
         item.setStatutRadiotherapie(statutRadiotherapieService.findByCode(StatutRadioTherapieConstant.EN_ATTENTE_PRESCRIPTION));
-        item.setPatient(patientService.findOrSave(item.getPatient()));
+        //item.setPatient(patientService.findOrSave(item.getPatient()));
         item.setVisee(viseeService.findOrSave(item.getVisee()));
         item.setMedecinPrescripteur(personnelService.findOrSave(item.getMedecinPrescripteur()));
         item.setProtocoleInclusion(protocoleInclusionService.findOrSave(item.getProtocoleInclusion()));
         item.setModaliteRadiotherapie(modaliteRadiotherapieService.findOrSave(item.getModaliteRadiotherapie()));
         item.setSite(siteService.findOrSave(item.getSite()));
-        item.setDecisionTraitement(decisionTraitementService.findOrSave(item.getDecisionTraitement()));
+        //item.setDecisionTraitement(decisionTraitementService.findOrSave(item.getDecisionTraitement()));
     }
 
     @Override
@@ -36,13 +37,13 @@ public class PrescriptionRadiotherapieSaveAdminProcessImpl extends AbstractProce
         RadiotherapieValidator.validateFraction(t.getFractionnement(), result);
 
         RadiotherapieValidator.validateStatutRadiotherapie(t.getStatutRadiotherapie(), result);
-        RadiotherapieValidator.validatePatient(t.getPatient(), result);
+        // RadiotherapieValidator.validatePatient(t.getPatient(), result);
         RadiotherapieValidator.validateVisee(t.getVisee(), result);
         RadiotherapieValidator.validatePersonnel(t.getMedecinPrescripteur(), result);
         RadiotherapieValidator.validateProtocoleInclusion(t.getProtocoleInclusion(), result);
         RadiotherapieValidator.validateModaliteRadiotherapie(t.getModaliteRadiotherapie(), result);
         RadiotherapieValidator.validateSite(t.getSite(), result);
-        RadiotherapieValidator.validateDecisionTraitement(t.getDecisionTraitement(), result);
+       // RadiotherapieValidator.validateDecisionTraitement(t.getDecisionTraitement(), result);
 
     }
 
@@ -60,6 +61,7 @@ public class PrescriptionRadiotherapieSaveAdminProcessImpl extends AbstractProce
     }
 
     private void updateSeanceRadioTherapieIfSceanceExist(PrescriptionRadiotherapie t) {
+        List<SeanceRadiotherapie> seanceRadiotherapies = seanceRadiotherapieService.findByPrescriptionRadiotherapieId(t.getId());
     }
 
     private void constrctSeanceRadioTherapie(PrescriptionRadiotherapie t) {

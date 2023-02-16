@@ -57,7 +57,7 @@ public class PersonnelRestAdmin  extends AbstractController<Personnel, Personnel
     public ResponseEntity<PersonnelDto> delete(PersonnelDto dto) throws Exception {
             return super.delete(dto);
     }
-    @ApiOperation("find by categoriePersonnel id")
+  /*  @ApiOperation("find by categoriePersonnel id")
     @GetMapping("categoriePersonnel/id/{id}")
     public List<Personnel> findByCategoriePersonnelId(@PathVariable Long id){
         return service.findByCategoriePersonnelId(id);
@@ -76,7 +76,7 @@ public class PersonnelRestAdmin  extends AbstractController<Personnel, Personnel
     @DeleteMapping("specialite/id/{id}")
     public int deleteBySpecialiteId(@PathVariable Long id){
         return service.deleteBySpecialiteId(id);
-    }
+    }*/
     @ApiOperation("Finds personnels by criteria")
     @PostMapping("listByCriteria")
     public ResponseEntity<List<PersonnelDto>> findByCriteria(@RequestBody PersonnelCriteria criteria) throws Exception {

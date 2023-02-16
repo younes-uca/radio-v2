@@ -2,21 +2,25 @@ package ma.enova.radio.bean.core;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import ma.enova.radio.zynerator.audit.AuditBusinessObjectEnhanced;
-import ma.enova.radio.zynerator.security.bean.User;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Objects;
 
 
 @Entity
 @Table(name = "personnel")
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@SequenceGenerator(name = "personnel_seq", sequenceName = "personnel_seq", allocationSize = 1, initialValue = 1)
-public class Personnel extends User {
+//@SequenceGenerator(name = "personnel_seq", sequenceName = "personnel_seq", allocationSize = 1, initialValue = 1)
+public class Personnel extends AuditBusinessObjectEnhanced {
 
     private Long id;
 
     @Column(length = 500)
+    private String label;
+   /* @Column(length = 500)
     private String ipp;
     @Lob
     @Column(columnDefinition = "TEXT")
@@ -34,7 +38,7 @@ public class Personnel extends User {
 
     private CategoriePersonnel categoriePersonnel;
 
-    private Specialite specialite;
+    private Specialite specialite;*/
 
 
     public Personnel() {
@@ -47,7 +51,7 @@ public class Personnel extends User {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "personnel_seq")
+    // @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "personnel_seq")
     public Long getId() {
         return this.id;
     }
@@ -56,7 +60,7 @@ public class Personnel extends User {
         this.id = id;
     }
 
-    public String getIpp() {
+   /* public String getIpp() {
         return this.ipp;
     }
 
@@ -129,11 +133,14 @@ public class Personnel extends User {
     public void setSpecialite(Specialite specialite) {
         this.specialite = specialite;
     }
+*/
 
-    @Transient
     public String getLabel() {
-        label = ipp;
         return label;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
     }
 
     @Override
