@@ -14,6 +14,7 @@ import ma.enova.radio.service.facade.admin.StatutRadiotherapieAdminService;
 import ma.enova.radio.ws.converter.HistortiquePrescriptionRadiotherapieConverter;
 import ma.enova.radio.ws.dto.HistortiquePrescriptionRadiotherapieDto;
 import ma.enova.radio.zynerator.service.AbstractServiceImpl;
+import ma.enova.radio.zynerator.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -50,13 +51,22 @@ public class HistortiquePrescriptionRadiotherapieAdminServiceImpl extends Abstra
 
     @Override
     public int createFromPrescription(Long prescriptionRadiotherapieId, StatutRadiotherapie statutRadiotherapie) {
-        if (prescriptionRadiotherapieId == null )
+        if (prescriptionRadiotherapieId == null)
             return -1;
         else if (statutRadiotherapie == null || statutRadiotherapie.getId() == null)
             return -2;
         else {
-            HistortiquePrescriptionRadiotherapie histortiquePrescriptionRadiotherapie = new HistortiquePrescriptionRadiotherapie(LocalDateTime.now(), prescriptionRadiotherapieId, statutRadiotherapie);
-            dao.save(histortiquePrescriptionRadiotherapie);
+            HistortiquePrescriptionRadiotherapie loadedHistortiquePrescriptionRadiotherapie = dao.findByPrescriptionRadiotherapieIdAndStatutRadiotherapieCode(prescriptionRadiotherapieId, statutRadiotherapie.getCode());
+            LocalDateTime now = LocalDateTime.now();
+            if (loadedHistortiquePrescriptionRadiotherapie == null) {
+                HistortiquePrescriptionRadiotherapie histortiquePrescriptionRadiotherapie = new HistortiquePrescriptionRadiotherapie(now, prescriptionRadiotherapieId, statutRadiotherapie);
+                histortiquePrescriptionRadiotherapie.setDescription(DateUtil.dateToString(now));
+                dao.save(histortiquePrescriptionRadiotherapie);
+            } else {
+                loadedHistortiquePrescriptionRadiotherapie.setDescription(DateUtil.dateToString(now) + ", " + loadedHistortiquePrescriptionRadiotherapie.getDescription());
+                loadedHistortiquePrescriptionRadiotherapie.setDateHistortiquePrescriptionRadiotherapie(now);
+            }
+
             return 1;
         }
     }

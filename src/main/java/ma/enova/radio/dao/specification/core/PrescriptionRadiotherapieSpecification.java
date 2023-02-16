@@ -48,7 +48,9 @@ public class PrescriptionRadiotherapieSpecification extends AbstractSpecificatio
             addPredicateFk("decisionTraitement", "id", criteria.getDecisionTraitement() == null ? null : criteria.getDecisionTraitement().getId());
             addPredicateFk("decisionTraitement", "code", criteria.getDecisionTraitement() == null ? null : criteria.getDecisionTraitement().getCode());
             addPredicateFk("patient", "ipp", criteria.getPatient() == null ? null : criteria.getPatient().getIpp());
+            addPredicateFk("patient", "id", criteria.getPatient() == null ? null : criteria.getPatient().getId());
             addPredicateFk("statutRadiotherapie", "code", criteria.getStatutRadiotherapie() == null ? null : criteria.getStatutRadiotherapie().getCode());
+            addPredicateFk("statutRadiotherapie", "id", criteria.getStatutRadiotherapie() == null ? null : criteria.getStatutRadiotherapie().getId());
             addOrderAndFilter();
         }
         return getResult();

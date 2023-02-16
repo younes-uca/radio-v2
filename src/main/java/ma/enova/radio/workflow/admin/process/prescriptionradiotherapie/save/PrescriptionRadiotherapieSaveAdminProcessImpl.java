@@ -50,12 +50,16 @@ public class PrescriptionRadiotherapieSaveAdminProcessImpl extends AbstractProce
     public void run(PrescriptionRadiotherapieSaveAdminInput input, PrescriptionRadiotherapie t, Result<PrescriptionRadiotherapieSaveAdminInput, PrescriptionRadiotherapieSaveAdminOutput, PrescriptionRadiotherapie> result) {
         constrctSeanceRadioTherapie(t);
         service.create(t);
+        updateSeanceRadioTherapieIfSceanceExist(t);
         for (SeanceRadiotherapie seanceRadiotherapie : t.getSeanceRadiotherapies()) {
             seanceRadiotherapie.setPrescriptionRadiotherapie(t);
             seanceRadiotherapieService.create(seanceRadiotherapie);
         }
         histortiquePrescriptionRadiotherapieService.createFromPrescription(t.getId(), t.getStatutRadiotherapie());
         result.addInfoMessage("radiotherapie.save.ok");
+    }
+
+    private void updateSeanceRadioTherapieIfSceanceExist(PrescriptionRadiotherapie t) {
     }
 
     private void constrctSeanceRadioTherapie(PrescriptionRadiotherapie t) {

@@ -12,6 +12,7 @@ import java.util.List;
 public interface HistortiquePrescriptionRadiotherapieDao extends AbstractRepository<HistortiquePrescriptionRadiotherapie,Long> {
 
     List<HistortiquePrescriptionRadiotherapie> findByPrescriptionRadiotherapieId(Long id);
+    HistortiquePrescriptionRadiotherapie findByPrescriptionRadiotherapieIdAndStatutRadiotherapieCode(Long id,String code);
     int deleteByPrescriptionRadiotherapieId(Long id);
     List<HistortiquePrescriptionRadiotherapie> findByStatutRadiotherapieCode(String code);
     int deleteByStatutRadiotherapieCode(String code);

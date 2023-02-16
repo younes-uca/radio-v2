@@ -55,24 +55,6 @@ public class PrescriptionRadiotherapieAdminServiceImpl extends AbstractServiceIm
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
     public PrescriptionRadiotherapie create(PrescriptionRadiotherapie t) {
         super.create(t);
-        if (t.getConsultationRadiotherapies() != null) {
-            t.getConsultationRadiotherapies().forEach(element -> {
-                element.setPrescriptionRadiotherapie(t);
-                consultationRadiotherapieService.create(element);
-            });
-        }
-        if (t.getSeanceRadiotherapies() != null) {
-            t.getSeanceRadiotherapies().forEach(element -> {
-                element.setPrescriptionRadiotherapie(t);
-                seanceRadiotherapieService.create(element);
-            });
-        }
-        if (t.getHistortiquePrescriptionRadiotherapies() != null) {
-            t.getHistortiquePrescriptionRadiotherapies().forEach(element -> {
-                element.setPrescriptionRadiotherapie(t);
-                histortiquePrescriptionRadiotherapieService.create(element);
-            });
-        }
         return t;
     }
 
