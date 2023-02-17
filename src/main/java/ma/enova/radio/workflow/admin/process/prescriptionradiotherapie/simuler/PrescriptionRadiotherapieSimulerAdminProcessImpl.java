@@ -48,20 +48,21 @@ public class PrescriptionRadiotherapieSimulerAdminProcessImpl extends AbstractPr
             result.addErrorMessage("radiotherapie.simuler.status.obligatoire");
         else if (item.getId() == null)
             result.addErrorMessage("radiotherapie.simuler.prescription.obligatoire");
-//        else if (input.getValidateurSimulation() == null || input.getValidateurSimulation().getId() == null) {
-//            result.addErrorMessage("radiotherapie.simuler.validateur.obligatoire");
-//        }
+        else if (item.getValidateurSimulation() == null || item.getValidateurSimulation().getId() == null) {
+            result.addErrorMessage("radiotherapie.simuler.validateur.obligatoire");
+        }
     }
 
     @Override
     public void run(PrescriptionRadiotherapieSimulerAdminInput input, PrescriptionRadiotherapie t, Result<PrescriptionRadiotherapieSimulerAdminInput, PrescriptionRadiotherapieSimulerAdminOutput, PrescriptionRadiotherapie> result) {
-        Long validateurSimulationId = 1l;
+        Long validateurSimulationId = t.getValidateurSimulation().getId();
         service.updateAsSimuler(t.getId(), t.getStatutRadiotherapie().getId(),t.getDateSimulation() , t.getImmobilistion(), t.getPositionnement() , t.getFichierTraitements() , t.getValidateurSimulationDate(), validateurSimulationId);
         histortiquePrescriptionRadiotherapieService.createFromPrescription(t.getId(), t.getStatutRadiotherapie());
         // queue to MS to create prescriptionRadioTherapie
-        DecisionTraitementDto decisiontraitementDto = new DecisionTraitementDto(1l, null,t.getStatutRadiotherapie().getCode());
-		RabbitUtils.convertAndSend(decisiontraitementDto, exchange, routingkey, rabbitTemplate);
-        
+        if(t.getDecisionTraitement() != null && t.getDecisionTraitement().getId() != null) {
+        	DecisionTraitementDto decisiontraitementDto = new DecisionTraitementDto(t.getDecisionTraitement().getId(), t.getDecisionTraitement().getCode(),t.getStatutRadiotherapie().getCode());
+    		RabbitUtils.convertAndSend(decisiontraitementDto, exchange, routingkey, rabbitTemplate);
+        } 
         result.addInfoMessage("radiotherapie.simuler.ok");
     }
 
