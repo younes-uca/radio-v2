@@ -22,7 +22,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "patient")
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@SequenceGenerator(name="patient_seq",sequenceName="patient_seq",allocationSize=1, initialValue = 1)
+//@SequenceGenerator(name="patient_seq",sequenceName="patient_seq",allocationSize=1, initialValue = 1)
 public class Patient   extends AuditBusinessObjectEnhanced  {
 
     private Long id;
@@ -51,7 +51,7 @@ public class Patient   extends AuditBusinessObjectEnhanced  {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator="patient_seq")
+   // @GeneratedValue(strategy = GenerationType.SEQUENCE,generator="patient_seq")
     public Long getId(){
         return this.id;
     }
