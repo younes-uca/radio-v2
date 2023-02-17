@@ -1,16 +1,15 @@
 package  ma.enova.radio.ws.dto;
 
-import ma.enova.radio.zynerator.audit.Log;
-import ma.enova.radio.zynerator.dto.AuditBaseDto;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import ma.enova.radio.zynerator.dto.AuditBaseDto;
 
 
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class PersonnelDto  extends AuditBaseDto {
 
-    private String ipp  ;
-    private String label  ;
+    /*private String ipp  ;
+
     private String adresse  ;
     private String nom  ;
     private String prenom  ;
@@ -21,14 +20,14 @@ public class PersonnelDto  extends AuditBaseDto {
     private Boolean expertise  ;
 
     private CategoriePersonnelDto categoriePersonnel ;
-    private SpecialiteDto specialite ;
+    private SpecialiteDto specialite ;*/
 
 
     public PersonnelDto(){
         super();
     }
 
-    @Log
+ /*   @Log
     public String getIpp(){
         return this.ipp;
     }
@@ -115,6 +114,6 @@ public class PersonnelDto  extends AuditBaseDto {
     public void setSpecialite(SpecialiteDto specialite){
         this.specialite = specialite;
     }
-
+*/
 
 }

@@ -4,7 +4,9 @@ import ma.enova.radio.zynerator.audit.Log;
 import ma.enova.radio.zynerator.dto.AuditBaseDto;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
-    import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
     import javax.persistence.Temporal;
     import javax.persistence.TemporalType;
     import com.fasterxml.jackson.annotation.JsonFormat;
@@ -28,7 +30,16 @@ public class SeanceRadiotherapieDto  extends AuditBaseDto {
         super();
     }
 
-
+    public SeanceRadiotherapieDto(Long id, String codeRdv, String datePrevu, String dateRealisation, Integer numero, Boolean effectue, String cr, String fichiers) {
+        this.id = id;
+        this.codeRdv = codeRdv;
+        this.datePrevu = datePrevu;
+        this.dateRealisation = dateRealisation;
+        this.numero = numero;
+        this.effectue = effectue;
+        this.cr = cr;
+        this.fichiers = fichiers;
+    }
 
     @Log
     public String getCodeRdv(){

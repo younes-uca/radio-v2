@@ -19,7 +19,7 @@ public class Personnel extends AuditBusinessObjectEnhanced {
     private Long id;
 
     @Column(length = 500)
-    private String label;
+    private String nom;
    /* @Column(length = 500)
     private String ipp;
     @Lob
@@ -135,12 +135,12 @@ public class Personnel extends AuditBusinessObjectEnhanced {
     }
 */
 
-    public String getLabel() {
-        return label;
+    public String getNom() {
+        return nom;
     }
 
-    public void setLabel(String label) {
-        this.label = label;
+    public void setNom(String nom) {
+        this.nom = nom;
     }
 
     @Override

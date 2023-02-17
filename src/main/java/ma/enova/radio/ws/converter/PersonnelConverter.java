@@ -1,27 +1,23 @@
-package  ma.enova.radio.ws.converter;
+package ma.enova.radio.ws.converter;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
-
-import ma.enova.radio.zynerator.util.StringUtil;
-import ma.enova.radio.zynerator.converter.AbstractConverter;
-import ma.enova.radio.zynerator.util.DateUtil;
-import ma.enova.radio.bean.history.PersonnelHistory;
 import ma.enova.radio.bean.core.Personnel;
+import ma.enova.radio.bean.history.PersonnelHistory;
 import ma.enova.radio.ws.dto.PersonnelDto;
+import ma.enova.radio.zynerator.converter.AbstractConverter;
+import ma.enova.radio.zynerator.util.StringUtil;
+import org.springframework.stereotype.Component;
 
 @Component
 public class PersonnelConverter extends AbstractConverter<Personnel, PersonnelDto, PersonnelHistory> {
-
+/*
     @Autowired
     private CategoriePersonnelConverter categoriePersonnelConverter ;
     @Autowired
     private SpecialiteConverter specialiteConverter ;
     private boolean categoriePersonnel;
-    private boolean specialite;
+    private boolean specialite;*/
 
-    public  PersonnelConverter(){
+    public PersonnelConverter() {
         super(Personnel.class, PersonnelDto.class, PersonnelHistory.class);
     }
 
@@ -30,11 +26,11 @@ public class PersonnelConverter extends AbstractConverter<Personnel, PersonnelDt
         if (dto == null) {
             return null;
         } else {
-        Personnel item = new Personnel();
-            if(StringUtil.isNotEmpty(dto.getId()))
+            Personnel item = new Personnel();
+            if (StringUtil.isNotEmpty(dto.getId()))
                 item.setId(dto.getId());
-            if(StringUtil.isNotEmpty(dto.getLabel()))
-                item.setLabel(dto.getLabel());
+            if (StringUtil.isNotEmpty(dto.getLabel()))
+                item.setNom(dto.getLabel());
            /* if(StringUtil.isNotEmpty(dto.getIpp()))
                 item.setIpp(dto.getIpp());
             if(StringUtil.isNotEmpty(dto.getAdresse()))
@@ -61,7 +57,7 @@ public class PersonnelConverter extends AbstractConverter<Personnel, PersonnelDt
 */
 
 
-        return item;
+            return item;
         }
     }
 
@@ -71,10 +67,10 @@ public class PersonnelConverter extends AbstractConverter<Personnel, PersonnelDt
             return null;
         } else {
             PersonnelDto dto = new PersonnelDto();
-            if(StringUtil.isNotEmpty(item.getId()))
+            if (StringUtil.isNotEmpty(item.getId()))
                 dto.setId(item.getId());
-            if(StringUtil.isNotEmpty(item.getLabel()))
-                dto.setLabel(item.getLabel());
+            if (StringUtil.isNotEmpty(item.getNom()))
+                dto.setLabel(item.getNom());
            /* if(StringUtil.isNotEmpty(item.getIpp()))
                 dto.setIpp(item.getIpp());
             if(StringUtil.isNotEmpty(item.getAdresse()))
@@ -98,12 +94,12 @@ public class PersonnelConverter extends AbstractConverter<Personnel, PersonnelDt
         if(this.specialite && item.getSpecialite()!=null) {
             dto.setSpecialite(specialiteConverter.toDto(item.getSpecialite())) ;
         }*/
-        return dto;
+            return dto;
         }
     }
 
 
-
+/*
     public CategoriePersonnelConverter getCategoriePersonnelConverter(){
         return this.categoriePersonnelConverter;
     }
@@ -129,5 +125,5 @@ public class PersonnelConverter extends AbstractConverter<Personnel, PersonnelDt
     }
     public void  setSpecialite(boolean specialite){
         this.specialite = specialite;
-    }
+    }*/
 }

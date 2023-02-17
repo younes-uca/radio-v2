@@ -1,17 +1,16 @@
 package ma.enova.radio.workflow.admin.process.prescriptionradiotherapie.save;
 
-import ma.enova.radio.bean.core.DecisionTraitement;
-import ma.enova.radio.bean.core.PrescriptionRadiotherapie;
-import ma.enova.radio.bean.core.SeanceRadiotherapie;
+import ma.enova.radio.bean.core.*;
 import ma.enova.radio.constant.StatutRadioTherapieConstant;
 import ma.enova.radio.service.facade.admin.*;
-import ma.enova.radio.workflow.admin.process.prescriptionradiotherapie.util.RadiotherapieValidator;
 import ma.enova.radio.zynerator.process.AbstractProcessImpl;
 import ma.enova.radio.zynerator.process.Result;
 import ma.enova.radio.zynerator.util.DateUtil;
 import ma.enova.radio.zynerator.util.StringUtil;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -30,38 +29,47 @@ public class PrescriptionRadiotherapieSaveAdminProcessImpl extends AbstractProce
 
     @Override
     public void validate(PrescriptionRadiotherapieSaveAdminInput input, PrescriptionRadiotherapie t, Result<PrescriptionRadiotherapieSaveAdminInput, PrescriptionRadiotherapieSaveAdminOutput, PrescriptionRadiotherapie> result) {
-        RadiotherapieValidator.validateDateTraitement(t.getDateSouhaiteDebutTraitement(), result);
-        RadiotherapieValidator.validateFrequenceRadio(t.getFrequenceRadiotherapie(), result);
-        RadiotherapieValidator.validateFraction(t.getFractionnement(), result);
-        RadiotherapieValidator.validateDateTraitement(t.getDateSouhaiteDebutTraitement(), result);
-        RadiotherapieValidator.validateFraction(t.getFractionnement(), result);
+        validateDateTraitement(t.getDateSouhaiteDebutTraitement(), result);
+        validateFrequenceRadio(t.getFrequenceRadiotherapie(), result);
+        validateFraction(t.getFractionnement(), result);
+        validateDateTraitement(t.getDateSouhaiteDebutTraitement(), result);
+        validateFraction(t.getFractionnement(), result);
 
-        RadiotherapieValidator.validateStatutRadiotherapie(t.getStatutRadiotherapie(), result);
-        // RadiotherapieValidator.validatePatient(t.getPatient(), result);
-        RadiotherapieValidator.validateVisee(t.getVisee(), result);
-        RadiotherapieValidator.validatePersonnel(t.getMedecinPrescripteur(), result);
-        RadiotherapieValidator.validateProtocoleInclusion(t.getProtocoleInclusion(), result);
-        RadiotherapieValidator.validateModaliteRadiotherapie(t.getModaliteRadiotherapie(), result);
-        RadiotherapieValidator.validateSite(t.getSite(), result);
-       // RadiotherapieValidator.validateDecisionTraitement(t.getDecisionTraitement(), result);
+        validateStatutRadiotherapie(t.getStatutRadiotherapie(), result);
+        // validatePatient(t.getPatient(), result);
+        validateVisee(t.getVisee(), result);
+        validatePersonnel(t.getMedecinPrescripteur(), result);
+        validateProtocoleInclusion(t.getProtocoleInclusion(), result);
+        validateModaliteRadiotherapie(t.getModaliteRadiotherapie(), result);
+        validateSite(t.getSite(), result);
+        // validateDecisionTraitement(t.getDecisionTraitement(), result);
 
     }
 
     @Override
     public void run(PrescriptionRadiotherapieSaveAdminInput input, PrescriptionRadiotherapie t, Result<PrescriptionRadiotherapieSaveAdminInput, PrescriptionRadiotherapieSaveAdminOutput, PrescriptionRadiotherapie> result) {
         constrctSeanceRadioTherapie(t);
+        int res = deleteSeanceRadioIfPrescriptionRadiotherapieExist(t);
         service.create(t);
-        updateSeanceRadioTherapieIfSceanceExist(t);
         for (SeanceRadiotherapie seanceRadiotherapie : t.getSeanceRadiotherapies()) {
             seanceRadiotherapie.setPrescriptionRadiotherapie(t);
             seanceRadiotherapieService.create(seanceRadiotherapie);
         }
         histortiquePrescriptionRadiotherapieService.createFromPrescription(t.getId(), t.getStatutRadiotherapie());
-        result.addInfoMessage("radiotherapie.save.ok");
+        String message = "radiotherapie.save.ok";
+        if (res == 1) {
+            message = "radiotherapie.update.ok";
+        }
+        result.addInfoMessage(message);
     }
 
-    private void updateSeanceRadioTherapieIfSceanceExist(PrescriptionRadiotherapie t) {
-        List<SeanceRadiotherapie> seanceRadiotherapies = seanceRadiotherapieService.findByPrescriptionRadiotherapieId(t.getId());
+    private int deleteSeanceRadioIfPrescriptionRadiotherapieExist(PrescriptionRadiotherapie t) {
+        int res = 0;
+        if (t != null && t.getId() != null) {
+            seanceRadiotherapieService.deleteByPrescriptionRadiotherapieId(t.getId());
+            res = 1;
+        }
+        return res;
     }
 
     private void constrctSeanceRadioTherapie(PrescriptionRadiotherapie t) {
@@ -75,6 +83,77 @@ public class PrescriptionRadiotherapieSaveAdminProcessImpl extends AbstractProce
             t.getSeanceRadiotherapies().add(seanceRadiotherapie);
         }
         t.setNombreTotalSeance(t.getFractionnement());
+    }
+
+    private void validateFraction(Integer fractionnement, Result result) {
+        if (fractionnement == null || fractionnement <= 0) {
+            result.addErrorMessage("radiotherapie.save.fractionnement.stritectement-positif");
+        }
+    }
+
+    private void validateFrequenceRadio(String frequenceRadiotherapie, Result result) {
+        List<String> frequenceRadiotherapies = Arrays.asList("heure", "jour", "semaine", "mois");
+        if (StringUtil.isEmpty(frequenceRadiotherapie)) {
+            result.addErrorMessage("radiotherapie.save.frequenceRadiotherapie.obligatoire");
+        } else if (!frequenceRadiotherapies.contains(frequenceRadiotherapie)) {
+            result.addErrorMessage("radiotherapie.save.frequenceRadiotherapie.valeur-non-conforme");
+        }
+    }
+
+    private void validatePatient(Patient patient, Result result) {
+        if (patient == null || StringUtil.isEmpty(patient.getIpp())) {
+            result.addErrorMessage("radiotherapie.save.patient.ipp-obligatoire");
+        }
+    }
+
+    private void validateDateTraitement(LocalDate dateSouhaiteDebutTraitement, Result result) {
+        if (dateSouhaiteDebutTraitement == null) {
+            result.addErrorMessage("radiotherapie.save.dateDebutTraitement-obligatoire");
+        } else if (DateUtil.isBeforeNow(dateSouhaiteDebutTraitement)) {
+            result.addErrorMessage("radiotherapie.save.dateDebutTraitement.inferieur-aujoudhui");
+        }
+    }
+
+    private void validateStatutRadiotherapie(StatutRadiotherapie statutRadiotherapie, Result<PrescriptionRadiotherapieSaveAdminInput, PrescriptionRadiotherapieSaveAdminOutput, PrescriptionRadiotherapie> result) {
+        if (statutRadiotherapie == null || StringUtil.isEmpty(statutRadiotherapie.getCode())) {
+            result.addErrorMessage("radiotherapie.save.statut.obligatoire");
+        }
+    }
+
+    private void validateVisee(Visee visee, Result<PrescriptionRadiotherapieSaveAdminInput, PrescriptionRadiotherapieSaveAdminOutput, PrescriptionRadiotherapie> result) {
+        if (visee == null || StringUtil.isEmpty(visee.getCode())) {
+            result.addErrorMessage("radiotherapie.save.visee.obligatoire");
+        }
+    }
+
+    private void validateProtocoleInclusion(ProtocoleInclusion protocoleInclusion, Result<PrescriptionRadiotherapieSaveAdminInput, PrescriptionRadiotherapieSaveAdminOutput, PrescriptionRadiotherapie> result) {
+        if (protocoleInclusion == null || StringUtil.isEmpty(protocoleInclusion.getCode())) {
+            result.addErrorMessage("radiotherapie.save.protocole-inclusion.obligatoire");
+        }
+    }
+
+    private void validatePersonnel(Personnel medecinPrescripteur, Result<PrescriptionRadiotherapieSaveAdminInput, PrescriptionRadiotherapieSaveAdminOutput, PrescriptionRadiotherapie> result) {
+        if (medecinPrescripteur == null || StringUtil.isEmpty(medecinPrescripteur.getNom())) {
+            result.addErrorMessage("radiotherapie.save.medecin-prescripteur.obligatoire");
+        }
+    }
+
+    private void validateModaliteRadiotherapie(ModaliteRadiotherapie modaliteRadiotherapie, Result<PrescriptionRadiotherapieSaveAdminInput, PrescriptionRadiotherapieSaveAdminOutput, PrescriptionRadiotherapie> result) {
+        if (modaliteRadiotherapie == null || StringUtil.isEmpty(modaliteRadiotherapie.getCode())) {
+            result.addErrorMessage("radiotherapie.save.modalite-radiotherapie.obligatoire");
+        }
+    }
+
+    private void validateSite(Site site, Result<PrescriptionRadiotherapieSaveAdminInput, PrescriptionRadiotherapieSaveAdminOutput, PrescriptionRadiotherapie> result) {
+        if (site == null || StringUtil.isEmpty(site.getCode())) {
+            result.addErrorMessage("radiotherapie.save.site.obligatoire");
+        }
+    }
+
+    private void validateDecisionTraitement(DecisionTraitement decisionTraitement, Result<PrescriptionRadiotherapieSaveAdminInput, PrescriptionRadiotherapieSaveAdminOutput, PrescriptionRadiotherapie> result) {
+        if (decisionTraitement == null || StringUtil.isEmpty(decisionTraitement.getCode())) {
+            result.addErrorMessage("radiotherapie.save.decision-traitement.obligatoire");
+        }
     }
 
     private PrescriptionRadiotherapieAdminService service;

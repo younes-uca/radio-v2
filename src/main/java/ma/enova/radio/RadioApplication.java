@@ -155,8 +155,8 @@ public class RadioApplication {
             /*item.setIpp(prefix + i);
             item.setNom(prefix + i);
             item.setPrenom(prefix + i);*/
-            item.setId(1L*i);
-            item.setLabel(prefix+i);
+            item.setId(1L * i);
+            item.setNom(prefix + i);
             personnelService.create(item);
 
         }

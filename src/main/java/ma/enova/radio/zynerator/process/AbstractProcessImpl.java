@@ -25,6 +25,7 @@ public abstract class AbstractProcessImpl<I extends AbstractProcessInput, K exte
         }
         K output = converter.toOutput(item);
         result.setOutput(output);
+        result.setItem(null);
         return result;
     }
 

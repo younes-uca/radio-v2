@@ -14,6 +14,7 @@ import java.util.Locale;
 public class DateUtil {
 
     public static final String DEFAULT_DATE_FORMAT = "dd/MM/yyyy";
+    public static final String DEFAULT_DATE_FORMAT_SQL = "yyyy-MM-dd";
     public static final String DATE_TIME_FORMAT = "dd/MM/yyyy HH:mm";
     // public static final String DATE_FORMAT_WITH_HOUR = "dd/MM/yyyy HH:mm";
     public static final String DATE_FORMAT_WITH_HOUR = "MM/dd/yyyy HH:mm";
@@ -126,7 +127,7 @@ public class DateUtil {
 
     public static String dateToString(final LocalDate date) {
         if (date != null) {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DEFAULT_DATE_FORMAT);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DEFAULT_DATE_FORMAT_SQL);
             return date.format(formatter);
         }
         return "";

@@ -40,6 +40,8 @@ public class SeanceRadiotherapie   extends AuditBusinessObject  {
     @Column(length = 500)
     private String fichiers;
 
+
+
     private PrescriptionRadiotherapie prescriptionRadiotherapie ;
     
 
