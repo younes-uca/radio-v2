@@ -54,10 +54,12 @@ public class PrescriptionRadiotherapieSimulerAdminConverter extends AbstractProc
             if (StringUtil.isNotEmpty(input.getValidateurSimulationDate()))
                 item.setValidateurSimulationDate(DateUtil.stringEnToDate(input.getValidateurSimulationDate()));
 
-            if (this.statutRadiotherapie && input.getStatutRadiotherapie() != null)
+           // if (this.statutRadiotherapie && input.getStatutRadiotherapie() != null)
+            if (input.getStatutRadiotherapie() != null)
                 item.setStatutRadiotherapie(statutRadiotherapieConverter.toItem(input.getStatutRadiotherapie()));
 
-            if (this.validateurSimulation && input.getValidateurSimulation() != null)
+            //if (this.validateurSimulation && input.getValidateurSimulation() != null)
+            if (input.getValidateurSimulation() != null)
                 item.setValidateurSimulation(personnelConverter.toItem(input.getValidateurSimulation()));
 
 
@@ -93,6 +95,7 @@ public class PrescriptionRadiotherapieSimulerAdminConverter extends AbstractProc
             return output;
         }
     }
+
 
 
     public ModaliteRadiotherapieConverter getModaliteRadiotherapieConverter() {

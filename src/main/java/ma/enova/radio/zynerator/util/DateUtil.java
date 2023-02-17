@@ -127,7 +127,7 @@ public class DateUtil {
 
     public static String dateToString(final LocalDate date) {
         if (date != null) {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DEFAULT_DATE_FORMAT_SQL);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DEFAULT_DATE_FORMAT);
             return date.format(formatter);
         }
         return "";
