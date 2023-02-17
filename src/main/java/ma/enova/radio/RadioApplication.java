@@ -48,7 +48,7 @@ public class RadioApplication {
                                   //, TypeTraitementAdminService typeTraitementAdminService, StatutRadiotherapieAdminService statutRadiotherapieAdminService
     ) {
         return (args) -> {
-            if (false) {
+            if (true) {
 
 
                 createStatutRadio();
@@ -64,6 +64,7 @@ public class RadioApplication {
                 createImmobilistion();
                 createPositionnement();
                 createTypeToxiciteRth();
+                createFrequence();
 
           /*  etats.entrySet().stream().forEach(e->typeTraitementAdminService.save(new TypeTraitement(e.getKey(),e.getValue())));
             etats.entrySet().stream().forEach(e->statutRadiotherapieAdminService.save(new StatutRadiotherapie(e.getKey(),e.getValue())));
@@ -84,6 +85,19 @@ public class RadioApplication {
                 userService.save(userForAdmin);
             }
         };
+    }
+
+    private void createFrequence() {
+        Map<String, String> etats = new HashMap<>();
+        etats.put("semaine", "semaine");
+        etats.put("mois", "mois");
+        etats.forEach((k, v) -> {
+            FrequenceRadiotherapie item = new FrequenceRadiotherapie();
+            item.setCode(k);
+            item.setLibelle(v);
+            frequenceRadiotherapieService.create(item);
+
+        });
     }
 
     private void createStatutRadio() {
@@ -237,6 +251,8 @@ public class RadioApplication {
         }
     }
 
+    @Autowired
+    private FrequenceRadiotherapieAdminService frequenceRadiotherapieService;
     @Autowired
     private StatutRadiotherapieAdminService statutRadiotherapieService;
     @Autowired
