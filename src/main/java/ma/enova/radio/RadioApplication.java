@@ -9,7 +9,6 @@ import ma.enova.radio.zynerator.security.common.AuthoritiesConstants;
 import ma.enova.radio.zynerator.security.service.facade.RoleService;
 import ma.enova.radio.zynerator.security.service.facade.UserService;
 
-import org.springframework.amqp.rabbit.annotation.EnableRabbit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -25,7 +24,7 @@ import java.util.Map;
 
 @SpringBootApplication
 //@EnableFeignClients("ma.enova.radio.required.facade")
-@EnableRabbit
+//@EnableRabbit
 public class RadioApplication {
     public static ConfigurableApplicationContext ctx;
 
@@ -48,7 +47,7 @@ public class RadioApplication {
                                   //, TypeTraitementAdminService typeTraitementAdminService, StatutRadiotherapieAdminService statutRadiotherapieAdminService
     ) {
         return (args) -> {
-            if (true) {
+            if (true) { /// aweda hi slouk
 
 
                 createStatutRadio();
