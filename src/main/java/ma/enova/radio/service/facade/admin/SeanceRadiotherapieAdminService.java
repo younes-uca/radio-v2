@@ -12,6 +12,8 @@ public interface SeanceRadiotherapieAdminService extends IService<SeanceRadiothe
 
     List<SeanceRadiotherapie> findByPrescriptionRadiotherapieId(Long id);
     int deleteByPrescriptionRadiotherapieId(Long id);
+    
+    public void updateEtatEffectue(Long id);
 
 
 
