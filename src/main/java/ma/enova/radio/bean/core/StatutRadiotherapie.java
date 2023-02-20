@@ -1,26 +1,17 @@
 package ma.enova.radio.bean.core;
 
-import java.util.Objects;
-
-
-
-
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import ma.enova.radio.zynerator.audit.AuditBusinessObject;
+
 import javax.persistence.*;
 import java.util.Objects;
-
-
-
-
 
 
 @Entity
 @Table(name = "statut_radiotherapie")
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@SequenceGenerator(name="statut_radiotherapie_seq",sequenceName="statut_radiotherapie_seq",allocationSize=1, initialValue = 1)
-public class StatutRadiotherapie   extends AuditBusinessObject  {
+@SequenceGenerator(name = "statut_radiotherapie_seq", sequenceName = "statut_radiotherapie_seq", allocationSize = 1, initialValue = 1)
+public class StatutRadiotherapie extends AuditBusinessObject {
 
     private Long id;
 
@@ -29,46 +20,62 @@ public class StatutRadiotherapie   extends AuditBusinessObject  {
     @Column(length = 500)
     private String libelle;
     @Column(length = 500)
+    private int niveau;
+    @Column(length = 500)
     private String style;
 
 
-
-    public StatutRadiotherapie(){
+    public StatutRadiotherapie() {
         super();
     }
-    public StatutRadiotherapie(String libelle,String code){
-        this.libelle=libelle;
-        this.code=code;
+
+    public StatutRadiotherapie(String libelle, String code, int niveau) {
+        this.libelle = libelle;
+        this.code = code;
+        this.niveau = niveau;
     }
-
-
 
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator="statut_radiotherapie_seq")
-    public Long getId(){
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "statut_radiotherapie_seq")
+    public Long getId() {
         return this.id;
     }
-    public void setId(Long id){
+
+    public int getNiveau() {
+        return niveau;
+    }
+
+    public void setNiveau(int niveau) {
+        this.niveau = niveau;
+    }
+
+    public void setId(Long id) {
         this.id = id;
     }
-    public String getCode(){
+
+    public String getCode() {
         return this.code;
     }
-    public void setCode(String code){
+
+    public void setCode(String code) {
         this.code = code;
     }
-    public String getLibelle(){
+
+    public String getLibelle() {
         return this.libelle;
     }
-    public void setLibelle(String libelle){
+
+    public void setLibelle(String libelle) {
         this.libelle = libelle;
     }
-    public String getStyle(){
+
+    public String getStyle() {
         return this.style;
     }
-    public void setStyle(String style){
+
+    public void setStyle(String style) {
         this.style = style;
     }
 

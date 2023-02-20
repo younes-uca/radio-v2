@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import ma.enova.radio.zynerator.audit.AuditBusinessObject;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Objects;
 
 
@@ -17,7 +17,7 @@ public class DecisionTraitement extends AuditBusinessObject {
     private Long id;
 
     private String code;
-    private LocalDateTime dateDecisionTraitement;
+    private LocalDate dateDecisionTraitement;
 
     private String decisionTherapeutique;
 
@@ -41,12 +41,12 @@ public class DecisionTraitement extends AuditBusinessObject {
         this.id = id;
     }
 
-    public LocalDateTime getDateDecisionTraitement() {
+    public LocalDate getDateDecisionTraitement() {
         return this.dateDecisionTraitement;
     }
 
-    public void setDateDecisionTraitement(LocalDateTime dateHistortiquePrescriptionRadiotherapie) {
-        this.dateDecisionTraitement = dateHistortiquePrescriptionRadiotherapie;
+    public void setDateDecisionTraitement(LocalDate dateDecisionTraitement) {
+        this.dateDecisionTraitement = dateDecisionTraitement;
     }
 
 

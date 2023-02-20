@@ -17,10 +17,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @SpringBootApplication
 //@EnableFeignClients("ma.enova.radio.required.facade")
@@ -47,7 +44,7 @@ public class RadioApplication {
                                   //, TypeTraitementAdminService typeTraitementAdminService, StatutRadiotherapieAdminService statutRadiotherapieAdminService
     ) {
         return (args) -> {
-            if (false) { /// aweda hi slouk
+            if (true) { /// aweda hi slouk
 
 
                 createStatutRadio();
@@ -100,16 +97,17 @@ public class RadioApplication {
     }
 
     private void createStatutRadio() {
-        Map<String, String> etats = new HashMap<>();
-        etats.put("en-attente-prescription", "EN_ATTENTE_PRESCRIPTION");
-        etats.put("en-attente-simulation", "EN_ATTENTE_SIMULATION");
-        etats.put("en-attente-validation", "EN_ATTENTE_VALIDATION");
-        etats.put("en-cours-traitement", "EN_COURS_TRAITEMENT");
-        etats.put("fin-traitement", "FIN_TRAITEMENT");
+        public static final String EN_ATTENTE_SIMULATION = "en-attente-simulation";
+        public static final String EN_COURS_TRAITEMENT = "en-cours-traitement";
+        public static final String FIN_TRAITEMENT = "fin-traitement";
+        List<StatutRadiotherapie> statutRadiotherapies= Arrays.asList(new StatutRadiotherapie())
+       int i=0;
         etats.forEach((k, v) -> {
+            i++;
             StatutRadiotherapie statutRadiotherapie = new StatutRadiotherapie();
             statutRadiotherapie.setCode(k);
             statutRadiotherapie.setLibelle(v);
+            statutRadiotherapieService.set
             statutRadiotherapieService.create(statutRadiotherapie);
 
         });

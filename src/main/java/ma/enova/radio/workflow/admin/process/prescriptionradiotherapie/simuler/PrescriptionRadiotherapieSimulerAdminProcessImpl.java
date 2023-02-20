@@ -33,7 +33,7 @@ public class PrescriptionRadiotherapieSimulerAdminProcessImpl extends AbstractPr
 
     @Override
     public void init(PrescriptionRadiotherapieSimulerAdminInput input, PrescriptionRadiotherapie item) {
-        StatutRadiotherapie statutRadiotherapie = statutRadiotherapieService.findByCode(StatutRadioTherapieConstant.EN_COURS_TRAITEMENT);
+        StatutRadiotherapie statutRadiotherapie = statutRadiotherapieService.findByCode(StatutRadioTherapieConstant.EN_COURS_TRAITEMENT_CODE);
         item.setStatutRadiotherapie(statutRadiotherapie);
         item.setValidateurSimulationDate(LocalDateTime.now());
     }

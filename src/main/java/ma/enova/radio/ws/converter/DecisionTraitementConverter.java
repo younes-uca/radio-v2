@@ -32,7 +32,7 @@ public class DecisionTraitementConverter extends AbstractConverter<DecisionTrait
             if (StringUtil.isNotEmpty(dto.getCode()))
                 item.setCode(dto.getCode());
             if (StringUtil.isNotEmpty(dto.getDateDecisionTraitement()))
-                item.setDateDecisionTraitement(DateUtil.stringEnToDate(dto.getDateDecisionTraitement()));
+                item.setDateDecisionTraitement(DateUtil.stringToDate(dto.getDateDecisionTraitement()));
 
             if (StringUtil.isNotEmpty(dto.getDecisionTherapeutique()))
                 item.setDecisionTherapeutique(dto.getDecisionTherapeutique());

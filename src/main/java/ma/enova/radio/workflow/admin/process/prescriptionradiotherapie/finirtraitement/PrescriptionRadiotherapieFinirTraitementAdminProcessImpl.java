@@ -13,7 +13,7 @@ public class PrescriptionRadiotherapieFinirTraitementAdminProcessImpl extends Ab
 
     @Override
     public void init(PrescriptionRadiotherapieFinirTraitementAdminInput input, PrescriptionRadiotherapie item) {
-        StatutRadiotherapie statutRadiotherapie = statutRadiotherapieService.findByCode(StatutRadioTherapieConstant.FIN_TRAITEMENT);
+        StatutRadiotherapie statutRadiotherapie = statutRadiotherapieService.findByCode(StatutRadioTherapieConstant.FIN_TRAITEMENT_CODE);
         item.setStatutRadiotherapie(statutRadiotherapie);
     }
 
@@ -21,7 +21,7 @@ public class PrescriptionRadiotherapieFinirTraitementAdminProcessImpl extends Ab
     public void validate(PrescriptionRadiotherapieFinirTraitementAdminInput input, PrescriptionRadiotherapie item, Result<PrescriptionRadiotherapieFinirTraitementAdminInput, PrescriptionRadiotherapieFinirTraitementAdminOutput, PrescriptionRadiotherapie> result) {
         if (item.getStatutRadiotherapie() == null)
         	 result.addErrorMessage("radiotherapie.finirtraitement.status.obligatoire");
-        else if (item.getId() == null)
+         if (item.getId() == null)
         	result.addErrorMessage("radiotherapie.finirtraitement.prescription.obligatoire");
     }
 
