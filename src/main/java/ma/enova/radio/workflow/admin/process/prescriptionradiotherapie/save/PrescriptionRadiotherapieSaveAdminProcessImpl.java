@@ -18,7 +18,7 @@ public class PrescriptionRadiotherapieSaveAdminProcessImpl extends AbstractProce
 
     public void init(PrescriptionRadiotherapieSaveAdminInput input, PrescriptionRadiotherapie item) {
         item.setStatutRadiotherapie(statutRadiotherapieService.findByCode(StatutRadioTherapieConstant.EN_ATTENTE_PRESCRIPTION));
-        //item.setPatient(patientService.findOrSave(item.getPatient()));
+        item.setPatient(patientService.findOrSave(item.getPatient()));
         item.setVisee(viseeService.findOrSave(item.getVisee()));
         item.setMedecinPrescripteur(personnelService.findOrSave(item.getMedecinPrescripteur()));
         item.setProtocoleInclusion(protocoleInclusionService.findOrSave(item.getProtocoleInclusion()));
@@ -36,7 +36,7 @@ public class PrescriptionRadiotherapieSaveAdminProcessImpl extends AbstractProce
         validateFraction(t.getFractionnement(), result);
 
         validateStatutRadiotherapie(t.getStatutRadiotherapie(), result);
-        // validatePatient(t.getPatient(), result);
+        //validatePatient(t.getPatient(), result);
         validateVisee(t.getVisee(), result);
         validatePersonnel(t.getMedecinPrescripteur(), result);
         validateProtocoleInclusion(t.getRcc(), t.getProtocoleInclusion(), result);
