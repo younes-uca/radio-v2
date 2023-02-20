@@ -73,9 +73,8 @@ public class AbstractController<T extends AuditBusinessObject, DTO extends BaseD
 
     public ResponseEntity<DTO> findById(Long id, String[] includes, String[] excludes) throws Exception {
         T t = service.findById(id);
-        converter.init(false);
-        DTO dto = converter.toDto(t);
         converter.init(true);
+        DTO dto = converter.toDto(t);
         return getDtoResponseEntity(dto, includes, excludes);
     }
 

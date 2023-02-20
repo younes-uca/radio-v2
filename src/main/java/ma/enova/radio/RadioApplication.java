@@ -47,7 +47,7 @@ public class RadioApplication {
                                   //, TypeTraitementAdminService typeTraitementAdminService, StatutRadiotherapieAdminService statutRadiotherapieAdminService
     ) {
         return (args) -> {
-            if (true) { /// aweda hi slouk
+            if (false) { /// aweda hi slouk
 
 
                 createStatutRadio();
@@ -130,6 +130,7 @@ public class RadioApplication {
         String prefix = "patient ";
         for (int i = 1; i < 100; i++) {
             Patient item = new Patient();
+            item.setId(i*1L);
             item.setOrdre(1L * i);
             item.setIpp(prefix + i);
             item.setNom(prefix + i);

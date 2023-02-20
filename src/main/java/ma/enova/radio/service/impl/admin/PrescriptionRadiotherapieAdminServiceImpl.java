@@ -58,6 +58,15 @@ public class PrescriptionRadiotherapieAdminServiceImpl extends AbstractServiceIm
         return t;
     }
 
+    @Override
+    public PrescriptionRadiotherapie findWithSeance(Long id) {
+        PrescriptionRadiotherapie result = dao.findById(id).orElse(null);
+        if (result != null && result.getId() != null) {
+            result.setSeanceRadiotherapies(seanceRadiotherapieService.findByPrescriptionRadiotherapieId(id));
+        }
+        return result;
+    }
+
     public PrescriptionRadiotherapie findWithAssociatedLists(Long id) {
         PrescriptionRadiotherapie result = dao.findById(id).orElse(null);
         if (result != null && result.getId() != null) {

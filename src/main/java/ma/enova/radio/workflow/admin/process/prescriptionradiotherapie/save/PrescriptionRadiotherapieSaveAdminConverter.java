@@ -2,15 +2,12 @@ package ma.enova.radio.workflow.admin.process.prescriptionradiotherapie.save;
 
 import ma.enova.radio.bean.core.PrescriptionRadiotherapie;
 import ma.enova.radio.ws.converter.*;
-import ma.enova.radio.ws.dto.SeanceRadiotherapieDto;
 import ma.enova.radio.zynerator.process.AbstractProcessConverter;
 import ma.enova.radio.zynerator.util.DateUtil;
 import ma.enova.radio.zynerator.util.ListUtil;
 import ma.enova.radio.zynerator.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.util.stream.Collectors;
 
 @Component
 public class PrescriptionRadiotherapieSaveAdminConverter extends AbstractProcessConverter<PrescriptionRadiotherapieSaveAdminInput, PrescriptionRadiotherapieSaveAdminOutput, PrescriptionRadiotherapie> {
@@ -80,8 +77,10 @@ public class PrescriptionRadiotherapieSaveAdminConverter extends AbstractProcess
                 item.setFractionnement(input.getFractionnement());
             if (StringUtil.isNotEmpty(input.getEtalement()))
                 item.setEtalement(input.getEtalement());
-            if (input.getFrequenceRadiotherapie() != null && StringUtil.isNotEmpty(input.getFrequenceRadiotherapie().getCode()))
-                item.setFrequenceRadiotherapie(input.getFrequenceRadiotherapie().getCode());
+           /* if (input.getFrequenceRadiotherapie() != null && StringUtil.isNotEmpty(input.getFrequenceRadiotherapie().getCode()))
+                item.setFrequenceRadiotherapie(input.getFrequenceRadiotherapie().getCode());*/
+            if (StringUtil.isNotEmpty(input.getFrequenceRadiotherapie()))
+                item.setFrequenceRadiotherapie(input.getFrequenceRadiotherapie());
             if (StringUtil.isNotEmpty(input.getDateSouhaiteDebutTraitement()))
                 item.setDateSouhaiteDebutTraitement(DateUtil.stringToDate(input.getDateSouhaiteDebutTraitement()));
             if (StringUtil.isNotEmpty(input.getObservation()))

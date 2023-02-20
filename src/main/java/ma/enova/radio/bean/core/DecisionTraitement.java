@@ -11,7 +11,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "decision_traitement")
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@SequenceGenerator(name = "decision_traitement_seq", sequenceName = "decision_traitement_seq", allocationSize = 1, initialValue = 1)
+//@SequenceGenerator(name = "decision_traitement_seq", sequenceName = "decision_traitement_seq", allocationSize = 1, initialValue = 1)
 public class DecisionTraitement extends AuditBusinessObject {
 
     private Long id;
@@ -33,7 +33,7 @@ public class DecisionTraitement extends AuditBusinessObject {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "decision_traitement_seq")
+    //@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "decision_traitement_seq")
     public Long getId() {
         return this.id;
     }

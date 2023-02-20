@@ -39,7 +39,7 @@ public class PrescriptionRadiotherapieSaveAdminProcessImpl extends AbstractProce
         // validatePatient(t.getPatient(), result);
         validateVisee(t.getVisee(), result);
         validatePersonnel(t.getMedecinPrescripteur(), result);
-        validateProtocoleInclusion(t.getProtocoleInclusion(), result);
+        validateProtocoleInclusion(t.getRcc(), t.getProtocoleInclusion(), result);
         validateModaliteRadiotherapie(t.getModaliteRadiotherapie(), result);
         validateSite(t.getSite(), result);
         // validateDecisionTraitement(t.getDecisionTraitement(), result);
@@ -126,9 +126,11 @@ public class PrescriptionRadiotherapieSaveAdminProcessImpl extends AbstractProce
         }
     }
 
-    private void validateProtocoleInclusion(ProtocoleInclusion protocoleInclusion, Result<PrescriptionRadiotherapieSaveAdminInput, PrescriptionRadiotherapieSaveAdminOutput, PrescriptionRadiotherapie> result) {
-        if (protocoleInclusion == null || StringUtil.isEmpty(protocoleInclusion.getCode())) {
-            result.addErrorMessage("radiotherapie.save.protocole-inclusion.obligatoire");
+    private void validateProtocoleInclusion(Boolean rcc, ProtocoleInclusion protocoleInclusion, Result<PrescriptionRadiotherapieSaveAdminInput, PrescriptionRadiotherapieSaveAdminOutput, PrescriptionRadiotherapie> result) {
+        if (rcc != null && rcc.equals(true)) {
+            if (protocoleInclusion == null || StringUtil.isEmpty(protocoleInclusion.getCode())) {
+                result.addErrorMessage("radiotherapie.save.protocole-inclusion.obligatoire");
+            }
         }
     }
 
