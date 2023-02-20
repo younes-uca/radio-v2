@@ -21,6 +21,7 @@ public class PrescriptionRadiotherapieSaveAdminOutput extends AbstractProcessOut
     protected Integer etalement = 0;
     protected FrequenceRadiotherapieDto frequenceRadiotherapie;
     protected String dateSouhaiteDebutTraitement;
+    protected String dateDebutTraitement;
     protected String observation;
     protected String dateSimulation;
     protected String immobilistion;
@@ -28,7 +29,6 @@ public class PrescriptionRadiotherapieSaveAdminOutput extends AbstractProcessOut
     protected String fichierTraitements;
     protected String validateurSimulationDate;
     protected String datePrevu;
-    protected String dateDebutTraitement;
     protected String dateFinTraitement;
     protected String dateDecisionTraitement;
     protected String compteRendu;

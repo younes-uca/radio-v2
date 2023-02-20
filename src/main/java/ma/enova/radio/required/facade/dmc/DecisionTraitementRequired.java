@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/admin/decisionTraitement")
-public class DecisionTraitementRequired extends AbstractRequired<DecisionTraitementDto,DecisionTraitementDto[]> {
+public class DecisionTraitementRequired extends AbstractRequired<DecisionTraitementDto, DecisionTraitementDto[]> {
 
     @Autowired
     RestTemplate restTemplate;

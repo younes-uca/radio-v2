@@ -249,16 +249,16 @@ public class DateUtil {
         return cal;
     }
 
-    public static LocalDate addFrequence(LocalDate dateSouhaiteDebutTraitement, int i, String code) {
+    public static LocalDate addFrequence(LocalDate dateDebutTraitement, int i, String code) {
         LocalDate myLocalDateTime = null;
         if ("heure".equals(code)) {
-            //myLocalDateTime = dateSouhaiteDebutTraitement.pl(i);
+            //myLocalDateTime = dateDebutTraitement.pl(i);
         } else if ("jour".equals(code)) {
-            myLocalDateTime = dateSouhaiteDebutTraitement.plusDays(i);
+            myLocalDateTime = dateDebutTraitement.plusDays(i);
         } else if ("semaine".equals(code)) {
-            myLocalDateTime = dateSouhaiteDebutTraitement.plusWeeks(i);
+            myLocalDateTime = dateDebutTraitement.plusWeeks(i);
         } else if ("mois".equals(code)) {
-            myLocalDateTime = dateSouhaiteDebutTraitement.plusMonths(i);
+            myLocalDateTime = dateDebutTraitement.plusMonths(i);
         }
         return myLocalDateTime;
     }

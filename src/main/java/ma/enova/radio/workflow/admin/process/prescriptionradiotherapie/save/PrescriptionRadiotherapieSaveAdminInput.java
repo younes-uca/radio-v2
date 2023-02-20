@@ -19,6 +19,7 @@ public class PrescriptionRadiotherapieSaveAdminInput extends AbstractProcessInpu
     private Integer fractionnement = 0;
     private Integer etalement = 0;
     private String dateSouhaiteDebutTraitement;
+    private String dateDebutTraitement;
     private String observation;
     private String immobilistion;
     private String positionnement;
@@ -270,12 +271,20 @@ public class PrescriptionRadiotherapieSaveAdminInput extends AbstractProcessInpu
     }
 
 
-      public FrequenceRadiotherapieDto getFrequenceRadiotherapie() {
+    public FrequenceRadiotherapieDto getFrequenceRadiotherapie() {
         return frequenceRadiotherapie;
     }
 
     public void setFrequenceRadiotherapie(FrequenceRadiotherapieDto frequenceRadiotherapie) {
         this.frequenceRadiotherapie = frequenceRadiotherapie;
+    }
+
+    public String getDateDebutTraitement() {
+        return dateDebutTraitement;
+    }
+
+    public void setDateDebutTraitement(String dateDebutTraitement) {
+        this.dateDebutTraitement = dateDebutTraitement;
     }
 
     public void setPatient(PatientDto patient) {

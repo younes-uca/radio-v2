@@ -17,14 +17,14 @@ import java.util.List;
 public class PrescriptionRadiotherapieSaveAdminProcessImpl extends AbstractProcessImpl<PrescriptionRadiotherapieSaveAdminInput, PrescriptionRadiotherapieSaveAdminOutput, PrescriptionRadiotherapie, PrescriptionRadiotherapieSaveAdminConverter> implements PrescriptionRadiotherapieSaveAdminProcess {
 
     public void init(PrescriptionRadiotherapieSaveAdminInput input, PrescriptionRadiotherapie item) {
-        item.setStatutRadiotherapie(statutRadiotherapieService.findByCode(StatutRadioTherapieConstant.EN_ATTENTE_PRESCRIPTION));
+        item.setStatutRadiotherapie(statutRadiotherapieService.findByCode(StatutRadioTherapieConstant.EN_ATTENTE_SIMULATION));
         item.setPatient(patientService.findOrSave(item.getPatient()));
         item.setVisee(viseeService.findOrSave(item.getVisee()));
         item.setMedecinPrescripteur(personnelService.findOrSave(item.getMedecinPrescripteur()));
         item.setProtocoleInclusion(protocoleInclusionService.findOrSave(item.getProtocoleInclusion()));
         item.setModaliteRadiotherapie(modaliteRadiotherapieService.findOrSave(item.getModaliteRadiotherapie()));
         item.setSite(siteService.findOrSave(item.getSite()));
-        //item.setDecisionTraitement(decisionTraitementService.findOrSave(item.getDecisionTraitement()));
+        item.setDecisionTraitement(decisionTraitementService.findOrSave(item.getDecisionTraitement()));
     }
 
     @Override
@@ -32,17 +32,17 @@ public class PrescriptionRadiotherapieSaveAdminProcessImpl extends AbstractProce
         validateDateTraitement(t.getDateDebutTraitement(), result);
         validateFrequenceRadio(t.getFrequenceRadiotherapie(), result);
         validateFraction(t.getFractionnement(), result);
-        validateDateTraitement(t.getDateSouhaiteDebutTraitement(), result);
+        validateDateTraitement(t.getDateDebutTraitement(), result);
         validateFraction(t.getFractionnement(), result);
 
         validateStatutRadiotherapie(t.getStatutRadiotherapie(), result);
-        //validatePatient(t.getPatient(), result);
+        validatePatient(t.getPatient(), result);
         validateVisee(t.getVisee(), result);
         validatePersonnel(t.getMedecinPrescripteur(), result);
         validateProtocoleInclusion(t.getRcc(), t.getProtocoleInclusion(), result);
         validateModaliteRadiotherapie(t.getModaliteRadiotherapie(), result);
         validateSite(t.getSite(), result);
-        // validateDecisionTraitement(t.getDecisionTraitement(), result);
+        validateDecisionTraitement(t.getDecisionTraitement(), result);
 
     }
 
@@ -78,7 +78,7 @@ public class PrescriptionRadiotherapieSaveAdminProcessImpl extends AbstractProce
         }
         for (int i = 0; i < t.getFractionnement(); i++) {
             SeanceRadiotherapie seanceRadiotherapie = new SeanceRadiotherapie();
-            seanceRadiotherapie.setDatePrevu(DateUtil.addFrequence(t.getDateSouhaiteDebutTraitement(), i, t.getFrequenceRadiotherapie().getCode()));
+            seanceRadiotherapie.setDatePrevu(DateUtil.addFrequence(t.getDateDebutTraitement(), i, t.getFrequenceRadiotherapie().getCode()));
             seanceRadiotherapie.setNumero(i + 1);
             t.getSeanceRadiotherapies().add(seanceRadiotherapie);
         }

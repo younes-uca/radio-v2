@@ -83,6 +83,8 @@ public class PrescriptionRadiotherapieSaveAdminConverter extends AbstractProcess
 
             if (StringUtil.isNotEmpty(input.getDateSouhaiteDebutTraitement()))
                 item.setDateSouhaiteDebutTraitement(DateUtil.stringToDate(input.getDateSouhaiteDebutTraitement()));
+            if (StringUtil.isNotEmpty(input.getDateDebutTraitement()))
+                item.setDateDebutTraitement(DateUtil.stringToDate(input.getDateDebutTraitement()));
             if (StringUtil.isNotEmpty(input.getObservation()))
                 item.setObservation(input.getObservation());
             if (StringUtil.isNotEmpty(input.getImmobilistion()))
@@ -102,8 +104,12 @@ public class PrescriptionRadiotherapieSaveAdminConverter extends AbstractProcess
             if (this.frequenceRadiotherapie && input.getFrequenceRadiotherapie() != null)
                 item.setFrequenceRadiotherapie(frequenceRadiotherapieConverter.toItem(input.getFrequenceRadiotherapie()));
 
-            if (this.decisionTraitement && input.getDecisionTraitement() != null)
+            if (this.decisionTraitement && input.getDecisionTraitement() != null){
                 item.setDecisionTraitement(decisionTraitementConverter.toItem(input.getDecisionTraitement()));
+                if(StringUtil.isNotEmpty(input.getDecisionTraitement().getLabel())){
+                    item.getDecisionTraitement().setCode(input.getDecisionTraitement().getLabel());
+                }
+            }
 
             if (this.medecinPrescripteur && input.getMedecinPrescripteur() != null)
                 item.setMedecinPrescripteur(personnelConverter.toItem(input.getMedecinPrescripteur()));

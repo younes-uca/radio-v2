@@ -175,6 +175,7 @@ public class AbstractController<T extends AuditBusinessObject, DTO extends BaseD
     public ResponseEntity<PaginatedList> findPaginatedByCriteria(Criteria criteria) throws Exception {
         List<T> list = service.findPaginatedByCriteria(criteria, criteria.getPage(), criteria.getMaxResults(), criteria.getSortOrder(), criteria.getSortField());
         list = converter.copyIncludeExcludeItems(list, criteria.getIncludes(), criteria.getExcludes());
+        converter.initObject(true);
         List<DTO> dtos = converter.toDto(list);
         PaginatedList paginatedList = new PaginatedList();
         paginatedList.setList(dtos);

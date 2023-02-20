@@ -1,9 +1,7 @@
 package ma.enova.radio.ws.converter;
 
-import ma.enova.radio.bean.core.FrequenceRadiotherapie;
 import ma.enova.radio.bean.core.PrescriptionRadiotherapie;
 import ma.enova.radio.bean.history.PrescriptionRadiotherapieHistory;
-import ma.enova.radio.ws.dto.FrequenceRadiotherapieDto;
 import ma.enova.radio.ws.dto.PrescriptionRadiotherapieDto;
 import ma.enova.radio.zynerator.converter.AbstractConverter;
 import ma.enova.radio.zynerator.util.DateUtil;
