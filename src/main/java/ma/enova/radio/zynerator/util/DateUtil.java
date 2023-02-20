@@ -19,7 +19,7 @@ public class DateUtil {
     public static final String DATE_TIME_FORMAT_FOR_BEAN = "yyyy-MM-dd'T'HH:mm";
     public static final String DATE_TIME_FORMAT_SQL = "dd/MM/yyyy HH:mm";
     // public static final String DATE_FORMAT_WITH_HOUR = "dd/MM/yyyy HH:mm";
-    public static final String DATE_FORMAT_WITH_HOUR = "MM/dd/yyyy HH:mm";
+    public static final String DATE_FORMAT_WITH_HOUR = "dd/MM/yyyy HH:mm";
     public static final String DATE_FORMAT_WITH_HOUR_FROM_BEAN = "MM/dd/yyyy HH:mm";
     public static final String DATE_FORMAT_NAME = "ddMMyyyyHHmmss";
     public final static String DATE_FORMAT_FILE = "yyMMddHHmmss";
@@ -181,7 +181,7 @@ public class DateUtil {
     public static String dateTimeToString(final LocalDate date) {
         try {
             if (date != null) {
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_FORMAT_WITH_HOUR);
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DEFAULT_DATE_FORMAT);
                 return date.format(formatter);
             }
         } catch (Exception e) {

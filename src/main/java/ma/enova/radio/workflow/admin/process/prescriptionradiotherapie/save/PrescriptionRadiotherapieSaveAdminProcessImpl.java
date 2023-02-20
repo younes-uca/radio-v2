@@ -153,7 +153,7 @@ public class PrescriptionRadiotherapieSaveAdminProcessImpl extends AbstractProce
     }
 
     private void validateDecisionTraitement(DecisionTraitement decisionTraitement, Result<PrescriptionRadiotherapieSaveAdminInput, PrescriptionRadiotherapieSaveAdminOutput, PrescriptionRadiotherapie> result) {
-        if (decisionTraitement == null || StringUtil.isEmpty(decisionTraitement.getCode())) {
+        if (decisionTraitement == null || StringUtil.isEmpty(decisionTraitement.getId())) {
             result.addErrorMessage("radiotherapie.save.decision-traitement.obligatoire");
         }
     }

@@ -1,12 +1,9 @@
 package ma.enova.radio.workflow.admin.process.prescriptionradiotherapie.simuler;
 
-import ma.enova.radio.bean.core.Immobilistion;
-import ma.enova.radio.bean.core.Positionnement;
 import ma.enova.radio.bean.core.PrescriptionRadiotherapie;
 import ma.enova.radio.ws.converter.*;
 import ma.enova.radio.zynerator.process.AbstractProcessConverter;
 import ma.enova.radio.zynerator.util.DateUtil;
-import ma.enova.radio.zynerator.util.ListUtil;
 import ma.enova.radio.zynerator.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -14,51 +11,17 @@ import org.springframework.stereotype.Component;
 @Component
 public class PrescriptionRadiotherapieSimulerAdminConverter extends AbstractProcessConverter<PrescriptionRadiotherapieSimulerAdminInput, PrescriptionRadiotherapieSimulerAdminOutput, PrescriptionRadiotherapie> {
     @Autowired
-    private ModaliteRadiotherapieConverter modaliteRadiotherapieConverter;
-    @Autowired
-    private HistortiquePrescriptionRadiotherapieConverter histortiquePrescriptionRadiotherapieConverter;
-    @Autowired
     private StatutRadiotherapieConverter statutRadiotherapieConverter;
-    @Autowired
-    private SiteConverter siteConverter;
-    @Autowired
-    private TypeTraitementConverter typeTraitementConverter;
     @Autowired
     private PersonnelConverter personnelConverter;
     @Autowired
     private ImmobilistionConverter immobilistionConverter;
     @Autowired
     private PositionnementConverter positionnementConverter;
-    @Autowired
-    private ViseeConverter viseeConverter;
-    @Autowired
-    private SeanceRadiotherapieConverter seanceRadiotherapieConverter;
-    @Autowired
-    private PatientConverter patientConverter;
-    @Autowired
-    private ConsultationRadiotherapieConverter consultationRadiotherapieConverter;
-    @Autowired
-    private TypeToxiciteRthConverter typeToxiciteRthConverter;
-    @Autowired
-    private TypeConsultationRadiotherapieConverter typeConsultationRadiotherapieConverter;
-    @Autowired
-    private ProtocoleInclusionConverter protocoleInclusionConverter;
-    @Autowired
-    private GradeToxiciteRthConverter gradeToxiciteRthConverter;
+
     @Autowired
     private DecisionTraitementConverter decisionTraitementConverter;
-    private boolean decisionTraitement = true;
-    private boolean medecinPrescripteur = true;
-    private boolean site = true;
-    private boolean modaliteRadiotherapie = true;
-    private boolean visee = true;
-    private boolean protocoleInclusion = true;
-    private boolean statutRadiotherapie = true;
-    private boolean validateurSimulation = true;
-    private boolean patient = true;
-    private boolean typeTraitement = true;
-    private boolean consultationRadiotherapies = true;
-    private boolean seanceRadiotherapies = true;
+
 
     public PrescriptionRadiotherapieSimulerAdminConverter() {
         super(PrescriptionRadiotherapie.class, PrescriptionRadiotherapieSimulerAdminInput.class, PrescriptionRadiotherapieSimulerAdminOutput.class);
@@ -78,14 +41,12 @@ public class PrescriptionRadiotherapieSimulerAdminConverter extends AbstractProc
 
             if (StringUtil.isNotEmpty(input.getFichierTraitements()))
                 item.setFichierTraitements(input.getFichierTraitements());
-            if (StringUtil.isNotEmpty(input.getValidateurSimulationDate()))
+            if (false && StringUtil.isNotEmpty(input.getValidateurSimulationDate()))
                 item.setValidateurSimulationDate(DateUtil.stringEnToDate(input.getValidateurSimulationDate()));
 
-            // if (this.statutRadiotherapie && input.getStatutRadiotherapie() != null)
             if (input.getStatutRadiotherapie() != null)
                 item.setStatutRadiotherapie(statutRadiotherapieConverter.toItem(input.getStatutRadiotherapie()));
 
-            //if (this.validateurSimulation && input.getValidateurSimulation() != null)
             if (input.getValidateurSimulation() != null)
                 item.setValidateurSimulation(personnelConverter.toItem(input.getValidateurSimulation()));
             if (input.getDecisionTraitement() != null)
@@ -112,14 +73,14 @@ public class PrescriptionRadiotherapieSimulerAdminConverter extends AbstractProc
 
             if (item.getDateSimulation() != null)
                 output.setDateSimulation(DateUtil.dateToStringForBean(item.getDateSimulation()));
-            if (item.getImmobilistion()!=null)
+            if (item.getImmobilistion() != null)
                 output.setImmobilistion(immobilistionConverter.toDto(item.getImmobilistion()));
             if (item.getPositionnement() != null)
                 output.setPositionnement(positionnementConverter.toDto(item.getPositionnement()));
             if (StringUtil.isNotEmpty(item.getFichierTraitements()))
                 output.setFichierTraitements(item.getFichierTraitements());
-            if (item.getValidateurSimulationDate() != null)
-                output.setValidateurSimulationDate(DateUtil.dateToString(item.getValidateurSimulationDate()));
+            if (false && item.getValidateurSimulationDate() != null)
+                output.setValidateurSimulationDate(DateUtil.dateToStringForBean(item.getValidateurSimulationDate()));
             /* if (item.getDatePrescription() != null)
                 output.setDatePrescription(DateUtil.dateToString(item.getDatePrescription()));
             output.setRcc(item.getRcc());
@@ -195,61 +156,5 @@ public class PrescriptionRadiotherapieSimulerAdminConverter extends AbstractProc
         }
     }
 
-
-    public ModaliteRadiotherapieConverter getModaliteRadiotherapieConverter() {
-        return this.modaliteRadiotherapieConverter;
-    }
-
-    public void setModaliteRadiotherapieConverter(ModaliteRadiotherapieConverter modaliteRadiotherapieConverter) {
-        this.modaliteRadiotherapieConverter = modaliteRadiotherapieConverter;
-    }
-
-    public HistortiquePrescriptionRadiotherapieConverter getHistortiquePrescriptionRadiotherapieConverter() {
-        return this.histortiquePrescriptionRadiotherapieConverter;
-    }
-
-    public void setHistortiquePrescriptionRadiotherapieConverter(HistortiquePrescriptionRadiotherapieConverter histortiquePrescriptionRadiotherapieConverter) {
-        this.histortiquePrescriptionRadiotherapieConverter = histortiquePrescriptionRadiotherapieConverter;
-    }
-
-    public StatutRadiotherapieConverter getStatutRadiotherapieConverter() {
-        return this.statutRadiotherapieConverter;
-    }
-
-    public void setStatutRadiotherapieConverter(StatutRadiotherapieConverter statutRadiotherapieConverter) {
-        this.statutRadiotherapieConverter = statutRadiotherapieConverter;
-    }
-
-    public PersonnelConverter getPersonnelConverter() {
-        return this.personnelConverter;
-    }
-
-    public void setPersonnelConverter(PersonnelConverter personnelConverter) {
-        this.personnelConverter = personnelConverter;
-    }
-
-    public boolean isMedecinPrescripteur() {
-        return this.medecinPrescripteur;
-    }
-
-    public void setMedecinPrescripteur(boolean medecinPrescripteur) {
-        this.medecinPrescripteur = medecinPrescripteur;
-    }
-
-    public boolean isStatutRadiotherapie() {
-        return this.statutRadiotherapie;
-    }
-
-    public void setStatutRadiotherapie(boolean statutRadiotherapie) {
-        this.statutRadiotherapie = statutRadiotherapie;
-    }
-
-    public boolean isValidateurSimulation() {
-        return this.validateurSimulation;
-    }
-
-    public void setValidateurSimulation(boolean validateurSimulation) {
-        this.validateurSimulation = validateurSimulation;
-    }
 
 }

@@ -82,6 +82,8 @@ public class PrescriptionRadiotherapieFinirTraitementAdminConverter extends Abst
                 item.setDateFinTraitement(DateUtil.stringEnToDate(input.getDateFinTraitement()));
             if (StringUtil.isNotEmpty(input.getCompteRendu()))
                 item.setCompteRendu(input.getCompteRendu());
+            if (StringUtil.isNotEmpty(input.getCompteRendu()))
+                item.setCompteRendu(input.getCompteRendu());
 
             return item;
         }

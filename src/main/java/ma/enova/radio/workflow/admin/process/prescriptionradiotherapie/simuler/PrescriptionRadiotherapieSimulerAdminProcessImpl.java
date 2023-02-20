@@ -32,16 +32,6 @@ public class PrescriptionRadiotherapieSimulerAdminProcessImpl extends AbstractPr
         //validateValidateurSimulation(item.getValidateurSimulation(), result);
     }
 
-    private void validatePositionnement(Positionnement positionnement, Result<PrescriptionRadiotherapieSimulerAdminInput, PrescriptionRadiotherapieSimulerAdminOutput, PrescriptionRadiotherapie> result) {
-        if (positionnement == null || positionnement.getId() == null)
-            result.addErrorMessage("radiotherapie.simuler.positionnement.obligatoire");
-    }
-
-    private void validateImmobilisation(Immobilistion immobilistion, Result<PrescriptionRadiotherapieSimulerAdminInput, PrescriptionRadiotherapieSimulerAdminOutput, PrescriptionRadiotherapie> result) {
-        if (immobilistion == null || immobilistion.getId() == null)
-            result.addErrorMessage("radiotherapie.simuler.immobilistion.obligatoire");
-    }
-
 
     @Override
     public void run(PrescriptionRadiotherapieSimulerAdminInput input, PrescriptionRadiotherapie t, Result<PrescriptionRadiotherapieSimulerAdminInput, PrescriptionRadiotherapieSimulerAdminOutput, PrescriptionRadiotherapie> result) {
@@ -75,6 +65,17 @@ public class PrescriptionRadiotherapieSimulerAdminProcessImpl extends AbstractPr
             result.addErrorMessage("radiotherapie.simuler.validateur.obligatoire");
         }
     }
+
+    private void validatePositionnement(Positionnement positionnement, Result<PrescriptionRadiotherapieSimulerAdminInput, PrescriptionRadiotherapieSimulerAdminOutput, PrescriptionRadiotherapie> result) {
+        if (positionnement == null || positionnement.getId() == null)
+            result.addErrorMessage("radiotherapie.simuler.positionnement.obligatoire");
+    }
+
+    private void validateImmobilisation(Immobilistion immobilistion, Result<PrescriptionRadiotherapieSimulerAdminInput, PrescriptionRadiotherapieSimulerAdminOutput, PrescriptionRadiotherapie> result) {
+        if (immobilistion == null || immobilistion.getId() == null)
+            result.addErrorMessage("radiotherapie.simuler.immobilistion.obligatoire");
+    }
+
 
     private PrescriptionRadiotherapieAdminService service;
     private StatutRadiotherapieAdminService statutRadiotherapieService;
