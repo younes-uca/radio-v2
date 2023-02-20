@@ -56,8 +56,8 @@ public class PrescriptionRadiotherapieSimulerAdminProcessImpl extends AbstractPr
             DecisionTraitementDto decisiontraitementDto = new DecisionTraitementDto(t.getDecisionTraitement().getId(), t.getDecisionTraitement().getCode(), t.getStatutRadiotherapie().getCode());
             RabbitUtils.convertAndSend(decisiontraitementDto, exchange, routingkey, rabbitTemplate);
         }
-        PrescriptionRadiotherapie prescriptionRadiotherapie = service.findWithSeance(t.getId());
-        result.setItem(prescriptionRadiotherapie);
+       /* PrescriptionRadiotherapie prescriptionRadiotherapie = service.findWithSeance(t.getId());
+        result.setItem(prescriptionRadiotherapie);*/
         result.addInfoMessage("radiotherapie.simuler.ok");
     }
 

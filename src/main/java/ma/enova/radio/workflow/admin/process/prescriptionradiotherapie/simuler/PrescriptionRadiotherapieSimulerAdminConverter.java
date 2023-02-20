@@ -99,7 +99,18 @@ public class PrescriptionRadiotherapieSimulerAdminConverter extends AbstractProc
             PrescriptionRadiotherapieSimulerAdminOutput output = new PrescriptionRadiotherapieSimulerAdminOutput();
             if (StringUtil.isNotEmpty(item.getId()))
                 output.setId(item.getId());
-            if (item.getDatePrescription() != null)
+
+            if (item.getDateSimulation() != null)
+                output.setDateSimulation(DateUtil.dateToString(item.getDateSimulation()));
+            if (StringUtil.isNotEmpty(item.getImmobilistion()))
+                output.setImmobilistion(item.getImmobilistion());
+            if (StringUtil.isNotEmpty(item.getPositionnement()))
+                output.setPositionnement(item.getPositionnement());
+            if (StringUtil.isNotEmpty(item.getFichierTraitements()))
+                output.setFichierTraitements(item.getFichierTraitements());
+            if (item.getValidateurSimulationDate() != null)
+                output.setValidateurSimulationDate(DateUtil.dateToString(item.getValidateurSimulationDate()));
+            /* if (item.getDatePrescription() != null)
                 output.setDatePrescription(DateUtil.dateToString(item.getDatePrescription()));
             output.setRcc(item.getRcc());
             if (StringUtil.isNotEmpty(item.getDose()))
@@ -114,16 +125,6 @@ public class PrescriptionRadiotherapieSimulerAdminConverter extends AbstractProc
                 output.setDateSouhaiteDebutTraitement(DateUtil.dateToString(item.getDateSouhaiteDebutTraitement()));
             if (StringUtil.isNotEmpty(item.getObservation()))
                 output.setObservation(item.getObservation());
-            if (item.getDateSimulation() != null)
-                output.setDateSimulation(DateUtil.dateToString(item.getDateSimulation()));
-            if (StringUtil.isNotEmpty(item.getImmobilistion()))
-                output.setImmobilistion(item.getImmobilistion());
-            if (StringUtil.isNotEmpty(item.getPositionnement()))
-                output.setPositionnement(item.getPositionnement());
-            if (StringUtil.isNotEmpty(item.getFichierTraitements()))
-                output.setFichierTraitements(item.getFichierTraitements());
-            if (item.getValidateurSimulationDate() != null)
-                output.setValidateurSimulationDate(DateUtil.dateToString(item.getValidateurSimulationDate()));
             if (item.getDatePrevu() != null)
                 output.setDatePrevu(DateUtil.dateToString(item.getDatePrevu()));
             if (item.getDateDebutTraitement() != null)
@@ -178,12 +179,7 @@ public class PrescriptionRadiotherapieSimulerAdminConverter extends AbstractProc
                 seanceRadiotherapieConverter.setPrescriptionRadiotherapie(false);
                 output.setSeanceRadiotherapies(seanceRadiotherapieConverter.toDto(item.getSeanceRadiotherapies()));
                 seanceRadiotherapieConverter.setPrescriptionRadiotherapie(true);
-               /* output.setSeanceRadiotherapies(item.getSeanceRadiotherapies().stream().map(e ->
-                        new SeanceRadiotherapieDto(e.getId(), e.getCodeRdv(), DateUtil.dateTimeToString(e.getDatePrevu()),
-                                DateUtil.dateTimeToString(e.getDateRealisation()), e.getNumero(),
-                                e.getEffectue(), e.getCr(), e.getFichiers())).collect(Collectors.toList()));*/
-
-            }
+            }*/
 
             return output;
         }

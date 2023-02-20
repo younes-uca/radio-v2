@@ -92,7 +92,7 @@ public class PrescriptionRadiotherapie extends AuditBusinessObject {
     }
 
 
-    @ManyToOne(/*fetch = FetchType.LAZY*/)
+    @ManyToOne(fetch = FetchType.LAZY)
     public DecisionTraitement getDecisionTraitement() {
         return this.decisionTraitement;
     }
@@ -109,7 +109,7 @@ public class PrescriptionRadiotherapie extends AuditBusinessObject {
         this.datePrescription = datePrescription;
     }
 
-    @ManyToOne(/*fetch = FetchType.LAZY*/)
+    @ManyToOne(fetch = FetchType.LAZY)
     public Personnel getMedecinPrescripteur() {
         return this.medecinPrescripteur;
     }
@@ -118,7 +118,7 @@ public class PrescriptionRadiotherapie extends AuditBusinessObject {
         this.medecinPrescripteur = medecinPrescripteur;
     }
 
-    @ManyToOne(/*fetch = FetchType.LAZY*/)
+    @ManyToOne(fetch = FetchType.LAZY)
     public Site getSite() {
         return this.site;
     }
@@ -127,7 +127,7 @@ public class PrescriptionRadiotherapie extends AuditBusinessObject {
         this.site = site;
     }
 
-    @ManyToOne(/*fetch = FetchType.LAZY*/)
+    @ManyToOne(fetch = FetchType.LAZY)
     public ModaliteRadiotherapie getModaliteRadiotherapie() {
         return this.modaliteRadiotherapie;
     }
@@ -136,7 +136,7 @@ public class PrescriptionRadiotherapie extends AuditBusinessObject {
         this.modaliteRadiotherapie = modaliteRadiotherapie;
     }
 
-    @ManyToOne(/*fetch = FetchType.LAZY*/)
+    @ManyToOne(fetch = FetchType.LAZY)
     public Visee getVisee() {
         return this.visee;
     }
@@ -153,7 +153,7 @@ public class PrescriptionRadiotherapie extends AuditBusinessObject {
         this.rcc = rcc;
     }
 
-    @ManyToOne(/*fetch = FetchType.LAZY*/)
+    @ManyToOne(fetch = FetchType.LAZY)
     public ProtocoleInclusion getProtocoleInclusion() {
         return this.protocoleInclusion;
     }
@@ -210,7 +210,7 @@ public class PrescriptionRadiotherapie extends AuditBusinessObject {
         this.observation = observation;
     }
 
-    @ManyToOne(/*fetch = FetchType.LAZY*/)
+    @ManyToOne(fetch = FetchType.LAZY)
     public StatutRadiotherapie getStatutRadiotherapie() {
         return this.statutRadiotherapie;
     }
@@ -251,7 +251,7 @@ public class PrescriptionRadiotherapie extends AuditBusinessObject {
         this.fichierTraitements = fichierTraitements;
     }
 
-    @ManyToOne(/*fetch = FetchType.LAZY*/)
+    @ManyToOne(fetch = FetchType.LAZY)
     public Personnel getValidateurSimulation() {
         return this.validateurSimulation;
     }
@@ -359,7 +359,7 @@ public class PrescriptionRadiotherapie extends AuditBusinessObject {
         this.nombreTotalSeance = nombreTotalSeance;
     }
 
-    @ManyToOne(/*fetch = FetchType.LAZY*/)
+    @ManyToOne(fetch = FetchType.LAZY)
     public Patient getPatient() {
         return this.patient;
     }
@@ -368,7 +368,7 @@ public class PrescriptionRadiotherapie extends AuditBusinessObject {
         this.patient = patient;
     }
 
-    @ManyToOne(/*fetch = FetchType.LAZY*/)
+    @ManyToOne(fetch = FetchType.LAZY)
     public TypeTraitement getTypeTraitement() {
         return this.typeTraitement;
     }
