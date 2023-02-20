@@ -29,9 +29,9 @@ public class StatutRadiotherapie extends AuditBusinessObject {
         super();
     }
 
-    public StatutRadiotherapie(String libelle, String code, int niveau) {
-        this.libelle = libelle;
+    public StatutRadiotherapie(String code, String libelle, int niveau) {
         this.code = code;
+        this.libelle = libelle;
         this.niveau = niveau;
     }
 
