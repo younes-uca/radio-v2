@@ -1,5 +1,11 @@
 package ma.enova.radio.service.impl.admin;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import ma.enova.radio.bean.core.SeanceRadiotherapie;
 import ma.enova.radio.bean.history.SeanceRadiotherapieHistory;
 import ma.enova.radio.dao.criteria.core.SeanceRadiotherapieCriteria;
@@ -7,20 +13,13 @@ import ma.enova.radio.dao.criteria.history.SeanceRadiotherapieHistoryCriteria;
 import ma.enova.radio.dao.facade.core.SeanceRadiotherapieDao;
 import ma.enova.radio.dao.facade.history.SeanceRadiotherapieHistoryDao;
 import ma.enova.radio.dao.specification.core.SeanceRadiotherapieSpecification;
+import ma.enova.radio.service.facade.admin.PrescriptionRadiotherapieAdminService ;
 import ma.enova.radio.service.facade.admin.SeanceRadiotherapieAdminService;
 import ma.enova.radio.ws.converter.SeanceRadiotherapieConverter;
 import ma.enova.radio.ws.dto.SeanceRadiotherapieDto;
 import ma.enova.radio.zynerator.service.AbstractServiceImpl;
-import org.springframework.stereotype.Service;
-import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
-import ma.enova.radio.service.facade.admin.PrescriptionRadiotherapieAdminService ;
-
-
-import java.util.List;
-
+@Transactional
 @Service
 public class SeanceRadiotherapieAdminServiceImpl extends AbstractServiceImpl<SeanceRadiotherapie, SeanceRadiotherapieDto,SeanceRadiotherapieHistory, SeanceRadiotherapieCriteria, SeanceRadiotherapieHistoryCriteria, SeanceRadiotherapieDao,
 SeanceRadiotherapieHistoryDao, SeanceRadiotherapieConverter> implements SeanceRadiotherapieAdminService {
@@ -48,5 +47,10 @@ SeanceRadiotherapieHistoryDao, SeanceRadiotherapieConverter> implements SeanceRa
     public SeanceRadiotherapieAdminServiceImpl(SeanceRadiotherapieDao dao, SeanceRadiotherapieHistoryDao historyDao, SeanceRadiotherapieConverter converter) {
         super(dao, historyDao, converter);
     }
+
+	@Override
+	public void updateEtatEffectue(Long id) {
+		dao.updateEtatEffectue(id);
+	}
 
 }

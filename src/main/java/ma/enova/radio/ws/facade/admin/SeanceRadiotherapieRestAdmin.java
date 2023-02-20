@@ -1,6 +1,20 @@
 package  ma.enova.radio.ws.facade.admin;
 
 
+import java.util.List;
+
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import ma.enova.radio.bean.core.SeanceRadiotherapie;
@@ -13,13 +27,6 @@ import ma.enova.radio.ws.dto.SeanceRadiotherapieDto;
 import ma.enova.radio.zynerator.controller.AbstractController;
 import ma.enova.radio.zynerator.dto.AuditEntityDto;
 import ma.enova.radio.zynerator.util.PaginatedList;
-import org.springframework.core.io.InputStreamResource;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
-import ma.enova.radio.zynerator.process.Result;
 
 @Api("Manages seanceRadiotherapie services")
 @RestController
@@ -90,6 +97,14 @@ public class SeanceRadiotherapieRestAdmin  extends AbstractController<SeanceRadi
         return super.getDataSize(criteria);
     }
 
+    @ApiOperation("update etat of Effectue")
+    @GetMapping("/updateEtatEffectue/{id}")
+    public ResponseEntity<Void> updateEtatEffectue(@PathVariable Long id) throws Exception {
+    	service.updateEtatEffectue(id);
+    	return new ResponseEntity<>(HttpStatus.OK);
+
+    }
+    
     @ApiOperation("Gets seanceRadiotherapie history by id")
     @GetMapping("histSeanceRadiotherapie/{id}")
     public ResponseEntity<AuditEntityDto> findHistoryById(@PathVariable("id") Long id) throws Exception {
