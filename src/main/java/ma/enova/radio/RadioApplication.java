@@ -45,7 +45,7 @@ public class RadioApplication {
                                   //, TypeTraitementAdminService typeTraitementAdminService, StatutRadiotherapieAdminService statutRadiotherapieAdminService
     ) {
         return (args) -> {
-            if (true) { /// aweda hi slouk
+            if (false) { /// aweda hi slouk
 
 
                 createStatutRadio();

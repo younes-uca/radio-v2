@@ -103,7 +103,7 @@ public class PrescriptionRadiotherapieSuivreConsultationAdminConverter extends A
             if (StringUtil.isNotEmpty(input.getDateFinTraitement()))
                 item.setDateFinTraitement(DateUtil.stringEnToDate(input.getDateFinTraitement()));
             if (StringUtil.isNotEmpty(input.getDateDecisionTraitement()))
-                item.setDateDecisionTraitement(DateUtil.stringEnToDate(input.getDateDecisionTraitement()));
+                item.setDateDecisionTraitement(DateUtil.stringToDate(input.getDateDecisionTraitement()));
             if (StringUtil.isNotEmpty(input.getCompteRendu()))
                 item.setCompteRendu(input.getCompteRendu());
             if (input.getActif() != null)

@@ -105,7 +105,7 @@ public class PrescriptionRadiotherapieConverter extends AbstractConverter<Prescr
             if (StringUtil.isNotEmpty(dto.getDateFinTraitement()))
                 item.setDateFinTraitement(DateUtil.stringEnToDate(dto.getDateFinTraitement()));
             if (StringUtil.isNotEmpty(dto.getDateDecisionTraitement()))
-                item.setDateDecisionTraitement(DateUtil.stringEnToDate(dto.getDateDecisionTraitement()));
+                item.setDateDecisionTraitement(DateUtil.stringToDate(dto.getDateDecisionTraitement()));
             if (StringUtil.isNotEmpty(dto.getCompteRendu()))
                 item.setCompteRendu(dto.getCompteRendu());
             if (dto.getActif() != null)
@@ -283,6 +283,7 @@ public class PrescriptionRadiotherapieConverter extends AbstractConverter<Prescr
         validateurSimulation = value;
         patient = value;
         typeTraitement = value;
+        frequenceRadiotherapie=value;
     }
 
 

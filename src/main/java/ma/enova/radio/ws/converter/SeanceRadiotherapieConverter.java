@@ -65,9 +65,9 @@ public class SeanceRadiotherapieConverter extends AbstractConverter<SeanceRadiot
             if (StringUtil.isNotEmpty(item.getCodeRdv()))
                 dto.setCodeRdv(item.getCodeRdv());
             if (item.getDatePrevu() != null)
-                dto.setDatePrevu(DateUtil.dateTimeToString(item.getDatePrevu()));
+                dto.setDatePrevu(DateUtil.dateToString(item.getDatePrevu()));
             if (item.getDateRealisation() != null)
-                dto.setDateRealisation(DateUtil.dateTimeToString(item.getDateRealisation()));
+                dto.setDateRealisation(DateUtil.dateToString(item.getDateRealisation()));
             if (StringUtil.isNotEmpty(item.getNumero()))
                 dto.setNumero(item.getNumero());
             dto.setEffectue(item.getEffectue());

@@ -37,7 +37,7 @@ public class DecisionTraitementConverter extends AbstractConverter<DecisionTrait
             if (StringUtil.isNotEmpty(dto.getDecisionTherapeutique()))
                 item.setDecisionTherapeutique(dto.getDecisionTherapeutique());
             if (this.statutRadiotherapie && StringUtil.isNotEmpty(dto.getEtat())) {
-                if(item.getStatutRadiotherapie()==null){
+                if (item.getStatutRadiotherapie() == null) {
                     item.setStatutRadiotherapie(new StatutRadiotherapie());
                 }
                 item.getStatutRadiotherapie().setCode(dto.getEtat());
@@ -60,8 +60,10 @@ public class DecisionTraitementConverter extends AbstractConverter<DecisionTrait
                 dto.setCode(item.getCode());
             if (StringUtil.isNotEmpty(item.getDecisionTherapeutique()))
                 dto.setDecisionTherapeutique(item.getDecisionTherapeutique());
+            if (item.getDateDecisionTraitement() != null)
+                dto.setDecisionTherapeutique(DateUtil.dateToString(item.getDateDecisionTraitement()));
 
-            if (this.statutRadiotherapie && item.getStatutRadiotherapie()!=null && StringUtil.isNotEmpty(item.getStatutRadiotherapie().getCode())) {
+            if (this.statutRadiotherapie && item.getStatutRadiotherapie() != null && StringUtil.isNotEmpty(item.getStatutRadiotherapie().getCode())) {
                 dto.setCode(item.getStatutRadiotherapie().getCode());
             }
             return dto;

@@ -42,7 +42,7 @@ public class PrescriptionRadiotherapie extends AuditBusinessObject {
     private LocalDateTime datePrevu;
     private LocalDate dateDebutTraitement;
     private LocalDateTime dateFinTraitement;
-    private LocalDateTime dateDecisionTraitement;
+    private LocalDate dateDecisionTraitement;
     @Column(length = 500)
     private String compteRendu;
     @Column(columnDefinition = "boolean default false")
@@ -302,11 +302,11 @@ public class PrescriptionRadiotherapie extends AuditBusinessObject {
         this.dateFinTraitement = dateFinTraitement;
     }
 
-    public LocalDateTime getDateDecisionTraitement() {
+    public LocalDate getDateDecisionTraitement() {
         return this.dateDecisionTraitement;
     }
 
-    public void setDateDecisionTraitement(LocalDateTime dateDecisionTraitement) {
+    public void setDateDecisionTraitement(LocalDate dateDecisionTraitement) {
         this.dateDecisionTraitement = dateDecisionTraitement;
     }
 
