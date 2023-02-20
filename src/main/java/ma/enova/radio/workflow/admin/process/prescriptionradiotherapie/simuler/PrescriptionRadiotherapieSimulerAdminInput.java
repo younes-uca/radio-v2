@@ -3,6 +3,7 @@ package ma.enova.radio.workflow.admin.process.prescriptionradiotherapie.simuler;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import ma.enova.radio.bean.core.PrescriptionRadiotherapie;
+import ma.enova.radio.required.dto.dmc.DecisionTraitementDto;
 import ma.enova.radio.ws.dto.PersonnelDto;
 import ma.enova.radio.ws.dto.StatutRadiotherapieDto;
 import ma.enova.radio.zynerator.audit.Log;
@@ -19,6 +20,8 @@ public class PrescriptionRadiotherapieSimulerAdminInput extends AbstractProcessI
     private PersonnelDto validateurSimulation; // to del just put it in output
     private String validateurSimulationDate;// to del just put it in output (now)
     private StatutRadiotherapieDto statutRadiotherapie;// to del just put it in output
+    
+    private DecisionTraitementDto decisionTraitement;// to del just put it in output
 
     @Log
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm")
@@ -86,6 +89,18 @@ public class PrescriptionRadiotherapieSimulerAdminInput extends AbstractProcessI
     public void setStatutRadiotherapie(StatutRadiotherapieDto statutRadiotherapie) {
         this.statutRadiotherapie = statutRadiotherapie;
     }
+
+	public DecisionTraitementDto getDecisionTraitement() {
+		return decisionTraitement;
+	}
+
+	public void setDecisionTraitement(DecisionTraitementDto decisionTraitement) {
+		this.decisionTraitement = decisionTraitement;
+	}
+
+	public void setValidateurSimulation(PersonnelDto validateurSimulation) {
+		this.validateurSimulation = validateurSimulation;
+	}
 }
 
 

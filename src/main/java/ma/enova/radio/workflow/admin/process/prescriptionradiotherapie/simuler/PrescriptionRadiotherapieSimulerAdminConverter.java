@@ -85,6 +85,9 @@ public class PrescriptionRadiotherapieSimulerAdminConverter extends AbstractProc
             //if (this.validateurSimulation && input.getValidateurSimulation() != null)
             if (input.getValidateurSimulation() != null)
                 item.setValidateurSimulation(personnelConverter.toItem(input.getValidateurSimulation()));
+            if (input.getDecisionTraitement() != null)
+                item.setDecisionTraitement(decisionTraitementConverter.toItem(input.getDecisionTraitement()));
+
 
 
             return item;

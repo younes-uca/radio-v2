@@ -19,18 +19,6 @@ import java.time.LocalDateTime;
 
 public class PrescriptionRadiotherapieSimulerAdminProcessImpl extends AbstractProcessImpl<PrescriptionRadiotherapieSimulerAdminInput, PrescriptionRadiotherapieSimulerAdminOutput, PrescriptionRadiotherapie, PrescriptionRadiotherapieSimulerAdminConverter> implements PrescriptionRadiotherapieSimulerAdminProcess {
 
-    @Autowired
-    private AmqpTemplate rabbitTemplate;
-
-    @Value("${rabbitmq.exchange}")
-    private String exchange;
-
-    @Value("${rabbitmq.routingkey}")
-    private String routingkey;
-
-    @Value("${rabbitmq.queue}")
-    private String queue;
-
     @Override
     public void init(PrescriptionRadiotherapieSimulerAdminInput input, PrescriptionRadiotherapie item) {
         service.updateStatutPrescription(item, StatutRadioTherapieConstant.EN_COURS_TRAITEMENT_CODE);
@@ -50,10 +38,10 @@ public class PrescriptionRadiotherapieSimulerAdminProcessImpl extends AbstractPr
         Long validateurSimulationId = t.getValidateurSimulation().getId();
         service.updateAsSimuler(t.getId(), t.getStatutRadiotherapie().getId(), t.getDateSimulation(), t.getImmobilistion(), t.getPositionnement(), t.getFichierTraitements(), t.getValidateurSimulationDate(), validateurSimulationId);
         histortiquePrescriptionRadiotherapieService.createFromPrescription(t.getId(), t.getStatutRadiotherapie());
-        // queue to MS to create prescriptionRadioTherapie
+        //queue message to dcm for update status decisionTraitement.
         if (t.getDecisionTraitement() != null && t.getDecisionTraitement().getId() != null) {
             DecisionTraitementDto decisiontraitementDto = new DecisionTraitementDto(t.getDecisionTraitement().getId(), t.getDecisionTraitement().getCode(), t.getStatutRadiotherapie().getCode());
-            RabbitUtils.convertAndSend(decisiontraitementDto, exchange, routingkey, rabbitTemplate);
+            RabbitUtils.convertAndSend(decisiontraitementDto);
         }
        /* PrescriptionRadiotherapie prescriptionRadiotherapie = service.findWithSeance(t.getId());
         result.setItem(prescriptionRadiotherapie);*/

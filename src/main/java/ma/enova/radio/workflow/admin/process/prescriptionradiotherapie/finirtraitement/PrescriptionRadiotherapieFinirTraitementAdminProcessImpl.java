@@ -2,9 +2,11 @@ package ma.enova.radio.workflow.admin.process.prescriptionradiotherapie.finirtra
 
 import ma.enova.radio.bean.core.PrescriptionRadiotherapie;
 import ma.enova.radio.constant.StatutRadioTherapieConstant;
+import ma.enova.radio.required.dto.dmc.DecisionTraitementDto;
 import ma.enova.radio.service.facade.admin.HistortiquePrescriptionRadiotherapieAdminService;
 import ma.enova.radio.service.facade.admin.PrescriptionRadiotherapieAdminService;
 import ma.enova.radio.service.facade.admin.StatutRadiotherapieAdminService;
+import ma.enova.radio.service.util.admin.RabbitUtils;
 import ma.enova.radio.zynerator.process.AbstractProcessImpl;
 import ma.enova.radio.zynerator.process.Result;
 
@@ -28,7 +30,11 @@ public class PrescriptionRadiotherapieFinirTraitementAdminProcessImpl extends Ab
         Long validateurSimulationId = t.getValidateurSimulation() != null ? t.getValidateurSimulation().getId() : null;
         service.updateAsCloturerTraitement(t.getId(), t.getStatutRadiotherapie().getId(), t.getDateFinTraitement(), t.getCompteRendu());
         histortiquePrescriptionRadiotherapieService.createFromPrescription(t.getId(), t.getStatutRadiotherapie());
-        // TODO : send new state to RabbitMq
+        //queue message to dcm for update status decisionTraitement.
+        if (t.getDecisionTraitement() != null && t.getDecisionTraitement().getId() != null) {
+            DecisionTraitementDto decisiontraitementDto = new DecisionTraitementDto(t.getDecisionTraitement().getId(), t.getDecisionTraitement().getCode(), t.getStatutRadiotherapie().getCode());
+            RabbitUtils.convertAndSend(decisiontraitementDto);
+        }
         result.addInfoMessage("radiotherapie.finirtraitement.ok");
     }
 
