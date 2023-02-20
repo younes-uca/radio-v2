@@ -29,7 +29,7 @@ public class PrescriptionRadiotherapieSaveAdminProcessImpl extends AbstractProce
 
     @Override
     public void validate(PrescriptionRadiotherapieSaveAdminInput input, PrescriptionRadiotherapie t, Result<PrescriptionRadiotherapieSaveAdminInput, PrescriptionRadiotherapieSaveAdminOutput, PrescriptionRadiotherapie> result) {
-        validateDateTraitement(t.getDateSouhaiteDebutTraitement(), result);
+        validateDateTraitement(t.getDateDebutTraitement(), result);
         validateFrequenceRadio(t.getFrequenceRadiotherapie(), result);
         validateFraction(t.getFractionnement(), result);
         validateDateTraitement(t.getDateSouhaiteDebutTraitement(), result);
@@ -78,7 +78,7 @@ public class PrescriptionRadiotherapieSaveAdminProcessImpl extends AbstractProce
         }
         for (int i = 0; i < t.getFractionnement(); i++) {
             SeanceRadiotherapie seanceRadiotherapie = new SeanceRadiotherapie();
-            seanceRadiotherapie.setDatePrevu(DateUtil.addFrequence(t.getDateSouhaiteDebutTraitement(), i, t.getFrequenceRadiotherapie()));
+            seanceRadiotherapie.setDatePrevu(DateUtil.addFrequence(t.getDateSouhaiteDebutTraitement(), i, t.getFrequenceRadiotherapie().getCode()));
             seanceRadiotherapie.setNumero(i + 1);
             t.getSeanceRadiotherapies().add(seanceRadiotherapie);
         }
@@ -91,11 +91,11 @@ public class PrescriptionRadiotherapieSaveAdminProcessImpl extends AbstractProce
         }
     }
 
-    private void validateFrequenceRadio(String frequenceRadiotherapie, Result result) {
+    private void validateFrequenceRadio(FrequenceRadiotherapie frequenceRadiotherapie, Result result) {
         List<String> frequenceRadiotherapies = Arrays.asList("heure", "jour", "semaine", "mois");
-        if (StringUtil.isEmpty(frequenceRadiotherapie)) {
+        if (frequenceRadiotherapie!=null && StringUtil.isEmpty(frequenceRadiotherapie.getCode())) {
             result.addErrorMessage("radiotherapie.save.frequenceRadiotherapie.obligatoire");
-        } else if (!frequenceRadiotherapies.contains(frequenceRadiotherapie)) {
+        } else if (!frequenceRadiotherapies.contains(frequenceRadiotherapie.getCode())) {
             result.addErrorMessage("radiotherapie.save.frequenceRadiotherapie.valeur-non-conforme");
         }
     }
@@ -106,10 +106,10 @@ public class PrescriptionRadiotherapieSaveAdminProcessImpl extends AbstractProce
         }
     }
 
-    private void validateDateTraitement(LocalDate dateSouhaiteDebutTraitement, Result result) {
-        if (dateSouhaiteDebutTraitement == null) {
+    private void validateDateTraitement(LocalDate dateDebutTraitement, Result result) {
+        if (dateDebutTraitement == null) {
             result.addErrorMessage("radiotherapie.save.dateDebutTraitement-obligatoire");
-        } else if (DateUtil.isBeforeNow(dateSouhaiteDebutTraitement)) {
+        } else if (DateUtil.isBeforeNow(dateDebutTraitement)) {
             result.addErrorMessage("radiotherapie.save.dateDebutTraitement.inferieur-aujoudhui");
         }
     }

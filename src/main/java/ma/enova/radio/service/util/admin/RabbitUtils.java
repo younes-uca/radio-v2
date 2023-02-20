@@ -1,4 +1,4 @@
-package ma.enova.radio.zynerator.service;
+package ma.enova.radio.service.util.admin;
 
 import org.springframework.amqp.AmqpException;
 import org.springframework.amqp.core.AmqpTemplate;

@@ -26,8 +26,7 @@ public class PrescriptionRadiotherapie extends AuditBusinessObject {
     private BigDecimal dose = BigDecimal.ZERO;
     private Integer fractionnement = 0;
     private Integer etalement = 0;
-    @Column(length = 500)
-    private String frequenceRadiotherapie;
+    private FrequenceRadiotherapie frequenceRadiotherapie;
     private LocalDate dateSouhaiteDebutTraitement;
     @Lob
     @Column(columnDefinition = "TEXT")
@@ -41,7 +40,7 @@ public class PrescriptionRadiotherapie extends AuditBusinessObject {
     private String fichierTraitements;
     private LocalDateTime validateurSimulationDate;
     private LocalDateTime datePrevu;
-    private LocalDateTime dateDebutTraitement;
+    private LocalDate dateDebutTraitement;
     private LocalDateTime dateFinTraitement;
     private LocalDateTime dateDecisionTraitement;
     @Column(length = 500)
@@ -186,14 +185,6 @@ public class PrescriptionRadiotherapie extends AuditBusinessObject {
         this.etalement = etalement;
     }
 
-    public String getFrequenceRadiotherapie() {
-        return this.frequenceRadiotherapie;
-    }
-
-    public void setFrequenceRadiotherapie(String frequenceRadiotherapie) {
-        this.frequenceRadiotherapie = frequenceRadiotherapie;
-    }
-
     public LocalDate getDateSouhaiteDebutTraitement() {
         return this.dateSouhaiteDebutTraitement;
     }
@@ -260,6 +251,16 @@ public class PrescriptionRadiotherapie extends AuditBusinessObject {
         this.validateurSimulation = validateurSimulation;
     }
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    public FrequenceRadiotherapie getFrequenceRadiotherapie() {
+        return frequenceRadiotherapie;
+    }
+
+    public void setFrequenceRadiotherapie(FrequenceRadiotherapie frequenceRadiotherapie) {
+        this.frequenceRadiotherapie = frequenceRadiotherapie;
+    }
+
+
     public LocalDateTime getValidateurSimulationDate() {
         return this.validateurSimulationDate;
     }
@@ -285,11 +286,11 @@ public class PrescriptionRadiotherapie extends AuditBusinessObject {
         this.datePrevu = datePrevu;
     }
 
-    public LocalDateTime getDateDebutTraitement() {
+    public LocalDate getDateDebutTraitement() {
         return this.dateDebutTraitement;
     }
 
-    public void setDateDebutTraitement(LocalDateTime dateDebutTraitement) {
+    public void setDateDebutTraitement(LocalDate dateDebutTraitement) {
         this.dateDebutTraitement = dateDebutTraitement;
     }
 

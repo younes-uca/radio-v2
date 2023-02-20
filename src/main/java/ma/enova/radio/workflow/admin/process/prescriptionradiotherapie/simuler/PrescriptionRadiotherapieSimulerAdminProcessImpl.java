@@ -10,7 +10,7 @@ import ma.enova.radio.service.facade.admin.PrescriptionRadiotherapieAdminService
 import ma.enova.radio.service.facade.admin.StatutRadiotherapieAdminService;
 import ma.enova.radio.zynerator.process.AbstractProcessImpl;
 import ma.enova.radio.zynerator.process.Result;
-import ma.enova.radio.zynerator.service.RabbitUtils;
+import ma.enova.radio.service.util.admin.RabbitUtils;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

@@ -19,7 +19,7 @@ public class PrescriptionRadiotherapieSaveAdminOutput extends AbstractProcessOut
     protected BigDecimal dose;
     protected Integer fractionnement = 0;
     protected Integer etalement = 0;
-    protected String frequenceRadiotherapie;
+    protected FrequenceRadiotherapieDto frequenceRadiotherapie;
     protected String dateSouhaiteDebutTraitement;
     protected String observation;
     protected String dateSimulation;
@@ -112,12 +112,12 @@ public class PrescriptionRadiotherapieSaveAdminOutput extends AbstractProcessOut
         this.etalement = etalement;
     }
 
-    @Log
-    public String getFrequenceRadiotherapie() {
+
+    public FrequenceRadiotherapieDto getFrequenceRadiotherapie() {
         return this.frequenceRadiotherapie;
     }
 
-    public void setFrequenceRadiotherapie(String frequenceRadiotherapie) {
+    public void setFrequenceRadiotherapie(FrequenceRadiotherapieDto frequenceRadiotherapie) {
         this.frequenceRadiotherapie = frequenceRadiotherapie;
     }
 

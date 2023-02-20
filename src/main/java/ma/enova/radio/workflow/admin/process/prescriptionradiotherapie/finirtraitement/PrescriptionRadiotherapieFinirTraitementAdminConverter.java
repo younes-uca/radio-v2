@@ -23,9 +23,11 @@ public class PrescriptionRadiotherapieFinirTraitementAdminConverter extends Abst
     @Autowired
     private TypeTraitementConverter typeTraitementConverter;
     @Autowired
-    private PersonnelConverter personnelConverter;    
+    private PersonnelConverter personnelConverter;
     @Autowired
     private DecisionTraitementConverter decisionTraitementConverter;
+    @Autowired
+    private FrequenceRadiotherapieConverter frequenceRadiotherapieConverter;
     @Autowired
     private ViseeConverter viseeConverter;
     @Autowired
@@ -43,6 +45,7 @@ public class PrescriptionRadiotherapieFinirTraitementAdminConverter extends Abst
     @Autowired
     private GradeToxiciteRthConverter gradeToxiciteRthConverter;
     private boolean decisionTraitement = true;
+    private boolean frequenceRadiotherapie = true;
     private boolean medecinPrescripteur = true;
     private boolean site = true;
     private boolean modaliteRadiotherapie = true;
@@ -94,8 +97,7 @@ public class PrescriptionRadiotherapieFinirTraitementAdminConverter extends Abst
                 output.setFractionnement(item.getFractionnement());
             if (StringUtil.isNotEmpty(item.getEtalement()))
                 output.setEtalement(item.getEtalement());
-            if (StringUtil.isNotEmpty(item.getFrequenceRadiotherapie()))
-                output.setFrequenceRadiotherapie(item.getFrequenceRadiotherapie());
+
             if (item.getDateSouhaiteDebutTraitement() != null)
                 output.setDateSouhaiteDebutTraitement(DateUtil.dateTimeToString(item.getDateSouhaiteDebutTraitement()));
             if (StringUtil.isNotEmpty(item.getObservation()))
@@ -125,6 +127,10 @@ public class PrescriptionRadiotherapieFinirTraitementAdminConverter extends Abst
                 output.setNombreSeanceRealise(item.getNombreSeanceRealise());
             if (StringUtil.isNotEmpty(item.getNombreTotalSeance()))
                 output.setNombreTotalSeance(item.getNombreTotalSeance());
+
+            if (this.frequenceRadiotherapie && item.getFrequenceRadiotherapie() != null) {
+                output.setFrequenceRadiotherapie(frequenceRadiotherapieConverter.toDto(item.getFrequenceRadiotherapie()));
+            }
             if (this.decisionTraitement && item.getDecisionTraitement() != null) {
                 output.setDecisionTraitement(decisionTraitementConverter.toDto(item.getDecisionTraitement()));
             }

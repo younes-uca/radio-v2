@@ -8,7 +8,6 @@ import ma.enova.radio.zynerator.audit.Log;
 import ma.enova.radio.zynerator.process.AbstractProcessInput;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -38,8 +37,7 @@ public class PrescriptionRadiotherapieSaveAdminInput extends AbstractProcessInpu
     private PatientDto patient;
     private TypeTraitementDto typeTraitement;
     private DecisionTraitementDto decisionTraitement;
-   // private FrequenceRadiotherapieDto frequenceRadiotherapie;
-    private String frequenceRadiotherapie;
+    private FrequenceRadiotherapieDto frequenceRadiotherapie;
 
     @Log
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm")
@@ -271,21 +269,14 @@ public class PrescriptionRadiotherapieSaveAdminInput extends AbstractProcessInpu
         this.decisionTraitement = decisionTraitement;
     }
 
-    public String getFrequenceRadiotherapie() {
-        return frequenceRadiotherapie;
-    }
 
-    public void setFrequenceRadiotherapie(String frequenceRadiotherapie) {
-        this.frequenceRadiotherapie = frequenceRadiotherapie;
-    }
-
-    /*  public FrequenceRadiotherapieDto getFrequenceRadiotherapie() {
+      public FrequenceRadiotherapieDto getFrequenceRadiotherapie() {
         return frequenceRadiotherapie;
     }
 
     public void setFrequenceRadiotherapie(FrequenceRadiotherapieDto frequenceRadiotherapie) {
         this.frequenceRadiotherapie = frequenceRadiotherapie;
-    }*/
+    }
 
     public void setPatient(PatientDto patient) {
         this.patient = patient;

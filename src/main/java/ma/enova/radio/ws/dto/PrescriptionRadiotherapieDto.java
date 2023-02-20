@@ -17,8 +17,7 @@ public class PrescriptionRadiotherapieDto extends AuditBaseDto {
     private BigDecimal dose;
     private Integer fractionnement = 0;
     private Integer etalement = 0;
-    //private FrequenceRadiotherapieDto frequenceRadiotherapie;
-    private String frequenceRadiotherapie;
+    private FrequenceRadiotherapieDto frequenceRadiotherapie;
     private String dateSouhaiteDebutTraitement;
     private String observation;
     private String dateSimulation;
@@ -100,23 +99,15 @@ public class PrescriptionRadiotherapieDto extends AuditBaseDto {
     public void setEtalement(Integer etalement) {
         this.etalement = etalement;
     }
-//
-//    public FrequenceRadiotherapieDto getFrequenceRadiotherapie() {
-//        return this.frequenceRadiotherapie;
-//    }
-//
-//    public void setFrequenceRadiotherapie(FrequenceRadiotherapieDto frequenceRadiotherapie) {
-//        this.frequenceRadiotherapie = frequenceRadiotherapie;
-//    }
 
-    @Log
-    public String getFrequenceRadiotherapie() {
-        return frequenceRadiotherapie;
+    public FrequenceRadiotherapieDto getFrequenceRadiotherapie() {
+        return this.frequenceRadiotherapie;
     }
 
-    public void setFrequenceRadiotherapie(String frequenceRadiotherapie) {
+    public void setFrequenceRadiotherapie(FrequenceRadiotherapieDto frequenceRadiotherapie) {
         this.frequenceRadiotherapie = frequenceRadiotherapie;
     }
+
 
     @Log
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm")

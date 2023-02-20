@@ -42,7 +42,10 @@ public class PrescriptionRadiotherapieSaveAdminConverter extends AbstractProcess
     private GradeToxiciteRthConverter gradeToxiciteRthConverter;
     @Autowired
     private DecisionTraitementConverter decisionTraitementConverter;
+    @Autowired
+    private FrequenceRadiotherapieConverter frequenceRadiotherapieConverter;
     private boolean decisionTraitement = true;
+    private boolean frequenceRadiotherapie = true;
     private boolean medecinPrescripteur = true;
     private boolean site = true;
     private boolean modaliteRadiotherapie = true;
@@ -77,10 +80,7 @@ public class PrescriptionRadiotherapieSaveAdminConverter extends AbstractProcess
                 item.setFractionnement(input.getFractionnement());
             if (StringUtil.isNotEmpty(input.getEtalement()))
                 item.setEtalement(input.getEtalement());
-           /* if (input.getFrequenceRadiotherapie() != null && StringUtil.isNotEmpty(input.getFrequenceRadiotherapie().getCode()))
-                item.setFrequenceRadiotherapie(input.getFrequenceRadiotherapie().getCode());*/
-            if (StringUtil.isNotEmpty(input.getFrequenceRadiotherapie()))
-                item.setFrequenceRadiotherapie(input.getFrequenceRadiotherapie());
+
             if (StringUtil.isNotEmpty(input.getDateSouhaiteDebutTraitement()))
                 item.setDateSouhaiteDebutTraitement(DateUtil.stringToDate(input.getDateSouhaiteDebutTraitement()));
             if (StringUtil.isNotEmpty(input.getObservation()))
@@ -98,6 +98,9 @@ public class PrescriptionRadiotherapieSaveAdminConverter extends AbstractProcess
             if (StringUtil.isNotEmpty(input.getNombreTotalSeance()))
                 item.setNombreTotalSeance(input.getNombreTotalSeance());
 
+
+            if (this.frequenceRadiotherapie && input.getFrequenceRadiotherapie() != null)
+                item.setFrequenceRadiotherapie(frequenceRadiotherapieConverter.toItem(input.getFrequenceRadiotherapie()));
 
             if (this.decisionTraitement && input.getDecisionTraitement() != null)
                 item.setDecisionTraitement(decisionTraitementConverter.toItem(input.getDecisionTraitement()));
@@ -147,8 +150,7 @@ public class PrescriptionRadiotherapieSaveAdminConverter extends AbstractProcess
                 output.setFractionnement(item.getFractionnement());
             if (StringUtil.isNotEmpty(item.getEtalement()))
                 output.setEtalement(item.getEtalement());
-            if (StringUtil.isNotEmpty(item.getFrequenceRadiotherapie()))
-                output.setFrequenceRadiotherapie(item.getFrequenceRadiotherapie());
+
             if (item.getDateSouhaiteDebutTraitement() != null)
                 output.setDateSouhaiteDebutTraitement(DateUtil.dateToString(item.getDateSouhaiteDebutTraitement()));
             if (StringUtil.isNotEmpty(item.getObservation()))
@@ -176,11 +178,12 @@ public class PrescriptionRadiotherapieSaveAdminConverter extends AbstractProcess
             output.setActif(item.getActif());
             if (StringUtil.isNotEmpty(item.getNombreSeanceRealise()))
                 output.setNombreSeanceRealise(item.getNombreSeanceRealise());
-            if (StringUtil.isNotEmpty(item.getFrequenceRadiotherapie()))
-                output.setFrequenceRadiotherapie(item.getFrequenceRadiotherapie());
 
             if (StringUtil.isNotEmpty(item.getNombreTotalSeance()))
                 output.setNombreTotalSeance(item.getNombreTotalSeance());
+
+            if (this.decisionTraitement && item.getFrequenceRadiotherapie() != null)
+                output.setFrequenceRadiotherapie(frequenceRadiotherapieConverter.toDto(item.getFrequenceRadiotherapie()));
             if (this.decisionTraitement && item.getDecisionTraitement() != null) {
                 output.setDecisionTraitement(decisionTraitementConverter.toDto(item.getDecisionTraitement()));
             }
