@@ -8,9 +8,9 @@ import ma.enova.radio.required.dto.dmc.DecisionTraitementDto;
 import ma.enova.radio.service.facade.admin.HistortiquePrescriptionRadiotherapieAdminService;
 import ma.enova.radio.service.facade.admin.PrescriptionRadiotherapieAdminService;
 import ma.enova.radio.service.facade.admin.StatutRadiotherapieAdminService;
+import ma.enova.radio.service.util.admin.RabbitUtils;
 import ma.enova.radio.zynerator.process.AbstractProcessImpl;
 import ma.enova.radio.zynerator.process.Result;
-import ma.enova.radio.service.util.admin.RabbitUtils;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -33,8 +33,7 @@ public class PrescriptionRadiotherapieSimulerAdminProcessImpl extends AbstractPr
 
     @Override
     public void init(PrescriptionRadiotherapieSimulerAdminInput input, PrescriptionRadiotherapie item) {
-        StatutRadiotherapie statutRadiotherapie = statutRadiotherapieService.findByCode(StatutRadioTherapieConstant.EN_COURS_TRAITEMENT_CODE);
-        item.setStatutRadiotherapie(statutRadiotherapie);
+        service.updateStatutPrescription(item, StatutRadioTherapieConstant.EN_COURS_TRAITEMENT_CODE);
         item.setValidateurSimulationDate(LocalDateTime.now());
     }
 

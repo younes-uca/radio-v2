@@ -1,6 +1,7 @@
 package ma.enova.radio;
 
 import ma.enova.radio.bean.core.*;
+import ma.enova.radio.constant.StatutRadioTherapieConstant;
 import ma.enova.radio.service.facade.admin.*;
 import ma.enova.radio.zynerator.security.bean.Permission;
 import ma.enova.radio.zynerator.security.bean.Role;
@@ -97,20 +98,16 @@ public class RadioApplication {
     }
 
     private void createStatutRadio() {
-        public static final String EN_ATTENTE_SIMULATION = "en-attente-simulation";
-        public static final String EN_COURS_TRAITEMENT = "en-cours-traitement";
-        public static final String FIN_TRAITEMENT = "fin-traitement";
-        List<StatutRadiotherapie> statutRadiotherapies= Arrays.asList(new StatutRadiotherapie())
-       int i=0;
-        etats.forEach((k, v) -> {
-            i++;
-            StatutRadiotherapie statutRadiotherapie = new StatutRadiotherapie();
-            statutRadiotherapie.setCode(k);
-            statutRadiotherapie.setLibelle(v);
-            statutRadiotherapieService.set
-            statutRadiotherapieService.create(statutRadiotherapie);
 
-        });
+        List<StatutRadiotherapie> statutRadiotherapies= Arrays.asList(
+                new StatutRadiotherapie(StatutRadioTherapieConstant.EN_ATTENTE_SIMULATION_CODE,StatutRadioTherapieConstant.EN_ATTENTE_SIMULATION_LABEL,1),
+                new StatutRadiotherapie(StatutRadioTherapieConstant.EN_COURS_TRAITEMENT_CODE,StatutRadioTherapieConstant.EN_COURS_TRAITEMENT_LABEL,2),
+                new StatutRadiotherapie(StatutRadioTherapieConstant.FIN_TRAITEMENT_CODE,StatutRadioTherapieConstant.FIN_TRAITEMENT_LABEL,3)
+                );
+
+        for (StatutRadiotherapie statutRadiotherapy : statutRadiotherapies) {
+            statutRadiotherapieService.create(statutRadiotherapy);
+        }
     }
 
     private void createModalite() {

@@ -1,6 +1,7 @@
 package ma.enova.radio.service.impl.admin;
 
 import ma.enova.radio.bean.core.PrescriptionRadiotherapie;
+import ma.enova.radio.bean.core.StatutRadiotherapie;
 import ma.enova.radio.bean.history.PrescriptionRadiotherapieHistory;
 import ma.enova.radio.dao.criteria.core.PrescriptionRadiotherapieCriteria;
 import ma.enova.radio.dao.criteria.history.PrescriptionRadiotherapieHistoryCriteria;
@@ -58,6 +59,13 @@ public class PrescriptionRadiotherapieAdminServiceImpl extends AbstractServiceIm
         return t;
     }
 
+    @Override
+    public void updateStatutPrescription(PrescriptionRadiotherapie item, String codeNewStatut){
+        StatutRadiotherapie statutRadiotherapie = statutRadiotherapieService.findByCode(codeNewStatut);
+        if(item.getStatutRadiotherapie()==null || statutRadiotherapie.getNiveau()>item.getStatutRadiotherapie().getNiveau()){
+            item.setStatutRadiotherapie(statutRadiotherapie);
+        }
+    }
     @Override
     public PrescriptionRadiotherapie findWithSeance(Long id) {
         PrescriptionRadiotherapie result = dao.findById(id).orElse(null);

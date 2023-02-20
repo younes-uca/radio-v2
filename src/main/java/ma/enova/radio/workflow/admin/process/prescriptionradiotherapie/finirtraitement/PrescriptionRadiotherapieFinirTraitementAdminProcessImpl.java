@@ -1,7 +1,6 @@
 package ma.enova.radio.workflow.admin.process.prescriptionradiotherapie.finirtraitement;
 
 import ma.enova.radio.bean.core.PrescriptionRadiotherapie;
-import ma.enova.radio.bean.core.StatutRadiotherapie;
 import ma.enova.radio.constant.StatutRadioTherapieConstant;
 import ma.enova.radio.service.facade.admin.HistortiquePrescriptionRadiotherapieAdminService;
 import ma.enova.radio.service.facade.admin.PrescriptionRadiotherapieAdminService;
@@ -13,20 +12,20 @@ public class PrescriptionRadiotherapieFinirTraitementAdminProcessImpl extends Ab
 
     @Override
     public void init(PrescriptionRadiotherapieFinirTraitementAdminInput input, PrescriptionRadiotherapie item) {
-        StatutRadiotherapie statutRadiotherapie = statutRadiotherapieService.findByCode(StatutRadioTherapieConstant.FIN_TRAITEMENT_CODE);
-        item.setStatutRadiotherapie(statutRadiotherapie);
+        service.updateStatutPrescription(item, StatutRadioTherapieConstant.FIN_TRAITEMENT_CODE);
     }
 
     @Override
     public void validate(PrescriptionRadiotherapieFinirTraitementAdminInput input, PrescriptionRadiotherapie item, Result<PrescriptionRadiotherapieFinirTraitementAdminInput, PrescriptionRadiotherapieFinirTraitementAdminOutput, PrescriptionRadiotherapie> result) {
         if (item.getStatutRadiotherapie() == null)
-        	 result.addErrorMessage("radiotherapie.finirtraitement.status.obligatoire");
-         if (item.getId() == null)
-        	result.addErrorMessage("radiotherapie.finirtraitement.prescription.obligatoire");
+            result.addErrorMessage("radiotherapie.finirtraitement.status.obligatoire");
+        if (item.getId() == null)
+            result.addErrorMessage("radiotherapie.finirtraitement.prescription.obligatoire");
     }
 
     @Override
-    public void run(PrescriptionRadiotherapieFinirTraitementAdminInput input, PrescriptionRadiotherapie t, Result<PrescriptionRadiotherapieFinirTraitementAdminInput, PrescriptionRadiotherapieFinirTraitementAdminOutput, PrescriptionRadiotherapie> result) {        Long validateurSimulationId = t.getValidateurSimulation() != null ? t.getValidateurSimulation().getId() : null;
+    public void run(PrescriptionRadiotherapieFinirTraitementAdminInput input, PrescriptionRadiotherapie t, Result<PrescriptionRadiotherapieFinirTraitementAdminInput, PrescriptionRadiotherapieFinirTraitementAdminOutput, PrescriptionRadiotherapie> result) {
+        Long validateurSimulationId = t.getValidateurSimulation() != null ? t.getValidateurSimulation().getId() : null;
         service.updateAsCloturerTraitement(t.getId(), t.getStatutRadiotherapie().getId(), t.getDateFinTraitement(), t.getCompteRendu());
         histortiquePrescriptionRadiotherapieService.createFromPrescription(t.getId(), t.getStatutRadiotherapie());
         // TODO : send new state to RabbitMq

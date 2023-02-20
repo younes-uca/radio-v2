@@ -22,6 +22,8 @@ public interface PrescriptionRadiotherapieAdminService extends IService<Prescrip
 
     void updateAsCloturerTraitement(Long id, Long statutRadiotherapieId, LocalDateTime dateFinTraitement, String cr);
 
+    void updateStatutPrescription(PrescriptionRadiotherapie item, String codeNewStatut);
+
     PrescriptionRadiotherapie findWithSeance(Long id);
 
     List<PrescriptionRadiotherapie> findByMedecinPrescripteurId(Long id);

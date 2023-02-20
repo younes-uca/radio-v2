@@ -17,7 +17,7 @@ import java.util.List;
 public class PrescriptionRadiotherapieSaveAdminProcessImpl extends AbstractProcessImpl<PrescriptionRadiotherapieSaveAdminInput, PrescriptionRadiotherapieSaveAdminOutput, PrescriptionRadiotherapie, PrescriptionRadiotherapieSaveAdminConverter> implements PrescriptionRadiotherapieSaveAdminProcess {
 
     public void init(PrescriptionRadiotherapieSaveAdminInput input, PrescriptionRadiotherapie item) {
-        item.setStatutRadiotherapie(statutRadiotherapieService.findByCode(StatutRadioTherapieConstant.EN_ATTENTE_SIMULATION_CODE));
+        service.updateStatutPrescription(item,StatutRadioTherapieConstant.EN_ATTENTE_SIMULATION_CODE);
         item.setPatient(patientService.findOrSave(item.getPatient()));
         item.setVisee(viseeService.findOrSave(item.getVisee()));
         item.setMedecinPrescripteur(personnelService.findOrSave(item.getMedecinPrescripteur()));
