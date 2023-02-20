@@ -18,6 +18,10 @@ public class PrescriptionRadiotherapieValidatePhysicienAdminConverter extends Ab
     @Autowired
     private StatutRadiotherapieConverter statutRadiotherapieConverter;
     @Autowired
+    private ImmobilistionConverter immobilistionConverter;
+    @Autowired
+    private PositionnementConverter positionnementConverter;
+    @Autowired
     private SiteConverter siteConverter;
     @Autowired
     private TypeTraitementConverter typeTraitementConverter;
@@ -68,20 +72,23 @@ public class PrescriptionRadiotherapieValidatePhysicienAdminConverter extends Ab
 
             if (StringUtil.isNotEmpty(input.getDateSimulation()))
                 item.setDateSimulation(DateUtil.stringEnToDate(input.getDateSimulation()));
-            if (StringUtil.isNotEmpty(input.getImmobilistion()))
-                item.setImmobilistion(input.getImmobilistion());
-            if (StringUtil.isNotEmpty(input.getPositionnement()))
-                item.setPositionnement(input.getPositionnement());
+
             if (StringUtil.isNotEmpty(input.getFichierTraitements()))
                 item.setFichierTraitements(input.getFichierTraitements());
             if (StringUtil.isNotEmpty(input.getValidateurSimulationDate()))
                 item.setValidateurSimulationDate(DateUtil.stringEnToDate(input.getValidateurSimulationDate()));
+
+            if (input.getImmobilistion() != null)
+                item.setImmobilistion(immobilistionConverter.toItem(input.getImmobilistion()));
+            if (input.getPositionnement() != null)
+                item.setPositionnement(positionnementConverter.toItem(input.getPositionnement()));
 
             if (this.statutRadiotherapie && input.getStatutRadiotherapie() != null)
                 item.setStatutRadiotherapie(statutRadiotherapieConverter.toItem(input.getStatutRadiotherapie()));
 
             if (this.validateurSimulation && input.getValidateurSimulation() != null)
                 item.setValidateurSimulation(personnelConverter.toItem(input.getValidateurSimulation()));
+
 
             return item;
         }
@@ -98,14 +105,16 @@ public class PrescriptionRadiotherapieValidatePhysicienAdminConverter extends Ab
 
             if (item.getDateSimulation() != null)
                 output.setDateSimulation(DateUtil.dateTimeToString(item.getDateSimulation()));
-            if (StringUtil.isNotEmpty(item.getImmobilistion()))
-                output.setImmobilistion(item.getImmobilistion());
-            if (StringUtil.isNotEmpty(item.getPositionnement()))
-                output.setPositionnement(item.getPositionnement());
+
             if (StringUtil.isNotEmpty(item.getFichierTraitements()))
                 output.setFichierTraitements(item.getFichierTraitements());
             if (item.getValidateurSimulationDate() != null)
                 output.setValidateurSimulationDate(DateUtil.dateTimeToString(item.getValidateurSimulationDate()));
+
+            if (item.getImmobilistion() != null)
+                output.setImmobilistion(immobilistionConverter.toDto(item.getImmobilistion()));
+            if (item.getPositionnement() != null)
+                output.setPositionnement(positionnementConverter.toDto(item.getPositionnement()));
 
             if (this.statutRadiotherapie && item.getStatutRadiotherapie() != null) {
                 output.setStatutRadiotherapie(statutRadiotherapieConverter.toDto(item.getStatutRadiotherapie()));

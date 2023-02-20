@@ -32,10 +32,8 @@ public class PrescriptionRadiotherapie extends AuditBusinessObject {
     @Column(columnDefinition = "TEXT")
     private String observation;
     private LocalDateTime dateSimulation;
-    @Column(length = 500)
-    private String immobilistion;
-    @Column(length = 500)
-    private String positionnement;
+    private Immobilistion immobilistion;
+    private Positionnement positionnement;
     @Column(length = 500)
     private String fichierTraitements;
     private LocalDateTime validateurSimulationDate;
@@ -218,19 +216,21 @@ public class PrescriptionRadiotherapie extends AuditBusinessObject {
         this.dateSimulation = dateSimulation;
     }
 
-    public String getImmobilistion() {
+    @ManyToOne(fetch = FetchType.LAZY)
+    public Immobilistion getImmobilistion() {
         return this.immobilistion;
     }
 
-    public void setImmobilistion(String immobilistion) {
+    public void setImmobilistion(Immobilistion immobilistion) {
         this.immobilistion = immobilistion;
     }
 
-    public String getPositionnement() {
+    @ManyToOne(fetch = FetchType.LAZY)
+    public Positionnement getPositionnement() {
         return this.positionnement;
     }
 
-    public void setPositionnement(String positionnement) {
+    public void setPositionnement(Positionnement positionnement) {
         this.positionnement = positionnement;
     }
 

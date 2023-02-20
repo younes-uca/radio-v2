@@ -17,8 +17,8 @@ public interface PrescriptionRadiotherapieDao extends AbstractRepository<Prescri
 
 
     @Modifying
-    @Query(value = "UPDATE PrescriptionRadiotherapie p set p.statutRadiotherapie.id=:statutRadiotherapieId , p.dateSimulation =:dateSimulation , p.immobilistion=:immobilistion , p.positionnement=:positionnement , p.fichierTraitements =:fichierTraitement , p.validateurSimulationDate =:validateurSimulationDate , p.validateurSimulation.id=:validateurId   WHERE p.id=:id")
-    public void updateAsSimuler(@Param("id") Long id, @Param("statutRadiotherapieId") Long statutRadiotherapieId, @Param("dateSimulation") LocalDateTime dateSimulation, @Param("immobilistion") String immobilistion, @Param("positionnement") String positionnement, @Param("fichierTraitement") String fichierTraitement, @Param("validateurSimulationDate") LocalDateTime validateurSimulationDate, @Param("validateurId") Long validateurId);
+    @Query(value = "UPDATE PrescriptionRadiotherapie p set p.statutRadiotherapie.id=:statutRadiotherapieId , p.dateSimulation =:dateSimulation , p.immobilistion.id=:immobilistion , p.positionnement.id=:positionnement , p.fichierTraitements =:fichierTraitement , p.validateurSimulationDate =:validateurSimulationDate , p.validateurSimulation.id=:validateurId   WHERE p.id=:id")
+    public void updateAsSimuler(@Param("id") Long id, @Param("statutRadiotherapieId") Long statutRadiotherapieId, @Param("dateSimulation") LocalDateTime dateSimulation, @Param("immobilistion") Long immobilistion, @Param("positionnement") Long positionnement, @Param("fichierTraitement") String fichierTraitement, @Param("validateurSimulationDate") LocalDateTime validateurSimulationDate, @Param("validateurId") Long validateurId);
 
     @Modifying
     @Query(value = "UPDATE PrescriptionRadiotherapie p set p.statutRadiotherapie.id=:statutRadiotherapieId , p.validateurSimulationDate =:validateurSimulationDate , p.validateurSimulation.id=:validateurId  WHERE p.id=:id")

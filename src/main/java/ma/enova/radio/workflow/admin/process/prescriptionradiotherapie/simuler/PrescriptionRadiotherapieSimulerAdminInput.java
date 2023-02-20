@@ -2,8 +2,12 @@ package ma.enova.radio.workflow.admin.process.prescriptionradiotherapie.simuler;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import ma.enova.radio.bean.core.Immobilistion;
+import ma.enova.radio.bean.core.Positionnement;
 import ma.enova.radio.bean.core.PrescriptionRadiotherapie;
+import ma.enova.radio.ws.dto.ImmobilistionDto;
 import ma.enova.radio.ws.dto.PersonnelDto;
+import ma.enova.radio.ws.dto.PositionnementDto;
 import ma.enova.radio.ws.dto.StatutRadiotherapieDto;
 import ma.enova.radio.zynerator.audit.Log;
 import ma.enova.radio.zynerator.process.AbstractProcessInput;
@@ -13,8 +17,8 @@ import ma.enova.radio.zynerator.process.AbstractProcessInput;
 public class PrescriptionRadiotherapieSimulerAdminInput extends AbstractProcessInput {
 
     private String dateSimulation;
-    private String immobilistion;
-    private String positionnement;
+    private ImmobilistionDto immobilistion;
+    private PositionnementDto positionnement;
     private String fichierTraitements;
     private PersonnelDto validateurSimulation; // to del just put it in output
     private String validateurSimulationDate;// to del just put it in output (now)
@@ -30,21 +34,19 @@ public class PrescriptionRadiotherapieSimulerAdminInput extends AbstractProcessI
         this.dateSimulation = dateSimulation;
     }
 
-    @Log
-    public String getImmobilistion() {
+    public ImmobilistionDto getImmobilistion() {
         return this.immobilistion;
     }
 
-    public void setImmobilistion(String immobilistion) {
+    public void setImmobilistion(ImmobilistionDto immobilistion) {
         this.immobilistion = immobilistion;
     }
 
-    @Log
-    public String getPositionnement() {
+    public PositionnementDto getPositionnement() {
         return this.positionnement;
     }
 
-    public void setPositionnement(String positionnement) {
+    public void setPositionnement(PositionnementDto positionnement) {
         this.positionnement = positionnement;
     }
 

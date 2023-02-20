@@ -24,8 +24,8 @@ public class PrescriptionRadiotherapieSaveAdminOutput extends AbstractProcessOut
     protected String dateDebutTraitement;
     protected String observation;
     protected String dateSimulation;
-    protected String immobilistion;
-    protected String positionnement;
+    protected ImmobilistionDto immobilistion;
+    protected PositionnementDto positionnement;
     protected String fichierTraitements;
     protected String validateurSimulationDate;
     protected String datePrevu;
@@ -150,21 +150,19 @@ public class PrescriptionRadiotherapieSaveAdminOutput extends AbstractProcessOut
         this.dateSimulation = dateSimulation;
     }
 
-    @Log
-    public String getImmobilistion() {
+    public ImmobilistionDto getImmobilistion() {
         return this.immobilistion;
     }
 
-    public void setImmobilistion(String immobilistion) {
+    public void setImmobilistion(ImmobilistionDto immobilistion) {
         this.immobilistion = immobilistion;
     }
 
-    @Log
-    public String getPositionnement() {
+    public PositionnementDto getPositionnement() {
         return this.positionnement;
     }
 
-    public void setPositionnement(String positionnement) {
+    public void setPositionnement(PositionnementDto positionnement) {
         this.positionnement = positionnement;
     }
 

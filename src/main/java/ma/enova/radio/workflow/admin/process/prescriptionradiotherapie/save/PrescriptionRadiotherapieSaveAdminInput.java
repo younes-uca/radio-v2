@@ -3,6 +3,8 @@ package ma.enova.radio.workflow.admin.process.prescriptionradiotherapie.save;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import ma.enova.radio.required.dto.dmc.DecisionTraitementDto;
+import ma.enova.radio.ws.converter.ImmobilistionConverter;
+import ma.enova.radio.ws.converter.PositionnementConverter;
 import ma.enova.radio.ws.dto.*;
 import ma.enova.radio.zynerator.audit.Log;
 import ma.enova.radio.zynerator.process.AbstractProcessInput;
@@ -21,8 +23,8 @@ public class PrescriptionRadiotherapieSaveAdminInput extends AbstractProcessInpu
     private String dateSouhaiteDebutTraitement;
     private String dateDebutTraitement;
     private String observation;
-    private String immobilistion;
-    private String positionnement;
+    private ImmobilistionDto immobilistion;
+    private PositionnementDto positionnement;
     private String datePrevu;
     private String compteRendu;
     private Boolean actif;
@@ -126,21 +128,19 @@ public class PrescriptionRadiotherapieSaveAdminInput extends AbstractProcessInpu
     }
 
 
-    @Log
-    public String getImmobilistion() {
+    public ImmobilistionDto getImmobilistion() {
         return this.immobilistion;
     }
 
-    public void setImmobilistion(String immobilistion) {
+    public void setImmobilistion(ImmobilistionDto immobilistion) {
         this.immobilistion = immobilistion;
     }
 
-    @Log
-    public String getPositionnement() {
+    public PositionnementDto getPositionnement() {
         return this.positionnement;
     }
 
-    public void setPositionnement(String positionnement) {
+    public void setPositionnement(PositionnementDto positionnement) {
         this.positionnement = positionnement;
     }
 

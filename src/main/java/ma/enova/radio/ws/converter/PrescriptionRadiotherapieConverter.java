@@ -2,6 +2,7 @@ package ma.enova.radio.ws.converter;
 
 import ma.enova.radio.bean.core.PrescriptionRadiotherapie;
 import ma.enova.radio.bean.history.PrescriptionRadiotherapieHistory;
+import ma.enova.radio.ws.dto.PositionnementDto;
 import ma.enova.radio.ws.dto.PrescriptionRadiotherapieDto;
 import ma.enova.radio.zynerator.converter.AbstractConverter;
 import ma.enova.radio.zynerator.util.DateUtil;
@@ -21,6 +22,10 @@ public class PrescriptionRadiotherapieConverter extends AbstractConverter<Prescr
     private StatutRadiotherapieConverter statutRadiotherapieConverter;
     @Autowired
     private FrequenceRadiotherapieConverter frequenceRadiotherapieConverter;
+    @Autowired
+    private ImmobilistionConverter immobilistionConverter;
+    @Autowired
+    private PositionnementConverter positionnementConverter;
     @Autowired
     private SiteConverter siteConverter;
     @Autowired
@@ -47,6 +52,8 @@ public class PrescriptionRadiotherapieConverter extends AbstractConverter<Prescr
     private GradeToxiciteRthConverter gradeToxiciteRthConverter;
     private boolean decisionTraitement;
     private boolean frequenceRadiotherapie;
+    private boolean   positionnement;
+    private boolean immobilistion;
     private boolean medecinPrescripteur;
     private boolean site;
     private boolean modaliteRadiotherapie;
@@ -90,10 +97,10 @@ public class PrescriptionRadiotherapieConverter extends AbstractConverter<Prescr
                 item.setObservation(dto.getObservation());
             if (StringUtil.isNotEmpty(dto.getDateSimulation()))
                 item.setDateSimulation(DateUtil.stringEnToDate(dto.getDateSimulation()));
-            if (StringUtil.isNotEmpty(dto.getImmobilistion()))
-                item.setImmobilistion(dto.getImmobilistion());
-            if (StringUtil.isNotEmpty(dto.getPositionnement()))
-                item.setPositionnement(dto.getPositionnement());
+            if (dto.getImmobilistion() != null)
+                item.setImmobilistion(immobilistionConverter.toItem(dto.getImmobilistion()));
+            if (dto.getPositionnement() != null)
+                item.setPositionnement(positionnementConverter.toItem(dto.getPositionnement()));
             if (StringUtil.isNotEmpty(dto.getFichierTraitements()))
                 item.setFichierTraitements(dto.getFichierTraitements());
             if (StringUtil.isNotEmpty(dto.getValidateurSimulationDate()))
@@ -115,7 +122,7 @@ public class PrescriptionRadiotherapieConverter extends AbstractConverter<Prescr
             if (StringUtil.isNotEmpty(dto.getNombreTotalSeance()))
                 item.setNombreTotalSeance(dto.getNombreTotalSeance());
 
-            if (this.frequenceRadiotherapie && dto.getFrequenceRadiotherapie()!=null)
+            if (this.frequenceRadiotherapie && dto.getFrequenceRadiotherapie() != null)
                 item.setFrequenceRadiotherapie(frequenceRadiotherapieConverter.toItem(dto.getFrequenceRadiotherapie()));
 
             if (this.decisionTraitement && dto.getDecisionTraitement() != null)
@@ -185,10 +192,10 @@ public class PrescriptionRadiotherapieConverter extends AbstractConverter<Prescr
                 dto.setObservation(item.getObservation());
             if (item.getDateSimulation() != null)
                 dto.setDateSimulation(DateUtil.dateTimeToString(item.getDateSimulation()));
-            if (StringUtil.isNotEmpty(item.getImmobilistion()))
-                dto.setImmobilistion(item.getImmobilistion());
-            if (StringUtil.isNotEmpty(item.getPositionnement()))
-                dto.setPositionnement(item.getPositionnement());
+            if (item.getImmobilistion() != null)
+                dto.setImmobilistion(immobilistionConverter.toDto(item.getImmobilistion()));
+            if (item.getPositionnement() != null)
+                dto.setPositionnement(positionnementConverter.toDto(item.getPositionnement()));
             if (StringUtil.isNotEmpty(item.getFichierTraitements()))
                 dto.setFichierTraitements(item.getFichierTraitements());
             if (item.getValidateurSimulationDate() != null)
@@ -283,7 +290,9 @@ public class PrescriptionRadiotherapieConverter extends AbstractConverter<Prescr
         validateurSimulation = value;
         patient = value;
         typeTraitement = value;
-        frequenceRadiotherapie=value;
+        frequenceRadiotherapie = value;
+        positionnement = value;
+        immobilistion = value;
     }
 
 
@@ -399,6 +408,62 @@ public class PrescriptionRadiotherapieConverter extends AbstractConverter<Prescr
         this.gradeToxiciteRthConverter = gradeToxiciteRthConverter;
     }
 
+
+    public FrequenceRadiotherapieConverter getFrequenceRadiotherapieConverter() {
+        return frequenceRadiotherapieConverter;
+    }
+
+    public void setFrequenceRadiotherapieConverter(FrequenceRadiotherapieConverter frequenceRadiotherapieConverter) {
+        this.frequenceRadiotherapieConverter = frequenceRadiotherapieConverter;
+    }
+
+    public ImmobilistionConverter getImmobilistionConverter() {
+        return immobilistionConverter;
+    }
+
+    public void setImmobilistionConverter(ImmobilistionConverter immobilistionConverter) {
+        this.immobilistionConverter = immobilistionConverter;
+    }
+
+    public PositionnementConverter getPositionnementConverter() {
+        return positionnementConverter;
+    }
+
+    public void setPositionnementConverter(PositionnementConverter positionnementConverter) {
+        this.positionnementConverter = positionnementConverter;
+    }
+
+    public DecisionTraitementConverter getDecisionTraitementConverter() {
+        return decisionTraitementConverter;
+    }
+
+    public void setDecisionTraitementConverter(DecisionTraitementConverter decisionTraitementConverter) {
+        this.decisionTraitementConverter = decisionTraitementConverter;
+    }
+
+    public boolean isFrequenceRadiotherapie() {
+        return frequenceRadiotherapie;
+    }
+
+    public void setFrequenceRadiotherapie(boolean frequenceRadiotherapie) {
+        this.frequenceRadiotherapie = frequenceRadiotherapie;
+    }
+
+    public boolean isPositionnement() {
+        return positionnement;
+    }
+
+    public void setPositionnement(boolean positionnement) {
+        this.positionnement = positionnement;
+    }
+
+    public boolean isImmobilistion() {
+        return immobilistion;
+    }
+
+    public void setImmobilistion(boolean immobilistion) {
+        this.immobilistion = immobilistion;
+    }
 
     public boolean isDecisionTraitement() {
         return this.decisionTraitement;

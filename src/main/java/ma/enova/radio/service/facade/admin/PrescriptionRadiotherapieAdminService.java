@@ -5,6 +5,7 @@ import ma.enova.radio.dao.criteria.core.PrescriptionRadiotherapieCriteria;
 import ma.enova.radio.dao.criteria.history.PrescriptionRadiotherapieHistoryCriteria;
 import ma.enova.radio.ws.dto.PrescriptionRadiotherapieDto;
 import ma.enova.radio.zynerator.service.IService;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -15,8 +16,8 @@ public interface PrescriptionRadiotherapieAdminService extends IService<Prescrip
     List<PrescriptionRadiotherapie> findByDecisionTraitementCode(String code);
 
     List<PrescriptionRadiotherapie> findByPatientIpp(String ipp);
-
-    void updateAsSimuler(Long id, Long statutRadiotherapieId, LocalDateTime dateSimulation, String immobilistion, String positionnement, String fichierTraitement, LocalDateTime validateurSimulationDate, Long validateurId);
+    @Transactional
+    void updateAsSimuler(Long id, Long statutRadiotherapieId, LocalDateTime dateSimulation, Long immobilistion, Long positionnement, String fichierTraitement, LocalDateTime validateurSimulationDate, Long validateurId);
 
     void updateAsValiderSimulation(Long id, Long statutRadiotherapieId, LocalDateTime validateurSimulationDate, Long validateurId);
 

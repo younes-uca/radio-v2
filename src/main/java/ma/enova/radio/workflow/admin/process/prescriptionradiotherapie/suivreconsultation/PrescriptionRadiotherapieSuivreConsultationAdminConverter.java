@@ -29,6 +29,10 @@ public class PrescriptionRadiotherapieSuivreConsultationAdminConverter extends A
     @Autowired
     private FrequenceRadiotherapieConverter frequenceRadiotherapieConverter;
     @Autowired
+    private ImmobilistionConverter immobilistionConverter;
+    @Autowired
+    private PositionnementConverter positionnementConverter;
+    @Autowired
     private ViseeConverter viseeConverter;
     @Autowired
     private SeanceRadiotherapieConverter seanceRadiotherapieConverter;
@@ -46,6 +50,8 @@ public class PrescriptionRadiotherapieSuivreConsultationAdminConverter extends A
     private GradeToxiciteRthConverter gradeToxiciteRthConverter;
     private boolean decisionTraitement;
     private boolean frequenceRadiotherapie;
+    private boolean immobilistion;
+    private boolean positionnement;
     private boolean medecinPrescripteur;
     private boolean site;
     private boolean modaliteRadiotherapie;
@@ -88,10 +94,7 @@ public class PrescriptionRadiotherapieSuivreConsultationAdminConverter extends A
                 item.setObservation(input.getObservation());
             if (StringUtil.isNotEmpty(input.getDateSimulation()))
                 item.setDateSimulation(DateUtil.stringEnToDate(input.getDateSimulation()));
-            if (StringUtil.isNotEmpty(input.getImmobilistion()))
-                item.setImmobilistion(input.getImmobilistion());
-            if (StringUtil.isNotEmpty(input.getPositionnement()))
-                item.setPositionnement(input.getPositionnement());
+
             if (StringUtil.isNotEmpty(input.getFichierTraitements()))
                 item.setFichierTraitements(input.getFichierTraitements());
             if (StringUtil.isNotEmpty(input.getValidateurSimulationDate()))
@@ -112,6 +115,12 @@ public class PrescriptionRadiotherapieSuivreConsultationAdminConverter extends A
                 item.setNombreSeanceRealise(input.getNombreSeanceRealise());
             if (StringUtil.isNotEmpty(input.getNombreTotalSeance()))
                 item.setNombreTotalSeance(input.getNombreTotalSeance());
+
+            if (this.immobilistion && input.getImmobilistion() != null)
+                item.setImmobilistion(immobilistionConverter.toItem(input.getImmobilistion()));
+            if (this.positionnement && input.getPositionnement() != null)
+                item.setPositionnement(positionnementConverter.toItem(input.getPositionnement()));
+
             if (this.decisionTraitement && input.getDecisionTraitement() != null)
                 item.setDecisionTraitement(decisionTraitementConverter.toItem(input.getDecisionTraitement()));
 
@@ -181,10 +190,7 @@ public class PrescriptionRadiotherapieSuivreConsultationAdminConverter extends A
                 output.setObservation(item.getObservation());
             if (item.getDateSimulation() != null)
                 output.setDateSimulation(DateUtil.dateTimeToString(item.getDateSimulation()));
-            if (StringUtil.isNotEmpty(item.getImmobilistion()))
-                output.setImmobilistion(item.getImmobilistion());
-            if (StringUtil.isNotEmpty(item.getPositionnement()))
-                output.setPositionnement(item.getPositionnement());
+
             if (StringUtil.isNotEmpty(item.getFichierTraitements()))
                 output.setFichierTraitements(item.getFichierTraitements());
             if (item.getValidateurSimulationDate() != null)
@@ -204,6 +210,8 @@ public class PrescriptionRadiotherapieSuivreConsultationAdminConverter extends A
                 output.setNombreSeanceRealise(item.getNombreSeanceRealise());
             if (StringUtil.isNotEmpty(item.getNombreTotalSeance()))
                 output.setNombreTotalSeance(item.getNombreTotalSeance());
+
+
             if (this.frequenceRadiotherapie && item.getFrequenceRadiotherapie() != null) {
                 output.setFrequenceRadiotherapie(frequenceRadiotherapieConverter.toDto(item.getFrequenceRadiotherapie()));
             }

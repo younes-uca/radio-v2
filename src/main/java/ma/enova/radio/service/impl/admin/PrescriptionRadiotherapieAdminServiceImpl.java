@@ -37,7 +37,7 @@ public class PrescriptionRadiotherapieAdminServiceImpl extends AbstractServiceIm
 
     @Override
     @Transactional
-    public void updateAsSimuler(Long id, Long statutRadiotherapieId, LocalDateTime dateSimulation, String immobilistion, String positionnement, String fichierTraitement, LocalDateTime validateurSimulationDate, Long validateurId) {
+    public void updateAsSimuler(Long id, Long statutRadiotherapieId, LocalDateTime dateSimulation, Long immobilistion, Long positionnement, String fichierTraitement, LocalDateTime validateurSimulationDate, Long validateurId) {
         dao.updateAsSimuler(id, statutRadiotherapieId, dateSimulation, immobilistion, positionnement, fichierTraitement, validateurSimulationDate, validateurId);
     }
 
@@ -126,6 +126,8 @@ public class PrescriptionRadiotherapieAdminServiceImpl extends AbstractServiceIm
             t.setValidateurSimulation(personnelService.findOrSave(t.getValidateurSimulation()));
             t.setPatient(patientService.findOrSave(t.getPatient()));
             t.setTypeTraitement(typeTraitementService.findOrSave(t.getTypeTraitement()));
+            t.setImmobilistion(immobilistionService.findOrSave(t.getImmobilistion()));
+            t.setImmobilistion(immobilistionService.findOrSave(t.getImmobilistion()));
         }
     }
 
@@ -256,6 +258,10 @@ public class PrescriptionRadiotherapieAdminServiceImpl extends AbstractServiceIm
     private StatutRadiotherapieAdminService statutRadiotherapieService;
     @Autowired
     private SiteAdminService siteService;
+    @Autowired
+    private ImmobilistionAdminService immobilistionService;
+    @Autowired
+    private PositionnementAdminServiceImpl positionnementAdminService;
     @Autowired
     private TypeTraitementAdminService typeTraitementService;
     @Autowired

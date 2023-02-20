@@ -29,6 +29,10 @@ public class PrescriptionRadiotherapieFinirTraitementAdminConverter extends Abst
     @Autowired
     private FrequenceRadiotherapieConverter frequenceRadiotherapieConverter;
     @Autowired
+    private ImmobilistionConverter immobilistionConverter;
+    @Autowired
+    private PositionnementConverter positionnementConverter;
+    @Autowired
     private ViseeConverter viseeConverter;
     @Autowired
     private SeanceRadiotherapieConverter seanceRadiotherapieConverter;
@@ -46,6 +50,9 @@ public class PrescriptionRadiotherapieFinirTraitementAdminConverter extends Abst
     private GradeToxiciteRthConverter gradeToxiciteRthConverter;
     private boolean decisionTraitement = true;
     private boolean frequenceRadiotherapie = true;
+    private boolean positionnement = true;
+    private boolean immobilisation = true;
+
     private boolean medecinPrescripteur = true;
     private boolean site = true;
     private boolean modaliteRadiotherapie = true;
@@ -104,10 +111,7 @@ public class PrescriptionRadiotherapieFinirTraitementAdminConverter extends Abst
                 output.setObservation(item.getObservation());
             if (item.getDateSimulation() != null)
                 output.setDateSimulation(DateUtil.dateTimeToString(item.getDateSimulation()));
-            if (StringUtil.isNotEmpty(item.getImmobilistion()))
-                output.setImmobilistion(item.getImmobilistion());
-            if (StringUtil.isNotEmpty(item.getPositionnement()))
-                output.setPositionnement(item.getPositionnement());
+
             if (StringUtil.isNotEmpty(item.getFichierTraitements()))
                 output.setFichierTraitements(item.getFichierTraitements());
             if (item.getValidateurSimulationDate() != null)
@@ -127,6 +131,14 @@ public class PrescriptionRadiotherapieFinirTraitementAdminConverter extends Abst
                 output.setNombreSeanceRealise(item.getNombreSeanceRealise());
             if (StringUtil.isNotEmpty(item.getNombreTotalSeance()))
                 output.setNombreTotalSeance(item.getNombreTotalSeance());
+
+
+            if (this.immobilisation && item.getImmobilistion() != null) {
+                output.setImmobilistion(immobilistionConverter.toDto(item.getImmobilistion()));
+            }
+            if (this.positionnement && item.getPositionnement() != null) {
+                output.setPositionnement(positionnementConverter.toDto(item.getPositionnement()));
+            }
 
             if (this.frequenceRadiotherapie && item.getFrequenceRadiotherapie() != null) {
                 output.setFrequenceRadiotherapie(frequenceRadiotherapieConverter.toDto(item.getFrequenceRadiotherapie()));

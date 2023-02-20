@@ -23,8 +23,8 @@ public class PrescriptionRadiotherapieFinirTraitementAdminOutput extends Abstrac
     private String dateSouhaiteDebutTraitement;
     private String observation;
     private String dateSimulation;
-    private String immobilistion;
-    private String positionnement;
+    private ImmobilistionDto immobilistion;
+    private PositionnementDto positionnement;
     private String fichierTraitements;
     private String validateurSimulationDate;
     private String datePrevu;
@@ -136,21 +136,19 @@ public class PrescriptionRadiotherapieFinirTraitementAdminOutput extends Abstrac
         this.dateSimulation = dateSimulation;
     }
 
-    @Log
-    public String getImmobilistion() {
+    public ImmobilistionDto getImmobilistion() {
         return this.immobilistion;
     }
 
-    public void setImmobilistion(String immobilistion) {
+    public void setImmobilistion(ImmobilistionDto immobilistion) {
         this.immobilistion = immobilistion;
     }
 
-    @Log
-    public String getPositionnement() {
+    public PositionnementDto getPositionnement() {
         return this.positionnement;
     }
 
-    public void setPositionnement(String positionnement) {
+    public void setPositionnement(PositionnementDto positionnement) {
         this.positionnement = positionnement;
     }
 

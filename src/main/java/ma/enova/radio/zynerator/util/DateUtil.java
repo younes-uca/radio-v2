@@ -16,8 +16,11 @@ public class DateUtil {
     public static final String DEFAULT_DATE_FORMAT = "dd/MM/yyyy";
     public static final String DEFAULT_DATE_FORMAT_SQL = "yyyy-MM-dd";
     public static final String DATE_TIME_FORMAT = "dd/MM/yyyy HH:mm";
+    public static final String DATE_TIME_FORMAT_FOR_BEAN = "yyyy-MM-dd'T'HH:mm";
+    public static final String DATE_TIME_FORMAT_SQL = "dd/MM/yyyy HH:mm";
     // public static final String DATE_FORMAT_WITH_HOUR = "dd/MM/yyyy HH:mm";
     public static final String DATE_FORMAT_WITH_HOUR = "MM/dd/yyyy HH:mm";
+    public static final String DATE_FORMAT_WITH_HOUR_FROM_BEAN = "MM/dd/yyyy HH:mm";
     public static final String DATE_FORMAT_NAME = "ddMMyyyyHHmmss";
     public final static String DATE_FORMAT_FILE = "yyMMddHHmmss";
     public static final String HOUR_FORMAT = "HH:mm:ss";
@@ -93,7 +96,7 @@ public class DateUtil {
     public static LocalDateTime stringToDateTime(final String strDate) {
         try {
             if (StringUtils.hasLength(strDate)) {
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_FORMAT_WITH_HOUR);
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_FORMAT_WITH_HOUR_FROM_BEAN);
                 return LocalDateTime.parse(strDate, formatter);
             }
         } catch (Exception e) {
@@ -136,6 +139,13 @@ public class DateUtil {
     public static String dateToString(final LocalDateTime date) {
         if (date != null) {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_TIME_FORMAT);
+            return date.format(formatter);
+        }
+        return "";
+    }
+    public static String dateToStringForBean(final LocalDateTime date) {
+        if (date != null) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_TIME_FORMAT_FOR_BEAN);
             return date.format(formatter);
         }
         return "";

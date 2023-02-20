@@ -1,8 +1,6 @@
 package ma.enova.radio.workflow.admin.process.prescriptionradiotherapie.simuler;
 
-import ma.enova.radio.bean.core.Personnel;
-import ma.enova.radio.bean.core.PrescriptionRadiotherapie;
-import ma.enova.radio.bean.core.StatutRadiotherapie;
+import ma.enova.radio.bean.core.*;
 import ma.enova.radio.constant.StatutRadioTherapieConstant;
 import ma.enova.radio.required.dto.dmc.DecisionTraitementDto;
 import ma.enova.radio.service.facade.admin.HistortiquePrescriptionRadiotherapieAdminService;
@@ -41,14 +39,26 @@ public class PrescriptionRadiotherapieSimulerAdminProcessImpl extends AbstractPr
     public void validate(PrescriptionRadiotherapieSimulerAdminInput input, PrescriptionRadiotherapie item, Result<PrescriptionRadiotherapieSimulerAdminInput, PrescriptionRadiotherapieSimulerAdminOutput, PrescriptionRadiotherapie> result) {
         validateStatutRadiotherapie(item.getStatutRadiotherapie(), result);
         validatePrescription(item.getId(), result);
-        validateValidateurSimulation(item.getValidateurSimulation(), result);
+        validateImmobilisation(item.getImmobilistion(), result);
+        validatePositionnement(item.getPositionnement(), result);
+        //validateValidateurSimulation(item.getValidateurSimulation(), result);
+    }
+
+    private void validatePositionnement(Positionnement positionnement, Result<PrescriptionRadiotherapieSimulerAdminInput, PrescriptionRadiotherapieSimulerAdminOutput, PrescriptionRadiotherapie> result) {
+        if (positionnement == null || positionnement.getId() == null)
+            result.addErrorMessage("radiotherapie.simuler.positionnement.obligatoire");
+    }
+
+    private void validateImmobilisation(Immobilistion immobilistion, Result<PrescriptionRadiotherapieSimulerAdminInput, PrescriptionRadiotherapieSimulerAdminOutput, PrescriptionRadiotherapie> result) {
+        if (immobilistion == null || immobilistion.getId() == null)
+            result.addErrorMessage("radiotherapie.simuler.immobilistion.obligatoire");
     }
 
 
     @Override
     public void run(PrescriptionRadiotherapieSimulerAdminInput input, PrescriptionRadiotherapie t, Result<PrescriptionRadiotherapieSimulerAdminInput, PrescriptionRadiotherapieSimulerAdminOutput, PrescriptionRadiotherapie> result) {
         Long validateurSimulationId = t.getValidateurSimulation().getId();
-        service.updateAsSimuler(t.getId(), t.getStatutRadiotherapie().getId(), t.getDateSimulation(), t.getImmobilistion(), t.getPositionnement(), t.getFichierTraitements(), t.getValidateurSimulationDate(), validateurSimulationId);
+        service.updateAsSimuler(t.getId(), t.getStatutRadiotherapie().getId(), t.getDateSimulation(), t.getImmobilistion().getId(), t.getPositionnement().getId(), t.getFichierTraitements(), t.getValidateurSimulationDate(), validateurSimulationId);
         histortiquePrescriptionRadiotherapieService.createFromPrescription(t.getId(), t.getStatutRadiotherapie());
         // queue to MS to create prescriptionRadioTherapie
         if (t.getDecisionTraitement() != null && t.getDecisionTraitement().getId() != null) {

@@ -1,5 +1,7 @@
 package ma.enova.radio.workflow.admin.process.prescriptionradiotherapie.simuler;
 
+import ma.enova.radio.bean.core.Immobilistion;
+import ma.enova.radio.bean.core.Positionnement;
 import ma.enova.radio.bean.core.PrescriptionRadiotherapie;
 import ma.enova.radio.ws.converter.*;
 import ma.enova.radio.zynerator.process.AbstractProcessConverter;
@@ -23,6 +25,10 @@ public class PrescriptionRadiotherapieSimulerAdminConverter extends AbstractProc
     private TypeTraitementConverter typeTraitementConverter;
     @Autowired
     private PersonnelConverter personnelConverter;
+    @Autowired
+    private ImmobilistionConverter immobilistionConverter;
+    @Autowired
+    private PositionnementConverter positionnementConverter;
     @Autowired
     private ViseeConverter viseeConverter;
     @Autowired
@@ -69,10 +75,7 @@ public class PrescriptionRadiotherapieSimulerAdminConverter extends AbstractProc
 
             if (StringUtil.isNotEmpty(input.getDateSimulation()))
                 item.setDateSimulation(DateUtil.stringEnToDate(input.getDateSimulation()));
-            if (StringUtil.isNotEmpty(input.getImmobilistion()))
-                item.setImmobilistion(input.getImmobilistion());
-            if (StringUtil.isNotEmpty(input.getPositionnement()))
-                item.setPositionnement(input.getPositionnement());
+
             if (StringUtil.isNotEmpty(input.getFichierTraitements()))
                 item.setFichierTraitements(input.getFichierTraitements());
             if (StringUtil.isNotEmpty(input.getValidateurSimulationDate()))
@@ -86,6 +89,10 @@ public class PrescriptionRadiotherapieSimulerAdminConverter extends AbstractProc
             if (input.getValidateurSimulation() != null)
                 item.setValidateurSimulation(personnelConverter.toItem(input.getValidateurSimulation()));
 
+            if (input.getImmobilistion() != null)
+                item.setImmobilistion(immobilistionConverter.toItem(input.getImmobilistion()));
+            if (input.getPositionnement() != null)
+                item.setPositionnement(positionnementConverter.toItem(input.getPositionnement()));
 
             return item;
         }
@@ -101,11 +108,11 @@ public class PrescriptionRadiotherapieSimulerAdminConverter extends AbstractProc
                 output.setId(item.getId());
 
             if (item.getDateSimulation() != null)
-                output.setDateSimulation(DateUtil.dateToString(item.getDateSimulation()));
-            if (StringUtil.isNotEmpty(item.getImmobilistion()))
-                output.setImmobilistion(item.getImmobilistion());
-            if (StringUtil.isNotEmpty(item.getPositionnement()))
-                output.setPositionnement(item.getPositionnement());
+                output.setDateSimulation(DateUtil.dateToStringForBean(item.getDateSimulation()));
+            if (item.getImmobilistion()!=null)
+                output.setImmobilistion(immobilistionConverter.toDto(item.getImmobilistion()));
+            if (item.getPositionnement() != null)
+                output.setPositionnement(positionnementConverter.toDto(item.getPositionnement()));
             if (StringUtil.isNotEmpty(item.getFichierTraitements()))
                 output.setFichierTraitements(item.getFichierTraitements());
             if (item.getValidateurSimulationDate() != null)
