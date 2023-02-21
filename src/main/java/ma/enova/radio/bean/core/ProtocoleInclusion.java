@@ -22,7 +22,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "protocole_inclusion")
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@SequenceGenerator(name="protocole_inclusion_seq",sequenceName="protocole_inclusion_seq",allocationSize=1, initialValue = 1)
+//@SequenceGenerator(name="protocole_inclusion_seq",sequenceName="protocole_inclusion_seq",allocationSize=1, initialValue = 1)
 public class ProtocoleInclusion   extends AuditBusinessObjectEnhanced  {
 
     private Long id;
@@ -48,7 +48,7 @@ public class ProtocoleInclusion   extends AuditBusinessObjectEnhanced  {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator="protocole_inclusion_seq")
+   // @GeneratedValue(strategy = GenerationType.SEQUENCE,generator="protocole_inclusion_seq")
     public Long getId(){
         return this.id;
     }

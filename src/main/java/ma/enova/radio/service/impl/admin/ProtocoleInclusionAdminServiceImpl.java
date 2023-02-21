@@ -30,9 +30,6 @@ ProtocoleInclusionHistoryDao, ProtocoleInclusionConverter> implements ProtocoleI
         return max != null ? max + 1 : 1;
     }
 
-    public ProtocoleInclusion findByReferenceEntity(ProtocoleInclusion t){
-        return  dao.findByCode(t.getCode());
-    }
     public void findOrSaveAssociatedObject(ProtocoleInclusion t){
         if( t != null) {
             t.setServices(servicesService.findOrSave(t.getServices()));
