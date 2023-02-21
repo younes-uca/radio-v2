@@ -1,4 +1,4 @@
-package  ma.enova.radio.ws.facade.admin;
+package ma.enova.radio.ws.facade.admin;
 
 
 import io.swagger.annotations.Api;
@@ -14,13 +14,11 @@ import ma.enova.radio.zynerator.controller.AbstractController;
 import ma.enova.radio.zynerator.dto.AuditEntityDto;
 import ma.enova.radio.zynerator.util.PaginatedList;
 import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import org.springframework.http.HttpStatus;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
-import ma.enova.radio.zynerator.process.Result;
 
 @Api("Manages specialite services")
 @RestController
@@ -31,6 +29,31 @@ public class SpecialiteRestAdmin  extends AbstractController<Specialite, Special
     @GetMapping("")
     public ResponseEntity<List<SpecialiteDto>> findAll() throws Exception {
         return super.findAll();
+    }
+    @ApiOperation("Updates the specified  specialite")
+    @PutMapping("")
+    public ResponseEntity<SpecialiteDto> update(@RequestBody SpecialiteDto dto) throws Exception {
+        return super.update(dto);
+    }
+    @ApiOperation("Finds a specialite by id")
+    @GetMapping("{id}")
+    public ResponseEntity<SpecialiteDto> findById(@PathVariable Long id, String[] includes, String[] excludes) throws Exception {
+        return super.findById(id, includes, excludes);
+    }
+    @ApiOperation("Saves the specified  specialite")
+    @PostMapping("")
+    public ResponseEntity<SpecialiteDto> save(@RequestBody SpecialiteDto dto) throws Exception {
+        return super.save(dto);
+    }
+    @ApiOperation("Delete list of specialite")
+    @DeleteMapping("/delete")
+    public ResponseEntity<List<SpecialiteDto>> delete(@RequestBody List<SpecialiteDto> listToDelete) throws Exception {
+        return super.delete(listToDelete);
+    }
+    @ApiOperation("Delete the specified specialite")
+    @DeleteMapping("")
+    public ResponseEntity<SpecialiteDto> delete(SpecialiteDto dto) throws Exception {
+            return super.delete(dto);
     }
     @ApiOperation("Updates the specified  specialite")
     @PutMapping("")

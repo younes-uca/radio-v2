@@ -7,21 +7,12 @@ import ma.enova.radio.dao.criteria.history.ConsultationRadiotherapieHistoryCrite
 import ma.enova.radio.dao.facade.core.ConsultationRadiotherapieDao;
 import ma.enova.radio.dao.facade.history.ConsultationRadiotherapieHistoryDao;
 import ma.enova.radio.dao.specification.core.ConsultationRadiotherapieSpecification;
-import ma.enova.radio.service.facade.admin.ConsultationRadiotherapieAdminService;
+import ma.enova.radio.service.facade.admin.*;
 import ma.enova.radio.ws.converter.ConsultationRadiotherapieConverter;
 import ma.enova.radio.ws.dto.ConsultationRadiotherapieDto;
 import ma.enova.radio.zynerator.service.AbstractServiceImpl;
-import org.springframework.stereotype.Service;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-
-import ma.enova.radio.service.facade.admin.TypeToxiciteRthAdminService ;
-import ma.enova.radio.service.facade.admin.TypeConsultationRadiotherapieAdminService ;
-import ma.enova.radio.service.facade.admin.PersonnelAdminService ;
-import ma.enova.radio.service.facade.admin.PrescriptionRadiotherapieAdminService ;
-import ma.enova.radio.service.facade.admin.GradeToxiciteRthAdminService ;
-
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -33,9 +24,12 @@ ConsultationRadiotherapieHistoryDao, ConsultationRadiotherapieConverter> impleme
     public void findOrSaveAssociatedObject(ConsultationRadiotherapie t){
         if( t != null) {
             t.setMedecin(personnelService.findOrSave(t.getMedecin()));
+            t.setSpecialite(specialiteService.findOrSave(t.getSpecialite()));
             t.setTypeConsultationRadiotherapie(typeConsultationRadiotherapieService.findOrSave(t.getTypeConsultationRadiotherapie()));
             t.setTypeToxiciteRth(typeToxiciteRthService.findOrSave(t.getTypeToxiciteRth()));
             t.setGradeToxiciteRth(gradeToxiciteRthService.findOrSave(t.getGradeToxiciteRth()));
+            t.setClassificationOms(classificationOmsService.findOrSave(t.getClassificationOms()));
+            t.setStatutMedicaleConsultationRadiotherapie(statutMedicaleConsultationRadiotherapieService.findOrSave(t.getStatutMedicaleConsultationRadiotherapie()));
             t.setPrescriptionRadiotherapie(prescriptionRadiotherapieService.findOrSave(t.getPrescriptionRadiotherapie()));
         }
     }
@@ -45,6 +39,12 @@ ConsultationRadiotherapieHistoryDao, ConsultationRadiotherapieConverter> impleme
     }
     public int deleteByMedecinId(Long id){
         return dao.deleteByMedecinId(id);
+    }
+    public List<ConsultationRadiotherapie> findBySpecialiteId(Long id){
+        return dao.findBySpecialiteId(id);
+    }
+    public int deleteBySpecialiteId(Long id){
+        return dao.deleteBySpecialiteId(id);
     }
     public List<ConsultationRadiotherapie> findByTypeConsultationRadiotherapieId(Long id){
         return dao.findByTypeConsultationRadiotherapieId(id);
@@ -64,6 +64,18 @@ ConsultationRadiotherapieHistoryDao, ConsultationRadiotherapieConverter> impleme
     public int deleteByGradeToxiciteRthId(Long id){
         return dao.deleteByGradeToxiciteRthId(id);
     }
+    public List<ConsultationRadiotherapie> findByClassificationOmsId(Long id){
+        return dao.findByClassificationOmsId(id);
+    }
+    public int deleteByClassificationOmsId(Long id){
+        return dao.deleteByClassificationOmsId(id);
+    }
+    public List<ConsultationRadiotherapie> findByStatutMedicaleConsultationRadiotherapieId(Long id){
+        return dao.findByStatutMedicaleConsultationRadiotherapieId(id);
+    }
+    public int deleteByStatutMedicaleConsultationRadiotherapieId(Long id){
+        return dao.deleteByStatutMedicaleConsultationRadiotherapieId(id);
+    }
     public List<ConsultationRadiotherapie> findByPrescriptionRadiotherapieId(Long id){
         return dao.findByPrescriptionRadiotherapieId(id);
     }
@@ -76,15 +88,21 @@ ConsultationRadiotherapieHistoryDao, ConsultationRadiotherapieConverter> impleme
     }
 
     @Autowired
+    private PersonnelAdminService personnelService ;
+    @Autowired
     private TypeToxiciteRthAdminService typeToxiciteRthService ;
+    @Autowired
+    private GradeToxiciteRthAdminService gradeToxiciteRthService ;
     @Autowired
     private TypeConsultationRadiotherapieAdminService typeConsultationRadiotherapieService ;
     @Autowired
-    private PersonnelAdminService personnelService ;
+    private StatutMedicaleConsultationRadiotherapieAdminService statutMedicaleConsultationRadiotherapieService ;
     @Autowired
     private PrescriptionRadiotherapieAdminService prescriptionRadiotherapieService ;
     @Autowired
-    private GradeToxiciteRthAdminService gradeToxiciteRthService ;
+    private ClassificationOmsAdminService classificationOmsService ;
+    @Autowired
+    private SpecialiteAdminService specialiteService ;
     public ConsultationRadiotherapieAdminServiceImpl(ConsultationRadiotherapieDao dao, ConsultationRadiotherapieHistoryDao historyDao, ConsultationRadiotherapieConverter converter) {
         super(dao, historyDao, converter);
     }

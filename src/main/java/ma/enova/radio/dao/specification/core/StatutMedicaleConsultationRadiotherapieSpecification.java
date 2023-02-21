@@ -1,8 +1,8 @@
 package ma.enova.radio.dao.specification.core;
 
 
-import ma.enova.radio.bean.core.Specialite;
-import ma.enova.radio.dao.criteria.core.SpecialiteCriteria;
+import ma.enova.radio.bean.core.StatutMedicaleConsultationRadiotherapie;
+import ma.enova.radio.dao.criteria.core.StatutMedicaleConsultationRadiotherapieCriteria;
 import ma.enova.radio.zynerator.specification.AbstractSpecification;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -12,10 +12,10 @@ import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SpecialiteSpecification extends AbstractSpecification<SpecialiteCriteria, Specialite> {
+public class StatutMedicaleConsultationRadiotherapieSpecification extends AbstractSpecification<StatutMedicaleConsultationRadiotherapieCriteria, StatutMedicaleConsultationRadiotherapie> {
 
     @Override
-    public Predicate toPredicate(Root<Specialite> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
+    public Predicate toPredicate(Root<StatutMedicaleConsultationRadiotherapie> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
         List<Predicate> predicates = new ArrayList<>();
             attachSearchElement(root, query, builder, predicates);
             if (criteria != null) {
@@ -32,11 +32,11 @@ public class SpecialiteSpecification extends AbstractSpecification<SpecialiteCri
     }
 
 
-    public SpecialiteSpecification(SpecialiteCriteria criteria) {
+    public StatutMedicaleConsultationRadiotherapieSpecification(StatutMedicaleConsultationRadiotherapieCriteria criteria) {
         super(criteria);
     }
 
-    public SpecialiteSpecification(SpecialiteCriteria criteria, boolean distinct) {
+    public StatutMedicaleConsultationRadiotherapieSpecification(StatutMedicaleConsultationRadiotherapieCriteria criteria, boolean distinct) {
         super(criteria, distinct);
     }
 

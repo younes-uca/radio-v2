@@ -1,34 +1,41 @@
-package  ma.enova.radio.ws.converter;
+package ma.enova.radio.ws.converter;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
+import ma.enova.radio.bean.core.ConsultationRadiotherapie;
 import ma.enova.radio.bean.core.PrescriptionRadiotherapie;
-
-import ma.enova.radio.zynerator.util.StringUtil;
+import ma.enova.radio.bean.history.ConsultationRadiotherapieHistory;
+import ma.enova.radio.ws.dto.ConsultationRadiotherapieDto;
 import ma.enova.radio.zynerator.converter.AbstractConverter;
 import ma.enova.radio.zynerator.util.DateUtil;
-import ma.enova.radio.bean.history.ConsultationRadiotherapieHistory;
-import ma.enova.radio.bean.core.ConsultationRadiotherapie;
-import ma.enova.radio.ws.dto.ConsultationRadiotherapieDto;
+import ma.enova.radio.zynerator.util.StringUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 @Component
 public class ConsultationRadiotherapieConverter extends AbstractConverter<ConsultationRadiotherapie, ConsultationRadiotherapieDto, ConsultationRadiotherapieHistory> {
 
     @Autowired
+    private PersonnelConverter personnelConverter ;
+    @Autowired
     private TypeToxiciteRthConverter typeToxiciteRthConverter ;
+    @Autowired
+    private GradeToxiciteRthConverter gradeToxiciteRthConverter ;
     @Autowired
     private TypeConsultationRadiotherapieConverter typeConsultationRadiotherapieConverter ;
     @Autowired
-    private PersonnelConverter personnelConverter ;
+    private StatutMedicaleConsultationRadiotherapieConverter statutMedicaleConsultationRadiotherapieConverter ;
     @Autowired
     private PrescriptionRadiotherapieConverter prescriptionRadiotherapieConverter ;
     @Autowired
-    private GradeToxiciteRthConverter gradeToxiciteRthConverter ;
+    private ClassificationOmsConverter classificationOmsConverter ;
+    @Autowired
+    private SpecialiteConverter specialiteConverter ;
     private boolean medecin;
+    private boolean specialite;
     private boolean typeConsultationRadiotherapie;
     private boolean typeToxiciteRth;
     private boolean gradeToxiciteRth;
+    private boolean classificationOms;
+    private boolean statutMedicaleConsultationRadiotherapie;
     private boolean prescriptionRadiotherapie;
 
     public  ConsultationRadiotherapieConverter(){
@@ -45,14 +52,13 @@ public class ConsultationRadiotherapieConverter extends AbstractConverter<Consul
                 item.setId(dto.getId());
             if(StringUtil.isNotEmpty(dto.getDateConsultation()))
                 item.setDateConsultation(DateUtil.stringEnToDate(dto.getDateConsultation()));
-            if(StringUtil.isNotEmpty(dto.getClassificationOms()))
-                item.setClassificationOms(dto.getClassificationOms());
             if(StringUtil.isNotEmpty(dto.getObservation()))
                 item.setObservation(dto.getObservation());
-            if(StringUtil.isNotEmpty(dto.getStatutMedicale()))
-                item.setStatutMedicale(dto.getStatutMedicale());
             if(this.medecin && dto.getMedecin()!=null)
                 item.setMedecin(personnelConverter.toItem(dto.getMedecin())) ;
+
+            if(this.specialite && dto.getSpecialite()!=null)
+                item.setSpecialite(specialiteConverter.toItem(dto.getSpecialite())) ;
 
             if(this.typeConsultationRadiotherapie && dto.getTypeConsultationRadiotherapie()!=null)
                 item.setTypeConsultationRadiotherapie(typeConsultationRadiotherapieConverter.toItem(dto.getTypeConsultationRadiotherapie())) ;
@@ -62,6 +68,12 @@ public class ConsultationRadiotherapieConverter extends AbstractConverter<Consul
 
             if(this.gradeToxiciteRth && dto.getGradeToxiciteRth()!=null)
                 item.setGradeToxiciteRth(gradeToxiciteRthConverter.toItem(dto.getGradeToxiciteRth())) ;
+
+            if(this.classificationOms && dto.getClassificationOms()!=null)
+                item.setClassificationOms(classificationOmsConverter.toItem(dto.getClassificationOms())) ;
+
+            if(this.statutMedicaleConsultationRadiotherapie && dto.getStatutMedicaleConsultationRadiotherapie()!=null)
+                item.setStatutMedicaleConsultationRadiotherapie(statutMedicaleConsultationRadiotherapieConverter.toItem(dto.getStatutMedicaleConsultationRadiotherapie())) ;
 
             if(dto.getPrescriptionRadiotherapie() != null && dto.getPrescriptionRadiotherapie().getId() != null){
                 item.setPrescriptionRadiotherapie(new PrescriptionRadiotherapie());
@@ -84,14 +96,13 @@ public class ConsultationRadiotherapieConverter extends AbstractConverter<Consul
                 dto.setId(item.getId());
             if(item.getDateConsultation()!=null)
                 dto.setDateConsultation(DateUtil.dateTimeToString(item.getDateConsultation()));
-            if(StringUtil.isNotEmpty(item.getClassificationOms()))
-                dto.setClassificationOms(item.getClassificationOms());
             if(StringUtil.isNotEmpty(item.getObservation()))
                 dto.setObservation(item.getObservation());
-            if(StringUtil.isNotEmpty(item.getStatutMedicale()))
-                dto.setStatutMedicale(item.getStatutMedicale());
         if(this.medecin && item.getMedecin()!=null) {
             dto.setMedecin(personnelConverter.toDto(item.getMedecin())) ;
+        }
+        if(this.specialite && item.getSpecialite()!=null) {
+            dto.setSpecialite(specialiteConverter.toDto(item.getSpecialite())) ;
         }
         if(this.typeConsultationRadiotherapie && item.getTypeConsultationRadiotherapie()!=null) {
             dto.setTypeConsultationRadiotherapie(typeConsultationRadiotherapieConverter.toDto(item.getTypeConsultationRadiotherapie())) ;
@@ -102,6 +113,12 @@ public class ConsultationRadiotherapieConverter extends AbstractConverter<Consul
         if(this.gradeToxiciteRth && item.getGradeToxiciteRth()!=null) {
             dto.setGradeToxiciteRth(gradeToxiciteRthConverter.toDto(item.getGradeToxiciteRth())) ;
         }
+        if(this.classificationOms && item.getClassificationOms()!=null) {
+            dto.setClassificationOms(classificationOmsConverter.toDto(item.getClassificationOms())) ;
+        }
+        if(this.statutMedicaleConsultationRadiotherapie && item.getStatutMedicaleConsultationRadiotherapie()!=null) {
+            dto.setStatutMedicaleConsultationRadiotherapie(statutMedicaleConsultationRadiotherapieConverter.toDto(item.getStatutMedicaleConsultationRadiotherapie())) ;
+        }
         if(this.prescriptionRadiotherapie && item.getPrescriptionRadiotherapie()!=null) {
             dto.setPrescriptionRadiotherapie(prescriptionRadiotherapieConverter.toDto(item.getPrescriptionRadiotherapie())) ;
         }
@@ -110,12 +127,35 @@ public class ConsultationRadiotherapieConverter extends AbstractConverter<Consul
     }
 
 
+    public void initObject(boolean value) {
+        this.medecin = value;
+        this.specialite = value;
+        this.typeConsultationRadiotherapie = value;
+        this.typeToxiciteRth = value;
+        this.gradeToxiciteRth = value;
+        this.classificationOms = value;
+        this.statutMedicaleConsultationRadiotherapie = value;
+        this.prescriptionRadiotherapie = value;
+    }
 
+
+    public PersonnelConverter getPersonnelConverter(){
+        return this.personnelConverter;
+    }
+    public void setPersonnelConverter(PersonnelConverter personnelConverter ){
+        this.personnelConverter = personnelConverter;
+    }
     public TypeToxiciteRthConverter getTypeToxiciteRthConverter(){
         return this.typeToxiciteRthConverter;
     }
     public void setTypeToxiciteRthConverter(TypeToxiciteRthConverter typeToxiciteRthConverter ){
         this.typeToxiciteRthConverter = typeToxiciteRthConverter;
+    }
+    public GradeToxiciteRthConverter getGradeToxiciteRthConverter(){
+        return this.gradeToxiciteRthConverter;
+    }
+    public void setGradeToxiciteRthConverter(GradeToxiciteRthConverter gradeToxiciteRthConverter ){
+        this.gradeToxiciteRthConverter = gradeToxiciteRthConverter;
     }
     public TypeConsultationRadiotherapieConverter getTypeConsultationRadiotherapieConverter(){
         return this.typeConsultationRadiotherapieConverter;
@@ -123,11 +163,11 @@ public class ConsultationRadiotherapieConverter extends AbstractConverter<Consul
     public void setTypeConsultationRadiotherapieConverter(TypeConsultationRadiotherapieConverter typeConsultationRadiotherapieConverter ){
         this.typeConsultationRadiotherapieConverter = typeConsultationRadiotherapieConverter;
     }
-    public PersonnelConverter getPersonnelConverter(){
-        return this.personnelConverter;
+    public StatutMedicaleConsultationRadiotherapieConverter getStatutMedicaleConsultationRadiotherapieConverter(){
+        return this.statutMedicaleConsultationRadiotherapieConverter;
     }
-    public void setPersonnelConverter(PersonnelConverter personnelConverter ){
-        this.personnelConverter = personnelConverter;
+    public void setStatutMedicaleConsultationRadiotherapieConverter(StatutMedicaleConsultationRadiotherapieConverter statutMedicaleConsultationRadiotherapieConverter ){
+        this.statutMedicaleConsultationRadiotherapieConverter = statutMedicaleConsultationRadiotherapieConverter;
     }
     public PrescriptionRadiotherapieConverter getPrescriptionRadiotherapieConverter(){
         return this.prescriptionRadiotherapieConverter;
@@ -135,11 +175,17 @@ public class ConsultationRadiotherapieConverter extends AbstractConverter<Consul
     public void setPrescriptionRadiotherapieConverter(PrescriptionRadiotherapieConverter prescriptionRadiotherapieConverter ){
         this.prescriptionRadiotherapieConverter = prescriptionRadiotherapieConverter;
     }
-    public GradeToxiciteRthConverter getGradeToxiciteRthConverter(){
-        return this.gradeToxiciteRthConverter;
+    public ClassificationOmsConverter getClassificationOmsConverter(){
+        return this.classificationOmsConverter;
     }
-    public void setGradeToxiciteRthConverter(GradeToxiciteRthConverter gradeToxiciteRthConverter ){
-        this.gradeToxiciteRthConverter = gradeToxiciteRthConverter;
+    public void setClassificationOmsConverter(ClassificationOmsConverter classificationOmsConverter ){
+        this.classificationOmsConverter = classificationOmsConverter;
+    }
+    public SpecialiteConverter getSpecialiteConverter(){
+        return this.specialiteConverter;
+    }
+    public void setSpecialiteConverter(SpecialiteConverter specialiteConverter ){
+        this.specialiteConverter = specialiteConverter;
     }
 
 
@@ -148,6 +194,12 @@ public class ConsultationRadiotherapieConverter extends AbstractConverter<Consul
     }
     public void  setMedecin(boolean medecin){
         this.medecin = medecin;
+    }
+    public boolean  isSpecialite(){
+        return this.specialite;
+    }
+    public void  setSpecialite(boolean specialite){
+        this.specialite = specialite;
     }
     public boolean  isTypeConsultationRadiotherapie(){
         return this.typeConsultationRadiotherapie;
@@ -166,6 +218,18 @@ public class ConsultationRadiotherapieConverter extends AbstractConverter<Consul
     }
     public void  setGradeToxiciteRth(boolean gradeToxiciteRth){
         this.gradeToxiciteRth = gradeToxiciteRth;
+    }
+    public boolean  isClassificationOms(){
+        return this.classificationOms;
+    }
+    public void  setClassificationOms(boolean classificationOms){
+        this.classificationOms = classificationOms;
+    }
+    public boolean  isStatutMedicaleConsultationRadiotherapie(){
+        return this.statutMedicaleConsultationRadiotherapie;
+    }
+    public void  setStatutMedicaleConsultationRadiotherapie(boolean statutMedicaleConsultationRadiotherapie){
+        this.statutMedicaleConsultationRadiotherapie = statutMedicaleConsultationRadiotherapie;
     }
     public boolean  isPrescriptionRadiotherapie(){
         return this.prescriptionRadiotherapie;

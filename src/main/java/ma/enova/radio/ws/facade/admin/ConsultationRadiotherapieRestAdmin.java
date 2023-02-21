@@ -1,4 +1,4 @@
-package  ma.enova.radio.ws.facade.admin;
+package ma.enova.radio.ws.facade.admin;
 
 
 import io.swagger.annotations.Api;
@@ -8,21 +8,21 @@ import ma.enova.radio.bean.history.ConsultationRadiotherapieHistory;
 import ma.enova.radio.dao.criteria.core.ConsultationRadiotherapieCriteria;
 import ma.enova.radio.dao.criteria.history.ConsultationRadiotherapieHistoryCriteria;
 import ma.enova.radio.service.facade.admin.ConsultationRadiotherapieAdminService;
+import ma.enova.radio.workflow.admin.process.consultationradiotherapie.save.ConsultationRadiotherapieSaveAdminInput;
+import ma.enova.radio.workflow.admin.process.consultationradiotherapie.save.ConsultationRadiotherapieSaveAdminOutput;
+import ma.enova.radio.workflow.admin.process.consultationradiotherapie.save.ConsultationRadiotherapieSaveAdminProcess;
 import ma.enova.radio.ws.converter.ConsultationRadiotherapieConverter;
 import ma.enova.radio.ws.dto.ConsultationRadiotherapieDto;
 import ma.enova.radio.zynerator.controller.AbstractController;
 import ma.enova.radio.zynerator.dto.AuditEntityDto;
+import ma.enova.radio.zynerator.process.Result;
 import ma.enova.radio.zynerator.util.PaginatedList;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
-import ma.enova.radio.zynerator.process.Result;
-import ma.enova.radio.workflow.admin.process.consultationradiotherapie.save.ConsultationRadiotherapieSaveAdminProcess ;
-import ma.enova.radio.workflow.admin.process.consultationradiotherapie.save.ConsultationRadiotherapieSaveAdminInput ;
-import ma.enova.radio.workflow.admin.process.consultationradiotherapie.save.ConsultationRadiotherapieSaveAdminOutput ;
 
 @Api("Manages consultationRadiotherapie services")
 @RestController
@@ -75,6 +75,16 @@ public class ConsultationRadiotherapieRestAdmin  extends AbstractController<Cons
     public int deleteByMedecinId(@PathVariable Long id){
         return service.deleteByMedecinId(id);
     }
+    @ApiOperation("find by specialite id")
+    @GetMapping("specialite/id/{id}")
+    public List<ConsultationRadiotherapie> findBySpecialiteId(@PathVariable Long id){
+        return service.findBySpecialiteId(id);
+    }
+    @ApiOperation("delete by specialite id")
+    @DeleteMapping("specialite/id/{id}")
+    public int deleteBySpecialiteId(@PathVariable Long id){
+        return service.deleteBySpecialiteId(id);
+    }
     @ApiOperation("find by typeConsultationRadiotherapie id")
     @GetMapping("typeConsultationRadiotherapie/id/{id}")
     public List<ConsultationRadiotherapie> findByTypeConsultationRadiotherapieId(@PathVariable Long id){
@@ -104,6 +114,26 @@ public class ConsultationRadiotherapieRestAdmin  extends AbstractController<Cons
     @DeleteMapping("gradeToxiciteRth/id/{id}")
     public int deleteByGradeToxiciteRthId(@PathVariable Long id){
         return service.deleteByGradeToxiciteRthId(id);
+    }
+    @ApiOperation("find by classificationOms id")
+    @GetMapping("classificationOms/id/{id}")
+    public List<ConsultationRadiotherapie> findByClassificationOmsId(@PathVariable Long id){
+        return service.findByClassificationOmsId(id);
+    }
+    @ApiOperation("delete by classificationOms id")
+    @DeleteMapping("classificationOms/id/{id}")
+    public int deleteByClassificationOmsId(@PathVariable Long id){
+        return service.deleteByClassificationOmsId(id);
+    }
+    @ApiOperation("find by statutMedicaleConsultationRadiotherapie id")
+    @GetMapping("statutMedicaleConsultationRadiotherapie/id/{id}")
+    public List<ConsultationRadiotherapie> findByStatutMedicaleConsultationRadiotherapieId(@PathVariable Long id){
+        return service.findByStatutMedicaleConsultationRadiotherapieId(id);
+    }
+    @ApiOperation("delete by statutMedicaleConsultationRadiotherapie id")
+    @DeleteMapping("statutMedicaleConsultationRadiotherapie/id/{id}")
+    public int deleteByStatutMedicaleConsultationRadiotherapieId(@PathVariable Long id){
+        return service.deleteByStatutMedicaleConsultationRadiotherapieId(id);
     }
     @ApiOperation("find by prescriptionRadiotherapie id")
     @GetMapping("prescriptionRadiotherapie/id/{id}")

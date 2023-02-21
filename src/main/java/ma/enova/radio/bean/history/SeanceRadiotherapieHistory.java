@@ -2,6 +2,7 @@ package ma.enova.radio.bean.history;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import ma.enova.radio.zynerator.history.HistBusinessObject;
+
 import javax.persistence.*;
 
 

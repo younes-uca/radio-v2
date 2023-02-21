@@ -1,30 +1,30 @@
 package ma.enova.radio.ws.converter;
 
-import ma.enova.radio.bean.core.Specialite;
-import ma.enova.radio.bean.history.SpecialiteHistory;
-import ma.enova.radio.ws.dto.SpecialiteDto;
+import ma.enova.radio.bean.core.StatutMedicaleConsultationRadiotherapie;
+import ma.enova.radio.bean.history.StatutMedicaleConsultationRadiotherapieHistory;
+import ma.enova.radio.ws.dto.StatutMedicaleConsultationRadiotherapieDto;
 import ma.enova.radio.zynerator.converter.AbstractConverter;
 import ma.enova.radio.zynerator.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class SpecialiteConverter extends AbstractConverter<Specialite, SpecialiteDto, SpecialiteHistory> {
+public class StatutMedicaleConsultationRadiotherapieConverter extends AbstractConverter<StatutMedicaleConsultationRadiotherapie, StatutMedicaleConsultationRadiotherapieDto, StatutMedicaleConsultationRadiotherapieHistory> {
 
     @Autowired
     private ServicesConverter servicesConverter ;
     private boolean services;
 
-    public  SpecialiteConverter(){
-        super(Specialite.class, SpecialiteDto.class, SpecialiteHistory.class);
+    public  StatutMedicaleConsultationRadiotherapieConverter(){
+        super(StatutMedicaleConsultationRadiotherapie.class, StatutMedicaleConsultationRadiotherapieDto.class, StatutMedicaleConsultationRadiotherapieHistory.class);
     }
 
     @Override
-    public Specialite toItem(SpecialiteDto dto) {
+    public StatutMedicaleConsultationRadiotherapie toItem(StatutMedicaleConsultationRadiotherapieDto dto) {
         if (dto == null) {
             return null;
         } else {
-        Specialite item = new Specialite();
+        StatutMedicaleConsultationRadiotherapie item = new StatutMedicaleConsultationRadiotherapie();
             if(StringUtil.isNotEmpty(dto.getId()))
                 item.setId(dto.getId());
             if(StringUtil.isNotEmpty(dto.getCode()))
@@ -41,11 +41,11 @@ public class SpecialiteConverter extends AbstractConverter<Specialite, Specialit
     }
 
     @Override
-    public SpecialiteDto toDto(Specialite item) {
+    public StatutMedicaleConsultationRadiotherapieDto toDto(StatutMedicaleConsultationRadiotherapie item) {
         if (item == null) {
             return null;
         } else {
-            SpecialiteDto dto = new SpecialiteDto();
+            StatutMedicaleConsultationRadiotherapieDto dto = new StatutMedicaleConsultationRadiotherapieDto();
             if(StringUtil.isNotEmpty(item.getId()))
                 dto.setId(item.getId());
             if(StringUtil.isNotEmpty(item.getCode()))

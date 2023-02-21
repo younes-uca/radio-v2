@@ -1,9 +1,9 @@
 package ma.enova.radio.workflow.admin.process.consultationradiotherapie.save;
-import ma.enova.radio.service.facade.admin.ConsultationRadiotherapieAdminService;
 
+import ma.enova.radio.bean.core.ConsultationRadiotherapie;
+import ma.enova.radio.service.facade.admin.ConsultationRadiotherapieAdminService;
 import ma.enova.radio.zynerator.process.AbstractProcessImpl;
 import ma.enova.radio.zynerator.process.Result;
-import ma.enova.radio.bean.core.ConsultationRadiotherapie;
 
 public class ConsultationRadiotherapieSaveAdminProcessImpl extends AbstractProcessImpl<ConsultationRadiotherapieSaveAdminInput, ConsultationRadiotherapieSaveAdminOutput,  ConsultationRadiotherapie,  ConsultationRadiotherapieSaveAdminConverter> implements ConsultationRadiotherapieSaveAdminProcess {
 

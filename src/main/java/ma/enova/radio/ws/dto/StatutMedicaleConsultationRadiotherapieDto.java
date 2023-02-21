@@ -7,7 +7,7 @@ import ma.enova.radio.zynerator.dto.AuditBaseDto;
 
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class SpecialiteDto  extends AuditBaseDto {
+public class StatutMedicaleConsultationRadiotherapieDto  extends AuditBaseDto {
 
     private String code  ;
     private String libelle  ;
@@ -15,7 +15,7 @@ public class SpecialiteDto  extends AuditBaseDto {
     private ServicesDto services ;
 
 
-    public SpecialiteDto(){
+    public StatutMedicaleConsultationRadiotherapieDto(){
         super();
     }
 

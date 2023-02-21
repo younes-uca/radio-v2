@@ -1,22 +1,11 @@
 package ma.enova.radio.bean.core;
 
-import java.util.Objects;
-
-import java.time.LocalDateTime;
-
-import java.util.Date;
-import com.fasterxml.jackson.annotation.JsonFormat;
-
-
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import ma.enova.radio.zynerator.audit.AuditBusinessObject;
+
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Objects;
-
-
-
-
 
 
 @Entity
@@ -28,21 +17,23 @@ public class ConsultationRadiotherapie   extends AuditBusinessObject  {
     private Long id;
 
     private LocalDateTime dateConsultation ;
-    @Column(length = 500)
-    private String classificationOms;
     @Lob
     @Column(columnDefinition="TEXT")
     private String observation;
-    @Column(length = 500)
-    private String statutMedicale;
 
     private Personnel medecin ;
+    
+    private Specialite specialite ;
     
     private TypeConsultationRadiotherapie typeConsultationRadiotherapie ;
     
     private TypeToxiciteRth typeToxiciteRth ;
     
     private GradeToxiciteRth gradeToxiciteRth ;
+    
+    private ClassificationOms classificationOms ;
+    
+    private StatutMedicaleConsultationRadiotherapie statutMedicaleConsultationRadiotherapie ;
     
     private PrescriptionRadiotherapie prescriptionRadiotherapie ;
     
@@ -78,6 +69,13 @@ public class ConsultationRadiotherapie   extends AuditBusinessObject  {
         this.medecin = medecin;
     }
     @ManyToOne(fetch = FetchType.LAZY)
+    public Specialite getSpecialite(){
+        return this.specialite;
+    }
+    public void setSpecialite(Specialite specialite){
+        this.specialite = specialite;
+    }
+    @ManyToOne(fetch = FetchType.LAZY)
     public TypeConsultationRadiotherapie getTypeConsultationRadiotherapie(){
         return this.typeConsultationRadiotherapie;
     }
@@ -98,10 +96,11 @@ public class ConsultationRadiotherapie   extends AuditBusinessObject  {
     public void setGradeToxiciteRth(GradeToxiciteRth gradeToxiciteRth){
         this.gradeToxiciteRth = gradeToxiciteRth;
     }
-    public String getClassificationOms(){
+    @ManyToOne(fetch = FetchType.LAZY)
+    public ClassificationOms getClassificationOms(){
         return this.classificationOms;
     }
-    public void setClassificationOms(String classificationOms){
+    public void setClassificationOms(ClassificationOms classificationOms){
         this.classificationOms = classificationOms;
     }
     public String getObservation(){
@@ -110,11 +109,12 @@ public class ConsultationRadiotherapie   extends AuditBusinessObject  {
     public void setObservation(String observation){
         this.observation = observation;
     }
-    public String getStatutMedicale(){
-        return this.statutMedicale;
+    @ManyToOne(fetch = FetchType.LAZY)
+    public StatutMedicaleConsultationRadiotherapie getStatutMedicaleConsultationRadiotherapie(){
+        return this.statutMedicaleConsultationRadiotherapie;
     }
-    public void setStatutMedicale(String statutMedicale){
-        this.statutMedicale = statutMedicale;
+    public void setStatutMedicaleConsultationRadiotherapie(StatutMedicaleConsultationRadiotherapie statutMedicaleConsultationRadiotherapie){
+        this.statutMedicaleConsultationRadiotherapie = statutMedicaleConsultationRadiotherapie;
     }
     @ManyToOne(fetch = FetchType.LAZY)
     public PrescriptionRadiotherapie getPrescriptionRadiotherapie(){

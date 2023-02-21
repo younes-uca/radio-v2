@@ -8,10 +8,10 @@ import java.util.Objects;
 
 
 @Entity
-@Table(name = "specialite")
+@Table(name = "classification_oms")
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@SequenceGenerator(name="specialite_seq",sequenceName="specialite_seq",allocationSize=1, initialValue = 1)
-public class Specialite   extends AuditBusinessObjectEnhanced  {
+@SequenceGenerator(name="classification_oms_seq",sequenceName="classification_oms_seq",allocationSize=1, initialValue = 1)
+public class ClassificationOms   extends AuditBusinessObjectEnhanced  {
 
     private Long id;
 
@@ -24,7 +24,7 @@ public class Specialite   extends AuditBusinessObjectEnhanced  {
     
 
 
-    public Specialite(){
+    public ClassificationOms(){
         super();
     }
 
@@ -33,7 +33,7 @@ public class Specialite   extends AuditBusinessObjectEnhanced  {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator="specialite_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator="classification_oms_seq")
     public Long getId(){
         return this.id;
     }
@@ -70,8 +70,8 @@ public class Specialite   extends AuditBusinessObjectEnhanced  {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Specialite specialite = (Specialite) o;
-        return id != null && id.equals(specialite.id);
+        ClassificationOms classificationOms = (ClassificationOms) o;
+        return id != null && id.equals(classificationOms.id);
     }
 
     @Override

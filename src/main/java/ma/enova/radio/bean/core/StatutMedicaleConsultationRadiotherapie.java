@@ -8,10 +8,10 @@ import java.util.Objects;
 
 
 @Entity
-@Table(name = "specialite")
+@Table(name = "statut_medicale_consultation_radiotherapie")
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@SequenceGenerator(name="specialite_seq",sequenceName="specialite_seq",allocationSize=1, initialValue = 1)
-public class Specialite   extends AuditBusinessObjectEnhanced  {
+@SequenceGenerator(name="statut_medicale_consultation_radiotherapie_seq",sequenceName="statut_medicale_consultation_radiotherapie_seq",allocationSize=1, initialValue = 1)
+public class StatutMedicaleConsultationRadiotherapie   extends AuditBusinessObjectEnhanced  {
 
     private Long id;
 
@@ -24,7 +24,7 @@ public class Specialite   extends AuditBusinessObjectEnhanced  {
     
 
 
-    public Specialite(){
+    public StatutMedicaleConsultationRadiotherapie(){
         super();
     }
 
@@ -33,7 +33,7 @@ public class Specialite   extends AuditBusinessObjectEnhanced  {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator="specialite_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator="statut_medicale_consultation_radiotherapie_seq")
     public Long getId(){
         return this.id;
     }
@@ -70,8 +70,8 @@ public class Specialite   extends AuditBusinessObjectEnhanced  {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Specialite specialite = (Specialite) o;
-        return id != null && id.equals(specialite.id);
+        StatutMedicaleConsultationRadiotherapie statutMedicaleConsultationRadiotherapie = (StatutMedicaleConsultationRadiotherapie) o;
+        return id != null && id.equals(statutMedicaleConsultationRadiotherapie.id);
     }
 
     @Override

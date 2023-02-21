@@ -1,27 +1,24 @@
-package  ma.enova.radio.ws.dto;
+package ma.enova.radio.ws.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import ma.enova.radio.zynerator.audit.Log;
 import ma.enova.radio.zynerator.dto.AuditBaseDto;
-import com.fasterxml.jackson.annotation.JsonInclude;
-
-    import java.util.Date;
-    import javax.persistence.Temporal;
-    import javax.persistence.TemporalType;
-    import com.fasterxml.jackson.annotation.JsonFormat;
 
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ConsultationRadiotherapieDto  extends AuditBaseDto {
 
     private String dateConsultation ;
-    private String classificationOms  ;
     private String observation  ;
-    private String statutMedicale  ;
 
     private PersonnelDto medecin ;
+    private SpecialiteDto specialite ;
     private TypeConsultationRadiotherapieDto typeConsultationRadiotherapie ;
     private TypeToxiciteRthDto typeToxiciteRth ;
     private GradeToxiciteRthDto gradeToxiciteRth ;
+    private ClassificationOmsDto classificationOms ;
+    private StatutMedicaleConsultationRadiotherapieDto statutMedicaleConsultationRadiotherapie ;
     private PrescriptionRadiotherapieDto prescriptionRadiotherapie ;
 
 
@@ -41,27 +38,11 @@ public class ConsultationRadiotherapieDto  extends AuditBaseDto {
     }
 
     @Log
-    public String getClassificationOms(){
-        return this.classificationOms;
-    }
-    public void setClassificationOms(String classificationOms){
-        this.classificationOms = classificationOms;
-    }
-
-    @Log
     public String getObservation(){
         return this.observation;
     }
     public void setObservation(String observation){
         this.observation = observation;
-    }
-
-    @Log
-    public String getStatutMedicale(){
-        return this.statutMedicale;
-    }
-    public void setStatutMedicale(String statutMedicale){
-        this.statutMedicale = statutMedicale;
     }
 
 
@@ -71,6 +52,13 @@ public class ConsultationRadiotherapieDto  extends AuditBaseDto {
 
     public void setMedecin(PersonnelDto medecin){
         this.medecin = medecin;
+    }
+    public SpecialiteDto getSpecialite(){
+        return this.specialite;
+    }
+
+    public void setSpecialite(SpecialiteDto specialite){
+        this.specialite = specialite;
     }
     public TypeConsultationRadiotherapieDto getTypeConsultationRadiotherapie(){
         return this.typeConsultationRadiotherapie;
@@ -92,6 +80,20 @@ public class ConsultationRadiotherapieDto  extends AuditBaseDto {
 
     public void setGradeToxiciteRth(GradeToxiciteRthDto gradeToxiciteRth){
         this.gradeToxiciteRth = gradeToxiciteRth;
+    }
+    public ClassificationOmsDto getClassificationOms(){
+        return this.classificationOms;
+    }
+
+    public void setClassificationOms(ClassificationOmsDto classificationOms){
+        this.classificationOms = classificationOms;
+    }
+    public StatutMedicaleConsultationRadiotherapieDto getStatutMedicaleConsultationRadiotherapie(){
+        return this.statutMedicaleConsultationRadiotherapie;
+    }
+
+    public void setStatutMedicaleConsultationRadiotherapie(StatutMedicaleConsultationRadiotherapieDto statutMedicaleConsultationRadiotherapie){
+        this.statutMedicaleConsultationRadiotherapie = statutMedicaleConsultationRadiotherapie;
     }
     public PrescriptionRadiotherapieDto getPrescriptionRadiotherapie(){
         return this.prescriptionRadiotherapie;
