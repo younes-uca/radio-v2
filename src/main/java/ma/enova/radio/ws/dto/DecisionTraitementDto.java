@@ -14,7 +14,8 @@ public class DecisionTraitementDto extends AuditBaseDto {
     private String etat;
     private Boolean urgence;
 
-    private DecisionTherapeutiqueDto decisionTherapeutique;
+    //    private DecisionTherapeutiqueDto decisionTherapeutique;
+    private String decisionTherapeutique;
     private StatutRadiotherapieDto statutRadiotherapie;
 
 
@@ -56,12 +57,19 @@ public class DecisionTraitementDto extends AuditBaseDto {
         this.urgence = urgence;
     }
 
+    /*
+        public DecisionTherapeutiqueDto getDecisionTherapeutique() {
+            return this.decisionTherapeutique;
+        }
 
-    public DecisionTherapeutiqueDto getDecisionTherapeutique() {
+        public void setDecisionTherapeutique(DecisionTherapeutiqueDto decisionTherapeutique) {
+            this.decisionTherapeutique = decisionTherapeutique;
+        }*/
+    public String getDecisionTherapeutique() {
         return this.decisionTherapeutique;
     }
 
-    public void setDecisionTherapeutique(DecisionTherapeutiqueDto decisionTherapeutique) {
+    public void setDecisionTherapeutique(String decisionTherapeutique) {
         this.decisionTherapeutique = decisionTherapeutique;
     }
 

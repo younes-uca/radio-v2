@@ -19,7 +19,7 @@ public class DecisionTraitement extends AuditBusinessObject {
     private String code;
     private LocalDate dateDecisionTraitement;
 
-    private DecisionTherapeutique decisionTherapeutique;
+    private String decisionTherapeutique;
 
     private Boolean urgence = false;
     private StatutRadiotherapie statutRadiotherapie;
@@ -58,7 +58,7 @@ public class DecisionTraitement extends AuditBusinessObject {
     public void setStatutRadiotherapie(StatutRadiotherapie statutRadiotherapie) {
         this.statutRadiotherapie = statutRadiotherapie;
     }
-
+/*
     @ManyToOne(fetch = FetchType.LAZY)
     public DecisionTherapeutique getDecisionTherapeutique() {
         return decisionTherapeutique;
@@ -66,16 +66,15 @@ public class DecisionTraitement extends AuditBusinessObject {
 
     public void setDecisionTherapeutique(DecisionTherapeutique decisionTherapeutique) {
         this.decisionTherapeutique = decisionTherapeutique;
-    }
+    }*/
 
-    /* @ManyToOne(fetch = FetchType.LAZY)
-    public DecisionTherapeutique getDecisionTherapeutique() {
+    public String getDecisionTherapeutique() {
         return decisionTherapeutique;
     }
 
-    public void setDecisionTherapeutique(DecisionTherapeutique decisionTherapeutique) {
+    public void setDecisionTherapeutique(String decisionTherapeutique) {
         this.decisionTherapeutique = decisionTherapeutique;
-    }*/
+    }
 
     public String getCode() {
         return code;

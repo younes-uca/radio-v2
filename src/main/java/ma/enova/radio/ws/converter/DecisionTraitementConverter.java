@@ -36,8 +36,10 @@ public class DecisionTraitementConverter extends AbstractConverter<DecisionTrait
             if (StringUtil.isNotEmpty(dto.getDateDecisionTraitement()))
                 item.setDateDecisionTraitement(DateUtil.stringToDate(dto.getDateDecisionTraitement()));
 
-            if (this.decisionTherapeutique && dto.getDecisionTherapeutique() != null)
-                item.setDecisionTherapeutique(decisionTherapeutiqueConverter.toItem(dto.getDecisionTherapeutique()));
+//            if (this.decisionTherapeutique && dto.getDecisionTherapeutique() != null)
+//                item.setDecisionTherapeutique(decisionTherapeutiqueConverter.toItem(dto.getDecisionTherapeutique()));
+            if (StringUtil.isNotEmpty(dto.getDecisionTherapeutique()))
+               item.setDecisionTherapeutique((dto.getDecisionTherapeutique()));
 
             if (this.statutRadiotherapie && StringUtil.isNotEmpty(dto.getEtat())) {
                 if (item.getStatutRadiotherapie() == null) {
@@ -61,9 +63,11 @@ public class DecisionTraitementConverter extends AbstractConverter<DecisionTrait
                 dto.setId(item.getId());
             if (StringUtil.isNotEmpty(item.getCode()))
                 dto.setCode(item.getCode());
-            if (this.decisionTherapeutique && item.getDecisionTherapeutique() != null) {
-                dto.setDecisionTherapeutique(decisionTherapeutiqueConverter.toDto(item.getDecisionTherapeutique()));
-            }
+            if (StringUtil.isNotEmpty(item.getDecisionTherapeutique()))
+                dto.setDecisionTherapeutique(item.getDecisionTherapeutique());
+//            if (this.decisionTherapeutique && item.getDecisionTherapeutique() != null) {
+//                dto.setDecisionTherapeutique(decisionTherapeutiqueConverter.toDto(item.getDecisionTherapeutique()));
+//            }
             if (item.getDateDecisionTraitement() != null)
                 dto.setDateDecisionTraitement(DateUtil.dateToString(item.getDateDecisionTraitement()));
             if (this.statutRadiotherapie && item.getStatutRadiotherapie() != null && StringUtil.isNotEmpty(item.getStatutRadiotherapie().getCode())) {

@@ -28,7 +28,7 @@ DecisionTraitementHistoryDao, DecisionTraitementConverter> implements DecisionTr
     }
     public void findOrSaveAssociatedObject(DecisionTraitement t){
         if( t != null) {
-            t.setDecisionTherapeutique(decisionTherapeutiqueService.findOrSave(t.getDecisionTherapeutique()));
+            //t.setDecisionTherapeutique(decisionTherapeutiqueService.findOrSave(t.getDecisionTherapeutique()));
             t.setStatutRadiotherapie(statutRadiotherapieService.findOrSave(t.getStatutRadiotherapie()));
         }
     }
@@ -52,7 +52,6 @@ DecisionTraitementHistoryDao, DecisionTraitementConverter> implements DecisionTr
         super.configure(DecisionTraitement.class, DecisionTraitementDto.class, DecisionTraitementHistory.class, DecisionTraitementHistoryCriteria.class, DecisionTraitementSpecification.class);
     }
 
-    @Autowired
     private DecisionTherapeutiqueAdminService decisionTherapeutiqueService ;
     @Autowired
     private StatutRadiotherapieAdminService statutRadiotherapieService ;
