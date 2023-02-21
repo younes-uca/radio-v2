@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import ma.enova.radio.bean.core.Immobilistion;
 import ma.enova.radio.bean.core.Positionnement;
-import ma.enova.radio.required.dto.dmc.DecisionTraitementDto;
+import ma.enova.radio.ws.dto.DecisionTraitementDto;
 import ma.enova.radio.ws.dto.*;
 import ma.enova.radio.zynerator.audit.Log;
 import ma.enova.radio.zynerator.process.AbstractProcessInput;

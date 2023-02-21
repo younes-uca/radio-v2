@@ -17,7 +17,6 @@ import java.util.Objects;
 @SequenceGenerator(name = "prescription_radiotherapie_seq", sequenceName = "prescription_radiotherapie_seq", allocationSize = 1, initialValue = 1)
 public class PrescriptionRadiotherapie extends AuditBusinessObject {
 
-    private Long id;
 
     @Temporal(TemporalType.DATE)
     private LocalDate datePrescription;
@@ -32,8 +31,6 @@ public class PrescriptionRadiotherapie extends AuditBusinessObject {
     @Column(columnDefinition = "TEXT")
     private String observation;
     private LocalDateTime dateSimulation;
-    private Immobilistion immobilistion;
-    private Positionnement positionnement;
     @Column(length = 500)
     private String fichierTraitements;
     private LocalDateTime validateurSimulationDate;
@@ -49,7 +46,9 @@ public class PrescriptionRadiotherapie extends AuditBusinessObject {
     private Integer nombreTotalSeance = 0;
 
     private DecisionTraitement decisionTraitement;
+    private String decisionTraitementCode;
     private Personnel medecinPrescripteur;
+    private Specialite specialite;
 
     private Site site;
 
@@ -61,7 +60,15 @@ public class PrescriptionRadiotherapie extends AuditBusinessObject {
 
     private StatutRadiotherapie statutRadiotherapie;
 
+    private Immobilistion immobilistion;
+
+    private Positionnement positionnement;
+
     private Personnel validateurSimulation;
+
+    private TypeToxiciteRth typeToxiciteRth;
+
+    private GradeToxiciteRth gradeToxiciteRth;
 
     private Patient patient;
 
@@ -88,6 +95,13 @@ public class PrescriptionRadiotherapie extends AuditBusinessObject {
         this.id = id;
     }
 
+    public String getDecisionTraitementCode() {
+        return this.decisionTraitementCode;
+    }
+
+    public void setDecisionTraitementCode(String decisionTraitementCode) {
+        this.decisionTraitementCode = decisionTraitementCode;
+    }
 
     @ManyToOne(fetch = FetchType.LAZY)
     public DecisionTraitement getDecisionTraitement() {
@@ -183,6 +197,15 @@ public class PrescriptionRadiotherapie extends AuditBusinessObject {
         this.etalement = etalement;
     }
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    public FrequenceRadiotherapie getFrequenceRadiotherapie() {
+        return this.frequenceRadiotherapie;
+    }
+
+    public void setFrequenceRadiotherapie(FrequenceRadiotherapie frequenceRadiotherapie) {
+        this.frequenceRadiotherapie = frequenceRadiotherapie;
+    }
+
     public LocalDate getDateSouhaiteDebutTraitement() {
         return this.dateSouhaiteDebutTraitement;
     }
@@ -252,14 +275,13 @@ public class PrescriptionRadiotherapie extends AuditBusinessObject {
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    public FrequenceRadiotherapie getFrequenceRadiotherapie() {
-        return frequenceRadiotherapie;
+    public Specialite getSpecialite() {
+        return specialite;
     }
 
-    public void setFrequenceRadiotherapie(FrequenceRadiotherapie frequenceRadiotherapie) {
-        this.frequenceRadiotherapie = frequenceRadiotherapie;
+    public void setSpecialite(Specialite specialite) {
+        this.specialite = specialite;
     }
-
 
     public LocalDateTime getValidateurSimulationDate() {
         return this.validateurSimulationDate;
@@ -358,6 +380,24 @@ public class PrescriptionRadiotherapie extends AuditBusinessObject {
 
     public void setNombreTotalSeance(Integer nombreTotalSeance) {
         this.nombreTotalSeance = nombreTotalSeance;
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    public TypeToxiciteRth getTypeToxiciteRth() {
+        return this.typeToxiciteRth;
+    }
+
+    public void setTypeToxiciteRth(TypeToxiciteRth typeToxiciteRth) {
+        this.typeToxiciteRth = typeToxiciteRth;
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    public GradeToxiciteRth getGradeToxiciteRth() {
+        return this.gradeToxiciteRth;
+    }
+
+    public void setGradeToxiciteRth(GradeToxiciteRth gradeToxiciteRth) {
+        this.gradeToxiciteRth = gradeToxiciteRth;
     }
 
     @ManyToOne(fetch = FetchType.LAZY)

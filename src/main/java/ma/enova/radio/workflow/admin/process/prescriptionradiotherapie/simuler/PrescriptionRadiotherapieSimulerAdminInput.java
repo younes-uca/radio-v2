@@ -2,7 +2,7 @@ package ma.enova.radio.workflow.admin.process.prescriptionradiotherapie.simuler;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import ma.enova.radio.required.dto.dmc.DecisionTraitementDto;
+import ma.enova.radio.ws.dto.DecisionTraitementDto;
 import ma.enova.radio.ws.dto.ImmobilistionDto;
 import ma.enova.radio.ws.dto.PersonnelDto;
 import ma.enova.radio.ws.dto.PositionnementDto;

@@ -1,9 +1,11 @@
-package ma.enova.radio.dao.specification.core;
+package  ma.enova.radio.dao.specification.core;
 
 
-import ma.enova.radio.bean.core.DecisionTraitement;
-import ma.enova.radio.required.criteria.dmc.DecisionTraitementCriteria;
+
+
 import ma.enova.radio.zynerator.specification.AbstractSpecification;
+import ma.enova.radio.dao.criteria.core.DecisionTraitementCriteria;
+import ma.enova.radio.bean.core.DecisionTraitement;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -20,11 +22,17 @@ public class DecisionTraitementSpecification extends AbstractSpecification<Decis
         attachSearchElement(root, query, builder, predicates);
         if (criteria != null) {
             addPredicateId("id", criteria);
-            addPredicate("code", criteria.getCode(), criteria.getCodeLike());
+            addPredicate("code", criteria.getCode(),criteria.getCodeLike());
             addPredicate("dateDecisionTraitement", criteria.getDateDecisionTraitement(), criteria.getDateDecisionTraitementFrom(), criteria.getDateDecisionTraitementTo());
-            addPredicate("decisionTherapeutique", criteria.getDecisionTherapeutique(), criteria.getDecisionTherapeutiqueLike());
-            addPredicate("statutRadiotherapie.id", criteria.getStatutRadiotherapieCriteria());
-            addPredicate("statutRadiotherapie.id", criteria.getStatutRadiotherapieCriterias());
+            addPredicateBool("urgence", criteria.getUrgence());
+            addPredicate("decisionTherapeutique.id", criteria.getDecisionTherapeutique());
+            addPredicate("decisionTherapeutique.id", criteria.getDecisionTherapeutiques());
+            addPredicate("decisionTherapeutique.name", criteria.getDecisionTherapeutique());
+            addPredicate("decisionTherapeutique.name", criteria.getDecisionTherapeutiques());
+            addPredicate("statutRadiotherapie.id", criteria.getStatutRadiotherapie());
+            addPredicate("statutRadiotherapie.id", criteria.getStatutRadiotherapies());
+            addPredicate("statutRadiotherapie.code", criteria.getStatutRadiotherapie());
+            addPredicate("statutRadiotherapie.code", criteria.getStatutRadiotherapies());
             addOrderAndFilter();
         }
         return getResult();
@@ -38,6 +46,7 @@ public class DecisionTraitementSpecification extends AbstractSpecification<Decis
     public DecisionTraitementSpecification(DecisionTraitementCriteria criteria, boolean distinct) {
         super(criteria, distinct);
     }
+
 
 
 }

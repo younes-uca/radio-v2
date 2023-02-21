@@ -22,10 +22,10 @@ public class SpecialiteSpecification extends AbstractSpecification<SpecialiteCri
                 addPredicateId("id", criteria);
                 addPredicate("code", criteria.getCode(),criteria.getCodeLike());
                 addPredicate("libelle", criteria.getLibelle(),criteria.getLibelleLike());
-                addPredicate("services.id", criteria.getServices());
+/*                addPredicate("services.id", criteria.getServices());
                 addPredicate("services.id", criteria.getServicess());
                 addPredicate("services.code", criteria.getServices());
-                addPredicate("services.code", criteria.getServicess());
+                addPredicate("services.code", criteria.getServicess());*/
                 addOrderAndFilter();
           }
         return getResult();

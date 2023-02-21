@@ -2,7 +2,7 @@ package ma.enova.radio.workflow.admin.process.prescriptionradiotherapie.finirtra
 
 import ma.enova.radio.bean.core.PrescriptionRadiotherapie;
 import ma.enova.radio.constant.StatutRadioTherapieConstant;
-import ma.enova.radio.required.dto.dmc.DecisionTraitementDto;
+import ma.enova.radio.ws.dto.DecisionTraitementDto;
 import ma.enova.radio.service.facade.admin.HistortiquePrescriptionRadiotherapieAdminService;
 import ma.enova.radio.service.facade.admin.PrescriptionRadiotherapieAdminService;
 import ma.enova.radio.service.facade.admin.StatutRadiotherapieAdminService;

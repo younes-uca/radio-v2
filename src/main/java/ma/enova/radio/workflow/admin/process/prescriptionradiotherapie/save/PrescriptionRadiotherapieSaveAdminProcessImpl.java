@@ -17,10 +17,11 @@ import java.util.List;
 public class PrescriptionRadiotherapieSaveAdminProcessImpl extends AbstractProcessImpl<PrescriptionRadiotherapieSaveAdminInput, PrescriptionRadiotherapieSaveAdminOutput, PrescriptionRadiotherapie, PrescriptionRadiotherapieSaveAdminConverter> implements PrescriptionRadiotherapieSaveAdminProcess {
 
     public void init(PrescriptionRadiotherapieSaveAdminInput input, PrescriptionRadiotherapie item) {
-        service.updateStatutPrescription(item,StatutRadioTherapieConstant.EN_ATTENTE_SIMULATION_CODE);
+        service.updateStatutPrescription(item, StatutRadioTherapieConstant.EN_ATTENTE_SIMULATION_CODE);
         if (item.getDecisionTraitement() != null) {
             item.getDecisionTraitement().setStatutRadiotherapie(item.getStatutRadiotherapie());
         }
+        item.setSpecialite(specialiteService.findOrSave(item.getSpecialite()));
         item.setPatient(patientService.findOrSave(item.getPatient()));
         item.setVisee(viseeService.findOrSave(item.getVisee()));
         item.setMedecinPrescripteur(personnelService.findOrSave(item.getMedecinPrescripteur()));
@@ -96,7 +97,7 @@ public class PrescriptionRadiotherapieSaveAdminProcessImpl extends AbstractProce
 
     private void validateFrequenceRadio(FrequenceRadiotherapie frequenceRadiotherapie, Result result) {
         List<String> frequenceRadiotherapies = Arrays.asList("heure", "jour", "semaine", "mois");
-        if (frequenceRadiotherapie!=null && StringUtil.isEmpty(frequenceRadiotherapie.getCode())) {
+        if (frequenceRadiotherapie != null && StringUtil.isEmpty(frequenceRadiotherapie.getCode())) {
             result.addErrorMessage("radiotherapie.save.frequenceRadiotherapie.obligatoire");
         } else if (!frequenceRadiotherapies.contains(frequenceRadiotherapie.getCode())) {
             result.addErrorMessage("radiotherapie.save.frequenceRadiotherapie.valeur-non-conforme");
@@ -169,11 +170,16 @@ public class PrescriptionRadiotherapieSaveAdminProcessImpl extends AbstractProce
     private ProtocoleInclusionAdminService protocoleInclusionService;
     private PersonnelAdminService personnelService;
     private PatientAdminService patientService;
+    private SpecialiteAdminService specialiteService;
     private ModaliteRadiotherapieAdminService modaliteRadiotherapieService;
     private SiteAdminService siteService;
     private DecisionTraitementAdminService decisionTraitementService;
 
-    public PrescriptionRadiotherapieSaveAdminProcessImpl(PrescriptionRadiotherapieAdminService service, StatutRadiotherapieAdminService statutRadiotherapieService, SeanceRadiotherapieAdminService seanceRadiotherapieService, PrescriptionRadiotherapieSaveAdminConverter converter, HistortiquePrescriptionRadiotherapieAdminService histortiquePrescriptionRadiotherapieService, ViseeAdminService viseeService, ProtocoleInclusionAdminService protocoleInclusionService, PersonnelAdminService personnelService, PatientAdminService patientService, ModaliteRadiotherapieAdminService modaliteRadiotherapieService, SiteAdminService siteService, DecisionTraitementAdminService decisionTraitementService) {
+    public PrescriptionRadiotherapieSaveAdminProcessImpl(PrescriptionRadiotherapieAdminService service, StatutRadiotherapieAdminService statutRadiotherapieService, SeanceRadiotherapieAdminService seanceRadiotherapieService,
+                                                         PrescriptionRadiotherapieSaveAdminConverter converter, HistortiquePrescriptionRadiotherapieAdminService histortiquePrescriptionRadiotherapieService,
+                                                         ViseeAdminService viseeService, ProtocoleInclusionAdminService protocoleInclusionService,
+                                                         PersonnelAdminService personnelService, PatientAdminService patientService, ModaliteRadiotherapieAdminService modaliteRadiotherapieService,
+                                                         SiteAdminService siteService, DecisionTraitementAdminService decisionTraitementService,SpecialiteAdminService specialiteService) {
         super(converter);
         this.service = service;
         this.seanceRadiotherapieService = seanceRadiotherapieService;
@@ -186,5 +192,6 @@ public class PrescriptionRadiotherapieSaveAdminProcessImpl extends AbstractProce
         this.modaliteRadiotherapieService = modaliteRadiotherapieService;
         this.siteService = siteService;
         this.decisionTraitementService = decisionTraitementService;
+        this.specialiteService = specialiteService;
     }
 }

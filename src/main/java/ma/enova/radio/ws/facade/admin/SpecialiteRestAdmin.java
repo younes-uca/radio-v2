@@ -30,31 +30,7 @@ public class SpecialiteRestAdmin  extends AbstractController<Specialite, Special
     public ResponseEntity<List<SpecialiteDto>> findAll() throws Exception {
         return super.findAll();
     }
-    @ApiOperation("Updates the specified  specialite")
-    @PutMapping("")
-    public ResponseEntity<SpecialiteDto> update(@RequestBody SpecialiteDto dto) throws Exception {
-        return super.update(dto);
-    }
-    @ApiOperation("Finds a specialite by id")
-    @GetMapping("{id}")
-    public ResponseEntity<SpecialiteDto> findById(@PathVariable Long id, String[] includes, String[] excludes) throws Exception {
-        return super.findById(id, includes, excludes);
-    }
-    @ApiOperation("Saves the specified  specialite")
-    @PostMapping("")
-    public ResponseEntity<SpecialiteDto> save(@RequestBody SpecialiteDto dto) throws Exception {
-        return super.save(dto);
-    }
-    @ApiOperation("Delete list of specialite")
-    @DeleteMapping("/delete")
-    public ResponseEntity<List<SpecialiteDto>> delete(@RequestBody List<SpecialiteDto> listToDelete) throws Exception {
-        return super.delete(listToDelete);
-    }
-    @ApiOperation("Delete the specified specialite")
-    @DeleteMapping("")
-    public ResponseEntity<SpecialiteDto> delete(SpecialiteDto dto) throws Exception {
-            return super.delete(dto);
-    }
+
     @ApiOperation("Updates the specified  specialite")
     @PutMapping("")
     public ResponseEntity<SpecialiteDto> update(@RequestBody SpecialiteDto dto) throws Exception {

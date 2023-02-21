@@ -1,7 +1,6 @@
 package ma.enova.radio.dao.criteria.core;
 
 
-import ma.enova.radio.required.criteria.dmc.DecisionTraitementCriteria;
 import ma.enova.radio.zynerator.criteria.BaseCriteria;
 
 import java.time.LocalDateTime;

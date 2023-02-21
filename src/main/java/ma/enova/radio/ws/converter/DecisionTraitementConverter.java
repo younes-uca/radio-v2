@@ -3,7 +3,7 @@ package ma.enova.radio.ws.converter;
 import ma.enova.radio.bean.core.DecisionTraitement;
 import ma.enova.radio.bean.core.StatutRadiotherapie;
 import ma.enova.radio.bean.history.DecisionTraitementHistory;
-import ma.enova.radio.required.dto.dmc.DecisionTraitementDto;
+import ma.enova.radio.ws.dto.DecisionTraitementDto;
 import ma.enova.radio.zynerator.converter.AbstractConverter;
 import ma.enova.radio.zynerator.util.DateUtil;
 import ma.enova.radio.zynerator.util.StringUtil;
@@ -12,9 +12,11 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class DecisionTraitementConverter extends AbstractConverter<DecisionTraitement, DecisionTraitementDto, DecisionTraitementHistory> {
-
+    @Autowired
+    private DecisionTherapeutiqueConverter decisionTherapeutiqueConverter;
     @Autowired
     private StatutRadiotherapieConverter statutRadiotherapieConverter;
+    private boolean decisionTherapeutique;
     private boolean statutRadiotherapie;
 
     public DecisionTraitementConverter() {
@@ -34,8 +36,9 @@ public class DecisionTraitementConverter extends AbstractConverter<DecisionTrait
             if (StringUtil.isNotEmpty(dto.getDateDecisionTraitement()))
                 item.setDateDecisionTraitement(DateUtil.stringToDate(dto.getDateDecisionTraitement()));
 
-            if (StringUtil.isNotEmpty(dto.getDecisionTherapeutique()))
-                item.setDecisionTherapeutique(dto.getDecisionTherapeutique());
+            if (this.decisionTherapeutique && dto.getDecisionTherapeutique() != null)
+                item.setDecisionTherapeutique(decisionTherapeutiqueConverter.toItem(dto.getDecisionTherapeutique()));
+
             if (this.statutRadiotherapie && StringUtil.isNotEmpty(dto.getEtat())) {
                 if (item.getStatutRadiotherapie() == null) {
                     item.setStatutRadiotherapie(new StatutRadiotherapie());
@@ -58,11 +61,11 @@ public class DecisionTraitementConverter extends AbstractConverter<DecisionTrait
                 dto.setId(item.getId());
             if (StringUtil.isNotEmpty(item.getCode()))
                 dto.setCode(item.getCode());
-            if (StringUtil.isNotEmpty(item.getDecisionTherapeutique()))
-                dto.setDecisionTherapeutique(item.getDecisionTherapeutique());
+            if (this.decisionTherapeutique && item.getDecisionTherapeutique() != null) {
+                dto.setDecisionTherapeutique(decisionTherapeutiqueConverter.toDto(item.getDecisionTherapeutique()));
+            }
             if (item.getDateDecisionTraitement() != null)
-                dto.setDecisionTherapeutique(DateUtil.dateToString(item.getDateDecisionTraitement()));
-
+                dto.setDateDecisionTraitement(DateUtil.dateToString(item.getDateDecisionTraitement()));
             if (this.statutRadiotherapie && item.getStatutRadiotherapie() != null && StringUtil.isNotEmpty(item.getStatutRadiotherapie().getCode())) {
                 dto.setCode(item.getStatutRadiotherapie().getCode());
             }
@@ -76,6 +79,22 @@ public class DecisionTraitementConverter extends AbstractConverter<DecisionTrait
 
     public void setStatutRadiotherapieConverter(StatutRadiotherapieConverter statutRadiotherapieConverter) {
         this.statutRadiotherapieConverter = statutRadiotherapieConverter;
+    }
+
+    public DecisionTherapeutiqueConverter getDecisionTherapeutiqueConverter() {
+        return decisionTherapeutiqueConverter;
+    }
+
+    public void setDecisionTherapeutiqueConverter(DecisionTherapeutiqueConverter decisionTherapeutiqueConverter) {
+        this.decisionTherapeutiqueConverter = decisionTherapeutiqueConverter;
+    }
+
+    public boolean isDecisionTherapeutique() {
+        return decisionTherapeutique;
+    }
+
+    public void setDecisionTherapeutique(boolean decisionTherapeutique) {
+        this.decisionTherapeutique = decisionTherapeutique;
     }
 
     public boolean isStatutRadiotherapie() {

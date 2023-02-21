@@ -2,11 +2,14 @@ package ma.enova.radio.workflow.admin.process.prescriptionradiotherapie.simuler;
 
 import ma.enova.radio.bean.core.*;
 import ma.enova.radio.constant.StatutRadioTherapieConstant;
-import ma.enova.radio.required.dto.dmc.DecisionTraitementDto;
+//import ma.enova.radio.ws.dto.DecisionTraitementDto;
+import ma.enova.radio.ws.dto.DecisionTraitementDto;
+
 import ma.enova.radio.service.facade.admin.HistortiquePrescriptionRadiotherapieAdminService;
 import ma.enova.radio.service.facade.admin.PrescriptionRadiotherapieAdminService;
 import ma.enova.radio.service.facade.admin.StatutRadiotherapieAdminService;
 import ma.enova.radio.service.util.admin.RabbitUtils;
+import ma.enova.radio.ws.dto.DecisionTraitementDto;
 import ma.enova.radio.zynerator.process.AbstractProcessImpl;
 import ma.enova.radio.zynerator.process.Result;
 import org.springframework.amqp.core.AmqpTemplate;

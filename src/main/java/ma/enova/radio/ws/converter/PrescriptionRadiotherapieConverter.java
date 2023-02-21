@@ -2,7 +2,6 @@ package ma.enova.radio.ws.converter;
 
 import ma.enova.radio.bean.core.PrescriptionRadiotherapie;
 import ma.enova.radio.bean.history.PrescriptionRadiotherapieHistory;
-import ma.enova.radio.ws.dto.PositionnementDto;
 import ma.enova.radio.ws.dto.PrescriptionRadiotherapieDto;
 import ma.enova.radio.zynerator.converter.AbstractConverter;
 import ma.enova.radio.zynerator.util.DateUtil;
@@ -50,9 +49,14 @@ public class PrescriptionRadiotherapieConverter extends AbstractConverter<Prescr
     private ProtocoleInclusionConverter protocoleInclusionConverter;
     @Autowired
     private GradeToxiciteRthConverter gradeToxiciteRthConverter;
+    @Autowired
+    private SpecialiteConverter specialiteConverter;
+    private boolean typeToxiciteRth;
+    private boolean gradeToxiciteRth;
+    private boolean specialite;
     private boolean decisionTraitement;
     private boolean frequenceRadiotherapie;
-    private boolean   positionnement;
+    private boolean positionnement;
     private boolean immobilistion;
     private boolean medecinPrescripteur;
     private boolean site;
@@ -122,6 +126,12 @@ public class PrescriptionRadiotherapieConverter extends AbstractConverter<Prescr
                 item.setNombreSeanceRealise(dto.getNombreSeanceRealise());
             if (StringUtil.isNotEmpty(dto.getNombreTotalSeance()))
                 item.setNombreTotalSeance(dto.getNombreTotalSeance());
+
+            if (this.typeToxiciteRth && dto.getTypeToxiciteRth() != null)
+                item.setTypeToxiciteRth(typeToxiciteRthConverter.toItem(dto.getTypeToxiciteRth()));
+
+            if (this.gradeToxiciteRth && dto.getGradeToxiciteRth() != null)
+                item.setGradeToxiciteRth(gradeToxiciteRthConverter.toItem(dto.getGradeToxiciteRth()));
 
             if (this.frequenceRadiotherapie && dto.getFrequenceRadiotherapie() != null)
                 item.setFrequenceRadiotherapie(frequenceRadiotherapieConverter.toItem(dto.getFrequenceRadiotherapie()));
@@ -240,6 +250,17 @@ public class PrescriptionRadiotherapieConverter extends AbstractConverter<Prescr
             if (this.statutRadiotherapie && item.getStatutRadiotherapie() != null) {
                 dto.setStatutRadiotherapie(statutRadiotherapieConverter.toDto(item.getStatutRadiotherapie()));
             }
+
+            if (this.gradeToxiciteRth && item.getGradeToxiciteRth() != null) {
+                dto.setGradeToxiciteRth(gradeToxiciteRthConverter.toDto(item.getGradeToxiciteRth()));
+            }
+            if (this.typeToxiciteRth && item.getTypeToxiciteRth() != null) {
+                dto.setTypeToxiciteRth(typeToxiciteRthConverter.toDto(item.getTypeToxiciteRth()));
+            }
+            if (this.specialite && item.getSpecialite() != null) {
+                dto.setSpecialite(specialiteConverter.toDto(item.getSpecialite()));
+            }
+
             if (this.validateurSimulation && item.getValidateurSimulation() != null) {
                 dto.setValidateurSimulation(personnelConverter.toDto(item.getValidateurSimulation()));
             }
@@ -294,6 +315,9 @@ public class PrescriptionRadiotherapieConverter extends AbstractConverter<Prescr
         frequenceRadiotherapie = value;
         positionnement = value;
         immobilistion = value;
+        typeToxiciteRth = value;
+        gradeToxiciteRth = value;
+        specialite = value;
     }
 
 
