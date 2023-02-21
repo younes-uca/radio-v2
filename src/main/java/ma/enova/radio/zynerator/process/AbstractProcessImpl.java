@@ -25,8 +25,10 @@ public abstract class AbstractProcessImpl<I extends AbstractProcessInput, K exte
         }
         K output = converter.toOutput(item);
         result.setOutput(output);
+        result.constructTextMessage();
         result.setItem(null);
         return result;
+
     }
 
     public void cleanUp(I input, T item, Result<I, K, T> result) {

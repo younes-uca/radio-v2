@@ -1,4 +1,4 @@
-package ma.enova.radio.service.util.admin;
+package ma.enova.radio.zynerator.process;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -12,12 +12,12 @@ import java.util.Locale;
 @Configuration
 public class LocaleConfiguration {
 
-    @Value("S{app.baseName}")
+    @Value("${app.basename}")
     private String baseName;
-    @Value("S{aap.defaultLocalel}")
+    @Value("${app.defaultlocal}")
     private String defaultLocalel;
 
-    @Bean(name = "texts")
+    @Bean(name="process-messages")
     public ResourceBundleMessageSource messageSource() {
         ResourceBundleMessageSource rs = new ResourceBundleMessageSource();
         rs.setBasename(baseName);

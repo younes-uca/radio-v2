@@ -2,13 +2,14 @@ package ma.enova.radio.zynerator.process;
 
 public class Message {
     private String label;
+    private String code;
     private MessageType messageType;
 
     public Message() {
     }
 
-    public Message(String label, MessageType messageType) {
-        this.label = label;
+    public Message(String code, MessageType messageType) {
+        this.code = code;
         this.messageType = messageType;
     }
 
@@ -26,5 +27,22 @@ public class Message {
 
     public void setMessageType(MessageType messageType) {
         this.messageType = messageType;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    @Override
+    public String toString() {
+        return "Message{" +
+                ", code='" + code + '\'' +
+                "label='" + label + '\'' +
+                ", messageType=" + messageType +
+                '}';
     }
 }

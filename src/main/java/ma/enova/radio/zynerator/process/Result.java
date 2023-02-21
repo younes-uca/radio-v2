@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class Result<I, K,T> {
+public class Result<I, K, T> {
     private List<Message> messages;
     private List<Message> errors;
     private List<Message> warnings;
@@ -51,8 +51,9 @@ public class Result<I, K,T> {
         this.status = HttpStatus.SEE_OTHER;
     }
 
-    private void addMessage(String messageText, MessageType type) {
-        Message myMessage = new Message(messageText, type);
+    private void addMessage(String messageCode, MessageType type) {
+        Message myMessage = new Message(messageCode, type);
+        myMessage.setLabel(Translator.toLocal(messageCode));
         if (type == MessageType.ERROR) {
             getErrors().add(myMessage);
         } else if (type == MessageType.WARN) {
@@ -61,14 +62,19 @@ public class Result<I, K,T> {
             getInfos().add(myMessage);
         }
         getMessages().add(myMessage);
-        constructTextMessage(myMessage);
     }
 
-    private void constructTextMessage(Message myMessage) {
+    public void constructTextMessage() {
         if (message == null) {
             message = "";
         }
-        message += myMessage.getLabel();
+        List<Message> myMessages = getMessages();
+        for (Message myMessage : myMessages) {
+            message += myMessage.getLabel() + ", ";
+        }
+        if (!message.isEmpty())
+            message = message.substring(0, message.length() - 2);
+
     }
 
     public List<Message> getMessages() {
