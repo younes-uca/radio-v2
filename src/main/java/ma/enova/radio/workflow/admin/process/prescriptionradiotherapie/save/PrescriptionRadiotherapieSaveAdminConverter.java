@@ -1,6 +1,7 @@
 package ma.enova.radio.workflow.admin.process.prescriptionradiotherapie.save;
 
 import ma.enova.radio.bean.core.PrescriptionRadiotherapie;
+import ma.enova.radio.bean.core.StatutRadiotherapie;
 import ma.enova.radio.ws.converter.*;
 import ma.enova.radio.zynerator.process.AbstractProcessConverter;
 import ma.enova.radio.zynerator.util.DateUtil;
@@ -11,7 +12,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class PrescriptionRadiotherapieSaveAdminConverter extends AbstractProcessConverter<PrescriptionRadiotherapieSaveAdminInput, PrescriptionRadiotherapieSaveAdminOutput, PrescriptionRadiotherapie> {
-
 
 
     public PrescriptionRadiotherapieSaveAdminConverter() {
@@ -79,8 +79,12 @@ public class PrescriptionRadiotherapieSaveAdminConverter extends AbstractProcess
             if (input.getProtocoleInclusion() != null)
                 item.setProtocoleInclusion(protocoleInclusionConverter.toItem(input.getProtocoleInclusion()));
 
-            if (input.getStatutRadiotherapie() != null)
-                item.setStatutRadiotherapie(statutRadiotherapieConverter.toItem(input.getStatutRadiotherapie()));
+            if (StringUtil.isNotEmpty(input.getStatutRadiotherapie()) && !input.equals("NONE")) {
+                //item.setStatutRadiotherapie(statutRadiotherapieConverter.toItem(input.getStatutRadiotherapie()));
+
+                item.setStatutRadiotherapie(new StatutRadiotherapie(input.getStatutRadiotherapie()));
+
+            }
 
             if (input.getPatient() != null)
                 item.setPatient(patientConverter.toItem(input.getPatient()));
@@ -193,7 +197,6 @@ public class PrescriptionRadiotherapieSaveAdminConverter extends AbstractProcess
             return output;
         }
     }
-
 
 
     @Autowired

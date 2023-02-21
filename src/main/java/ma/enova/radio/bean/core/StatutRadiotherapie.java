@@ -24,6 +24,9 @@ public class StatutRadiotherapie extends AuditBusinessObject {
     @Column(length = 500)
     private String style;
 
+    public StatutRadiotherapie(String code) {
+        this.code = code;
+    }
 
     public StatutRadiotherapie() {
         super();
