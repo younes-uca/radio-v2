@@ -18,6 +18,9 @@ public class PrescriptionRadiotherapieSaveAdminProcessImpl extends AbstractProce
 
     public void init(PrescriptionRadiotherapieSaveAdminInput input, PrescriptionRadiotherapie item) {
         service.updateStatutPrescription(item,StatutRadioTherapieConstant.EN_ATTENTE_SIMULATION_CODE);
+        if (item.getDecisionTraitement() != null) {
+            item.getDecisionTraitement().setStatutRadiotherapie(item.getStatutRadiotherapie());
+        }
         item.setPatient(patientService.findOrSave(item.getPatient()));
         item.setVisee(viseeService.findOrSave(item.getVisee()));
         item.setMedecinPrescripteur(personnelService.findOrSave(item.getMedecinPrescripteur()));

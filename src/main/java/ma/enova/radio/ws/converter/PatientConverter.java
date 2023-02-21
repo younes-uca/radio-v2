@@ -1,6 +1,5 @@
 package  ma.enova.radio.ws.converter;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 
@@ -38,7 +37,7 @@ public class PatientConverter extends AbstractConverter<Patient, PatientDto, Pat
             if(StringUtil.isNotEmpty(dto.getDateNaissance()))
                 item.setDateNaissance(DateUtil.stringEnToDate(dto.getDateNaissance()));
             if(StringUtil.isNotEmpty(dto.getNumeroClassement()))
-                item.setNumeroClassement(dto.getNumeroClassement());
+                item.setNumeroDeClassement(dto.getNumeroClassement());
             if(StringUtil.isNotEmpty(dto.getAge()))
                 item.setAge(dto.getAge());
 
@@ -65,8 +64,8 @@ public class PatientConverter extends AbstractConverter<Patient, PatientDto, Pat
                 dto.setSexe(item.getSexe());
             if(item.getDateNaissance()!=null)
                 dto.setDateNaissance(DateUtil.dateTimeToString(item.getDateNaissance()));
-            if(StringUtil.isNotEmpty(item.getNumeroClassement()))
-                dto.setNumeroClassement(item.getNumeroClassement());
+            if(StringUtil.isNotEmpty(item.getNumeroDeClassement()))
+                dto.setNumeroClassement(item.getNumeroDeClassement());
             if(StringUtil.isNotEmpty(item.getAge()))
                 dto.setAge(item.getAge());
         return dto;

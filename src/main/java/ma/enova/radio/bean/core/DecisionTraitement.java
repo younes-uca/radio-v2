@@ -21,7 +21,7 @@ public class DecisionTraitement extends AuditBusinessObject {
 
     private String decisionTherapeutique;
 
-    private Boolean urgence;
+    private Boolean urgence = false;
     private StatutRadiotherapie statutRadiotherapie;
 
 

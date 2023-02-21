@@ -80,6 +80,7 @@ public class PrescriptionRadiotherapieConverter extends AbstractConverter<Prescr
             PrescriptionRadiotherapie item = new PrescriptionRadiotherapie();
             if (StringUtil.isNotEmpty(dto.getId()))
                 item.setId(dto.getId());
+
             if (StringUtil.isNotEmpty(dto.getDatePrescription()))
                 item.setDatePrescription(DateUtil.stringToDate(dto.getDatePrescription()));
             if (dto.getRcc() != null)

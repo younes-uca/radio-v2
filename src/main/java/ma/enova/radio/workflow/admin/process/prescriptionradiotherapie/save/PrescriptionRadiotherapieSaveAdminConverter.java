@@ -12,57 +12,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class PrescriptionRadiotherapieSaveAdminConverter extends AbstractProcessConverter<PrescriptionRadiotherapieSaveAdminInput, PrescriptionRadiotherapieSaveAdminOutput, PrescriptionRadiotherapie> {
 
-    @Autowired
-    private ModaliteRadiotherapieConverter modaliteRadiotherapieConverter;
-    @Autowired
-    private HistortiquePrescriptionRadiotherapieConverter histortiquePrescriptionRadiotherapieConverter;
-    @Autowired
-    private StatutRadiotherapieConverter statutRadiotherapieConverter;
-    @Autowired
-    private SiteConverter siteConverter;
-    @Autowired
-    private TypeTraitementConverter typeTraitementConverter;
-    @Autowired
-    private PersonnelConverter personnelConverter;
-    @Autowired
-    private ViseeConverter viseeConverter;
-    @Autowired
-    private SeanceRadiotherapieConverter seanceRadiotherapieConverter;
-    @Autowired
-    private PatientConverter patientConverter;
-    @Autowired
-    private ConsultationRadiotherapieConverter consultationRadiotherapieConverter;
-    @Autowired
-    private TypeToxiciteRthConverter typeToxiciteRthConverter;
-    @Autowired
-    private TypeConsultationRadiotherapieConverter typeConsultationRadiotherapieConverter;
-    @Autowired
-    private ProtocoleInclusionConverter protocoleInclusionConverter;
-    @Autowired
-    private GradeToxiciteRthConverter gradeToxiciteRthConverter;
-    @Autowired
-    private DecisionTraitementConverter decisionTraitementConverter;
-    @Autowired
-    private FrequenceRadiotherapieConverter frequenceRadiotherapieConverter;
-    @Autowired
-    private PositionnementConverter positionnementConverter;
-    @Autowired
-    private ImmobilistionConverter immobilistionConverter;
-    private boolean decisionTraitement = true;
-    private boolean frequenceRadiotherapie = true;
-    private boolean medecinPrescripteur = true;
-    private boolean site = true;
-    private boolean modaliteRadiotherapie = true;
-    private boolean visee = true;
-    private boolean protocoleInclusion = true;
-    private boolean statutRadiotherapie = true;
-    private boolean validateurSimulation = true;
-    private boolean patient = true;
-    private boolean typeTraitement = true;
-    private boolean immobilisation = true;
-    private boolean positionnement = true;
-    private boolean consultationRadiotherapies = true;
-    private boolean seanceRadiotherapies = true;
+
 
     public PrescriptionRadiotherapieSaveAdminConverter() {
         super(PrescriptionRadiotherapie.class, PrescriptionRadiotherapieSaveAdminInput.class, PrescriptionRadiotherapieSaveAdminOutput.class);
@@ -104,44 +54,44 @@ public class PrescriptionRadiotherapieSaveAdminConverter extends AbstractProcess
                 item.setNombreTotalSeance(input.getNombreTotalSeance());
 
 
-            if (this.frequenceRadiotherapie && input.getFrequenceRadiotherapie() != null)
+            if (input.getFrequenceRadiotherapie() != null)
                 item.setFrequenceRadiotherapie(frequenceRadiotherapieConverter.toItem(input.getFrequenceRadiotherapie()));
 
-            if (this.decisionTraitement && input.getDecisionTraitement() != null) {
+            if (input.getDecisionTraitement() != null) {
                 item.setDecisionTraitement(decisionTraitementConverter.toItem(input.getDecisionTraitement()));
                 if (StringUtil.isNotEmpty(input.getDecisionTraitement().getLabel())) {
                     item.getDecisionTraitement().setCode(input.getDecisionTraitement().getLabel());
                 }
             }
 
-            if (this.medecinPrescripteur && input.getMedecinPrescripteur() != null)
+            if (input.getMedecinPrescripteur() != null)
                 item.setMedecinPrescripteur(personnelConverter.toItem(input.getMedecinPrescripteur()));
 
-            if (this.site && input.getSite() != null)
+            if (input.getSite() != null)
                 item.setSite(siteConverter.toItem(input.getSite()));
 
-            if (this.modaliteRadiotherapie && input.getModaliteRadiotherapie() != null)
+            if (input.getModaliteRadiotherapie() != null)
                 item.setModaliteRadiotherapie(modaliteRadiotherapieConverter.toItem(input.getModaliteRadiotherapie()));
 
-            if (this.visee && input.getVisee() != null)
+            if (input.getVisee() != null)
                 item.setVisee(viseeConverter.toItem(input.getVisee()));
 
-            if (this.protocoleInclusion && input.getProtocoleInclusion() != null)
+            if (input.getProtocoleInclusion() != null)
                 item.setProtocoleInclusion(protocoleInclusionConverter.toItem(input.getProtocoleInclusion()));
 
-            if (this.statutRadiotherapie && input.getStatutRadiotherapie() != null)
+            if (input.getStatutRadiotherapie() != null)
                 item.setStatutRadiotherapie(statutRadiotherapieConverter.toItem(input.getStatutRadiotherapie()));
 
-            if (this.patient && input.getPatient() != null)
+            if (input.getPatient() != null)
                 item.setPatient(patientConverter.toItem(input.getPatient()));
 
-            if (this.typeTraitement && input.getTypeTraitement() != null)
+            if (input.getTypeTraitement() != null)
                 item.setTypeTraitement(typeTraitementConverter.toItem(input.getTypeTraitement()));
 
-            if (this.immobilisation && input.getImmobilistion() != null)
+            if (input.getImmobilistion() != null)
                 item.setImmobilistion(immobilistionConverter.toItem(input.getImmobilistion()));
 
-            if (this.positionnement && input.getPositionnement() != null)
+            if (input.getPositionnement() != null)
                 item.setPositionnement(positionnementConverter.toItem(input.getPositionnement()));
 
             return item;
@@ -200,49 +150,44 @@ public class PrescriptionRadiotherapieSaveAdminConverter extends AbstractProcess
             if (item.getPositionnement() != null)
                 output.setPositionnement(positionnementConverter.toDto(item.getPositionnement()));
 
-            if (this.decisionTraitement && item.getFrequenceRadiotherapie() != null)
+            if (item.getFrequenceRadiotherapie() != null)
                 output.setFrequenceRadiotherapie(frequenceRadiotherapieConverter.toDto(item.getFrequenceRadiotherapie()));
-            if (this.decisionTraitement && item.getDecisionTraitement() != null) {
+            if (item.getDecisionTraitement() != null) {
                 output.setDecisionTraitement(decisionTraitementConverter.toDto(item.getDecisionTraitement()));
             }
-            if (this.medecinPrescripteur && item.getMedecinPrescripteur() != null) {
+            if (item.getMedecinPrescripteur() != null) {
                 output.setMedecinPrescripteur(personnelConverter.toDto(item.getMedecinPrescripteur()));
             }
-            if (this.site && item.getSite() != null) {
+            if (item.getSite() != null) {
                 output.setSite(siteConverter.toDto(item.getSite()));
             }
-            if (this.modaliteRadiotherapie && item.getModaliteRadiotherapie() != null) {
+            if (item.getModaliteRadiotherapie() != null) {
                 output.setModaliteRadiotherapie(modaliteRadiotherapieConverter.toDto(item.getModaliteRadiotherapie()));
             }
-            if (this.visee && item.getVisee() != null) {
+            if (item.getVisee() != null) {
                 output.setVisee(viseeConverter.toDto(item.getVisee()));
             }
-            if (this.protocoleInclusion && item.getProtocoleInclusion() != null) {
+            if (item.getProtocoleInclusion() != null) {
                 output.setProtocoleInclusion(protocoleInclusionConverter.toDto(item.getProtocoleInclusion()));
             }
-            if (this.statutRadiotherapie && item.getStatutRadiotherapie() != null) {
+            if (item.getStatutRadiotherapie() != null) {
                 output.setStatutRadiotherapie(statutRadiotherapieConverter.toDto(item.getStatutRadiotherapie()));
             }
-            if (this.validateurSimulation && item.getValidateurSimulation() != null) {
+            if (item.getValidateurSimulation() != null) {
                 output.setValidateurSimulation(personnelConverter.toDto(item.getValidateurSimulation()));
             }
-            if (this.patient && item.getPatient() != null) {
+            if (item.getPatient() != null) {
                 output.setPatient(patientConverter.toDto(item.getPatient()));
             }
-            if (this.typeTraitement && item.getTypeTraitement() != null) {
+            if (item.getTypeTraitement() != null) {
                 output.setTypeTraitement(typeTraitementConverter.toDto(item.getTypeTraitement()));
             }
 
-            if (this.seanceRadiotherapies && ListUtil.isNotEmpty(item.getSeanceRadiotherapies())) {
+            if (ListUtil.isNotEmpty(item.getSeanceRadiotherapies())) {
                 seanceRadiotherapieConverter.init(true);
                 seanceRadiotherapieConverter.setPrescriptionRadiotherapie(false);
                 output.setSeanceRadiotherapies(seanceRadiotherapieConverter.toDto(item.getSeanceRadiotherapies()));
                 seanceRadiotherapieConverter.setPrescriptionRadiotherapie(true);
-               /* output.setSeanceRadiotherapies(item.getSeanceRadiotherapies().stream().map(e ->
-                        new SeanceRadiotherapieDto(e.getId(), e.getCodeRdv(), DateUtil.dateTimeToString(e.getDatePrevu()),
-                                DateUtil.dateTimeToString(e.getDateRealisation()), e.getNumero(),
-                                e.getEffectue(), e.getCr(), e.getFichiers())).collect(Collectors.toList()));*/
-
             }
 
             return output;
@@ -250,212 +195,41 @@ public class PrescriptionRadiotherapieSaveAdminConverter extends AbstractProcess
     }
 
 
-    public ModaliteRadiotherapieConverter getModaliteRadiotherapieConverter() {
-        return this.modaliteRadiotherapieConverter;
-    }
 
-    public void setModaliteRadiotherapieConverter(ModaliteRadiotherapieConverter modaliteRadiotherapieConverter) {
-        this.modaliteRadiotherapieConverter = modaliteRadiotherapieConverter;
-    }
-
-    public HistortiquePrescriptionRadiotherapieConverter getHistortiquePrescriptionRadiotherapieConverter() {
-        return this.histortiquePrescriptionRadiotherapieConverter;
-    }
-
-    public void setHistortiquePrescriptionRadiotherapieConverter(HistortiquePrescriptionRadiotherapieConverter histortiquePrescriptionRadiotherapieConverter) {
-        this.histortiquePrescriptionRadiotherapieConverter = histortiquePrescriptionRadiotherapieConverter;
-    }
-
-    public StatutRadiotherapieConverter getStatutRadiotherapieConverter() {
-        return this.statutRadiotherapieConverter;
-    }
-
-    public void setStatutRadiotherapieConverter(StatutRadiotherapieConverter statutRadiotherapieConverter) {
-        this.statutRadiotherapieConverter = statutRadiotherapieConverter;
-    }
-
-    public SiteConverter getSiteConverter() {
-        return this.siteConverter;
-    }
-
-    public void setSiteConverter(SiteConverter siteConverter) {
-        this.siteConverter = siteConverter;
-    }
-
-    public TypeTraitementConverter getTypeTraitementConverter() {
-        return this.typeTraitementConverter;
-    }
-
-    public void setTypeTraitementConverter(TypeTraitementConverter typeTraitementConverter) {
-        this.typeTraitementConverter = typeTraitementConverter;
-    }
-
-    public PersonnelConverter getPersonnelConverter() {
-        return this.personnelConverter;
-    }
-
-    public void setPersonnelConverter(PersonnelConverter personnelConverter) {
-        this.personnelConverter = personnelConverter;
-    }
-
-    public ViseeConverter getViseeConverter() {
-        return this.viseeConverter;
-    }
-
-    public void setViseeConverter(ViseeConverter viseeConverter) {
-        this.viseeConverter = viseeConverter;
-    }
-
-    public SeanceRadiotherapieConverter getSeanceRadiotherapieConverter() {
-        return this.seanceRadiotherapieConverter;
-    }
-
-    public void setSeanceRadiotherapieConverter(SeanceRadiotherapieConverter seanceRadiotherapieConverter) {
-        this.seanceRadiotherapieConverter = seanceRadiotherapieConverter;
-    }
-
-    public PatientConverter getPatientConverter() {
-        return this.patientConverter;
-    }
-
-    public void setPatientConverter(PatientConverter patientConverter) {
-        this.patientConverter = patientConverter;
-    }
-
-    public ConsultationRadiotherapieConverter getConsultationRadiotherapieConverter() {
-        return this.consultationRadiotherapieConverter;
-    }
-
-    public void setConsultationRadiotherapieConverter(ConsultationRadiotherapieConverter consultationRadiotherapieConverter) {
-        this.consultationRadiotherapieConverter = consultationRadiotherapieConverter;
-    }
-
-    public TypeToxiciteRthConverter getTypeToxiciteRthConverter() {
-        return this.typeToxiciteRthConverter;
-    }
-
-    public void setTypeToxiciteRthConverter(TypeToxiciteRthConverter typeToxiciteRthConverter) {
-        this.typeToxiciteRthConverter = typeToxiciteRthConverter;
-    }
-
-    public TypeConsultationRadiotherapieConverter getTypeConsultationRadiotherapieConverter() {
-        return this.typeConsultationRadiotherapieConverter;
-    }
-
-    public void setTypeConsultationRadiotherapieConverter(TypeConsultationRadiotherapieConverter typeConsultationRadiotherapieConverter) {
-        this.typeConsultationRadiotherapieConverter = typeConsultationRadiotherapieConverter;
-    }
-
-    public ProtocoleInclusionConverter getProtocoleInclusionConverter() {
-        return this.protocoleInclusionConverter;
-    }
-
-    public void setProtocoleInclusionConverter(ProtocoleInclusionConverter protocoleInclusionConverter) {
-        this.protocoleInclusionConverter = protocoleInclusionConverter;
-    }
-
-    public GradeToxiciteRthConverter getGradeToxiciteRthConverter() {
-        return this.gradeToxiciteRthConverter;
-    }
-
-    public void setGradeToxiciteRthConverter(GradeToxiciteRthConverter gradeToxiciteRthConverter) {
-        this.gradeToxiciteRthConverter = gradeToxiciteRthConverter;
-    }
-
-
-    public boolean isDecisionTraitement() {
-        return this.decisionTraitement;
-    }
-
-    public void setDecisionTraitement(boolean decisionTraitement) {
-        this.decisionTraitement = decisionTraitement;
-    }
-
-    public boolean isMedecinPrescripteur() {
-        return this.medecinPrescripteur;
-    }
-
-    public void setMedecinPrescripteur(boolean medecinPrescripteur) {
-        this.medecinPrescripteur = medecinPrescripteur;
-    }
-
-    public boolean isSite() {
-        return this.site;
-    }
-
-    public void setSite(boolean site) {
-        this.site = site;
-    }
-
-    public boolean isModaliteRadiotherapie() {
-        return this.modaliteRadiotherapie;
-    }
-
-    public void setModaliteRadiotherapie(boolean modaliteRadiotherapie) {
-        this.modaliteRadiotherapie = modaliteRadiotherapie;
-    }
-
-    public boolean isVisee() {
-        return this.visee;
-    }
-
-    public void setVisee(boolean visee) {
-        this.visee = visee;
-    }
-
-    public boolean isProtocoleInclusion() {
-        return this.protocoleInclusion;
-    }
-
-    public void setProtocoleInclusion(boolean protocoleInclusion) {
-        this.protocoleInclusion = protocoleInclusion;
-    }
-
-    public boolean isStatutRadiotherapie() {
-        return this.statutRadiotherapie;
-    }
-
-    public void setStatutRadiotherapie(boolean statutRadiotherapie) {
-        this.statutRadiotherapie = statutRadiotherapie;
-    }
-
-    public boolean isValidateurSimulation() {
-        return this.validateurSimulation;
-    }
-
-    public void setValidateurSimulation(boolean validateurSimulation) {
-        this.validateurSimulation = validateurSimulation;
-    }
-
-    public boolean isPatient() {
-        return this.patient;
-    }
-
-    public void setPatient(boolean patient) {
-        this.patient = patient;
-    }
-
-    public boolean isTypeTraitement() {
-        return this.typeTraitement;
-    }
-
-    public void setTypeTraitement(boolean typeTraitement) {
-        this.typeTraitement = typeTraitement;
-    }
-
-    public boolean isConsultationRadiotherapies() {
-        return this.consultationRadiotherapies;
-    }
-
-    public void setConsultationRadiotherapies(boolean consultationRadiotherapies) {
-        this.consultationRadiotherapies = consultationRadiotherapies;
-    }
-
-    public boolean isSeanceRadiotherapies() {
-        return this.seanceRadiotherapies;
-    }
-
-    public void setSeanceRadiotherapies(boolean seanceRadiotherapies) {
-        this.seanceRadiotherapies = seanceRadiotherapies;
-    }
+    @Autowired
+    private ModaliteRadiotherapieConverter modaliteRadiotherapieConverter;
+    @Autowired
+    private HistortiquePrescriptionRadiotherapieConverter histortiquePrescriptionRadiotherapieConverter;
+    @Autowired
+    private StatutRadiotherapieConverter statutRadiotherapieConverter;
+    @Autowired
+    private SiteConverter siteConverter;
+    @Autowired
+    private TypeTraitementConverter typeTraitementConverter;
+    @Autowired
+    private PersonnelConverter personnelConverter;
+    @Autowired
+    private ViseeConverter viseeConverter;
+    @Autowired
+    private SeanceRadiotherapieConverter seanceRadiotherapieConverter;
+    @Autowired
+    private PatientConverter patientConverter;
+    @Autowired
+    private ConsultationRadiotherapieConverter consultationRadiotherapieConverter;
+    @Autowired
+    private TypeToxiciteRthConverter typeToxiciteRthConverter;
+    @Autowired
+    private TypeConsultationRadiotherapieConverter typeConsultationRadiotherapieConverter;
+    @Autowired
+    private ProtocoleInclusionConverter protocoleInclusionConverter;
+    @Autowired
+    private GradeToxiciteRthConverter gradeToxiciteRthConverter;
+    @Autowired
+    private DecisionTraitementConverter decisionTraitementConverter;
+    @Autowired
+    private FrequenceRadiotherapieConverter frequenceRadiotherapieConverter;
+    @Autowired
+    private PositionnementConverter positionnementConverter;
+    @Autowired
+    private ImmobilistionConverter immobilistionConverter;
 }

@@ -4,19 +4,10 @@ import java.util.Objects;
 
 import java.time.LocalDateTime;
 
-import java.util.Date;
-import com.fasterxml.jackson.annotation.JsonFormat;
-
-
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import ma.enova.radio.zynerator.audit.AuditBusinessObjectEnhanced;
 import javax.persistence.*;
-import java.util.Objects;
-
-
-
-
 
 
 @Entity
@@ -37,7 +28,7 @@ public class Patient   extends AuditBusinessObjectEnhanced  {
     private String sexe;
     private LocalDateTime dateNaissance ;
     @Column(length = 500)
-    private String numeroClassement;
+    private String numeroDeClassement;
     private Integer age = 0;
 
 
@@ -88,11 +79,11 @@ public class Patient   extends AuditBusinessObjectEnhanced  {
     public void setDateNaissance(LocalDateTime dateNaissance){
         this.dateNaissance = dateNaissance;
     }
-    public String getNumeroClassement(){
-        return this.numeroClassement;
+    public String getNumeroDeClassement(){
+        return this.numeroDeClassement;
     }
-    public void setNumeroClassement(String numeroClassement){
-        this.numeroClassement = numeroClassement;
+    public void setNumeroDeClassement(String numeroClassement){
+        this.numeroDeClassement = numeroClassement;
     }
     public Integer getAge(){
         return this.age;
