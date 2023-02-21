@@ -98,9 +98,9 @@ public class SeanceRadiotherapieRestAdmin  extends AbstractController<SeanceRadi
     }
 
     @ApiOperation("update etat of Effectue")
-    @GetMapping("/updateEtatEffectue/{id}")
-    public ResponseEntity<Void> updateEtatEffectue(@PathVariable Long id) throws Exception {
-    	service.updateEtatEffectue(id);
+    @PostMapping("/updateEtatEffectue")
+    public ResponseEntity<Void> updateEtatEffectue(@RequestBody SeanceRadiotherapieDto dto) throws Exception {
+    	service.updateEtatEffectue(dto);
     	return new ResponseEntity<>(HttpStatus.OK);
 
     }

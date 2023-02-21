@@ -84,6 +84,12 @@ public class PrescriptionRadiotherapieFinirTraitementAdminConverter extends Abst
                 item.setCompteRendu(input.getCompteRendu());
             if (StringUtil.isNotEmpty(input.getCompteRendu()))
                 item.setCompteRendu(input.getCompteRendu());
+            if (this.decisionTraitement && input.getDecisionTraitement() != null) {
+                item.setDecisionTraitement(decisionTraitementConverter.toItem(input.getDecisionTraitement()));
+                if (StringUtil.isNotEmpty(input.getDecisionTraitement().getLabel())) {
+                    item.getDecisionTraitement().setCode(input.getDecisionTraitement().getLabel());
+                }
+            }
 
             return item;
         }

@@ -27,12 +27,11 @@ public class PrescriptionRadiotherapieFinirTraitementAdminProcessImpl extends Ab
 
     @Override
     public void run(PrescriptionRadiotherapieFinirTraitementAdminInput input, PrescriptionRadiotherapie t, Result<PrescriptionRadiotherapieFinirTraitementAdminInput, PrescriptionRadiotherapieFinirTraitementAdminOutput, PrescriptionRadiotherapie> result) {
-        Long validateurSimulationId = t.getValidateurSimulation() != null ? t.getValidateurSimulation().getId() : null;
         service.updateAsCloturerTraitement(t.getId(), t.getStatutRadiotherapie().getId(), t.getDateFinTraitement(), t.getCompteRendu());
         histortiquePrescriptionRadiotherapieService.createFromPrescription(t.getId(), t.getStatutRadiotherapie());
         //queue message to dcm for update status decisionTraitement.
         if (t.getDecisionTraitement() != null && t.getDecisionTraitement().getId() != null) {
-            DecisionTraitementDto decisiontraitementDto = new DecisionTraitementDto(t.getDecisionTraitement().getId(), t.getDecisionTraitement().getCode(), t.getStatutRadiotherapie().getCode());
+            DecisionTraitementDto decisiontraitementDto = new DecisionTraitementDto(t.getDecisionTraitement().getId(), null, t.getStatutRadiotherapie().getCode());
             RabbitUtils.convertAndSend(decisiontraitementDto);
         }
         result.addInfoMessage("radiotherapie.finirtraitement.ok");

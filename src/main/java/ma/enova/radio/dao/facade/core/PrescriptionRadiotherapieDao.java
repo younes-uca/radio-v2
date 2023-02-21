@@ -28,6 +28,10 @@ public interface PrescriptionRadiotherapieDao extends AbstractRepository<Prescri
     @Query(value = "UPDATE PrescriptionRadiotherapie p set p.statutRadiotherapie.id=:statutRadiotherapieId , p.dateFinTraitement =:dateFinTraitement , p.compteRendu=:compteRendu  WHERE p.id=:id")
     public void updateAsCloturerTraitement(@Param("id") Long id, @Param("statutRadiotherapieId") Long statutRadiotherapieId, @Param("dateFinTraitement") LocalDateTime dateFinTraitement, @Param("compteRendu") String compteRendu);
 
+    @Modifying
+    @Query(value = "UPDATE PrescriptionRadiotherapie p set p.nombreSeanceRealise=:nombreSeanceRealise   WHERE p.id=:id")
+    public void updateNombreSeanceRealise(@Param("id") Long id, @Param("nombreSeanceRealise") Integer nombreSeanceRealise);
+
     List<PrescriptionRadiotherapie> findByDecisionTraitementCode(String code);
 
     List<PrescriptionRadiotherapie> findByPatientIpp(String ipp);

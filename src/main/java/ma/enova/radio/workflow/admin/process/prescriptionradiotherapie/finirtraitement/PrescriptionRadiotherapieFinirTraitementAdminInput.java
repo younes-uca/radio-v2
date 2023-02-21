@@ -2,6 +2,7 @@ package ma.enova.radio.workflow.admin.process.prescriptionradiotherapie.finirtra
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import ma.enova.radio.ws.dto.DecisionTraitementDto;
 import ma.enova.radio.zynerator.audit.Log;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import ma.enova.radio.zynerator.process.AbstractProcessInput;
@@ -12,6 +13,8 @@ public class PrescriptionRadiotherapieFinirTraitementAdminInput extends Abstract
     private String dateFinTraitement;
     private String compteRendu;
     private String fichierTraitements;
+    
+    private DecisionTraitementDto decisionTraitement;
 
 
     @Log
@@ -38,6 +41,16 @@ public class PrescriptionRadiotherapieFinirTraitementAdminInput extends Abstract
     public void setCompteRendu(String compteRendu){
         this.compteRendu = compteRendu;
     }
+
+	public DecisionTraitementDto getDecisionTraitement() {
+		return decisionTraitement;
+	}
+
+	public void setDecisionTraitement(DecisionTraitementDto decisionTraitement) {
+		this.decisionTraitement = decisionTraitement;
+	}
+    
+    
 
 }
 

@@ -43,7 +43,7 @@ public class PrescriptionRadiotherapieSimulerAdminProcessImpl extends AbstractPr
         histortiquePrescriptionRadiotherapieService.createFromPrescription(t.getId(), t.getStatutRadiotherapie());
         //queue message to dcm for update status decisionTraitement.
         if (t.getDecisionTraitement() != null && t.getDecisionTraitement().getId() != null) {
-            DecisionTraitementDto decisiontraitementDto = new DecisionTraitementDto(t.getDecisionTraitement().getId(), t.getDecisionTraitement().getCode(), t.getStatutRadiotherapie().getCode());
+            DecisionTraitementDto decisiontraitementDto = new DecisionTraitementDto(t.getDecisionTraitement().getId(), null, t.getStatutRadiotherapie().getCode());
             RabbitUtils.convertAndSend(decisiontraitementDto);
         }
        /* PrescriptionRadiotherapie prescriptionRadiotherapie = service.findWithSeance(t.getId());

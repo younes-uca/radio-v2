@@ -46,11 +46,11 @@ public class DecisionTraitementConverter extends AbstractConverter<DecisionTrait
             if (StringUtil.isNotEmpty(dto.getDecisionTherapeutique()))
                 item.setDecisionTherapeutique((dto.getDecisionTherapeutique()));
 
-            if (this.statutRadiotherapie && StringUtil.isNotEmpty(dto.getEtat())) {
+            if (this.statutRadiotherapie && StringUtil.isNotEmpty(dto.getStatutRadiotherapie())) {
                 if (item.getStatutRadiotherapie() == null) {
                     item.setStatutRadiotherapie(new StatutRadiotherapie());
                 }
-                item.getStatutRadiotherapie().setCode(dto.getEtat());
+                item.getStatutRadiotherapie().setCode(dto.getStatutRadiotherapie());
             }
 
 

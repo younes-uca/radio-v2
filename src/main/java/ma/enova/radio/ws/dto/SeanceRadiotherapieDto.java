@@ -22,7 +22,7 @@ public class SeanceRadiotherapieDto  extends AuditBaseDto {
     private Boolean effectue  ;
     private String cr  ;
     private String fichiers  ;
-
+    
     private PrescriptionRadiotherapieDto prescriptionRadiotherapie ;
 
 
@@ -107,6 +107,7 @@ public class SeanceRadiotherapieDto  extends AuditBaseDto {
     public void setPrescriptionRadiotherapie(PrescriptionRadiotherapieDto prescriptionRadiotherapie){
         this.prescriptionRadiotherapie = prescriptionRadiotherapie;
     }
+    
 
 
 }
