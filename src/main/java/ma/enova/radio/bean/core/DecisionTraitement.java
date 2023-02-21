@@ -96,8 +96,8 @@ public class DecisionTraitement extends AuditBusinessObject {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        DecisionTraitement histortiquePrescriptionRadiotherapie = (DecisionTraitement) o;
-        return id != null && id.equals(histortiquePrescriptionRadiotherapie.id);
+        DecisionTraitement decisionTraitement = (DecisionTraitement) o;
+        return id != null && id.equals(decisionTraitement.id);
     }
 
     @Override

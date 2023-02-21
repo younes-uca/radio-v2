@@ -4,10 +4,7 @@ import ma.enova.radio.zynerator.audit.Log;
 import ma.enova.radio.zynerator.dto.AuditBaseDto;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
-    import java.util.Date;
-    import javax.persistence.Temporal;
-    import javax.persistence.TemporalType;
-    import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -18,7 +15,7 @@ public class PatientDto  extends AuditBaseDto {
     private String prenom  ;
     private String sexe  ;
     private String dateNaissance ;
-    private String numeroClassement  ;
+    private String numeroDeClassement;
     private Integer age  = 0 ;
 
 
@@ -71,11 +68,11 @@ public class PatientDto  extends AuditBaseDto {
     }
 
     @Log
-    public String getNumeroClassement(){
-        return this.numeroClassement;
+    public String getNumeroDeClassement(){
+        return this.numeroDeClassement;
     }
-    public void setNumeroClassement(String numeroClassement){
-        this.numeroClassement = numeroClassement;
+    public void setNumeroDeClassement(String numeroDeClassement){
+        this.numeroDeClassement = numeroDeClassement;
     }
 
     @Log

@@ -16,22 +16,7 @@ import java.util.List;
 
 public class PrescriptionRadiotherapieSaveAdminProcessImpl extends AbstractProcessImpl<PrescriptionRadiotherapieSaveAdminInput, PrescriptionRadiotherapieSaveAdminOutput, PrescriptionRadiotherapie, PrescriptionRadiotherapieSaveAdminConverter> implements PrescriptionRadiotherapieSaveAdminProcess {
 
-    private static final String RADIO_SAVED = "radiotherapie.save.ok";
-    private static final String RADIO_UPDATED = "radiotherapie.update.ok";
-    public static final String RADIOTHERAPIE_SAVE_FRACTIONNEMENT_STRITECTEMENT_POSITIF = "radiotherapie.save.fractionnement.stritectement-positif";
-    public static final String RADIOTHERAPIE_SAVE_FREQUENCE_RADIOTHERAPIE_OBLIGATOIRE = "radiotherapie.save.frequenceRadiotherapie.obligatoire";
-    public static final String RADIOTHERAPIE_SAVE_FREQUENCE_RADIOTHERAPIE_VALEUR_NON_CONFORME = "radiotherapie.save.frequenceRadiotherapie.valeur-non-conforme";
-    public static final String RADIOTHERAPIE_SAVE_PATIENT_IPP_OBLIGATOIRE = "radiotherapie.save.patient.ipp-obligatoire";
-    public static final String RADIOTHERAPIE_SAVE_DATE_DEBUT_TRAITEMENT_OBLIGATOIRE = "radiotherapie.save.dateDebutTraitement-obligatoire";
-    public static final String RADIOTHERAPIE_SAVE_DATE_DEBUT_TRAITEMENT_INFERIEUR_AUJOUDHUI = "radiotherapie.save.dateDebutTraitement.inferieur-aujoudhui";
-    public static final String RADIOTHERAPIE_SAVE_STATUT_OBLIGATOIRE = "radiotherapie.save.statut.obligatoire";
-    public static final String RADIOTHERAPIE_SAVE_VISEE_OBLIGATOIRE = "radiotherapie.save.visee.obligatoire";
-    public static final String RADIOTHERAPIE_SAVE_PROTOCOLE_INCLUSION_OBLIGATOIRE = "radiotherapie.save.protocole-inclusion.obligatoire";
-    public static final String RADIOTHERAPIE_SAVE_MEDECIN_PRESCRIPTEUR_OBLIGATOIRE = "radiotherapie.save.medecin-prescripteur.obligatoire";
-    public static final String RADIOTHERAPIE_SAVE_MODALITE_RADIOTHERAPIE_OBLIGATOIRE = "radiotherapie.save.modalite-radiotherapie.obligatoire";
-    public static final String RADIOTHERAPIE_SAVE_SITE_OBLIGATOIRE = "radiotherapie.save.site.obligatoire";
-    public static final String RADIOTHERAPIE_SAVE_DECISION_TRAITEMENT_OBLIGATOIRE = "radiotherapie.save.decision-traitement.obligatoire";
-
+ 
     public void init(PrescriptionRadiotherapieSaveAdminInput input, PrescriptionRadiotherapie item) {
         service.updateStatutPrescription(item, StatutRadioTherapieConstant.EN_ATTENTE_SIMULATION_CODE);
         if (item.getDecisionTraitement() != null) {
@@ -190,6 +175,22 @@ public class PrescriptionRadiotherapieSaveAdminProcessImpl extends AbstractProce
     private ModaliteRadiotherapieAdminService modaliteRadiotherapieService;
     private SiteAdminService siteService;
     private DecisionTraitementAdminService decisionTraitementService;
+
+    private static final String RADIO_SAVED = "radiotherapie.save.ok";
+    private static final String RADIO_UPDATED = "radiotherapie.update.ok";
+    private static final String RADIOTHERAPIE_SAVE_FRACTIONNEMENT_STRITECTEMENT_POSITIF = "radiotherapie.save.fractionnement.stritectement-positif";
+    private static final String RADIOTHERAPIE_SAVE_FREQUENCE_RADIOTHERAPIE_OBLIGATOIRE = "radiotherapie.save.frequenceRadiotherapie.obligatoire";
+    private static final String RADIOTHERAPIE_SAVE_FREQUENCE_RADIOTHERAPIE_VALEUR_NON_CONFORME = "radiotherapie.save.frequenceRadiotherapie.valeur-non-conforme";
+    private static final String RADIOTHERAPIE_SAVE_PATIENT_IPP_OBLIGATOIRE = "radiotherapie.save.patient.ipp-obligatoire";
+    private static final String RADIOTHERAPIE_SAVE_DATE_DEBUT_TRAITEMENT_OBLIGATOIRE = "radiotherapie.save.dateDebutTraitement-obligatoire";
+    private static final String RADIOTHERAPIE_SAVE_DATE_DEBUT_TRAITEMENT_INFERIEUR_AUJOUDHUI = "radiotherapie.save.dateDebutTraitement.inferieur-aujoudhui";
+    private static final String RADIOTHERAPIE_SAVE_STATUT_OBLIGATOIRE = "radiotherapie.save.statut.obligatoire";
+    private static final String RADIOTHERAPIE_SAVE_VISEE_OBLIGATOIRE = "radiotherapie.save.visee.obligatoire";
+    private static final String RADIOTHERAPIE_SAVE_PROTOCOLE_INCLUSION_OBLIGATOIRE = "radiotherapie.save.protocole-inclusion.obligatoire";
+    private static final String RADIOTHERAPIE_SAVE_MEDECIN_PRESCRIPTEUR_OBLIGATOIRE = "radiotherapie.save.medecin-prescripteur.obligatoire";
+    private static final String RADIOTHERAPIE_SAVE_MODALITE_RADIOTHERAPIE_OBLIGATOIRE = "radiotherapie.save.modalite-radiotherapie.obligatoire";
+    private static final String RADIOTHERAPIE_SAVE_SITE_OBLIGATOIRE = "radiotherapie.save.site.obligatoire";
+    private static final String RADIOTHERAPIE_SAVE_DECISION_TRAITEMENT_OBLIGATOIRE = "radiotherapie.save.decision-traitement.obligatoire";
 
     public PrescriptionRadiotherapieSaveAdminProcessImpl(PrescriptionRadiotherapieAdminService service, StatutRadiotherapieAdminService statutRadiotherapieService, SeanceRadiotherapieAdminService seanceRadiotherapieService,
                                                          PrescriptionRadiotherapieSaveAdminConverter converter, HistortiquePrescriptionRadiotherapieAdminService histortiquePrescriptionRadiotherapieService,

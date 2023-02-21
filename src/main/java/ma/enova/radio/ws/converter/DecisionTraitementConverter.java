@@ -35,11 +35,16 @@ public class DecisionTraitementConverter extends AbstractConverter<DecisionTrait
                 item.setCode(dto.getCode());
             if (StringUtil.isNotEmpty(dto.getDateDecisionTraitement()))
                 item.setDateDecisionTraitement(DateUtil.stringToDate(dto.getDateDecisionTraitement()));
+            if (dto.getUrgence()!=null)
+                item.setUrgence(dto.getUrgence());
+            else{
+                item.setUrgence(false);
+            }
 
 //            if (this.decisionTherapeutique && dto.getDecisionTherapeutique() != null)
 //                item.setDecisionTherapeutique(decisionTherapeutiqueConverter.toItem(dto.getDecisionTherapeutique()));
             if (StringUtil.isNotEmpty(dto.getDecisionTherapeutique()))
-               item.setDecisionTherapeutique((dto.getDecisionTherapeutique()));
+                item.setDecisionTherapeutique((dto.getDecisionTherapeutique()));
 
             if (this.statutRadiotherapie && StringUtil.isNotEmpty(dto.getEtat())) {
                 if (item.getStatutRadiotherapie() == null) {
@@ -65,6 +70,12 @@ public class DecisionTraitementConverter extends AbstractConverter<DecisionTrait
                 dto.setCode(item.getCode());
             if (StringUtil.isNotEmpty(item.getDecisionTherapeutique()))
                 dto.setDecisionTherapeutique(item.getDecisionTherapeutique());
+            if (item.getUrgence()!=null)
+                dto.setUrgence(item.getUrgence());
+            else{
+                dto.setUrgence(false);
+            }
+
 //            if (this.decisionTherapeutique && item.getDecisionTherapeutique() != null) {
 //                dto.setDecisionTherapeutique(decisionTherapeutiqueConverter.toDto(item.getDecisionTherapeutique()));
 //            }
