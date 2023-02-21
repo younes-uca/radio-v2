@@ -16,7 +16,8 @@ public class DecisionTraitementDto extends AuditBaseDto {
 
     //    private DecisionTherapeutiqueDto decisionTherapeutique;
     private String decisionTherapeutique;
-    private StatutRadiotherapieDto statutRadiotherapie;
+    //private StatutRadiotherapieDto statutRadiotherapie;
+    private String statutRadiotherapie;
 
 
     public DecisionTraitementDto() {
@@ -72,12 +73,22 @@ public class DecisionTraitementDto extends AuditBaseDto {
     public void setDecisionTherapeutique(String decisionTherapeutique) {
         this.decisionTherapeutique = decisionTherapeutique;
     }
+/*
 
     public StatutRadiotherapieDto getStatutRadiotherapie() {
         return this.statutRadiotherapie;
     }
 
     public void setStatutRadiotherapie(StatutRadiotherapieDto statutRadiotherapie) {
+        this.statutRadiotherapie = statutRadiotherapie;
+    }
+*/
+
+    public String getStatutRadiotherapie() {
+        return statutRadiotherapie;
+    }
+
+    public void setStatutRadiotherapie(String statutRadiotherapie) {
         this.statutRadiotherapie = statutRadiotherapie;
     }
 
