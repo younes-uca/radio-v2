@@ -33,8 +33,8 @@ public class PrescriptionRadiotherapieSaveAdminInput extends AbstractProcessInpu
     private ModaliteRadiotherapieDto modaliteRadiotherapie;
     private ViseeDto visee;
     private ProtocoleInclusionDto protocoleInclusion;
-    //private StatutRadiotherapieDto statutRadiotherapie;
-    private String statutRadiotherapie;
+    private StatutRadiotherapieDto statutRadiotherapie;
+    //private String statutRadiotherapie;
     private PatientDto patient;
     private TypeTraitementDto typeTraitement;
     private DecisionTraitementDto decisionTraitement;
@@ -86,34 +86,6 @@ public class PrescriptionRadiotherapieSaveAdminInput extends AbstractProcessInpu
         this.etalement = etalement;
     }
 
-    /*
-
-        public StatutRadiotherapieDto getStatutRadiotherapie() {
-            return statutRadiotherapie;
-        }
-
-        public void setStatutRadiotherapie(StatutRadiotherapieDto statutRadiotherapie) {
-            this.statutRadiotherapie = statutRadiotherapie;
-        }
-
-         public void setStatutRadiotherapieDto(StatutRadiotherapieDto statutRadiotherapie) {
-        this.statutRadiotherapie = statutRadiotherapie;
-    }
-
-*/
-
-
-    public void setStatutRadiotherapieDto(String statutRadiotherapie) {
-        this.statutRadiotherapie = statutRadiotherapie;
-    }
-    @Log
-    public String getStatutRadiotherapie() {
-        return statutRadiotherapie;
-    }
-
-    public void setStatutRadiotherapie(String statutRadiotherapie) {
-        this.statutRadiotherapie = statutRadiotherapie;
-    }
 
     @Log
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm")
@@ -308,6 +280,15 @@ public class PrescriptionRadiotherapieSaveAdminInput extends AbstractProcessInpu
     public void setTypeTraitement(TypeTraitementDto typeTraitement) {
         this.typeTraitement = typeTraitement;
     }
+
+	public StatutRadiotherapieDto getStatutRadiotherapie() {
+		return statutRadiotherapie;
+	}
+
+	public void setStatutRadiotherapie(StatutRadiotherapieDto statutRadiotherapie) {
+		this.statutRadiotherapie = statutRadiotherapie;
+	}
+    
 }
 
 

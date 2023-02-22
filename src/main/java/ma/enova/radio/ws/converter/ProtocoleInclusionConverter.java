@@ -38,7 +38,7 @@ public class ProtocoleInclusionConverter extends AbstractConverter<ProtocoleIncl
             if (StringUtil.isNotEmpty(dto.getLibelle()))
                 item.setLibelle(dto.getLibelle());
             if (StringUtil.isNotEmpty(dto.getDateInclusion()))
-                item.setDateInclusion(DateUtil.stringEnToDate(dto.getDateInclusion()));
+                item.setDateInclusion(DateUtil.stringToDate(dto.getDateInclusion()));
             if (this.protocoleInclusionStatut && dto.getProtocoleInclusionStatut() != null)
                 item.setProtocoleInclusionStatut(protocoleInclusionStatutConverter.toItem(dto.getProtocoleInclusionStatut()));
             if (this.services && dto.getServices() != null)

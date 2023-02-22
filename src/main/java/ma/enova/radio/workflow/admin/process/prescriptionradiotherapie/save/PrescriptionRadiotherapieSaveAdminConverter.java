@@ -79,11 +79,9 @@ public class PrescriptionRadiotherapieSaveAdminConverter extends AbstractProcess
             if (input.getProtocoleInclusion() != null)
                 item.setProtocoleInclusion(protocoleInclusionConverter.toItem(input.getProtocoleInclusion()));
 
-            if (StringUtil.isNotEmpty(input.getStatutRadiotherapie()) && !input.equals("NONE")) {
-                //item.setStatutRadiotherapie(statutRadiotherapieConverter.toItem(input.getStatutRadiotherapie()));
-
-                item.setStatutRadiotherapie(new StatutRadiotherapie(input.getStatutRadiotherapie()));
-
+            if (input.getStatutRadiotherapie() != null) {
+                item.setStatutRadiotherapie(statutRadiotherapieConverter.toItem(input.getStatutRadiotherapie()));
+               // item.setStatutRadiotherapie(new StatutRadiotherapie(input.getStatutRadiotherapie()));
             }
 
             if (input.getPatient() != null)

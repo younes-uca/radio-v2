@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import ma.enova.radio.zynerator.audit.AuditBusinessObjectEnhanced;
 
 import javax.persistence.*;
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -20,7 +22,7 @@ public class ProtocoleInclusion   extends AuditBusinessObjectEnhanced  {
     private String code;
     @Column(length = 500)
     private String libelle;
-    private LocalDateTime dateInclusion ;
+    private LocalDate dateInclusion ;
 
     private ProtocoleInclusionStatut protocoleInclusionStatut ;
     
@@ -56,10 +58,10 @@ public class ProtocoleInclusion   extends AuditBusinessObjectEnhanced  {
     public void setLibelle(String libelle){
         this.libelle = libelle;
     }
-    public LocalDateTime getDateInclusion(){
+    public LocalDate getDateInclusion(){
         return this.dateInclusion;
     }
-    public void setDateInclusion(LocalDateTime dateInclusion){
+    public void setDateInclusion(LocalDate dateInclusion){
         this.dateInclusion = dateInclusion;
     }
     @ManyToOne(fetch = FetchType.LAZY)
