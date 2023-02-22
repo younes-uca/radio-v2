@@ -3,6 +3,8 @@ package ma.enova.radio.workflow.admin.process.prescriptionradiotherapie.save;
 import ma.enova.radio.bean.core.*;
 import ma.enova.radio.constant.StatutRadioTherapieConstant;
 import ma.enova.radio.service.facade.admin.*;
+import ma.enova.radio.service.util.admin.RabbitUtils;
+import ma.enova.radio.ws.dto.DecisionTraitementDto;
 import ma.enova.radio.zynerator.process.AbstractProcessImpl;
 import ma.enova.radio.zynerator.process.Result;
 import ma.enova.radio.zynerator.util.DateUtil;
@@ -66,7 +68,6 @@ public class PrescriptionRadiotherapieSaveAdminProcessImpl extends AbstractProce
             DecisionTraitementDto decisiontraitementDto = new DecisionTraitementDto(t.getDecisionTraitement().getId(), null, t.getStatutRadiotherapie().getCode());
             RabbitUtils.convertAndSend(decisiontraitementDto);
         }
-        String message = RADIO_SAVED;
         String message = PrescriptionRadiotherapieSaveAdminUtil.SAVED;
         if (res == 1) {
             message = PrescriptionRadiotherapieSaveAdminUtil.UPDATED;
