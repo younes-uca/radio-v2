@@ -1,6 +1,7 @@
 package ma.enova.radio;
 
 import ma.enova.radio.bean.core.*;
+import ma.enova.radio.constant.StatutProtocoleInclusionConstant;
 import ma.enova.radio.constant.StatutRadioTherapieConstant;
 import ma.enova.radio.service.facade.admin.*;
 import ma.enova.radio.zynerator.security.bean.Permission;
@@ -99,15 +100,27 @@ public class RadioApplication {
 
     private void createStatutRadio() {
 
-        List<StatutRadiotherapie> statutRadiotherapies= Arrays.asList(
+        List<StatutRadiotherapie> list= Arrays.asList(
                 new StatutRadiotherapie(StatutRadioTherapieConstant.EN_ATTENTE_SIMULATION_CODE,StatutRadioTherapieConstant.EN_ATTENTE_SIMULATION_LABEL,1),
                 new StatutRadiotherapie(StatutRadioTherapieConstant.EN_COURS_TRAITEMENT_CODE,StatutRadioTherapieConstant.EN_COURS_TRAITEMENT_LABEL,2),
                 new StatutRadiotherapie(StatutRadioTherapieConstant.FIN_TRAITEMENT_CODE,StatutRadioTherapieConstant.FIN_TRAITEMENT_LABEL,3)
                 );
 
-        for (StatutRadiotherapie statutRadiotherapy : statutRadiotherapies) {
-            statutRadiotherapieService.create(statutRadiotherapy);
+        for (StatutRadiotherapie item : list) {
+            statutRadiotherapieService.create(item);
         }
+    }
+    private void createStatutProtocoleInclusion() {
+
+     /*   List<ProtocoleInclusionStatut> list= Arrays.asList(
+                new ProtocoleInclusionStatut(StatutProtocoleInclusionConstant.PRESCRIPTION_CODE,StatutProtocoleInclusionConstant.PRESCRIPTION_LABEL,1),
+                new ProtocoleInclusionStatut(StatutProtocoleInclusionConstant.EN_COURS_TRAITEMENT_CODE,StatutRadioTherapieConstant.EN_COURS_TRAITEMENT_LABEL,2),
+                new ProtocoleInclusionStatut(StatutProtocoleInclusionConstant.FIN_TRAITEMENT_CODE,StatutRadioTherapieConstant.FIN_TRAITEMENT_LABEL,3)
+                );
+
+        for (ProtocoleInclusionStatut statutRadiotherapy : list) {
+            statutRadiotherapieService.create(statutRadiotherapy);
+        }*/
     }
 
     private void createModalite() {

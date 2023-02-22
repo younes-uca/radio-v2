@@ -28,8 +28,10 @@ ProtocoleInclusionHistoryDao, ProtocoleInclusionConverter> implements ProtocoleI
     }
 
     public ProtocoleInclusion findByReferenceEntity(ProtocoleInclusion t){
+        findOrSaveAssociatedObject(t);
         return  dao.findByCode(t.getCode());
     }
+
     public void findOrSaveAssociatedObject(ProtocoleInclusion t){
         if( t != null) {
             t.setProtocoleInclusionStatut(protocoleInclusionStatutService.findOrSave(t.getProtocoleInclusionStatut()));
