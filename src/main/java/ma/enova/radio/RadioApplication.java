@@ -55,7 +55,7 @@ public class RadioApplication {
                 createPatient();
                 createSite();
                 createPersonnel();
-                createProtocoleInclusion();
+                //createProtocoleInclusion();
                 createTypeTraitement();
 
                 createGradeToxiciteRth();
@@ -203,6 +203,7 @@ public class RadioApplication {
         String prefix = "protocoleInclusion ";
         for (int i = 1; i < 100; i++) {
             ProtocoleInclusion item = new ProtocoleInclusion();
+            //item.setId(iL);
             item.setOrdre(1L * i);
             item.setLibelle(prefix + i);
             item.setCode(prefix + i);

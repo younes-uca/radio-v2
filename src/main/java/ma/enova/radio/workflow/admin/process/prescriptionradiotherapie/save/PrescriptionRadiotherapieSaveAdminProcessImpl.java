@@ -105,7 +105,7 @@ public class PrescriptionRadiotherapieSaveAdminProcessImpl extends AbstractProce
     }
 
     private void validateFrequenceRadio(FrequenceRadiotherapie frequenceRadiotherapie, Result result) {
-        List<String> frequenceRadiotherapies = Arrays.asList("heure", "jour", "semaine", "mois");
+        List<String> frequenceRadiotherapies = Arrays.asList("heure", "jour", "semaine", "mois","quotidienne");
         if (frequenceRadiotherapie != null && StringUtil.isEmpty(frequenceRadiotherapie.getCode())) {
             result.addErrorMessage(RADIOTHERAPIE_SAVE_FREQUENCE_RADIOTHERAPIE_OBLIGATOIRE);
         } else if (!frequenceRadiotherapies.contains(frequenceRadiotherapie.getCode())) {
