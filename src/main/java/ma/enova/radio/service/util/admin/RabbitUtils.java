@@ -28,11 +28,11 @@ public class RabbitUtils {
 	public static <T> void convertAndSend(T t) {
 		if (t != null) {
 			ObjectMapper mapper = new ObjectMapper();
-			try {
+			/*try {
 				rabbitTemplate.convertAndSend(exchange, routingkey, mapper.writeValueAsString(t));
 			} catch (AmqpException | JsonProcessingException e) {
 				e.printStackTrace();
-			}
+			}*/
 		}
 	}
 

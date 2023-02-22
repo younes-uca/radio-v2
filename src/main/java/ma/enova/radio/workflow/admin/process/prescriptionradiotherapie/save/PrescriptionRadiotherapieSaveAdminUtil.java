@@ -24,8 +24,14 @@ public class PrescriptionRadiotherapieSaveAdminUtil {
 
 
     @Bean
-    public PrescriptionRadiotherapieSaveAdminProcess prescriptionRadiotherapieSaveAdmin(PrescriptionRadiotherapieAdminService service, StatutRadiotherapieAdminService statutRadiotherapieService, SeanceRadiotherapieAdminService seanceRadiotherapieService, PrescriptionRadiotherapieSaveAdminConverter converter, HistortiquePrescriptionRadiotherapieAdminService histortiquePrescriptionRadiotherapieService, ViseeAdminService viseeService, ProtocoleInclusionAdminService protocoleInclusionService, PersonnelAdminService personnelService, PatientAdminService patientService, ModaliteRadiotherapieAdminService modaliteRadiotherapieService, SiteAdminService siteService, DecisionTraitementAdminService decisionTraitementService, SpecialiteAdminService specialiteService) {
-        return new PrescriptionRadiotherapieSaveAdminProcessImpl(service, statutRadiotherapieService, seanceRadiotherapieService, converter, histortiquePrescriptionRadiotherapieService, viseeService, protocoleInclusionService, personnelService, patientService, modaliteRadiotherapieService, siteService, decisionTraitementService,specialiteService);
+    public PrescriptionRadiotherapieSaveAdminProcess prescriptionRadiotherapieSaveAdmin(PrescriptionRadiotherapieAdminService service, StatutRadiotherapieAdminService statutRadiotherapieService,
+                                                                                        SeanceRadiotherapieAdminService seanceRadiotherapieService, PrescriptionRadiotherapieSaveAdminConverter converter,
+                                                                                        HistortiquePrescriptionRadiotherapieAdminService histortiquePrescriptionRadiotherapieService, ViseeAdminService viseeService,
+                                                                                        ProtocoleInclusionAdminService protocoleInclusionService, PersonnelAdminService personnelService, PatientAdminService patientService,
+                                                                                        ModaliteRadiotherapieAdminService modaliteRadiotherapieService, SiteAdminService siteService,
+                                                                                        DecisionTraitementAdminService decisionTraitementService, SpecialiteAdminService specialiteService, FrequenceRadiotherapieAdminService frequenceRadiotherapieService) {
+        return new PrescriptionRadiotherapieSaveAdminProcessImpl(service, statutRadiotherapieService, seanceRadiotherapieService, converter, histortiquePrescriptionRadiotherapieService, viseeService, protocoleInclusionService,
+                personnelService, patientService, modaliteRadiotherapieService, siteService, decisionTraitementService, specialiteService, frequenceRadiotherapieService);
     }
 
 }

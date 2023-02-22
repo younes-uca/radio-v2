@@ -25,6 +25,7 @@ public class PrescriptionRadiotherapieSaveAdminProcessImpl extends AbstractProce
             item.getDecisionTraitement().setStatutRadiotherapie(item.getStatutRadiotherapie());
         }
         item.setSpecialite(specialiteService.findOrSave(item.getSpecialite()));
+        item.setFrequenceRadiotherapie(frequenceRadiotherapieService.findOrSave(item.getFrequenceRadiotherapie()));
         item.setPatient(patientService.findOrSave(item.getPatient()));
         item.setVisee(viseeService.findOrSave(item.getVisee()));
         item.setMedecinPrescripteur(personnelService.findOrSave(item.getMedecinPrescripteur()));
@@ -100,30 +101,30 @@ public class PrescriptionRadiotherapieSaveAdminProcessImpl extends AbstractProce
 
     private void validateFraction(Integer fractionnement, Result result) {
         if (fractionnement == null || fractionnement <= 0) {
-            result.addErrorMessage(RADIOTHERAPIE_SAVE_FRACTIONNEMENT_STRITECTEMENT_POSITIF);
+            result.addErrorMessage(PrescriptionRadiotherapieSaveAdminUtil.FRACTIONNEMENT_STRITECTEMENT_POSITIF);
         }
     }
 
     private void validateFrequenceRadio(FrequenceRadiotherapie frequenceRadiotherapie, Result result) {
         List<String> frequenceRadiotherapies = Arrays.asList("heure", "jour", "semaine", "mois","quotidienne");
         if (frequenceRadiotherapie != null && StringUtil.isEmpty(frequenceRadiotherapie.getCode())) {
-            result.addErrorMessage(RADIOTHERAPIE_SAVE_FREQUENCE_RADIOTHERAPIE_OBLIGATOIRE);
+            result.addErrorMessage(PrescriptionRadiotherapieSaveAdminUtil.FREQUENCE_OBLIGATOIRE);
         } else if (!frequenceRadiotherapies.contains(frequenceRadiotherapie.getCode())) {
-            result.addErrorMessage(RADIOTHERAPIE_SAVE_FREQUENCE_RADIOTHERAPIE_VALEUR_NON_CONFORME);
+            result.addErrorMessage(PrescriptionRadiotherapieSaveAdminUtil.FREQUENCE_VALEUR_NON_CONFORME);
         }
     }
 
     private void validatePatient(Patient patient, Result result) {
         if (patient == null || StringUtil.isEmpty(patient.getIpp())) {
-            result.addErrorMessage(RADIOTHERAPIE_SAVE_PATIENT_IPP_OBLIGATOIRE);
+            result.addErrorMessage(PrescriptionRadiotherapieSaveAdminUtil.PATIENT_IPP_OBLIGATOIRE);
         }
     }
 
     private void validateDateTraitement(LocalDate dateDebutTraitement, Result result) {
         if (dateDebutTraitement == null) {
-            result.addErrorMessage(RADIOTHERAPIE_SAVE_DATE_DEBUT_TRAITEMENT_OBLIGATOIRE);
+            result.addErrorMessage(PrescriptionRadiotherapieSaveAdminUtil.DATE_DEBUT_TRAITEMENT_OBLIGATOIRE);
         } else if (DateUtil.isBeforeNow(dateDebutTraitement)) {
-            result.addErrorMessage(RADIOTHERAPIE_SAVE_DATE_DEBUT_TRAITEMENT_INFERIEUR_AUJOUDHUI);
+            result.addErrorMessage(PrescriptionRadiotherapieSaveAdminUtil.DATE_DEBUT_TRAITEMENT_INFERIEUR_AUJOUDHUI);
         }
     }
 
@@ -178,33 +179,18 @@ public class PrescriptionRadiotherapieSaveAdminProcessImpl extends AbstractProce
     private ViseeAdminService viseeService;
     private ProtocoleInclusionAdminService protocoleInclusionService;
     private PersonnelAdminService personnelService;
-    private PatientAdminService patientService;
+    private PatientAdminService patientService;  
+    private FrequenceRadiotherapieAdminService frequenceRadiotherapieService;
     private SpecialiteAdminService specialiteService;
     private ModaliteRadiotherapieAdminService modaliteRadiotherapieService;
     private SiteAdminService siteService;
     private DecisionTraitementAdminService decisionTraitementService;
 
-    private static final String RADIO_SAVED = "radiotherapie.save.ok";
-    private static final String RADIO_UPDATED = "radiotherapie.update.ok";
-    private static final String RADIOTHERAPIE_SAVE_FRACTIONNEMENT_STRITECTEMENT_POSITIF = "radiotherapie.save.fractionnement.stritectement-positif";
-    private static final String RADIOTHERAPIE_SAVE_FREQUENCE_RADIOTHERAPIE_OBLIGATOIRE = "radiotherapie.save.frequenceRadiotherapie.obligatoire";
-    private static final String RADIOTHERAPIE_SAVE_FREQUENCE_RADIOTHERAPIE_VALEUR_NON_CONFORME = "radiotherapie.save.frequenceRadiotherapie.valeur-non-conforme";
-    private static final String RADIOTHERAPIE_SAVE_PATIENT_IPP_OBLIGATOIRE = "radiotherapie.save.patient.ipp-obligatoire";
-    private static final String RADIOTHERAPIE_SAVE_DATE_DEBUT_TRAITEMENT_OBLIGATOIRE = "radiotherapie.save.dateDebutTraitement-obligatoire";
-    private static final String RADIOTHERAPIE_SAVE_DATE_DEBUT_TRAITEMENT_INFERIEUR_AUJOUDHUI = "radiotherapie.save.dateDebutTraitement.inferieur-aujoudhui";
-    private static final String RADIOTHERAPIE_SAVE_STATUT_OBLIGATOIRE = "radiotherapie.save.statut.obligatoire";
-    private static final String RADIOTHERAPIE_SAVE_VISEE_OBLIGATOIRE = "radiotherapie.save.visee.obligatoire";
-    private static final String RADIOTHERAPIE_SAVE_PROTOCOLE_INCLUSION_OBLIGATOIRE = "radiotherapie.save.protocole-inclusion.obligatoire";
-    private static final String RADIOTHERAPIE_SAVE_MEDECIN_PRESCRIPTEUR_OBLIGATOIRE = "radiotherapie.save.medecin-prescripteur.obligatoire";
-    private static final String RADIOTHERAPIE_SAVE_MODALITE_RADIOTHERAPIE_OBLIGATOIRE = "radiotherapie.save.modalite-radiotherapie.obligatoire";
-    private static final String RADIOTHERAPIE_SAVE_SITE_OBLIGATOIRE = "radiotherapie.save.site.obligatoire";
-    private static final String RADIOTHERAPIE_SAVE_DECISION_TRAITEMENT_OBLIGATOIRE = "radiotherapie.save.decision-traitement.obligatoire";
-
     public PrescriptionRadiotherapieSaveAdminProcessImpl(PrescriptionRadiotherapieAdminService service, StatutRadiotherapieAdminService statutRadiotherapieService, SeanceRadiotherapieAdminService seanceRadiotherapieService,
                                                          PrescriptionRadiotherapieSaveAdminConverter converter, HistortiquePrescriptionRadiotherapieAdminService histortiquePrescriptionRadiotherapieService,
                                                          ViseeAdminService viseeService, ProtocoleInclusionAdminService protocoleInclusionService,
                                                          PersonnelAdminService personnelService, PatientAdminService patientService, ModaliteRadiotherapieAdminService modaliteRadiotherapieService,
-                                                         SiteAdminService siteService, DecisionTraitementAdminService decisionTraitementService,SpecialiteAdminService specialiteService) {
+                                                         SiteAdminService siteService, DecisionTraitementAdminService decisionTraitementService,SpecialiteAdminService specialiteService,FrequenceRadiotherapieAdminService frequenceRadiotherapieService) {
         super(converter);
         this.service = service;
         this.seanceRadiotherapieService = seanceRadiotherapieService;
@@ -218,5 +204,6 @@ public class PrescriptionRadiotherapieSaveAdminProcessImpl extends AbstractProce
         this.siteService = siteService;
         this.decisionTraitementService = decisionTraitementService;
         this.specialiteService = specialiteService;
+        this.frequenceRadiotherapieService = frequenceRadiotherapieService;
     }
 }

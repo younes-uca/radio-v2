@@ -170,7 +170,7 @@ public class DateUtil {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_FORMAT_WITH_HOUR, Locale.ENGLISH);
                 OffsetDateTime off = OffsetDateTime.of(date, ZoneOffset.UTC);
               //  ZonedDateTime zoned = off.atZoneSameInstant(ZoneId.of("UTC+1"));
-                ZonedDateTime zoned = off.atZoneSameInstant(ZoneId.of("UTC"));
+                ZonedDateTime zoned = off.atZoneSameInstant(ZoneId.of("UTC+1"));
                 return zoned.toLocalDateTime().format(formatter);
             }
         } catch (Exception e) {
