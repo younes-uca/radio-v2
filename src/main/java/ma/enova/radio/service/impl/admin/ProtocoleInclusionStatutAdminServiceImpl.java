@@ -26,6 +26,10 @@ public class ProtocoleInclusionStatutAdminServiceImpl extends AbstractServiceImp
         return max != null ? max + 1 : 1;
     }
 
+    public ProtocoleInclusionStatut findByReferenceEntity(ProtocoleInclusionStatut t) {
+        return dao.findByName(t.getName());
+    }
+
     public void findOrSaveAssociatedObject(ProtocoleInclusionStatut t) {
         if (t != null) {
             t.setServices(servicesService.findOrSave(t.getServices()));
