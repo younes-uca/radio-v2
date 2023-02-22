@@ -56,8 +56,8 @@ public class User  extends AuditBusinessObjectEnhanced implements UserDetails {
     @JoinColumn(name = "ROLE_ID")})
     protected Collection<Role> roles = new ArrayList<>();
 
-    @ManyToOne
-    protected Etablissement etablissement;
+//    @ManyToOne
+//    protected Etablissement etablissement;
     @Transient
     protected Collection<Role> authorities;
 
@@ -110,13 +110,13 @@ public class User  extends AuditBusinessObjectEnhanced implements UserDetails {
     this.credentialsNonExpired = credentialsNonExpired;
     }
 
-    public Etablissement getEtablissement() {
-    return etablissement;
-    }
-
-    public void setEtablissement(Etablissement etablissement) {
-    this.etablissement = etablissement;
-    }
+//    public Etablissement getEtablissement() {
+//    return etablissement;
+//    }
+//
+//    public void setEtablissement(Etablissement etablissement) {
+//    this.etablissement = etablissement;
+//    }
 
     public Collection<Role> getRoles() {
         return roles;

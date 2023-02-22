@@ -1,11 +1,4 @@
-FROM maven:3.6.1-jdk-8-slim AS build
-RUN mkdir -p /workspace
-WORKDIR /workspace
-COPY pom.xml /workspace
-COPY src /workspace/src
-RUN mvn -f pom.xml clean package -Dmaven.test.skip
-
-FROM openjdk:8-alpine
-COPY --from=build /workspace/target/*.jar app.jar
-EXPOSE 8036
-ENTRYPOINT ["java","-jar","app.jar"]
+FROM openjdk:8-jre-alpine
+WORKDIR /opt/jar
+COPY radio-0.0.1-SNAPSHOT.jar .
+CMD ["java", "-jar", "-Dserver.port=8080", "-Xms256m", "-Dserver.contextPath=/RADIOBACK", "-Xmx256m", "radio-0.0.1-SNAPSHOT.jar"]
