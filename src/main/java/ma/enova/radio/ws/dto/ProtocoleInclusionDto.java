@@ -41,7 +41,7 @@ public class ProtocoleInclusionDto extends AuditBaseDto {
     }
 
     @Log
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     public String getDateInclusion() {
         return this.dateInclusion;
     }
