@@ -18,27 +18,25 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class ProtocoleInclusionStatutAdminServiceImpl extends AbstractServiceImpl<ProtocoleInclusionStatut, ProtocoleInclusionStatutDto,ProtocoleInclusionStatutHistory, ProtocoleInclusionStatutCriteria, ProtocoleInclusionStatutHistoryCriteria, ProtocoleInclusionStatutDao,
-ProtocoleInclusionStatutHistoryDao, ProtocoleInclusionStatutConverter> implements ProtocoleInclusionStatutAdminService {
+public class ProtocoleInclusionStatutAdminServiceImpl extends AbstractServiceImpl<ProtocoleInclusionStatut, ProtocoleInclusionStatutDto, ProtocoleInclusionStatutHistory, ProtocoleInclusionStatutCriteria, ProtocoleInclusionStatutHistoryCriteria, ProtocoleInclusionStatutDao,
+        ProtocoleInclusionStatutHistoryDao, ProtocoleInclusionStatutConverter> implements ProtocoleInclusionStatutAdminService {
 
     public Long getNextOrdre() {
         Long max = dao.findMaxOrdreByEtablissementIdOrder(getEtablissementId());
         return max != null ? max + 1 : 1;
     }
 
-    public ProtocoleInclusionStatut findByReferenceEntity(ProtocoleInclusionStatut t){
-        return  dao.findByName(t.getName());
-    }
-    public void findOrSaveAssociatedObject(ProtocoleInclusionStatut t){
-        if( t != null) {
+    public void findOrSaveAssociatedObject(ProtocoleInclusionStatut t) {
+        if (t != null) {
             t.setServices(servicesService.findOrSave(t.getServices()));
         }
     }
 
-    public List<ProtocoleInclusionStatut> findByServicesId(Long id){
+    public List<ProtocoleInclusionStatut> findByServicesId(Long id) {
         return dao.findByServicesId(id);
     }
-    public int deleteByServicesId(Long id){
+
+    public int deleteByServicesId(Long id) {
         return dao.deleteByServicesId(id);
     }
 
@@ -47,7 +45,8 @@ ProtocoleInclusionStatutHistoryDao, ProtocoleInclusionStatutConverter> implement
     }
 
     @Autowired
-    private ServicesAdminService servicesService ;
+    private ServicesAdminService servicesService;
+
     public ProtocoleInclusionStatutAdminServiceImpl(ProtocoleInclusionStatutDao dao, ProtocoleInclusionStatutHistoryDao historyDao, ProtocoleInclusionStatutConverter converter) {
         super(dao, historyDao, converter);
     }

@@ -150,6 +150,7 @@ public abstract class AbstractServiceImpl<T extends AuditBusinessObject, DTO ext
 
     public T findOrSave(T t) {
         if (t != null) {
+            findOrSaveAssociatedObject(t);
             T result = findByReferenceEntity(t);
             if (result == null) {
                 return create(t);
