@@ -64,7 +64,9 @@ public class PrescriptionRadiotherapieSaveAdminProcessImpl extends AbstractProce
         }
         histortiquePrescriptionRadiotherapieService.createFromPrescription(t.getId(), t.getStatutRadiotherapie());
         System.out.println("================================"+ t.getDecisionTraitement().getId());
+        // TODO : 1-Ismail plz le code de verification  de t.getDecisionTraitement() && t.getDecisionTraitement().getId() Doit etre dans validate et non pas dans run
         if (t.getDecisionTraitement() != null && t.getDecisionTraitement().getId() != null) {
+            // TODO : 1-Ismail plz le code de conversion de DecisionTraitementDto  doit etre dans le SaveConverter
             DecisionTraitementDto decisiontraitementDto = new DecisionTraitementDto(t.getDecisionTraitement().getId(), null, t.getStatutRadiotherapie().getCode());
             RabbitUtils.convertAndSend(decisiontraitementDto);
         }

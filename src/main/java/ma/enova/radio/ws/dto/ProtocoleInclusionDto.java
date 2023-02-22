@@ -1,73 +1,70 @@
-package  ma.enova.radio.ws.dto;
+package ma.enova.radio.ws.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import ma.enova.radio.zynerator.audit.Log;
 import ma.enova.radio.zynerator.dto.AuditBaseDto;
-import com.fasterxml.jackson.annotation.JsonInclude;
-
-    import java.util.Date;
-    import javax.persistence.Temporal;
-    import javax.persistence.TemporalType;
-    import com.fasterxml.jackson.annotation.JsonFormat;
 
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ProtocoleInclusionDto  extends AuditBaseDto {
+public class ProtocoleInclusionDto extends AuditBaseDto {
 
-    private String code  ;
-    private String libelle  ;
-    private String dateInclusion ;
-    private String protocoleInclusionStatut  ;
+    private String code;
+    private String libelle;
+    private String dateInclusion;
+    private ProtocoleInclusionStatutDto protocoleInclusionStatut;
 
-    private ServicesDto services ;
+    private ServicesDto services;
 
 
-    public ProtocoleInclusionDto(){
+    public ProtocoleInclusionDto() {
         super();
     }
 
 
-
     @Log
-    public String getCode(){
+    public String getCode() {
         return this.code;
     }
-    public void setCode(String code){
+
+    public void setCode(String code) {
         this.code = code;
     }
 
     @Log
-    public String getLibelle(){
+    public String getLibelle() {
         return this.libelle;
     }
-    public void setLibelle(String libelle){
+
+    public void setLibelle(String libelle) {
         this.libelle = libelle;
     }
 
     @Log
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm")
-    public String getDateInclusion(){
+    public String getDateInclusion() {
         return this.dateInclusion;
     }
-    public void setDateInclusion(String dateInclusion){
+
+    public void setDateInclusion(String dateInclusion) {
         this.dateInclusion = dateInclusion;
     }
 
-    @Log
-    public String getProtocoleInclusionStatut(){
-        return this.protocoleInclusionStatut;
-    }
-    public void setProtocoleInclusionStatut(String protocoleInclusionStatut){
-        this.protocoleInclusionStatut = protocoleInclusionStatut;
-    }
 
 
-    public ServicesDto getServices(){
+    public ServicesDto getServices() {
         return this.services;
     }
 
-    public void setServices(ServicesDto services){
+    public void setServices(ServicesDto services) {
         this.services = services;
     }
 
+    public ProtocoleInclusionStatutDto getProtocoleInclusionStatut() {
+        return protocoleInclusionStatut;
+    }
 
+    public void setProtocoleInclusionStatut(ProtocoleInclusionStatutDto protocoleInclusionStatut) {
+        this.protocoleInclusionStatut = protocoleInclusionStatut;
+    }
 }

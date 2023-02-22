@@ -1,13 +1,12 @@
 package ma.enova.radio.dao.facade.core;
 
 
-
+import ma.enova.radio.bean.core.ProtocoleInclusion;
 import ma.enova.radio.zynerator.repository.AbstractRepository;
-import ma.enova.radio.bean.core.ProtocoleInclusion;
-import org.springframework.stereotype.Repository;
-import ma.enova.radio.bean.core.ProtocoleInclusion;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+
 import java.util.List;
 
 
@@ -16,6 +15,8 @@ public interface ProtocoleInclusionDao extends AbstractRepository<ProtocoleInclu
     ProtocoleInclusion findByCode(String code);
     int deleteByCode(String code);
 
+    List<ProtocoleInclusion> findByProtocoleInclusionStatutId(Long id);
+    int deleteByProtocoleInclusionStatutId(Long id);
     List<ProtocoleInclusion> findByServicesId(Long id);
     int deleteByServicesId(Long id);
 

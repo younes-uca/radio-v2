@@ -1,11 +1,9 @@
-package  ma.enova.radio.dao.specification.core;
+package ma.enova.radio.dao.specification.core;
 
 
-
-
-import ma.enova.radio.zynerator.specification.AbstractSpecification;
-import ma.enova.radio.dao.criteria.core.ProtocoleInclusionCriteria;
 import ma.enova.radio.bean.core.ProtocoleInclusion;
+import ma.enova.radio.dao.criteria.core.ProtocoleInclusionCriteria;
+import ma.enova.radio.zynerator.specification.AbstractSpecification;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -25,7 +23,14 @@ public class ProtocoleInclusionSpecification extends AbstractSpecification<Proto
                 addPredicate("code", criteria.getCode(),criteria.getCodeLike());
                 addPredicate("libelle", criteria.getLibelle(),criteria.getLibelleLike());
                 addPredicate("dateInclusion", criteria.getDateInclusion(), criteria.getDateInclusionFrom(), criteria.getDateInclusionTo());
-                addPredicate("protocoleInclusionStatut", criteria.getProtocoleInclusionStatut(),criteria.getProtocoleInclusionStatutLike());
+                addPredicate("protocoleInclusionStatut.id", criteria.getProtocoleInclusionStatut());
+                addPredicate("protocoleInclusionStatut.id", criteria.getProtocoleInclusionStatuts());
+                addPredicate("protocoleInclusionStatut.name", criteria.getProtocoleInclusionStatut());
+                addPredicate("protocoleInclusionStatut.name", criteria.getProtocoleInclusionStatuts());
+                addPredicate("services.id", criteria.getServices());
+                addPredicate("services.id", criteria.getServicess());
+                addPredicate("services.code", criteria.getServices());
+                addPredicate("services.code", criteria.getServicess());
                 addOrderAndFilter();
           }
         return getResult();

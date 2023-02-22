@@ -3,6 +3,6 @@ package ma.enova.radio.dao.criteria.history;
 import ma.enova.radio.zynerator.history.HistCriteria;
 
 
-public class ProtocoleInclusionHistoryCriteria extends HistCriteria {
+public class ProtocoleInclusionStatutHistoryCriteria extends HistCriteria {
 
 }

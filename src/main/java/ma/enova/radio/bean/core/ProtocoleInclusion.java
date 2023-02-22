@@ -1,28 +1,17 @@
 package ma.enova.radio.bean.core;
 
-import java.util.Objects;
-
-import java.time.LocalDateTime;
-
-import java.util.Date;
-import com.fasterxml.jackson.annotation.JsonFormat;
-
-
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import ma.enova.radio.zynerator.audit.AuditBusinessObjectEnhanced;
+
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Objects;
-
-
-
-
 
 
 @Entity
 @Table(name = "protocole_inclusion")
 @JsonInclude(JsonInclude.Include.NON_NULL)
-//@SequenceGenerator(name="protocole_inclusion_seq",sequenceName="protocole_inclusion_seq",allocationSize=1, initialValue = 1)
+@SequenceGenerator(name="protocole_inclusion_seq",sequenceName="protocole_inclusion_seq",allocationSize=1, initialValue = 1)
 public class ProtocoleInclusion   extends AuditBusinessObjectEnhanced  {
 
     private Long id;
@@ -32,9 +21,9 @@ public class ProtocoleInclusion   extends AuditBusinessObjectEnhanced  {
     @Column(length = 500)
     private String libelle;
     private LocalDateTime dateInclusion ;
-    @Column(length = 500)
-    private String protocoleInclusionStatut;
 
+    private ProtocoleInclusionStatut protocoleInclusionStatut ;
+    
     private Services services ;
     
 
@@ -48,7 +37,7 @@ public class ProtocoleInclusion   extends AuditBusinessObjectEnhanced  {
 
     @Id
     @Column(name = "id")
-   // @GeneratedValue(strategy = GenerationType.SEQUENCE,generator="protocole_inclusion_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator="protocole_inclusion_seq")
     public Long getId(){
         return this.id;
     }
@@ -73,10 +62,11 @@ public class ProtocoleInclusion   extends AuditBusinessObjectEnhanced  {
     public void setDateInclusion(LocalDateTime dateInclusion){
         this.dateInclusion = dateInclusion;
     }
-    public String getProtocoleInclusionStatut(){
+    @ManyToOne(fetch = FetchType.LAZY)
+    public ProtocoleInclusionStatut getProtocoleInclusionStatut(){
         return this.protocoleInclusionStatut;
     }
-    public void setProtocoleInclusionStatut(String protocoleInclusionStatut){
+    public void setProtocoleInclusionStatut(ProtocoleInclusionStatut protocoleInclusionStatut){
         this.protocoleInclusionStatut = protocoleInclusionStatut;
     }
     @ManyToOne(fetch = FetchType.LAZY)

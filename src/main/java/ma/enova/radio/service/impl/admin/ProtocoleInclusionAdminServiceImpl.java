@@ -8,16 +8,13 @@ import ma.enova.radio.dao.facade.core.ProtocoleInclusionDao;
 import ma.enova.radio.dao.facade.history.ProtocoleInclusionHistoryDao;
 import ma.enova.radio.dao.specification.core.ProtocoleInclusionSpecification;
 import ma.enova.radio.service.facade.admin.ProtocoleInclusionAdminService;
+import ma.enova.radio.service.facade.admin.ProtocoleInclusionStatutAdminService;
+import ma.enova.radio.service.facade.admin.ServicesAdminService;
 import ma.enova.radio.ws.converter.ProtocoleInclusionConverter;
 import ma.enova.radio.ws.dto.ProtocoleInclusionDto;
 import ma.enova.radio.zynerator.service.AbstractServiceImpl;
-import org.springframework.stereotype.Service;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-
-import ma.enova.radio.service.facade.admin.ServicesAdminService ;
-
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -30,12 +27,22 @@ ProtocoleInclusionHistoryDao, ProtocoleInclusionConverter> implements ProtocoleI
         return max != null ? max + 1 : 1;
     }
 
+    public ProtocoleInclusion findByReferenceEntity(ProtocoleInclusion t){
+        return  dao.findByCode(t.getCode());
+    }
     public void findOrSaveAssociatedObject(ProtocoleInclusion t){
         if( t != null) {
+            t.setProtocoleInclusionStatut(protocoleInclusionStatutService.findOrSave(t.getProtocoleInclusionStatut()));
             t.setServices(servicesService.findOrSave(t.getServices()));
         }
     }
 
+    public List<ProtocoleInclusion> findByProtocoleInclusionStatutId(Long id){
+        return dao.findByProtocoleInclusionStatutId(id);
+    }
+    public int deleteByProtocoleInclusionStatutId(Long id){
+        return dao.deleteByProtocoleInclusionStatutId(id);
+    }
     public List<ProtocoleInclusion> findByServicesId(Long id){
         return dao.findByServicesId(id);
     }
@@ -47,6 +54,8 @@ ProtocoleInclusionHistoryDao, ProtocoleInclusionConverter> implements ProtocoleI
         super.configure(ProtocoleInclusion.class, ProtocoleInclusionDto.class, ProtocoleInclusionHistory.class, ProtocoleInclusionHistoryCriteria.class, ProtocoleInclusionSpecification.class);
     }
 
+    @Autowired
+    private ProtocoleInclusionStatutAdminService protocoleInclusionStatutService ;
     @Autowired
     private ServicesAdminService servicesService ;
     public ProtocoleInclusionAdminServiceImpl(ProtocoleInclusionDao dao, ProtocoleInclusionHistoryDao historyDao, ProtocoleInclusionConverter converter) {
