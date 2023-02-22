@@ -11,7 +11,7 @@ public class DecisionTraitementDto extends AuditBaseDto {
 
     private String code;
     private String dateDecisionTraitement;
-    private String etat;
+   // private String etat;
     private Boolean urgence;
 
     //    private DecisionTherapeutiqueDto decisionTherapeutique;
@@ -27,7 +27,7 @@ public class DecisionTraitementDto extends AuditBaseDto {
     public DecisionTraitementDto(Long id, String code, String codeEtat) {
         super(id);
         this.code = code;
-        this.etat = codeEtat;
+        this.statutRadiotherapie = codeEtat;
     }
 
     @Log
@@ -92,11 +92,11 @@ public class DecisionTraitementDto extends AuditBaseDto {
         this.statutRadiotherapie = statutRadiotherapie;
     }
 
-    public String getEtat() {
-        return etat;
-    }
-
-    public void setEtat(String etat) {
-        this.etat = etat;
-    }
+//    public String getEtat() {
+//        return etat;
+//    }
+//
+//    public void setEtat(String etat) {
+//        this.etat = etat;
+//    }
 }

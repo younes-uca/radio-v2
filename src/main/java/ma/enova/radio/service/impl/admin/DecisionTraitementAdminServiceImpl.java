@@ -23,9 +23,6 @@ public class DecisionTraitementAdminServiceImpl extends AbstractServiceImpl<Deci
 DecisionTraitementHistoryDao, DecisionTraitementConverter> implements DecisionTraitementAdminService {
 
 
-    public DecisionTraitement findByReferenceEntity(DecisionTraitement t){
-        return  dao.findByCode(t.getCode());
-    }
     public void findOrSaveAssociatedObject(DecisionTraitement t){
         if( t != null) {
             //t.setDecisionTherapeutique(decisionTherapeutiqueService.findOrSave(t.getDecisionTherapeutique()));

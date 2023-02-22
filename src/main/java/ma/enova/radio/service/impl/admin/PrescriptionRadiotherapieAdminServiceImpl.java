@@ -277,4 +277,10 @@ public class PrescriptionRadiotherapieAdminServiceImpl extends AbstractServiceIm
         super(dao, historyDao, converter);
     }
 
+	@Override
+	@Transactional
+	public void updateNombreSeanceRealise(Long id, Integer nombreSeanceRealise) {
+		dao.updateNombreSeanceRealise(id, nombreSeanceRealise);
+	}
+
 }

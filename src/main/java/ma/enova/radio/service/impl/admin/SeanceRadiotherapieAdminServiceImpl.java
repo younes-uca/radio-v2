@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import ma.enova.radio.bean.core.PrescriptionRadiotherapie;
 import ma.enova.radio.bean.core.SeanceRadiotherapie;
 import ma.enova.radio.bean.history.SeanceRadiotherapieHistory;
 import ma.enova.radio.dao.criteria.core.SeanceRadiotherapieCriteria;
@@ -49,8 +50,13 @@ SeanceRadiotherapieHistoryDao, SeanceRadiotherapieConverter> implements SeanceRa
     }
 
 	@Override
-	public void updateEtatEffectue(Long id) {
-		dao.updateEtatEffectue(id);
+	public void updateEtatEffectue(SeanceRadiotherapieDto dto) {
+		PrescriptionRadiotherapie prescription = prescriptionRadiotherapieService.findById(dto.getPrescriptionRadiotherapie().getId());
+		if(dto.getEffectue())
+			prescriptionRadiotherapieService.updateNombreSeanceRealise(prescription.getId(), prescription.getNombreSeanceRealise()+1);
+		else 
+			prescriptionRadiotherapieService.updateNombreSeanceRealise(prescription.getId(), prescription.getNombreSeanceRealise()-1);
+		dao.updateEtatEffectue(dto.getId());
 	}
 
 }
