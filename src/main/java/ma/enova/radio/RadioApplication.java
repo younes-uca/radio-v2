@@ -87,8 +87,8 @@ public class RadioApplication {
 
     private void createFrequence() {
         Map<String, String> etats = new HashMap<>();
-        etats.put("semaine", "semaine");
-        etats.put("mois", "mois");
+        etats.put("quotidienne", "quotidienne");
+       // etats.put("mois", "mois");
         etats.forEach((k, v) -> {
             FrequenceRadiotherapie item = new FrequenceRadiotherapie();
             item.setCode(k);

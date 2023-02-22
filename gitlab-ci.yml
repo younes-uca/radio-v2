@@ -1,0 +1,37 @@
+#######################################################################
+#stages:
+#  - build
+#
+#Build Java Project:
+#  stage: build
+#  before_script:
+#    mvn --version
+#  script:
+#    mvn clean install -DskipTests=true && ls ./target/
+#######################################################################
+stages:
+  - build
+  - deploy
+
+#variables:
+#  DOCKER_HOST: tcp://docker:2375/
+#  DOCKER_DRIVER: overlay2
+#  DOCKER_TLS_CERTDIR: ""
+
+#services:
+#  - docker:dind
+
+build:
+  stage: build
+  script:
+    - mvn clean package -DskipTests
+    - ssh root@192.168.1.205 "rm -rf /tmp/my-app/*"
+    - scp -r Dockerfile ./target/*.jar root@192.168.1.205:/tmp/my-app/
+
+deploy:
+  stage: deploy
+  script:
+    - ssh root@192.168.1.205 "docker stop rth-container-v1 && docker rm rth-container-v1 && docker image rm rth-image-v1"
+    #- ssh root@192.168.1.205 "docker rm rth-container-v1 && docker image rm rth-image-v1"
+    - ssh root@192.168.1.205 "cd /tmp/my-app && docker build -t rth-image-v1 ."
+    - ssh root@192.168.1.205 "docker run -d --name rth-container-v1 -p 9092:8080 rth-image-v1"
