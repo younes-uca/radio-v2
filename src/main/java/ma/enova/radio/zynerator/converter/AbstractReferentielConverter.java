@@ -1,12 +1,15 @@
 package ma.enova.radio.zynerator.converter;
 
 
+import ma.enova.radio.bean.core.Immobilistion;
+import ma.enova.radio.ws.dto.ImmobilistionDto;
 import ma.enova.radio.zynerator.audit.AuditBusinessObject;
+import ma.enova.radio.zynerator.audit.AuditBusinessObjectEnhanced;
 import ma.enova.radio.zynerator.bean.BusinessObject;
 import ma.enova.radio.zynerator.bean.Etablissement;
 import ma.enova.radio.zynerator.dto.AuditBaseDto;
-import ma.enova.radio.zynerator.dto.BaseDto;
 import ma.enova.radio.zynerator.dto.EtablissementDto;
+import ma.enova.radio.zynerator.dto.ReferentielBaseDto;
 import ma.enova.radio.zynerator.util.DateUtil;
 import ma.enova.radio.zynerator.util.ListUtil;
 import ma.enova.radio.zynerator.util.RefelexivityUtil;
@@ -17,17 +20,42 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public abstract class AbstractConverter<T extends BusinessObject, DTO extends BaseDto, H extends BusinessObject> {
+public abstract class AbstractReferentielConverter<T extends AuditBusinessObjectEnhanced, DTO extends ReferentielBaseDto, H extends BusinessObject> {
     protected int maxLevel = 2;
     protected Class<T> itemType;
     protected Class<DTO> dtoType;
     protected Class<H> historyType;
 
-    protected AbstractConverter(Class<T> itemType, Class<DTO> dtoType, Class<H> historyType) {
+    protected AbstractReferentielConverter(Class<T> itemType, Class<DTO> dtoType, Class<H> historyType) {
         this.itemType = itemType;
         this.dtoType = dtoType;
         this.historyType = historyType;
         this.init(true);
+    }
+
+
+    public void convertRefentielAttribute(DTO dto, T item) {
+        if (dto.getActif() != null) {
+            item.setActif(dto.getActif());
+        }
+        if (StringUtil.isNotEmpty(dto.getHl7())) {
+            item.setHl7(dto.getHl7());
+        }
+        if (StringUtil.isNotEmpty(dto.getHl7())) {
+            item.setHl7(dto.getHl7());
+        }
+    }
+
+    public void convertRefentielAttribute(T item, DTO dto) {
+        if (item.getActif() != null) {
+            dto.setActif(item.getActif());
+        }
+        if (StringUtil.isNotEmpty(item.getHl7())) {
+            dto.setHl7(item.getHl7());
+        }
+        if (StringUtil.isNotEmpty(item.getHl7())) {
+            dto.setHl7(item.getHl7());
+        }
     }
 
     public abstract T toItem(DTO dto);

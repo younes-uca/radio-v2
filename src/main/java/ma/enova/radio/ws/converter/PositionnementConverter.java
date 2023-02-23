@@ -1,24 +1,21 @@
-package  ma.enova.radio.ws.converter;
+package ma.enova.radio.ws.converter;
 
+import ma.enova.radio.bean.core.Positionnement;
+import ma.enova.radio.bean.history.PositionnementHistory;
+import ma.enova.radio.ws.dto.PositionnementDto;
+import ma.enova.radio.zynerator.converter.AbstractReferentielConverter;
+import ma.enova.radio.zynerator.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-
-import ma.enova.radio.zynerator.util.StringUtil;
-import ma.enova.radio.zynerator.converter.AbstractConverter;
-import ma.enova.radio.zynerator.util.DateUtil;
-import ma.enova.radio.bean.history.PositionnementHistory;
-import ma.enova.radio.bean.core.Positionnement;
-import ma.enova.radio.ws.dto.PositionnementDto;
-
 @Component
-public class PositionnementConverter extends AbstractConverter<Positionnement, PositionnementDto, PositionnementHistory> {
+public class PositionnementConverter extends AbstractReferentielConverter<Positionnement, PositionnementDto, PositionnementHistory> {
 
     @Autowired
-    private ServicesConverter servicesConverter ;
+    private ServicesConverter servicesConverter;
     private boolean services;
 
-    public  PositionnementConverter(){
+    public PositionnementConverter() {
         super(Positionnement.class, PositionnementDto.class, PositionnementHistory.class);
     }
 
@@ -27,19 +24,19 @@ public class PositionnementConverter extends AbstractConverter<Positionnement, P
         if (dto == null) {
             return null;
         } else {
-        Positionnement item = new Positionnement();
-            if(StringUtil.isNotEmpty(dto.getId()))
+            Positionnement item = new Positionnement();
+            if (StringUtil.isNotEmpty(dto.getId()))
                 item.setId(dto.getId());
-            if(StringUtil.isNotEmpty(dto.getCode()))
+            if (StringUtil.isNotEmpty(dto.getCode()))
                 item.setCode(dto.getCode());
-            if(StringUtil.isNotEmpty(dto.getLibelle()))
+            if (StringUtil.isNotEmpty(dto.getLibelle()))
                 item.setLibelle(dto.getLibelle());
-            if(this.services && dto.getServices()!=null)
-                item.setServices(servicesConverter.toItem(dto.getServices())) ;
+            if (this.services && dto.getServices() != null)
+                item.setServices(servicesConverter.toItem(dto.getServices()));
+            convertRefentielAttribute(dto, item);
 
 
-
-        return item;
+            return item;
         }
     }
 
@@ -49,33 +46,36 @@ public class PositionnementConverter extends AbstractConverter<Positionnement, P
             return null;
         } else {
             PositionnementDto dto = new PositionnementDto();
-            if(StringUtil.isNotEmpty(item.getId()))
+            if (StringUtil.isNotEmpty(item.getId()))
                 dto.setId(item.getId());
-            if(StringUtil.isNotEmpty(item.getCode()))
+            if (StringUtil.isNotEmpty(item.getCode()))
                 dto.setCode(item.getCode());
-            if(StringUtil.isNotEmpty(item.getLibelle()))
+            if (StringUtil.isNotEmpty(item.getLibelle()))
                 dto.setLibelle(item.getLibelle());
-        if(this.services && item.getServices()!=null) {
-            dto.setServices(servicesConverter.toDto(item.getServices())) ;
-        }
-        return dto;
+            if (this.services && item.getServices() != null) {
+                dto.setServices(servicesConverter.toDto(item.getServices()));
+            }
+            convertRefentielAttribute(item, dto);
+
+            return dto;
         }
     }
 
 
-
-    public ServicesConverter getServicesConverter(){
+    public ServicesConverter getServicesConverter() {
         return this.servicesConverter;
     }
-    public void setServicesConverter(ServicesConverter servicesConverter ){
+
+    public void setServicesConverter(ServicesConverter servicesConverter) {
         this.servicesConverter = servicesConverter;
     }
 
 
-    public boolean  isServices(){
+    public boolean isServices() {
         return this.services;
     }
-    public void  setServices(boolean services){
+
+    public void setServices(boolean services) {
         this.services = services;
     }
 }

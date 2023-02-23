@@ -3,11 +3,11 @@ package  ma.enova.radio.ws.dto;
 import ma.enova.radio.zynerator.audit.Log;
 import ma.enova.radio.zynerator.dto.AuditBaseDto;
 import com.fasterxml.jackson.annotation.JsonInclude;
-
+import ma.enova.radio.zynerator.dto.ReferentielBaseDto;
 
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ImmobilistionDto  extends AuditBaseDto {
+public class ImmobilistionDto  extends ReferentielBaseDto {
 
     private String code  ;
     private String libelle  ;

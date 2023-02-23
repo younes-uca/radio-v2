@@ -1,0 +1,38 @@
+package ma.enova.radio.zynerator.dto;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class ReferentielBaseDto extends AuditBaseDto {
+
+    protected Boolean actif = false;
+    protected String hl7;
+    protected Long ordre ;
+
+    public Boolean getActif() {
+        return actif;
+    }
+
+    public void setActif(Boolean actif) {
+        this.actif = actif;
+    }
+
+    public String getHl7() {
+        return hl7;
+    }
+
+    public void setHl7(String hl7) {
+        this.hl7 = hl7;
+    }
+
+    public Long getOrdre() {
+        return ordre;
+    }
+
+    public void setOrdre(Long ordre) {
+        this.ordre = ordre;
+    }
+}
