@@ -54,7 +54,7 @@ public class ServicesRestAdmin  extends AbstractController<Services, ServicesDto
     }
     @ApiOperation("Delete the specified services")
     @DeleteMapping("")
-    public ResponseEntity<ServicesDto> delete(ServicesDto dto) throws Exception {
+    public ResponseEntity<ServicesDto> delete(@RequestBody ServicesDto dto) throws Exception {
             return super.delete(dto);
     }
     @ApiOperation("Finds servicess by criteria")

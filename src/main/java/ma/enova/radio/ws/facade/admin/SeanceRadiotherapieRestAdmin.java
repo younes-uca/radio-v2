@@ -60,7 +60,7 @@ public class SeanceRadiotherapieRestAdmin  extends AbstractController<SeanceRadi
     }
     @ApiOperation("Delete the specified seanceRadiotherapie")
     @DeleteMapping("")
-    public ResponseEntity<SeanceRadiotherapieDto> delete(SeanceRadiotherapieDto dto) throws Exception {
+    public ResponseEntity<SeanceRadiotherapieDto> delete(@RequestBody SeanceRadiotherapieDto dto) throws Exception {
             return super.delete(dto);
     }
     @ApiOperation("find by prescriptionRadiotherapie id")

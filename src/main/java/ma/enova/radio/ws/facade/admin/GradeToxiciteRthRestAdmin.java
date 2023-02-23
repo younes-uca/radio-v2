@@ -54,7 +54,7 @@ public class GradeToxiciteRthRestAdmin  extends AbstractController<GradeToxicite
     }
     @ApiOperation("Delete the specified gradeToxiciteRth")
     @DeleteMapping("")
-    public ResponseEntity<GradeToxiciteRthDto> delete(GradeToxiciteRthDto dto) throws Exception {
+    public ResponseEntity<GradeToxiciteRthDto> delete(@RequestBody GradeToxiciteRthDto dto) throws Exception {
             return super.delete(dto);
     }
     @ApiOperation("find by services id")

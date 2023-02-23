@@ -110,7 +110,7 @@ public class PrescriptionRadiotherapieRestAdmin extends AbstractController<Presc
 
     @ApiOperation("Delete the specified prescriptionRadiotherapie")
     @DeleteMapping("")
-    public ResponseEntity<PrescriptionRadiotherapieDto> delete(PrescriptionRadiotherapieDto dto) throws Exception {
+    public ResponseEntity<PrescriptionRadiotherapieDto> delete(@RequestBody PrescriptionRadiotherapieDto dto) throws Exception {
         return super.delete(dto);
     }
 

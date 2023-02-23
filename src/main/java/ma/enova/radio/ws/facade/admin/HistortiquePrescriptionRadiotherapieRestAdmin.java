@@ -53,7 +53,7 @@ public class HistortiquePrescriptionRadiotherapieRestAdmin  extends AbstractCont
     }
     @ApiOperation("Delete the specified histortiquePrescriptionRadiotherapie")
     @DeleteMapping("")
-    public ResponseEntity<HistortiquePrescriptionRadiotherapieDto> delete(HistortiquePrescriptionRadiotherapieDto dto) throws Exception {
+    public ResponseEntity<HistortiquePrescriptionRadiotherapieDto> delete(@RequestBody HistortiquePrescriptionRadiotherapieDto dto) throws Exception {
             return super.delete(dto);
     }
     @ApiOperation("find by prescriptionRadiotherapie id")

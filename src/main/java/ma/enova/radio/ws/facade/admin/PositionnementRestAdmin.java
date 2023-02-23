@@ -54,7 +54,7 @@ public class PositionnementRestAdmin  extends AbstractController<Positionnement,
     }
     @ApiOperation("Delete the specified positionnement")
     @DeleteMapping("")
-    public ResponseEntity<PositionnementDto> delete(PositionnementDto dto) throws Exception {
+    public ResponseEntity<PositionnementDto> delete(@RequestBody PositionnementDto dto) throws Exception {
             return super.delete(dto);
     }
     @ApiOperation("find by services id")

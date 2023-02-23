@@ -54,7 +54,7 @@ public class ViseeRestAdmin  extends AbstractController<Visee, ViseeDto, ViseeHi
     }
     @ApiOperation("Delete the specified visee")
     @DeleteMapping("")
-    public ResponseEntity<ViseeDto> delete(ViseeDto dto) throws Exception {
+    public ResponseEntity<ViseeDto> delete(@RequestBody ViseeDto dto) throws Exception {
             return super.delete(dto);
     }
     @ApiOperation("find by services id")

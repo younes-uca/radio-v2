@@ -54,7 +54,7 @@ public class PatientRestAdmin  extends AbstractController<Patient, PatientDto, P
     }
     @ApiOperation("Delete the specified patient")
     @DeleteMapping("")
-    public ResponseEntity<PatientDto> delete(PatientDto dto) throws Exception {
+    public ResponseEntity<PatientDto> delete(@RequestBody PatientDto dto) throws Exception {
             return super.delete(dto);
     }
     @ApiOperation("Finds patients by criteria")

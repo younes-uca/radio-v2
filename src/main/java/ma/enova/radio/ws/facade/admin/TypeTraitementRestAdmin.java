@@ -53,7 +53,7 @@ public class TypeTraitementRestAdmin  extends AbstractController<TypeTraitement,
     }
     @ApiOperation("Delete the specified typeTraitement")
     @DeleteMapping("")
-    public ResponseEntity<TypeTraitementDto> delete(TypeTraitementDto dto) throws Exception {
+    public ResponseEntity<TypeTraitementDto> delete(@RequestBody TypeTraitementDto dto) throws Exception {
             return super.delete(dto);
     }
     @ApiOperation("Finds typeTraitements by criteria")

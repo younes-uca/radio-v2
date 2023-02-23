@@ -53,7 +53,7 @@ public class SpecialiteRestAdmin  extends AbstractController<Specialite, Special
     }
     @ApiOperation("Delete the specified specialite")
     @DeleteMapping("")
-    public ResponseEntity<SpecialiteDto> delete(SpecialiteDto dto) throws Exception {
+    public ResponseEntity<SpecialiteDto> delete(@RequestBody SpecialiteDto dto) throws Exception {
             return super.delete(dto);
     }
     @ApiOperation("find by services id")

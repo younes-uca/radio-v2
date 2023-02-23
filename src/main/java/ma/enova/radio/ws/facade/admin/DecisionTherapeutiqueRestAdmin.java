@@ -52,7 +52,7 @@ public class DecisionTherapeutiqueRestAdmin extends AbstractController<DecisionT
     }
     @ApiOperation("Delete the specified decisionTherapeutique")
     @DeleteMapping("")
-    public ResponseEntity<DecisionTherapeutiqueDto> delete(DecisionTherapeutiqueDto dto) throws Exception {
+    public ResponseEntity<DecisionTherapeutiqueDto> delete(@RequestBody DecisionTherapeutiqueDto dto) throws Exception {
             return super.delete(dto);
     }
     @ApiOperation("find by services id")

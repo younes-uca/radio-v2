@@ -54,7 +54,7 @@ public class ImmobilistionRestAdmin  extends AbstractController<Immobilistion, I
     }
     @ApiOperation("Delete the specified immobilistion")
     @DeleteMapping("")
-    public ResponseEntity<ImmobilistionDto> delete(ImmobilistionDto dto) throws Exception {
+    public ResponseEntity<ImmobilistionDto> delete(@RequestBody ImmobilistionDto dto) throws Exception {
             return super.delete(dto);
     }
     @ApiOperation("find by services id")

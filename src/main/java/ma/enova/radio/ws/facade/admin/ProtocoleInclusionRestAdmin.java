@@ -54,7 +54,7 @@ public class ProtocoleInclusionRestAdmin  extends AbstractController<ProtocoleIn
     }
     @ApiOperation("Delete the specified protocoleInclusion")
     @DeleteMapping("")
-    public ResponseEntity<ProtocoleInclusionDto> delete(ProtocoleInclusionDto dto) throws Exception {
+    public ResponseEntity<ProtocoleInclusionDto> delete(@RequestBody ProtocoleInclusionDto dto) throws Exception {
             return super.delete(dto);
     }
     @ApiOperation("find by services id")

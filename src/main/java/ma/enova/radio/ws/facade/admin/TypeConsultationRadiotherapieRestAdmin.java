@@ -54,7 +54,7 @@ public class TypeConsultationRadiotherapieRestAdmin  extends AbstractController<
     }
     @ApiOperation("Delete the specified typeConsultationRadiotherapie")
     @DeleteMapping("")
-    public ResponseEntity<TypeConsultationRadiotherapieDto> delete(TypeConsultationRadiotherapieDto dto) throws Exception {
+    public ResponseEntity<TypeConsultationRadiotherapieDto> delete(@RequestBody TypeConsultationRadiotherapieDto dto) throws Exception {
             return super.delete(dto);
     }
     @ApiOperation("find by services id")

@@ -54,7 +54,7 @@ public class SiteRestAdmin  extends AbstractController<Site, SiteDto, SiteHistor
     }
     @ApiOperation("Delete the specified site")
     @DeleteMapping("")
-    public ResponseEntity<SiteDto> delete(SiteDto dto) throws Exception {
+    public ResponseEntity<SiteDto> delete(@RequestBody SiteDto dto) throws Exception {
             return super.delete(dto);
     }
     @ApiOperation("find by services id")

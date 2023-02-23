@@ -52,7 +52,7 @@ public class ProtocoleInclusionStatutRestAdmin extends AbstractController<Protoc
     }
     @ApiOperation("Delete the specified protocoleInclusionStatut")
     @DeleteMapping("")
-    public ResponseEntity<ProtocoleInclusionStatutDto> delete(ProtocoleInclusionStatutDto dto) throws Exception {
+    public ResponseEntity<ProtocoleInclusionStatutDto> delete(@RequestBody ProtocoleInclusionStatutDto dto) throws Exception {
             return super.delete(dto);
     }
     @ApiOperation("find by services id")

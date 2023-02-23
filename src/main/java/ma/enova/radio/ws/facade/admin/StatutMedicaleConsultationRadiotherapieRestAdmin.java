@@ -52,7 +52,7 @@ public class StatutMedicaleConsultationRadiotherapieRestAdmin  extends AbstractC
     }
     @ApiOperation("Delete the specified statutMedicaleConsultationRadiotherapie")
     @DeleteMapping("")
-    public ResponseEntity<StatutMedicaleConsultationRadiotherapieDto> delete(StatutMedicaleConsultationRadiotherapieDto dto) throws Exception {
+    public ResponseEntity<StatutMedicaleConsultationRadiotherapieDto> delete(@RequestBody StatutMedicaleConsultationRadiotherapieDto dto) throws Exception {
             return super.delete(dto);
     }
     @ApiOperation("find by services id")

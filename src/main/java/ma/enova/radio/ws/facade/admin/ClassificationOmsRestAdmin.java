@@ -52,7 +52,7 @@ public class ClassificationOmsRestAdmin  extends AbstractController<Classificati
     }
     @ApiOperation("Delete the specified classificationOms")
     @DeleteMapping("")
-    public ResponseEntity<ClassificationOmsDto> delete(ClassificationOmsDto dto) throws Exception {
+    public ResponseEntity<ClassificationOmsDto> delete(@RequestBody ClassificationOmsDto dto) throws Exception {
             return super.delete(dto);
     }
     @ApiOperation("find by services id")
