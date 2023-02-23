@@ -57,7 +57,7 @@ public class PrescriptionRadiotherapieSaveAdminProcessImpl extends AbstractProce
     @Override
     public void run(PrescriptionRadiotherapieSaveAdminInput input, PrescriptionRadiotherapie t, Result<PrescriptionRadiotherapieSaveAdminInput, PrescriptionRadiotherapieSaveAdminOutput, PrescriptionRadiotherapie> result) {
         constrctSeanceRadioTherapie(t);
-        int res = deleteSeanceRadioIfPrescriptionRadiotherapieExist(t);
+       // int res = deleteSeanceRadioIfPrescriptionRadiotherapieExist(t);
         service.create(t);
         for (SeanceRadiotherapie seanceRadiotherapie : t.getSeanceRadiotherapies()) {
             seanceRadiotherapie.setPrescriptionRadiotherapie(t);
@@ -71,9 +71,9 @@ public class PrescriptionRadiotherapieSaveAdminProcessImpl extends AbstractProce
             RabbitUtils.convertAndSend(decisiontraitementDto);
         }
         String message = PrescriptionRadiotherapieSaveAdminUtil.SAVED;
-        if (res == 1) {
+        /*if (res == 1) {
             message = PrescriptionRadiotherapieSaveAdminUtil.UPDATED;
-        }
+        }*/
         result.addInfoMessage(message);
     }
 
