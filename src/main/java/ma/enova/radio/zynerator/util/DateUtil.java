@@ -272,7 +272,8 @@ public class DateUtil {
             myLocalDateTime = dateDebutTraitement.plusWeeks(i);
         } else if ("mois".equals(code)) {
             myLocalDateTime = dateDebutTraitement.plusMonths(i);
-        }
+        }else
+        	myLocalDateTime = dateDebutTraitement.plusDays(i);
         return myLocalDateTime;
     }
 
