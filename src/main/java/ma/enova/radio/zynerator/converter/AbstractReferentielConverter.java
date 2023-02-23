@@ -1,8 +1,6 @@
 package ma.enova.radio.zynerator.converter;
 
 
-import ma.enova.radio.bean.core.Immobilistion;
-import ma.enova.radio.ws.dto.ImmobilistionDto;
 import ma.enova.radio.zynerator.audit.AuditBusinessObject;
 import ma.enova.radio.zynerator.audit.AuditBusinessObjectEnhanced;
 import ma.enova.radio.zynerator.bean.BusinessObject;
