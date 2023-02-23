@@ -10,6 +10,7 @@ import ma.enova.radio.dao.specification.core.PositionnementSpecification;
 import ma.enova.radio.service.facade.admin.PositionnementAdminService;
 import ma.enova.radio.ws.converter.PositionnementConverter;
 import ma.enova.radio.ws.dto.PositionnementDto;
+import ma.enova.radio.zynerator.service.AbstractReferentielServiceImpl;
 import ma.enova.radio.zynerator.service.AbstractServiceImpl;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -22,7 +23,7 @@ import ma.enova.radio.service.facade.admin.ServicesAdminService ;
 import java.util.List;
 
 @Service
-public class PositionnementAdminServiceImpl extends AbstractServiceImpl<Positionnement, PositionnementDto,PositionnementHistory, PositionnementCriteria, PositionnementHistoryCriteria, PositionnementDao,
+public class PositionnementAdminServiceImpl extends AbstractReferentielServiceImpl<Positionnement, PositionnementDto,PositionnementHistory, PositionnementCriteria, PositionnementHistoryCriteria, PositionnementDao,
 PositionnementHistoryDao, PositionnementConverter> implements PositionnementAdminService {
 
     public Long getNextOrdre() {

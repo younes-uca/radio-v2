@@ -10,6 +10,7 @@ import ma.enova.radio.dao.specification.core.ImmobilistionSpecification;
 import ma.enova.radio.service.facade.admin.ImmobilistionAdminService;
 import ma.enova.radio.ws.converter.ImmobilistionConverter;
 import ma.enova.radio.ws.dto.ImmobilistionDto;
+import ma.enova.radio.zynerator.service.AbstractReferentielServiceImpl;
 import ma.enova.radio.zynerator.service.AbstractServiceImpl;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -22,7 +23,7 @@ import ma.enova.radio.service.facade.admin.ServicesAdminService ;
 import java.util.List;
 
 @Service
-public class ImmobilistionAdminServiceImpl extends AbstractServiceImpl<Immobilistion, ImmobilistionDto,ImmobilistionHistory, ImmobilistionCriteria, ImmobilistionHistoryCriteria, ImmobilistionDao,
+public class ImmobilistionAdminServiceImpl extends AbstractReferentielServiceImpl<Immobilistion, ImmobilistionDto,ImmobilistionHistory, ImmobilistionCriteria, ImmobilistionHistoryCriteria, ImmobilistionDao,
 ImmobilistionHistoryDao, ImmobilistionConverter> implements ImmobilistionAdminService {
 
     public Long getNextOrdre() {

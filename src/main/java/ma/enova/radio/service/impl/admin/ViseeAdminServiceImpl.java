@@ -10,6 +10,7 @@ import ma.enova.radio.dao.specification.core.ViseeSpecification;
 import ma.enova.radio.service.facade.admin.ViseeAdminService;
 import ma.enova.radio.ws.converter.ViseeConverter;
 import ma.enova.radio.ws.dto.ViseeDto;
+import ma.enova.radio.zynerator.service.AbstractReferentielServiceImpl;
 import ma.enova.radio.zynerator.service.AbstractServiceImpl;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -22,7 +23,7 @@ import ma.enova.radio.service.facade.admin.ServicesAdminService ;
 import java.util.List;
 
 @Service
-public class ViseeAdminServiceImpl extends AbstractServiceImpl<Visee, ViseeDto,ViseeHistory, ViseeCriteria, ViseeHistoryCriteria, ViseeDao,
+public class ViseeAdminServiceImpl extends AbstractReferentielServiceImpl<Visee, ViseeDto,ViseeHistory, ViseeCriteria, ViseeHistoryCriteria, ViseeDao,
 ViseeHistoryDao, ViseeConverter> implements ViseeAdminService {
 
     public Long getNextOrdre() {

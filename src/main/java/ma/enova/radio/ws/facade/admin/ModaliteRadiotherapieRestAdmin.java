@@ -11,6 +11,7 @@ import ma.enova.radio.service.facade.admin.ModaliteRadiotherapieAdminService;
 import ma.enova.radio.ws.converter.ModaliteRadiotherapieConverter;
 import ma.enova.radio.ws.dto.ModaliteRadiotherapieDto;
 import ma.enova.radio.zynerator.controller.AbstractController;
+import ma.enova.radio.zynerator.controller.AbstractReferentielController;
 import ma.enova.radio.zynerator.dto.AuditEntityDto;
 import ma.enova.radio.zynerator.util.PaginatedList;
 import org.springframework.core.io.InputStreamResource;
@@ -25,7 +26,7 @@ import ma.enova.radio.zynerator.process.Result;
 @Api("Manages modaliteRadiotherapie services")
 @RestController
 @RequestMapping("/api/modaliteRadiotherapie")
-public class ModaliteRadiotherapieRestAdmin  extends AbstractController<ModaliteRadiotherapie, ModaliteRadiotherapieDto, ModaliteRadiotherapieHistory, ModaliteRadiotherapieCriteria, ModaliteRadiotherapieHistoryCriteria, ModaliteRadiotherapieAdminService, ModaliteRadiotherapieConverter> {
+public class ModaliteRadiotherapieRestAdmin  extends AbstractReferentielController<ModaliteRadiotherapie, ModaliteRadiotherapieDto, ModaliteRadiotherapieHistory, ModaliteRadiotherapieCriteria, ModaliteRadiotherapieHistoryCriteria, ModaliteRadiotherapieAdminService, ModaliteRadiotherapieConverter> {
 
     @ApiOperation("Finds a list of all modaliteRadiotherapies")
     @GetMapping("")

@@ -10,6 +10,7 @@ import ma.enova.radio.dao.specification.core.ModaliteRadiotherapieSpecification;
 import ma.enova.radio.service.facade.admin.ModaliteRadiotherapieAdminService;
 import ma.enova.radio.ws.converter.ModaliteRadiotherapieConverter;
 import ma.enova.radio.ws.dto.ModaliteRadiotherapieDto;
+import ma.enova.radio.zynerator.service.AbstractReferentielServiceImpl;
 import ma.enova.radio.zynerator.service.AbstractServiceImpl;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -22,7 +23,7 @@ import ma.enova.radio.service.facade.admin.ServicesAdminService ;
 import java.util.List;
 
 @Service
-public class ModaliteRadiotherapieAdminServiceImpl extends AbstractServiceImpl<ModaliteRadiotherapie, ModaliteRadiotherapieDto,ModaliteRadiotherapieHistory, ModaliteRadiotherapieCriteria, ModaliteRadiotherapieHistoryCriteria, ModaliteRadiotherapieDao,
+public class ModaliteRadiotherapieAdminServiceImpl extends AbstractReferentielServiceImpl<ModaliteRadiotherapie, ModaliteRadiotherapieDto,ModaliteRadiotherapieHistory, ModaliteRadiotherapieCriteria, ModaliteRadiotherapieHistoryCriteria, ModaliteRadiotherapieDao,
 ModaliteRadiotherapieHistoryDao, ModaliteRadiotherapieConverter> implements ModaliteRadiotherapieAdminService {
 
     public Long getNextOrdre() {

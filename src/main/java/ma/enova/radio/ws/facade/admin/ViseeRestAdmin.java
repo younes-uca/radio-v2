@@ -10,22 +10,20 @@ import ma.enova.radio.dao.criteria.history.ViseeHistoryCriteria;
 import ma.enova.radio.service.facade.admin.ViseeAdminService;
 import ma.enova.radio.ws.converter.ViseeConverter;
 import ma.enova.radio.ws.dto.ViseeDto;
-import ma.enova.radio.zynerator.controller.AbstractController;
+import ma.enova.radio.zynerator.controller.AbstractReferentielController;
 import ma.enova.radio.zynerator.dto.AuditEntityDto;
 import ma.enova.radio.zynerator.util.PaginatedList;
 import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import org.springframework.http.HttpStatus;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
-import ma.enova.radio.zynerator.process.Result;
 
 @Api("Manages visee services")
 @RestController
 @RequestMapping("/api/visee")
-public class ViseeRestAdmin  extends AbstractController<Visee, ViseeDto, ViseeHistory, ViseeCriteria, ViseeHistoryCriteria, ViseeAdminService, ViseeConverter> {
+public class ViseeRestAdmin  extends AbstractReferentielController<Visee, ViseeDto, ViseeHistory, ViseeCriteria, ViseeHistoryCriteria, ViseeAdminService, ViseeConverter> {
 
     @ApiOperation("Finds a list of all visees")
     @GetMapping("")

@@ -11,6 +11,7 @@ import ma.enova.radio.service.facade.admin.PositionnementAdminService;
 import ma.enova.radio.ws.converter.PositionnementConverter;
 import ma.enova.radio.ws.dto.PositionnementDto;
 import ma.enova.radio.zynerator.controller.AbstractController;
+import ma.enova.radio.zynerator.controller.AbstractReferentielController;
 import ma.enova.radio.zynerator.dto.AuditEntityDto;
 import ma.enova.radio.zynerator.util.PaginatedList;
 import org.springframework.core.io.InputStreamResource;
@@ -25,7 +26,7 @@ import ma.enova.radio.zynerator.process.Result;
 @Api("Manages positionnement services")
 @RestController
 @RequestMapping("/api/positionnement")
-public class PositionnementRestAdmin  extends AbstractController<Positionnement, PositionnementDto, PositionnementHistory, PositionnementCriteria, PositionnementHistoryCriteria, PositionnementAdminService, PositionnementConverter> {
+public class PositionnementRestAdmin  extends AbstractReferentielController<Positionnement, PositionnementDto, PositionnementHistory, PositionnementCriteria, PositionnementHistoryCriteria, PositionnementAdminService, PositionnementConverter> {
 
     @ApiOperation("Finds a list of all positionnements")
     @GetMapping("")

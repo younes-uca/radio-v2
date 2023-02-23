@@ -11,6 +11,7 @@ import ma.enova.radio.service.facade.admin.ImmobilistionAdminService;
 import ma.enova.radio.ws.converter.ImmobilistionConverter;
 import ma.enova.radio.ws.dto.ImmobilistionDto;
 import ma.enova.radio.zynerator.controller.AbstractController;
+import ma.enova.radio.zynerator.controller.AbstractReferentielController;
 import ma.enova.radio.zynerator.dto.AuditEntityDto;
 import ma.enova.radio.zynerator.util.PaginatedList;
 import org.springframework.core.io.InputStreamResource;
@@ -25,7 +26,7 @@ import ma.enova.radio.zynerator.process.Result;
 @Api("Manages immobilistion services")
 @RestController
 @RequestMapping("/api/immobilistion")
-public class ImmobilistionRestAdmin  extends AbstractController<Immobilistion, ImmobilistionDto, ImmobilistionHistory, ImmobilistionCriteria, ImmobilistionHistoryCriteria, ImmobilistionAdminService, ImmobilistionConverter> {
+public class ImmobilistionRestAdmin  extends AbstractReferentielController<Immobilistion, ImmobilistionDto, ImmobilistionHistory, ImmobilistionCriteria, ImmobilistionHistoryCriteria, ImmobilistionAdminService, ImmobilistionConverter> {
 
     @ApiOperation("Finds a list of all immobilistions")
     @GetMapping("")
