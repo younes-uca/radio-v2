@@ -66,7 +66,9 @@ public class DateUtil {
         if (StringUtils.hasLength(strDate)) {
             try {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DEFAULT_DATE_FORMAT);
-                return LocalDate.parse(strDate, formatter);
+                formatter = formatter.withZone(ZoneId.systemDefault()); // Set the time zone to UTC
+                LocalDate date = LocalDate.parse(strDate, formatter);
+                return date;
 
             } catch (Exception e) {
                 throw new BusinessRuleException("errors.format.date");
